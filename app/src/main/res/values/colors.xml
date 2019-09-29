@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0480B7</color>
+    <color name="colorPrimaryDark">#286580</color>
+    <color name="colorAccent">#65a8c6</color>
+
+    <color name="splash_color">#006087</color>
+    <color name="white">#FFFF</color>
+    <color name="timeTableTextColor">#000</color>
+    <color name="lightPrimary">#ebf9ff</color>
+
+    <color name="bottomBorder">#c3c3c3</color>
+</resources>

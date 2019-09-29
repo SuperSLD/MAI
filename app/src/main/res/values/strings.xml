@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">МАИ</string>
+
+    <string name="title_time_table">Расписание</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_information">Информация</string>
+</resources>

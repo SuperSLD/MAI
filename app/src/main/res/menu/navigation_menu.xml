@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_map"
+        android:icon="@drawable/ic_help_24px"
+        android:title="" />
+    <item
+        android:id="@+id/action_time_table"
+        android:icon="@drawable/ic_today_24px"
+        android:title="" />
+    <item
+        android:id="@+id/action_setting"
+        android:icon="@drawable/ic_settings_applications_24px"
+        android:title="" />
+</menu>
