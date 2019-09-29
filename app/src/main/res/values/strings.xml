@@ -4,4 +4,7 @@
     <string name="title_time_table">Расписание</string>
     <string name="title_settings">Настройки</string>
     <string name="title_information">Информация</string>
+
+    <string name="versionString">0.01 29.09.2019</string>
+    <string name="autor">Соляной Леонид</string>
 </resources>

@@ -41,6 +41,10 @@ public class Open extends AppCompatActivity {
         final Spinner spinner = findViewById(R.id.multiAutoCompleteTextView);
         mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString("groupInfo", "");
+        editor.apply();
+
         //если список был загружен то сразу переходим к выбору группы
         if (mSettings.getString("groupInfo", "").length() < 10) {
             new Thread(new Runnable() {

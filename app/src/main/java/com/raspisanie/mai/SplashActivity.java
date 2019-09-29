@@ -21,22 +21,24 @@ public class SplashActivity extends AppCompatActivity {
         //TODO Сделать красивую заставку (SVG)
 
         SharedPreferences mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
-        /**
+        Parametrs.setParam("mSettings", mSettings);
         if (mSettings.getInt("group", -1) > -1) {
-            if (mSettings.getString("weeks", "").length() > 10) {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                return;
-            }
             Gson gson = new Gson();
             String text = mSettings.getString("groupInfo", "");
             SimpleTree<String> tree = gson.fromJson(text, SimpleTree.class);
             Parametrs.setParam("tree", tree);
 
+
+            if (mSettings.getString("weeks", "").length() > 10) {
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                return;
+            }
+
             Intent intent = new Intent(SplashActivity.this, LoadTimeTableActivity.class);
             startActivity(intent);
             return;
-        } */
+        }
 
         Intent intent = new Intent(this, Open.class);
         startActivity(intent);

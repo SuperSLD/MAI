@@ -1,5 +1,7 @@
 package com.raspisanie.mai.Fragments;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.raspisanie.mai.Activity.LoadTimeTableActivity;
+import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
@@ -45,6 +49,30 @@ public class SettingsFragment extends android.app.Fragment {
         ((TextView) view.findViewById(R.id.textView1)).setText("Группа " + groupName);
         ((TextView) view.findViewById(R.id.textView2)).setText(facName);
         ((TextView) view.findViewById(R.id.textView3)).setText(kursName);
+        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =
+                        new Intent(getActivity().getBaseContext(), LoadTimeTableActivity.class);
+                SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
+                editor.putString("weeks", "");
+                editor.apply();
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.button0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =
+                        new Intent(getActivity().getBaseContext(), Open.class);
+                SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
+                editor.putString("weeks", "");
+                editor.putString("groupInfo", "");
+                editor.putInt("group", -1);
+                editor.apply();
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
