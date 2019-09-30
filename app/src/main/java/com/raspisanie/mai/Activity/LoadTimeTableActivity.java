@@ -74,12 +74,12 @@ public class LoadTimeTableActivity extends AppCompatActivity {
                     s = null;
                     while (s == null)
                     s = url.get(getString);
-                    String[] dayList = s.split("<div class=\"sc-table-col sc-day-header sc-gray\" >");
+                    String[] dayList = s.split("<div class=\"sc-table-col sc-day-header");
                     //Составление списка дней.
                     for (int j = 1; j < dayList.length; j++) {
                         Day day = new Day(
-                                dayList[j].split("<span")[0],
-                                dayList[j].split("</")[0].split(">")[1]
+                                dayList[j].split("<span")[0].split(">")[1],
+                                dayList[j].split("<span class=\"sc-day\">")[1].split("</")[0]
                         );
 
                         //Составление списка предметов.
