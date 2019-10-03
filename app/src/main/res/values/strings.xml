@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">МАИ</string>
 
+    <!-- Menu Title -->
     <string name="title_time_table">Расписание</string>
     <string name="title_settings">Настройки</string>
     <string name="title_information">Информация</string>
+    <string name="title_campus_map">Общая схема кампуса</string>
 
+    <!-- Settings Fragment -->
     <string name="versionString">0.01 29.09.2019</string>
     <string name="autor">Соляной Леонид</string>
+    <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов.
+        Попытка исправить недочеты другого приложения.</string>
+
+    <!-- Widget Info -->
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

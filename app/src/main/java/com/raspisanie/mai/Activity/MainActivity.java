@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         // <><><><>
     }
 
+    //TODO отловить ситуацию, когда текущая неделя выходит за список существующих.
     private void setThisWeek() {
         int thisWeek = 0;
         SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");

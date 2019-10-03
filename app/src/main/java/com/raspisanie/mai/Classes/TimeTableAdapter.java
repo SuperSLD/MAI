@@ -1,6 +1,7 @@
 package com.raspisanie.mai.Classes;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +12,20 @@ import android.widget.TextView;
 import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class TimeTableAdapter extends BaseAdapter {
     private Context ctx;
     private LayoutInflater lInflater;
     private ArrayList<Day> objects;
+    private boolean now;
 
-    public TimeTableAdapter(Context context, ArrayList days) {
+    public TimeTableAdapter(Context context, ArrayList days, boolean now) {
+        this.now = now;
         this.ctx = context;
         this.objects = days;
         this.lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        System.out.println("create Adapter");
     }
 
     @Override
@@ -47,6 +50,14 @@ public class TimeTableAdapter extends BaseAdapter {
         View view = convertView;
         if (view == null) {
             view = lInflater.inflate(R.layout.item_table_main, parent, false);
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        if (now) {
+            System.out.println(objects.get(position).getDate());
+            if (Integer.parseInt(objects.get(position).getDate().substring(0, 2)) !=
+                calendar.get(Calendar.DAY_OF_MONTH))
+            view.findViewById(R.id.dayHeader).setBackgroundResource(R.color.dayGreyHeader);
         }
 
         System.out.println("getView");

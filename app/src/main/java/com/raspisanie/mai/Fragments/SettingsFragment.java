@@ -2,6 +2,7 @@ package com.raspisanie.mai.Fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -73,6 +74,13 @@ public class SettingsFragment extends android.app.Fragment {
                 startActivity(intent);
             }
         });
+        view.findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://mai.ru"));
+                startActivity(myIntent);
+            }
+        });
 
         return view;
     }
@@ -80,6 +88,6 @@ public class SettingsFragment extends android.app.Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        getActivity().setTitle(R.string.app_name);
+        //getActivity().setTitle(R.string.app_name);
     }
 }

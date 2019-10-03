@@ -148,4 +148,12 @@ public class Open extends AppCompatActivity {
 
         Parametrs.setParam("tree", tree);
     }
+
+    /**
+     * Переопределение метода нажатия кнопки назад.
+     */
+    @Override
+    public void onBackPressed() {
+        // <><><><>
+    }
 }

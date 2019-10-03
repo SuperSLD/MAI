@@ -8,6 +8,7 @@
     <color name="white">#FFFF</color>
     <color name="timeTableTextColor">#000</color>
     <color name="lightPrimary">#ebf9ff</color>
+    <color name="dayGreyHeader">#888888</color>
 
     <color name="bottomBorder">#c3c3c3</color>
 </resources>

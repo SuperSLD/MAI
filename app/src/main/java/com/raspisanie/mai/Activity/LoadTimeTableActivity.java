@@ -119,4 +119,12 @@ public class LoadTimeTableActivity extends AppCompatActivity {
             }
         }).start();
     }
+
+    /**
+     * Переопределение метода нажатия кнопки назад.
+     */
+    @Override
+    public void onBackPressed() {
+        // <><><><>
+    }
 }

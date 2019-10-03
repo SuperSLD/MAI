@@ -62,7 +62,7 @@ public class TimeTableFragment extends android.app.Fragment{
     @Override
     public void onPause() {
         super.onPause();
-        getActivity().setTitle(R.string.app_name);
+        //getActivity().setTitle(R.string.app_name);
     }
 
     private void setDaysList(int week) {
@@ -74,7 +74,8 @@ public class TimeTableFragment extends android.app.Fragment{
 
         ListView listView = view.findViewById(R.id.listItem);
         TimeTableAdapter adapter = new TimeTableAdapter(view.getContext(),
-                ((Week[]) Parametrs.getParam("weeks"))[week].getDaysList());
+                ((Week[]) Parametrs.getParam("weeks"))[week].getDaysList(),
+                week == ((int) Parametrs.getParam("thisWeek")));
         listView.setAdapter(adapter);
     }
 }
