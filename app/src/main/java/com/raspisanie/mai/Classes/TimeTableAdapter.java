@@ -47,17 +47,15 @@ public class TimeTableAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // используем созданные, но не используемые view
-        View view = convertView;
-        if (view == null) {
-            view = lInflater.inflate(R.layout.item_table_main, parent, false);
-        }
+        View view =  lInflater.inflate(R.layout.item_table_main, parent, false);
 
         Calendar calendar = Calendar.getInstance();
         if (now) {
             System.out.println(objects.get(position).getDate());
             if (Integer.parseInt(objects.get(position).getDate().substring(0, 2)) !=
-                calendar.get(Calendar.DAY_OF_MONTH))
-            view.findViewById(R.id.dayHeader).setBackgroundResource(R.color.dayGreyHeader);
+                calendar.get(Calendar.DAY_OF_MONTH)) {
+                view.findViewById(R.id.dayHeader).setBackgroundResource(R.color.dayGreyHeader);
+            }
         }
 
         System.out.println("getView");

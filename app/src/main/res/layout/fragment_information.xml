@@ -30,6 +30,39 @@
                     style="@style/Widget.AppCompat.Button.Borderless"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/bottom_border">
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Столовые и буфеты"
+                    android:drawableLeft="@drawable/ic_fastfood_24px"
+                    android:drawableTint="@android:color/darker_gray"
+                    android:textAllCaps="false"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/bottom_border">
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Секции"
+                    android:drawableLeft="@drawable/ic_directions_bike_24px"
+                    android:drawableTint="@android:color/darker_gray"
+                    android:textAllCaps="false"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
