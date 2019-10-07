@@ -47,59 +47,53 @@ public class Open extends AppCompatActivity {
 
         //если список был загружен то сразу переходим к выбору группы
         if (mSettings.getString("groupInfo", "").length() < 10) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    url = new URLSendRequest("https://mai.ru/", 50000);
-                    String s = null;
-                    while (s == null)
-                    s = url.get("education/schedule/");
+            new Thread(() -> {
+                url = new URLSendRequest("https://mai.ru/", 50000);
+                String s = null;
+                while (s == null)
+                s = url.get("education/schedule/");
 
-                    final ArrayList<String> list1 = new ArrayList<>();
+                final ArrayList<String> list1 = new ArrayList<>();
 
-                    //Собираем дерево групп.
-                    String[] kurs = s.split("<h5 class=\"sc-container-header sc-gray\" >");
-                    for (int i = 1; i < kurs.length; i++) {
-                        //Находим курсы.
-                        SimpleTree<String> k = new SimpleTree<>(kurs[i].split("</h5>")[0]);
-                        list1.add(kurs[i].split("</h5>")[0]);
-                        String[] fak = kurs[i].split("role=\"button\" data-toggle=\"collapse\" aria-expanded=\"false\" aria-controls=\"");
-                        for (int j = 1; j < fak.length; j++) {
-                            //Находим факультеты
-                            SimpleTree<String> f = new SimpleTree<>(fak[j].split("</a>")[0].split(">")[1]);
-                            String[] group = fak[j].split("<a class=\"sc-group-item\" href=\"");
-                            for (int l = 1; l < group.length; l++) {
-                                //Находим группы каждого факультета.
-                                f.addChild(new SimpleTree<>(group[l].split("</a>")[0].split(">")[1]));
-                            }
-                            k.addChild(f);
+                //Собираем дерево групп.
+                String[] kurs = s.split("<h5 class=\"sc-container-header sc-gray\" >");
+                for (int i = 1; i < kurs.length; i++) {
+                    //Находим курсы.
+                    SimpleTree<String> k = new SimpleTree<>(kurs[i].split("</h5>")[0]);
+                    list1.add(kurs[i].split("</h5>")[0]);
+                    String[] fak = kurs[i].split("role=\"button\" data-toggle=\"collapse\" aria-expanded=\"false\" aria-controls=\"");
+                    for (int j = 1; j < fak.length; j++) {
+                        //Находим факультеты
+                        SimpleTree<String> f = new SimpleTree<>(fak[j].split("</a>")[0].split(">")[1]);
+                        String[] group = fak[j].split("<a class=\"sc-group-item\" href=\"");
+                        for (int l = 1; l < group.length; l++) {
+                            //Находим группы каждого факультета.
+                            f.addChild(new SimpleTree<>(group[l].split("</a>")[0].split(">")[1]));
                         }
-                        tree.addChild(k);
+                        k.addChild(f);
                     }
-
-                    Gson gson = new Gson();
-                    String json = gson.toJson(tree);
-                    SharedPreferences.Editor editor = mSettings.edit();
-                    editor.putString("groupInfo", json);
-                    editor.apply();
-
-                    //убираем загрузку и показываем первый элемент с вводом
-                    final ArrayAdapter adapter
-                            = new ArrayAdapter(Open.this, android.R.layout.simple_dropdown_item_1line, list1.toArray());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ProgressBar progressBar = findViewById(R.id.progressBar);
-                            LinearLayout listView = findViewById(R.id.writeinfo);
-                            TextView progressBarText = findViewById(R.id.textProgressBar);
-                            progressBar.setVisibility(View.GONE);
-                            progressBarText.setVisibility(View.GONE);
-
-                            spinner.setAdapter(adapter);
-                            listView.setVisibility(View.VISIBLE);
-                        }
-                    });
+                    tree.addChild(k);
                 }
+
+                Gson gson = new Gson();
+                String json = gson.toJson(tree);
+                SharedPreferences.Editor editor1 = mSettings.edit();
+                editor1.putString("groupInfo", json);
+                editor1.apply();
+
+                //убираем загрузку и показываем первый элемент с вводом
+                final ArrayAdapter adapter
+                        = new ArrayAdapter(Open.this, android.R.layout.simple_dropdown_item_1line, list1.toArray());
+                runOnUiThread(() -> {
+                    ProgressBar progressBar = findViewById(R.id.progressBar);
+                    LinearLayout listView = findViewById(R.id.writeinfo);
+                    TextView progressBarText = findViewById(R.id.textProgressBar);
+                    progressBar.setVisibility(View.GONE);
+                    progressBarText.setVisibility(View.GONE);
+
+                    spinner.setAdapter(adapter);
+                    listView.setVisibility(View.VISIBLE);
+                });
             }).start();
         } else {
             Gson gson = new Gson();
@@ -136,14 +130,11 @@ public class Open extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.buttonNext).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Open.this, SelectFacActivity.class);
-                intent.putExtra("kurs", kurs);
-                Parametrs.setParam("kurs", kurs);
-                startActivity(intent);
-            }
+        findViewById(R.id.buttonNext).setOnClickListener((view) -> {
+            Intent intent = new Intent(Open.this, SelectFacActivity.class);
+            intent.putExtra("kurs", kurs);
+            Parametrs.setParam("kurs", kurs);
+            startActivity(intent);
         });
 
         Parametrs.setParam("tree", tree);

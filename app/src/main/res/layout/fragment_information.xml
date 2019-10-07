@@ -30,6 +30,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"/>
 
+                <!-- Кнопка перехода к схеме кампуса
                 <Button
                     android:id="@+id/button0"
                     android:layout_width="match_parent"
@@ -38,7 +39,7 @@
                     android:drawableLeft="@drawable/ic_map_24px"
                     android:drawableTint="@android:color/darker_gray"
                     android:textAllCaps="false"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    style="@style/Widget.AppCompat.Button.Borderless"/> -->
 
                 <Button
                     android:id="@+id/button1"
@@ -84,7 +85,7 @@
                     android:id="@+id/button00"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Спортивные екции"
+                    android:text="Спотривные секции"
                     android:drawableLeft="@drawable/ic_directions_bike_24px"
                     android:drawableTint="@android:color/darker_gray"
                     android:textAllCaps="false"

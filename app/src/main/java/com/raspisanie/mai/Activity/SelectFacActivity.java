@@ -52,15 +52,12 @@ public class SelectFacActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.buttonNext).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =
+        findViewById(R.id.buttonNext).setOnClickListener(v -> {
+                Intent intentLocal =
                         new Intent(SelectFacActivity.this, SelectGroupActivity.class);
-                intent.putExtra("fac", fac);
+                intentLocal.putExtra("fac", fac);
                 Parametrs.setParam("fac", fac);
-                startActivity(intent);
-            }
+                startActivity(intentLocal);
         });
     }
 }

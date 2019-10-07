@@ -57,23 +57,20 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                android.app.FragmentTransaction fTrans = getFragmentManager().beginTransaction();
-                switch (item.getItemId()) {
-                    case R.id.action_time_table:
-                        fTrans.replace(R.id.fragment, timeTableFragment).commit();
-                        break;
-                    case R.id.action_map:
-                        fTrans.replace(R.id.fragment, informationFagment).commit();
-                        break;
-                    case R.id.action_setting:
-                        fTrans.replace(R.id.fragment, settingsFragment).commit();
-                        break;
-                }
-                return true;
+        bottomNavigationView.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
+            android.app.FragmentTransaction fTrans = getFragmentManager().beginTransaction();
+            switch (item.getItemId()) {
+                case R.id.action_time_table:
+                    fTrans.replace(R.id.fragment, timeTableFragment).commit();
+                    break;
+                case R.id.action_map:
+                    fTrans.replace(R.id.fragment, informationFagment).commit();
+                    break;
+                case R.id.action_setting:
+                    fTrans.replace(R.id.fragment, settingsFragment).commit();
+                    break;
             }
+            return true;
         });
         bottomNavigationView.setSelectedItemId(R.id.action_time_table);
     }

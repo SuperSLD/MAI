@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Activity.MainActivity;
@@ -28,9 +29,14 @@ public class SplashActivity extends AppCompatActivity {
             SimpleTree<String> tree = gson.fromJson(text, SimpleTree.class);
             Parametrs.setParam("tree", tree);
 
-
             if (mSettings.getString("weeks", "").length() > 10) {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+
+                if (mSettings.getString("sportInfo", "").length() > 10) {
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                Intent intent = new Intent(SplashActivity.this, LoadInformationActivity.class);
                 startActivity(intent);
                 return;
             }

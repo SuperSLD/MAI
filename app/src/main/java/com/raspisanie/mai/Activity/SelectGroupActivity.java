@@ -57,22 +57,19 @@ public class SelectGroupActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.buttonNext).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =
-                        new Intent(SelectGroupActivity.this, LoadTimeTableActivity.class);
-                intent.putExtra("group", group);
-                Parametrs.setParam("group", group);
+        findViewById(R.id.buttonNext).setOnClickListener(v -> {
+            Intent intent =
+                    new Intent(SelectGroupActivity.this, LoadTimeTableActivity.class);
+            intent.putExtra("group", group);
+            Parametrs.setParam("group", group);
 
-                SharedPreferences.Editor editor = mSettings.edit();
-                editor.putInt("group", group);
-                editor.putInt("fac", fac);
-                editor.putInt("kurs", kurs);
-                editor.apply();
+            SharedPreferences.Editor editor = mSettings.edit();
+            editor.putInt("group", group);
+            editor.putInt("fac", fac);
+            editor.putInt("kurs", kurs);
+            editor.apply();
 
-                startActivity(intent);
-            }
+            startActivity(intent);
         });
 
     }

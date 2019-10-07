@@ -49,28 +49,25 @@ public class URLSendRequest {
      */
     public String get(final String SERVER_GET) {
         final String[] input = {null};
-        Thread send = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HttpURLConnection conn = null;
-                try {
-                    String q = SERVER_URL + SERVER_GET;
-                    URL url = new URL(q);
-                    conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    conn.setConnectTimeout(TIME_OUT);
-                    conn.setReadTimeout(TIME_OUT);
-                    conn.connect();
+        Thread send = new Thread(() -> {
+            HttpURLConnection conn = null;
+            try {
+                String q = SERVER_URL + SERVER_GET;
+                URL url = new URL(q);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setConnectTimeout(TIME_OUT);
+                conn.setReadTimeout(TIME_OUT);
+                conn.connect();
 
-                    if(HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                        input[0] = readBuffer(bufferedReader);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    conn.disconnect();
+                if(HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    input[0] = readBuffer(bufferedReader);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                conn.disconnect();
             }
         });
         send.start();
@@ -81,29 +78,26 @@ public class URLSendRequest {
     public String get(final String SERVER_GET,
                       final String SessionID) {
         final String[] input = {null};
-        Thread send = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HttpURLConnection conn = null;
-                try {
-                    String q = SERVER_URL + SERVER_GET;
-                    URL url = new URL(q);
-                    conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    conn.setRequestProperty("Cookie", "JSESSIONID="+SessionID);
-                    conn.setConnectTimeout(TIME_OUT);
-                    conn.setReadTimeout(TIME_OUT);
-                    conn.connect();
+        Thread send = new Thread(() -> {
+            HttpURLConnection conn = null;
+            try {
+                String q = SERVER_URL + SERVER_GET;
+                URL url = new URL(q);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Cookie", "JSESSIONID="+SessionID);
+                conn.setConnectTimeout(TIME_OUT);
+                conn.setReadTimeout(TIME_OUT);
+                conn.connect();
 
-                    if(HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                        input[0] = readBuffer(bufferedReader);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    conn.disconnect();
+                if(HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    input[0] = readBuffer(bufferedReader);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                conn.disconnect();
             }
         });
         send.start();
@@ -121,84 +115,78 @@ public class URLSendRequest {
      * @param urlParameters параметры передаваемые в запросе
      * @return строка ответ сервера
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public String post(final String SERVER_POST,
                        final String urlParameters) {
         final String[] input = {null};
-        Thread send = new Thread(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void run() {
-                HttpURLConnection conn = null;
-                try {
-                    byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
-                    int    postDataLength = postData.length;
-                    String request        = SERVER_URL + SERVER_POST;
-                    URL    url            = new URL( request );
-                    conn                  = (HttpURLConnection) url.openConnection();
-                    conn.setDoOutput( true );
-                    conn.setInstanceFollowRedirects( false );
-                    conn.setRequestMethod( "POST" );
-                    conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
-                    conn.setRequestProperty( "charset", "utf-8");
-                    conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
-                    conn.setUseCaches( false );
-                    try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
-                        wr.write( postData );
-                    }
-
-                    if(HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                        input[0] = readBuffer(bufferedReader);
-                        input[0] = URLDecoder.decode(input[0], "UTF-8");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    conn.disconnect();
+        Thread send = new Thread(() -> {
+            HttpURLConnection conn = null;
+            try {
+                byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+                int    postDataLength = postData.length;
+                String request        = SERVER_URL + SERVER_POST;
+                URL    url            = new URL( request );
+                conn                  = (HttpURLConnection) url.openConnection();
+                conn.setDoOutput( true );
+                conn.setInstanceFollowRedirects( false );
+                conn.setRequestMethod( "POST" );
+                conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
+                conn.setRequestProperty( "charset", "utf-8");
+                conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+                conn.setUseCaches( false );
+                try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
+                    wr.write( postData );
                 }
+
+                if(HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    input[0] = readBuffer(bufferedReader);
+                    input[0] = URLDecoder.decode(input[0], "UTF-8");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                conn.disconnect();
             }
         });
         send.start();
         while (send.isAlive()) { }
         return input[0];
     }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public String post(final String SERVER_POST,
                        final String urlParameters,
                        final String SessionID) {
         final String[] input = {null};
-        Thread send = new Thread(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void run() {
-                HttpURLConnection conn = null;
-                try {
-                    byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
-                    int    postDataLength = postData.length;
-                    String request        = SERVER_URL + SERVER_POST;
-                    URL    url            = new URL( request );
-                    conn                  = (HttpURLConnection) url.openConnection();
-                    conn.setDoOutput( true );
-                    conn.setInstanceFollowRedirects( false );
-                    conn.setRequestMethod( "POST" );
-                    conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
-                    conn.setRequestProperty( "charset", "utf-8");
-                    conn.setRequestProperty("Cookie",SessionID);
-                    conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
-                    conn.setUseCaches( false );
-                    try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
-                        wr.write( postData );
-                    }
-
-                    if(HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                        input[0] = readBuffer(bufferedReader);
-                        input[0] = URLDecoder.decode(input[0], "UTF-8");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    conn.disconnect();
+        Thread send = new Thread(() -> {
+            HttpURLConnection conn = null;
+            try {
+                byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+                int    postDataLength = postData.length;
+                String request        = SERVER_URL + SERVER_POST;
+                URL    url            = new URL( request );
+                conn                  = (HttpURLConnection) url.openConnection();
+                conn.setDoOutput( true );
+                conn.setInstanceFollowRedirects( false );
+                conn.setRequestMethod( "POST" );
+                conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
+                conn.setRequestProperty( "charset", "utf-8");
+                conn.setRequestProperty("Cookie",SessionID);
+                conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+                conn.setUseCaches( false );
+                try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
+                    wr.write( postData );
                 }
+
+                if(HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    input[0] = readBuffer(bufferedReader);
+                    input[0] = URLDecoder.decode(input[0], "UTF-8");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                conn.disconnect();
             }
         });
         send.start();
