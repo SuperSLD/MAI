@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +32,8 @@ public class SettingsFragment extends android.app.Fragment {
         inflater.inflate(R.menu.settings_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
         getActivity().setTitle(R.string.title_settings);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
+
     }
 
     @Override

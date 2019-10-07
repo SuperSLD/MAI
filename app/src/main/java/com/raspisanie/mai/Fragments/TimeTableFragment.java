@@ -2,6 +2,7 @@ package com.raspisanie.mai.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +34,7 @@ public class TimeTableFragment extends android.app.Fragment{
         inflater.inflate(R.menu.time_table_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
         getActivity().setTitle(R.string.title_time_table);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Текущая неделя");
     }
 
     @Override
@@ -40,12 +42,15 @@ public class TimeTableFragment extends android.app.Fragment{
         switch (item.getItemId()) {
             case R.id.but1:
                 setDaysList((int) Parametrs.getParam("thisWeek") - 1);
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Предыдущая неделя");
                 break;
             case R.id.but2:
                 setDaysList((int) Parametrs.getParam("thisWeek"));
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Текущая неделя");
                 break;
             case R.id.but3:
                 setDaysList((int) Parametrs.getParam("thisWeek") + 1);
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Следующая неделя");
                 break;
         }
         return super.onOptionsItemSelected(item);

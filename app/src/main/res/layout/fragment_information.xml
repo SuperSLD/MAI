@@ -19,6 +19,17 @@
                 android:orientation="vertical"
                 android:background="@drawable/bottom_border">
 
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="15dp"
+                    android:textSize="18dp"
+                    android:text="@string/titleCumpus"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"/>
+
                 <Button
                     android:id="@+id/button0"
                     android:layout_width="match_parent"
@@ -28,13 +39,6 @@
                     android:drawableTint="@android:color/darker_gray"
                     android:textAllCaps="false"
                     style="@style/Widget.AppCompat.Button.Borderless"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@drawable/bottom_border">
 
                 <Button
                     android:id="@+id/button1"
@@ -45,6 +49,18 @@
                     android:drawableTint="@android:color/darker_gray"
                     android:textAllCaps="false"
                     style="@style/Widget.AppCompat.Button.Borderless"/>
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Библиотеки"
+                    android:drawableLeft="@drawable/ic_book_24px"
+                    android:drawableTint="@android:color/darker_gray"
+                    android:textAllCaps="false"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -53,12 +69,43 @@
                 android:orientation="vertical"
                 android:background="@drawable/bottom_border">
 
-                <Button
-                    android:id="@+id/button2"
+                <TextView
+                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Секции"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="15dp"
+                    android:textSize="18dp"
+                    android:text="@string/titleLife"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/button00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Спортивные екции"
                     android:drawableLeft="@drawable/ic_directions_bike_24px"
+                    android:drawableTint="@android:color/darker_gray"
+                    android:textAllCaps="false"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+                <Button
+                    android:id="@+id/button01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Студенческие объединения"
+                    android:drawableLeft="@drawable/ic_people_24px"
+                    android:drawableTint="@android:color/darker_gray"
+                    android:textAllCaps="false"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+                <Button
+                    android:id="@+id/button02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Творческие колективы и клубы"
+                    android:drawableLeft="@drawable/ic_extension_24px"
                     android:drawableTint="@android:color/darker_gray"
                     android:textAllCaps="false"
                     style="@style/Widget.AppCompat.Button.Borderless"/>

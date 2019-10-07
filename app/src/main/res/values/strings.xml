@@ -13,7 +13,8 @@
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов.
         Попытка исправить недочеты другого приложения.</string>
 
-    <!-- Widget Info -->
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <!-- Fragment Info -->
+    <string name="titleCumpus">Кампус</string>
+    <string name="titleLife">Жизнь</string>
+
 </resources>
