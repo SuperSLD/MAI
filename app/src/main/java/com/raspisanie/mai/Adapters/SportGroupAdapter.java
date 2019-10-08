@@ -60,7 +60,7 @@ public class SportGroupAdapter extends BaseAdapter {
         newLinearLayout.setOrientation(LinearLayout.VERTICAL);
 
         newLinearLayout.removeAllViews();
-        for (int j = 0 ; i < objects.get(j).getChildList().size(); j++)
+        for (int j = 0 ; j < objects.get(j).getChildList().size(); j++)
             newLinearLayout.addView(adapter.getView(j, null, newLinearLayout));
 
         ((LinearLayout) view.findViewById(R.id.tableList)).removeAllViews();

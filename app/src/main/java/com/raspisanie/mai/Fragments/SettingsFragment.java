@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Classes.Parametrs;
@@ -75,7 +76,16 @@ public class SettingsFragment extends android.app.Fragment {
             Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://mai.ru"));
             startActivity(myIntent);
         });
-
+        view.findViewById(R.id.button01).setOnClickListener(v -> {
+            Intent intent =
+                    new Intent(getActivity().getBaseContext(), LoadInformationActivity.class);
+            SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
+            editor.putString("sport", "");
+            editor.putString("creative", "");
+            //TODO дописать обнуление
+            editor.apply();
+            startActivity(intent);
+        });
         return view;
     }
 

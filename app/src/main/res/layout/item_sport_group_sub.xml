@@ -8,32 +8,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/t1"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/t1"
-                android:layout_width="wrap_content"
-                android:textColor="@android:color/black"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Академическая гребля" />
-            <TextView
-                android:id="@+id/t2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Виталий Михайлович Елисеев" />
-        </LinearLayout>
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Академическая гребля" />
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Виталий Михайлович Елисеев" />
 
         <TextView
             android:id="@+id/t3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
+            android:background="@drawable/border_primary"
             android:text="	гребная база «Буревестник», Волоколамское ш., д. 67
 +7 499 158-43-01
 +7 499 158-46-20"

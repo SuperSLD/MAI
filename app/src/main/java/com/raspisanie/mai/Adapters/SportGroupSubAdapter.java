@@ -46,10 +46,14 @@ public class SportGroupSubAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.item_sport_group_sub, parent, false);
         }
 
-        String[] text = objects.get(position).getValue().split("<!>");
-        ((TextView) view.findViewById(R.id.tableText)).setText(text[0]);
-        ((TextView) view.findViewById(R.id.tableText)).setText(text[1]);
-        ((TextView) view.findViewById(R.id.tableText)).setText(text[2]);
+        try {
+            String[] text = objects.get(position).getValue().replaceAll("  ", "\n").split("<!>");
+            ((TextView) view.findViewById(R.id.t1)).setText(text[0]);
+            ((TextView) view.findViewById(R.id.t2)).setText(text[1]);
+            ((TextView) view.findViewById(R.id.t3)).setText(text[2]);
+        } catch (IndexOutOfBoundsException ex) {
+            ex.printStackTrace();
+        }
 
         return view;
     }
