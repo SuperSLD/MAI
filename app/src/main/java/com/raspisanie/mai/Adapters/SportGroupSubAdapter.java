@@ -1,4 +1,4 @@
-package com.raspisanie.mai.Classes;
+package com.raspisanie.mai.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,22 +7,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.raspisanie.mai.Classes.Day;
-import com.raspisanie.mai.Classes.Subject;
+import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
 
-public class TimeTableSubAdapter extends BaseAdapter {
-
+public class SportGroupSubAdapter extends BaseAdapter {
     private Context ctx;
     private LayoutInflater lInflater;
-    private ArrayList<Subject> objects;
+    private ArrayList<SimpleTree<String>> objects;
 
-
-    public TimeTableSubAdapter (Context context, ArrayList subj) {
+    public SportGroupSubAdapter(Context context, ArrayList list) {
         this.ctx = context;
-        this.objects = subj;
+        this.objects = list;
         this.lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -46,15 +43,13 @@ public class TimeTableSubAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            view = lInflater.inflate(R.layout.item_table_sub, parent, false);
+            view = lInflater.inflate(R.layout.item_sport_group_sub, parent, false);
         }
 
-        ((TextView) view.findViewById(R.id.textView)).setText(objects.get(position).getName());
-        ((TextView) view.findViewById(R.id.textView6)).setText(objects.get(position).getLecturer());
-
-        ((TextView) view.findViewById(R.id.textView5)).setText(objects.get(position).getTime());
-        ((TextView) view.findViewById(R.id.textView4)).setText(objects.get(position).getType());
-        ((TextView) view.findViewById(R.id.textView3)).setText(objects.get(position).getPlace());
+        String[] text = objects.get(position).getValue().split("<!>");
+        ((TextView) view.findViewById(R.id.tableText)).setText(text[0]);
+        ((TextView) view.findViewById(R.id.tableText)).setText(text[1]);
+        ((TextView) view.findViewById(R.id.tableText)).setText(text[2]);
 
         return view;
     }

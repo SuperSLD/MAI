@@ -31,7 +31,12 @@ public class SplashActivity extends AppCompatActivity {
 
             if (mSettings.getString("weeks", "").length() > 10) {
 
-                if (mSettings.getString("sportInfo", "").length() > 10) {
+                if (mSettings.getString("sport", "").length() > 10) {
+                    Parametrs.setParam("sport",
+                            gson.fromJson(mSettings.getString("sport", ""), SimpleTree.class));
+                    Parametrs.setParam("creative",
+                            gson.fromJson(mSettings.getString("creative", ""), SimpleTree.class));
+
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     return;

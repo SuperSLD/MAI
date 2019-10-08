@@ -1,22 +1,23 @@
 package com.raspisanie.mai.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.Classes.URLSendRequest;
-import com.raspisanie.mai.Classes.Week;
 import com.raspisanie.mai.R;
-
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 
 public class LoadInformationActivity extends AppCompatActivity {
     private SharedPreferences mSettings;
-    private SimpleTree<String> sport = new SimpleTree<String>("Виды спорта");
+    private SimpleTree<String> sport = new SimpleTree<>("Виды спорта");
+    private SimpleTree<String> creative = new SimpleTree<>("Творческие коллективы");
+    private SimpleTree<String> studOrg = new SimpleTree<>("Студенческие органмзации");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +69,57 @@ public class LoadInformationActivity extends AppCompatActivity {
             s = null;
             while (s == null)
                 s = url.get("life/create/dkit/kollektivy-dkit.php");
-            String group = s.split("<p>")[1];
+            String[] group = s.split("<p>")[1].split("<b>");
 
+            for (int i = 1; i < group.length; i++) {
+                try {
+                    SimpleTree<String> groupTree = new SimpleTree<>(deleteHTML(
+                            group[i].split("</b>")[0]
+                            + "<!>" + group[i].split("<br>")[1]
+                            + "<!>" + group[i].split("<br>")[3]
+                    ));
+
+                    creative.addChild(groupTree);
+                } catch (IndexOutOfBoundsException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            /*
+            Загрузка данных о студенческих организациях
+
+            s = null;
+            while (s == null)
+                s = url.get("life/join/index.php");
+
+            String[] org = s.split("<th colspan=");
+
+            for (int i = 1; i < group.length; i++) {
+                try {
+                    SimpleTree<String> orgTree = new SimpleTree<>(deleteHTML(
+                            org[i].split("</")[0].split(">")
+                                    [org[i].split("</")[0].split(">").length-1]
+                    ));
+
+                    studOrg.addChild(orgTree);
+                } catch (IndexOutOfBoundsException ex) {
+                    ex.printStackTrace();
+                }
+            }
+             */
             setProgressText("Загружаем другую инфрмацию о ВУЗе...\n2/X");
+            setProgressText(creative.toString(0));
+
+            Gson gson = new Gson();
+            Parametrs.setParam("sport", sport);
+            Parametrs.setParam("creative", creative);
+            SharedPreferences.Editor editor = mSettings.edit();
+            editor.putString("sport", gson.toJson(sport));
+            editor.putString("creative", gson.toJson(creative));
+            editor.apply();
+
+            Intent intent = new Intent(LoadInformationActivity.this, MainActivity.class);
+            startActivity(intent);
         }).start();
     }
 
@@ -90,6 +139,7 @@ public class LoadInformationActivity extends AppCompatActivity {
     private String deleteHTML(String s) {
         return s.replaceAll("\t", "")
                 .replaceAll("&nbsp;", " ")
-                .replaceAll("\n", "");
+                .replaceAll("\n", "")
+                .replaceAll("<br>", "");
     }
 }

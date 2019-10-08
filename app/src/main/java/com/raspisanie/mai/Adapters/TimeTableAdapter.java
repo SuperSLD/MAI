@@ -1,7 +1,6 @@
-package com.raspisanie.mai.Classes;
+package com.raspisanie.mai.Adapters;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.raspisanie.mai.Classes.Day;
 import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
@@ -61,6 +61,7 @@ public class TimeTableAdapter extends BaseAdapter {
         System.out.println("getView");
         ((TextView) view.findViewById(R.id.textView1)).setText(objects.get(position).getDate());
         ((TextView) view.findViewById(R.id.textView2)).setText(objects.get(position).getName());
+
         TimeTableSubAdapter adapter = new TimeTableSubAdapter(ctx, objects.get(position).getSubjectList());
 
         LinearLayout newLinearLayout = new LinearLayout(ctx);

@@ -10,15 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Switch;
 
 import com.raspisanie.mai.Classes.Parametrs;
-import com.raspisanie.mai.Classes.TimeTableAdapter;
+import com.raspisanie.mai.Adapters.TimeTableAdapter;
 import com.raspisanie.mai.Classes.Week;
 import com.raspisanie.mai.R;
-
-import java.util.ArrayList;
 
 public class TimeTableFragment extends android.app.Fragment{
     View view;

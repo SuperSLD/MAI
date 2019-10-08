@@ -108,7 +108,7 @@ public class LoadTimeTableActivity extends AppCompatActivity {
             editor.apply();
 
             //TODO дописать инициализацию переменных.
-            if (mSettings.getString("sportInfo", "").length() > 10) {
+            if (mSettings.getString("sport", "").length() > 10) {
                 Intent intent = new Intent(LoadTimeTableActivity.this, MainActivity.class);
                 startActivity(intent);
                 return;
