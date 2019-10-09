@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.raspisanie.mai.Activity.CampusMapActivity;
 import com.raspisanie.mai.Activity.CreativGroupActivity;
 import com.raspisanie.mai.Activity.SportGroupActivity;
+import com.raspisanie.mai.Activity.StudOrgActivity;
 import com.raspisanie.mai.R;
 
 public class InformationFragment extends Fragment {
@@ -46,6 +47,10 @@ public class InformationFragment extends Fragment {
         }); */
         view.findViewById(R.id.button00).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), SportGroupActivity.class);
+            startActivity(intent);
+        });
+        view.findViewById(R.id.button01).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity().getBaseContext(), StudOrgActivity.class);
             startActivity(intent);
         });
         view.findViewById(R.id.button02).setOnClickListener(v -> {

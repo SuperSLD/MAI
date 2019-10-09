@@ -82,7 +82,7 @@ public class SettingsFragment extends android.app.Fragment {
             SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
             editor.putString("sport", "");
             editor.putString("creative", "");
-            //TODO дописать обнуление
+            editor.putString("studOrg", "");
             editor.apply();
             startActivity(intent);
         });

@@ -94,6 +94,7 @@ public class LoadInformationActivity extends AppCompatActivity {
             /*
             Загрузка данных о студенческих организациях
             */
+            //TODO правильно распарсить группы
             s = null;
             while (s == null)
                 s = url.get("life/join/index.php");
@@ -105,6 +106,9 @@ public class LoadInformationActivity extends AppCompatActivity {
                     SimpleTree<String> orgTree = new SimpleTree<>(deleteHTML(
                             org[i].replaceAll("<br>", "").split("</")[0].split(">")
                                     [org[i].split("</")[0].split(">").length-1]
+                            + "<!>" + org[i].split("<td valign=\"top\">")[1].split("</td>")[0]
+                            + "<!>" + org[i].split("<td colspan=\"2\" valign=\"top\">")[1].split("</td>")[0]
+                            + "<!>" + org[i].split("<td>")[1].split("</td>")[0]
                     ));
 
                     studOrg.addChild(orgTree);
@@ -119,9 +123,11 @@ public class LoadInformationActivity extends AppCompatActivity {
             Gson gson = new Gson();
             Parametrs.setParam("sport", sport);
             Parametrs.setParam("creative", creative);
+            Parametrs.setParam("studOrg", studOrg);
             SharedPreferences.Editor editor = mSettings.edit();
             editor.putString("sport", gson.toJson(sport));
             editor.putString("creative", gson.toJson(creative));
+            editor.putString("studOrg", gson.toJson(studOrg));
             editor.apply();
 
             Intent intent = new Intent(LoadInformationActivity.this, MainActivity.class);

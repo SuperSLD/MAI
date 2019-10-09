@@ -36,6 +36,8 @@ public class SplashActivity extends AppCompatActivity {
                             gson.fromJson(mSettings.getString("sport", ""), SimpleTree.class));
                     Parametrs.setParam("creative",
                             gson.fromJson(mSettings.getString("creative", ""), SimpleTree.class));
+                    Parametrs.setParam("studOrg",
+                            gson.fromJson(mSettings.getString("studOrg", ""), SimpleTree.class));
 
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);

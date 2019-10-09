@@ -107,7 +107,6 @@ public class LoadTimeTableActivity extends AppCompatActivity {
             editor.putString("weeks", json);
             editor.apply();
 
-            //TODO дописать инициализацию переменных.
             if (mSettings.getString("sport", "").length() > 10) {
                 Intent intent = new Intent(LoadTimeTableActivity.this, MainActivity.class);
                 startActivity(intent);
