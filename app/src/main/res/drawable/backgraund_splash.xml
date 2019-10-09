@@ -4,10 +4,14 @@
     <item
         android:drawable="@color/splash_color"/>
 
+    <!--
     <item>
         <bitmap
+            android:height="100dp"
+            android:width="100dp"
+
             android:mipMap="true"
             android:gravity="center"
             android:src="@drawable/mai_logo"/>
-    </item>
+    </item>-->
 </layer-list>
