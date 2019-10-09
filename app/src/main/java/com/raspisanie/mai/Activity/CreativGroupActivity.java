@@ -3,29 +3,31 @@ package com.raspisanie.mai.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.widget.Adapter;
 import android.widget.ListView;
 
-import com.raspisanie.mai.Adapters.SportGroupAdapter;
+import com.raspisanie.mai.Adapters.CreativeAdapter;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
 
-public class SportGroupActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sport_group);
+import java.lang.reflect.Parameter;
 
-        SportGroupAdapter adapter = new SportGroupAdapter(
-                getBaseContext(), ((SimpleTree<String>) Parametrs.getParam("sport")).getChildList());
+public class CreativGroupActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_creariv_group);
 
         ListView listView = findViewById(R.id.table);
+        CreativeAdapter adapter = new CreativeAdapter(getBaseContext(),
+                ((SimpleTree<String>) Parametrs.getParam("creative")).getChildList());
         listView.setAdapter(adapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        setTitle("Спотривные секции");
+        setTitle("Творческие колективы и клубы");
         getSupportActionBar().setSubtitle(null);
         return super.onCreateOptionsMenu(menu);
     }

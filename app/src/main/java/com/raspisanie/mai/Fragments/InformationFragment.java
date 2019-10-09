@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.raspisanie.mai.Activity.CampusMapActivity;
+import com.raspisanie.mai.Activity.CreativGroupActivity;
 import com.raspisanie.mai.Activity.SportGroupActivity;
 import com.raspisanie.mai.R;
 
@@ -45,6 +46,10 @@ public class InformationFragment extends Fragment {
         }); */
         view.findViewById(R.id.button00).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), SportGroupActivity.class);
+            startActivity(intent);
+        });
+        view.findViewById(R.id.button02).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity().getBaseContext(), CreativGroupActivity.class);
             startActivity(intent);
         });
 

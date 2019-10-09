@@ -19,6 +19,8 @@ public class LoadInformationActivity extends AppCompatActivity {
     private SimpleTree<String> creative = new SimpleTree<>("Творческие коллективы");
     private SimpleTree<String> studOrg = new SimpleTree<>("Студенческие органмзации");
 
+    private final String COUNT = "3";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,16 +54,18 @@ public class LoadInformationActivity extends AppCompatActivity {
                         SimpleTree<String> sectTree = new SimpleTree<>(
                                 deleteHTML(group[j].split("</td>")[0].split("<td>")[1])
                                 + "<!>" + deleteHTML(group[j].split("</td>")[1].split("<td>")[1])
-                                + "<!>" + deleteHTML(group[j].split("</td>")[2].split("<td>")[1])
+                                + "<!>" + deleteHTML(group[j].replaceAll("<!", "</")
+                                        .replaceAll("<a", "</").split("</")[2].split("<td>")[1])
                         );
                         korpTree.addChild(sectTree);
                     } catch (IndexOutOfBoundsException ex) {
-                        ex.printStackTrace();
+                        //ex.printStackTrace();
                     }
                 }
+
                 sport.addChild(korpTree);
             }
-            setProgressText("Загружаем другую инфрмацию о ВУЗе...\n1/X");
+            setProgressText("Загружаем другую инфрмацию о ВУЗе...\n1/" + COUNT);
 
             /*
             Загрузка данных о спортивных секциях
@@ -81,13 +85,15 @@ public class LoadInformationActivity extends AppCompatActivity {
 
                     creative.addChild(groupTree);
                 } catch (IndexOutOfBoundsException ex) {
-                    ex.printStackTrace();
+                    //ex.printStackTrace();
                 }
             }
 
+            setProgressText("Загружаем другую инфрмацию о ВУЗе...\n2/" + COUNT);
+
             /*
             Загрузка данных о студенческих организациях
-
+            */
             s = null;
             while (s == null)
                 s = url.get("life/join/index.php");
@@ -97,7 +103,7 @@ public class LoadInformationActivity extends AppCompatActivity {
             for (int i = 1; i < group.length; i++) {
                 try {
                     SimpleTree<String> orgTree = new SimpleTree<>(deleteHTML(
-                            org[i].split("</")[0].split(">")
+                            org[i].replaceAll("<br>", "").split("</")[0].split(">")
                                     [org[i].split("</")[0].split(">").length-1]
                     ));
 
@@ -106,9 +112,9 @@ public class LoadInformationActivity extends AppCompatActivity {
                     ex.printStackTrace();
                 }
             }
-             */
-            setProgressText("Загружаем другую инфрмацию о ВУЗе...\n2/X");
-            setProgressText(creative.toString(0));
+
+            setProgressText("Загружаем другую инфрмацию о ВУЗе...\n3/" + COUNT);
+            System.out.println(studOrg.toString(0));
 
             Gson gson = new Gson();
             Parametrs.setParam("sport", sport);

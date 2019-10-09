@@ -86,6 +86,7 @@ public class SettingsFragment extends android.app.Fragment {
             editor.apply();
             startActivity(intent);
         });
+
         return view;
     }
 
