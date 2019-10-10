@@ -152,6 +152,8 @@ public class LoadInformationActivity extends AppCompatActivity {
         return s.replaceAll("\t", "")
                 .replaceAll("&nbsp;", " ")
                 .replaceAll("\n", "")
+                .replaceAll("<sup>", "")
+                .replaceAll("</sup>", "")
                 .replaceAll("<br>", "");
     }
 }
