@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.raspisanie.mai.Activity.CampusMapActivity;
 import com.raspisanie.mai.Activity.CreativGroupActivity;
 import com.raspisanie.mai.Activity.SportGroupActivity;
 import com.raspisanie.mai.Activity.StudOrgActivity;
@@ -38,11 +39,10 @@ public class InformationFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_information, null);
 
-        /*
         view.findViewById(R.id.button0).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), CampusMapActivity.class);
             startActivity(intent);
-        }); */
+        });
         view.findViewById(R.id.button00).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), SportGroupActivity.class);
             startActivity(intent);
