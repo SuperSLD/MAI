@@ -94,7 +94,6 @@ public class LoadInformationActivity extends AppCompatActivity {
             /*
             Загрузка данных о студенческих организациях
             */
-            //TODO правильно распарсить группы
             s = null;
             while (s == null)
                 s = url.get("life/join/index.php");
