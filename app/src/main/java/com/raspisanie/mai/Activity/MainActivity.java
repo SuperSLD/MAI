@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
         bottomNavigationView.setSelectedItemId(R.id.action_time_table);
+
+        //TODO добавить проверку обновления и вынести диалоговое окно со списком нововведений
     }
 
     /**
