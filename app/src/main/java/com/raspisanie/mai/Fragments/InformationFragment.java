@@ -31,7 +31,6 @@ public class InformationFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         getActivity().setTitle(R.string.title_information);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
-
     }
 
     @Override
@@ -39,10 +38,11 @@ public class InformationFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_information, null);
 
+        /*
         view.findViewById(R.id.button0).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), CampusMapActivity.class);
             startActivity(intent);
-        });
+        });*/
         view.findViewById(R.id.button00).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), SportGroupActivity.class);
             startActivity(intent);

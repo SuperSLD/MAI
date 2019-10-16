@@ -32,6 +32,7 @@
             android:paddingBottom="4dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:autoLink="phone"
             android:background="@drawable/border_primary"
             android:text="	гребная база «Буревестник», Волоколамское ш., д. 67
 +7 499 158-43-01

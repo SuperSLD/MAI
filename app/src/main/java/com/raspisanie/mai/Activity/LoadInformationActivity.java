@@ -89,7 +89,7 @@ public class LoadInformationActivity extends AppCompatActivity {
                 }
             }
 
-            setProgressText("Загружаем другую инфрмацию о ВУЗе...\n2/" + COUNT);
+            setProgressText("Загружаем другую информацию о ВУЗе...\n2/" + COUNT);
 
             /*
             Загрузка данных о студенческих организациях
