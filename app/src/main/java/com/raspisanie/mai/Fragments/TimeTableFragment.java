@@ -22,7 +22,8 @@ import java.util.Calendar;
 
 public class TimeTableFragment extends android.app.Fragment{
     View view;
-    private ArrayList<Day> day = new ArrayList<>();
+    private final ArrayList<Day> day = new ArrayList<>();
+    private boolean notFirstDay = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,34 +61,61 @@ public class TimeTableFragment extends android.app.Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_time_table, null);
-        setDaysList((int) Parametrs.getParam("thisWeek"));
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_time_table, null);
+            setDaysList((int) Parametrs.getParam("thisWeek"));
+
+            ListView listView = view.findViewById(R.id.listItem);
+            if (notFirstDay) {
+                final View header = inflater.inflate(R.layout.header_time_table, null);
+                listView.addHeaderView(header);
+
+                header.findViewById(R.id.buttonHeader).setOnClickListener(v -> {
+                            listView.removeHeaderView(header);
+                            int thisWeek = (int) Parametrs.getParam("thisWeek");
+                            //for (int i = ; i )
+                        }
+                );
+            }
+        }
+
         return view;
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        //getActivity().setTitle(R.string.app_name);
     }
 
+    /**
+     * Передаем в ListView adapter с списком дней текущей недели.
+     * Сам список дней объявлен глобальным чтоб его можно было динамически изменять.
+     * @param week номер текущей недели.
+     */
     private void setDaysList(int week) {
+        // отчищаем список дней
         day.clear();
 
+        // проверяем существует ли эта неделя
         if (week < 0)
             week = 0;
         if (week >= ((Week[]) Parametrs.getParam("weeks")).length)
             week = ((Week[]) Parametrs.getParam("weeks")).length - 1;
 
+        // добавляем в список дни если это нужно
         for (int i = 0;
              i < ((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().size(); i++) {
             Calendar calendar = Calendar.getInstance();
+            // если указана текущая неделя и день уже прошел то он не показывается
             if (week == ((int) Parametrs.getParam("thisWeek"))) {
                 if (Integer.parseInt(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i).getDate().substring(0, 2)) >=
                         calendar.get(Calendar.DAY_OF_MONTH)) {
                     day.add(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i));
+                } else if (i != 0) {
+                    notFirstDay = true;
                 }
             } else {
+                // если неделя не равна текущей то показываем все дни
                 day.add(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i));
             }
         }
