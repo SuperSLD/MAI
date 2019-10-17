@@ -55,10 +55,6 @@ public class TimeTableAdapter extends BaseAdapter {
                 calendar.get(Calendar.DAY_OF_MONTH)) {
                 view.findViewById(R.id.dayHeader).setBackgroundResource(R.color.dayGreyHeader);
             }
-            if (Integer.parseInt(objects.get(position).getDate().substring(0, 2)) <
-                    calendar.get(Calendar.DAY_OF_MONTH)) {
-                //view.findViewById(R.id.list).setVisibility(View.GONE);
-            }
         } else {
             view.findViewById(R.id.dayHeader).setBackgroundResource(R.color.dayGreyHeader);
         }

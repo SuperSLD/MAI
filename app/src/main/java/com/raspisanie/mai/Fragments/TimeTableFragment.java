@@ -11,13 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.raspisanie.mai.Classes.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Adapters.TimeTableAdapter;
 import com.raspisanie.mai.Classes.Week;
 import com.raspisanie.mai.R;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 public class TimeTableFragment extends android.app.Fragment{
     View view;
+    private ArrayList<Day> day = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,16 +72,29 @@ public class TimeTableFragment extends android.app.Fragment{
     }
 
     private void setDaysList(int week) {
+        day.clear();
 
         if (week < 0)
             week = 0;
         if (week >= ((Week[]) Parametrs.getParam("weeks")).length)
             week = ((Week[]) Parametrs.getParam("weeks")).length - 1;
 
+        for (int i = 0;
+             i < ((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().size(); i++) {
+            Calendar calendar = Calendar.getInstance();
+            if (week == ((int) Parametrs.getParam("thisWeek"))) {
+                if (Integer.parseInt(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i).getDate().substring(0, 2)) >=
+                        calendar.get(Calendar.DAY_OF_MONTH)) {
+                    day.add(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i));
+                }
+            } else {
+                day.add(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i));
+            }
+        }
+
         ListView listView = view.findViewById(R.id.listItem);
         TimeTableAdapter adapter = new TimeTableAdapter(view.getContext(),
-                ((Week[]) Parametrs.getParam("weeks"))[week].getDaysList(),
-                week == ((int) Parametrs.getParam("thisWeek")));
+                day, week == ((int) Parametrs.getParam("thisWeek")));
         listView.setAdapter(adapter);
     }
 }
