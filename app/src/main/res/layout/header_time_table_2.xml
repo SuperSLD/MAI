@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/TimeTableHeaderButton"
-        android:drawableLeft="@drawable/ic_vertical_align_top_24px"
+        android:drawableLeft="@drawable/ic_vertical_align_bottom_24px"
         android:drawableTint="@android:color/white"
         android:drawablePadding="10dp"
         android:textAllCaps="false"
-        android:text="Показать скрытые дни" />
+        android:text="Скрыть прошедшие дни" />
 </LinearLayout>

@@ -22,6 +22,9 @@ import java.util.Calendar;
 
 public class TimeTableFragment extends android.app.Fragment{
     View view;
+    private View header;
+    private View header2;
+
     private final ArrayList<Day> day = new ArrayList<>();
     private boolean notFirstDay = false;
 
@@ -64,19 +67,6 @@ public class TimeTableFragment extends android.app.Fragment{
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_time_table, null);
             setDaysList((int) Parametrs.getParam("thisWeek"));
-
-            ListView listView = view.findViewById(R.id.listItem);
-            if (notFirstDay) {
-                final View header = inflater.inflate(R.layout.header_time_table, null);
-                listView.addHeaderView(header);
-
-                header.findViewById(R.id.buttonHeader).setOnClickListener(v -> {
-                            listView.removeHeaderView(header);
-                            int thisWeek = (int) Parametrs.getParam("thisWeek");
-                            //for (int i = ; i )
-                        }
-                );
-            }
         }
 
         return view;
@@ -120,9 +110,38 @@ public class TimeTableFragment extends android.app.Fragment{
             }
         }
 
-        ListView listView = view.findViewById(R.id.listItem);
         TimeTableAdapter adapter = new TimeTableAdapter(view.getContext(),
                 day, week == ((int) Parametrs.getParam("thisWeek")));
+        ListView listView = view.findViewById(R.id.listItem);
+        // удаляемм заголовок списка
+        listView.removeHeaderView(header);
+        listView.removeHeaderView(header2);
+        // если нужно устанавливаем новый заголовок
+        if (notFirstDay && week == ((int) Parametrs.getParam("thisWeek")) ) {
+            header = getActivity().getLayoutInflater().inflate(R.layout.header_time_table, null);
+            header2 = getActivity().getLayoutInflater().inflate(R.layout.header_time_table_2, null);
+            listView.addHeaderView(header);
+
+            int finalWeek = week;
+            int daySum = ((Week[]) Parametrs.getParam("weeks"))[finalWeek].getDaysList().size() - day.size() -1;
+            header.findViewById(R.id.buttonHeader).setOnClickListener(v -> {
+                listView.removeHeaderView(header);
+                for (int i = daySum; i >= 0; i--) {
+                    day.add(0, ((Week[]) Parametrs.getParam("weeks"))[finalWeek].getDaysList().get(i));
+                }
+                listView.addHeaderView(header2);
+                adapter.notifyDataSetChanged();
+            });
+
+            header2.findViewById(R.id.buttonHeader).setOnClickListener(v -> {
+                listView.removeHeaderView(header2);
+                for (int i = 0; i <= daySum; i++) {
+                    day.remove(0);
+                }
+                listView.addHeaderView(header);
+                adapter.notifyDataSetChanged();
+            });
+        }
         listView.setAdapter(adapter);
     }
 }
