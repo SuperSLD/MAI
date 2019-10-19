@@ -1,10 +1,14 @@
 package com.raspisanie.mai.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +23,9 @@ import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
+import com.raspisanie.mai.View.DiagramView;
+
+import java.io.UnsupportedEncodingException;
 
 public class SettingsFragment extends android.app.Fragment {
 
@@ -37,6 +44,7 @@ public class SettingsFragment extends android.app.Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,6 +95,33 @@ public class SettingsFragment extends android.app.Fragment {
             startActivity(intent);
         });
 
+        SharedPreferences mSettings = getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
+        float[] data = new float[3];
+        try {
+            data[0] = mSettings.getString("weeks", "").getBytes("UTF-8").length;
+            data[1] = mSettings.getString("groupInfo", "").getBytes("UTF-8").length;
+            data[2] = mSettings.getString("sport", "").getBytes("UTF-8").length
+            + mSettings.getString("creative", "").getBytes("UTF-8").length
+            + mSettings.getString("studOrg", "").getBytes("UTF-8").length;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        ((TextView) view.findViewById(R.id.textViewD0)).setText("Расписание " + Integer.toString((int)data[0]/1024) + " KB");
+        ((TextView) view.findViewById(R.id.textViewD1)).setText("Информация о группах " + Integer.toString((int)data[1]/1024) + " KB");
+        ((TextView) view.findViewById(R.id.textViewD2)).setText("Информация о ВУЗе " + Integer.toString((int)data[2]/1024) + " KB");
+
+        DiagramView diagramView = view.findViewById(R.id.diagram1);
+        diagramView.setCenterText("Устройство");
+        diagramView.setCenterSubText((int) ((data[0] + data[1] + data[2])/1024) + " KB");
+        diagramView.setColorText(getResources().getColor(R.color.colorPrimaryDark),
+                getResources().getColor(R.color.diagramSubText));
+        diagramView.setData(data,
+                new int[]{
+                        getResources().getColor(R.color.diagram1),
+                        getResources().getColor(R.color.diagram2),
+                        getResources().getColor(R.color.diagram3)
+                });
         return view;
     }
 

@@ -8,10 +8,11 @@
     <string name="title_campus_map">Общая схема кампуса</string>
 
     <!-- Settings Fragment -->
-    <string name="versionString">0.005 18.10.2019</string>
+    <string name="versionString">0.009 20.10.2019</string>
     <string name="autor">Соляной Леонид</string>
-    <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов.
-        Попытка исправить недочеты другого приложения.</string>
+    <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
+        чтоб облегчить доступ к расписанию и другой информации.
+        Более удобное чем существующий аналог.</string>
 
     <!-- Fragment Info -->
     <string name="titleCumpus">Кампус</string>

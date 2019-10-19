@@ -57,4 +57,12 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    /**
+     * Переопределение метода нажатия кнопки назад.
+     */
+    @Override
+    public void onBackPressed() {
+        // <><><><>
+    }
 }

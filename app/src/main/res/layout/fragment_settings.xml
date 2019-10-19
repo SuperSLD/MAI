@@ -109,6 +109,83 @@
                 android:padding="20dp"
                 android:background="@drawable/bottom_border">
 
+                <com.raspisanie.mai.View.DiagramView
+                    android:id="@+id/diagram1"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+                </com.raspisanie.mai.View.DiagramView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="2dp">
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorAccent"/>
+                        <TextView
+                            android:id="@+id/textViewD0"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:padding="5dp"
+
+                            android:text="Расписание 400 Byte"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="2dp">
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorPrimary"/>
+                        <TextView
+                            android:id="@+id/textViewD1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:padding="5dp"
+                            android:text="Расписание 400 Byte"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="2dp">
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorPrimaryDark"/>
+                        <TextView
+                            android:id="@+id/textViewD2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:padding="5dp"
+
+                            android:text="Расписание 400 Byte"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:background="@drawable/bottom_border">
+
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
