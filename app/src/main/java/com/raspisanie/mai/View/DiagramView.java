@@ -1,5 +1,6 @@
 package com.raspisanie.mai.View;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -19,6 +20,7 @@ public class DiagramView extends View {
 
     private int colorText = 0;
     private int colorSubText = 0;
+    float lastAngle = -90;
 
     public DiagramView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -60,6 +62,7 @@ public class DiagramView extends View {
      * @param data данные
      */
     public void setData(float[] data, int[] colors) {
+        if (data.length > colors.length) throw new IndexOutOfBoundsException("data.length > colors.length");
         this.colors = colors;
         this.data = data;
         for (float s : data) {
@@ -80,7 +83,7 @@ public class DiagramView extends View {
             paint.setColor(getResources().getColor(R.color.white));
             canvas.drawCircle(w / 2, h / 2, h / 2 - h / 10, paint);
         } else {
-            float lastAngle = -90;
+            //float lastAngle = -90;
             for (int i = 0; i < data.length; i++) {
                 float angle = ((data[i]*360)/dataSum);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

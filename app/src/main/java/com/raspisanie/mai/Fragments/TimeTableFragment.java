@@ -101,7 +101,7 @@ public class TimeTableFragment extends android.app.Fragment{
                 if (Integer.parseInt(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i).getDate().substring(0, 2)) >=
                         calendar.get(Calendar.DAY_OF_MONTH)) {
                     day.add(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i));
-                } else if (i != 0) {
+                } else {
                     notFirstDay = true;
                 }
             } else {
