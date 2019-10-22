@@ -8,11 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,7 +20,7 @@ import com.raspisanie.mai.Classes.URLSendRequest;
 import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Open extends AppCompatActivity {
 
@@ -45,7 +41,6 @@ public class Open extends AppCompatActivity {
         editor.putString("groupInfo", "");
         editor.apply();
 
-        //если список был загружен то сразу переходим к выбору группы
         if (mSettings.getString("groupInfo", "").length() < 10) {
             new Thread(() -> {
                 url = new URLSendRequest("https://mai.ru/", 50000);

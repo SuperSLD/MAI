@@ -24,9 +24,9 @@ public class SportGroupActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        setTitle("Спотривные секции");
-        getSupportActionBar().setSubtitle(null);
-        return super.onCreateOptionsMenu(menu);
+        public boolean onCreateOptionsMenu(Menu menu) {
+            setTitle("Спортивные секции");
+            getSupportActionBar().setSubtitle(null);
+            return super.onCreateOptionsMenu(menu);
     }
 }
