@@ -31,6 +31,10 @@ public class DiagramView extends View {
         setMeasuredDimension(widthMeasureSpec,heightMeasureSpec);
     }
 
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) { }
+
     /**
      * Установка текста в центре диаграммы
      * @param text текст

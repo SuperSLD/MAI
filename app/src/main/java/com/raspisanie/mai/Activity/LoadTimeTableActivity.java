@@ -91,6 +91,7 @@ public class LoadTimeTableActivity extends AppCompatActivity {
                                 subjectList[k].split("<span class=\"sc-title\">")[1].split("<")[0],
                                 lect,
                                 subjectList[k].split("marker\">&nbsp;</span>")[1].split("</div>")[0]
+                                .replaceAll("<br>", " - ")
                         );
                         day.addSubject(subject);
                     }
