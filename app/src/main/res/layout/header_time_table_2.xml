@@ -15,5 +15,6 @@
         android:drawableTint="@android:color/white"
         android:drawablePadding="10dp"
         android:textAllCaps="false"
+        android:background="@drawable/button_primary"
         android:text="Скрыть прошедшие дни" />
 </LinearLayout>
