@@ -19,7 +19,6 @@ public class SportGroupAdapter extends BaseAdapter {
     private Context ctx;
     private LayoutInflater lInflater;
     private ArrayList<SimpleTree<String>> objects;
-    private boolean now;
 
     public SportGroupAdapter(Context context, ArrayList korpus) {
         this.ctx = context;

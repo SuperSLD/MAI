@@ -64,9 +64,7 @@
                     android:drawableTint="@android:color/darker_gray"
                     android:textAllCaps="false"
                     style="@style/Widget.AppCompat.Button.Borderless"/>
-
-
-            </LinearLayout> -->
+            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
