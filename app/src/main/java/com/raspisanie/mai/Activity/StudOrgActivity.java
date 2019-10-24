@@ -2,6 +2,7 @@ package com.raspisanie.mai.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.widget.ListView;
 
 import com.raspisanie.mai.Adapters.SportGroupAdapter;
@@ -21,5 +22,12 @@ public class StudOrgActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.table);
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        setTitle("Творческие колективы и клубы");
+        getSupportActionBar().setSubtitle(null);
+        return super.onCreateOptionsMenu(menu);
     }
 }

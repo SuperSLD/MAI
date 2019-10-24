@@ -13,6 +13,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <style name="TimeTableHeaderButton" parent="android:Widget.Button">
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/colorPrimary</item>
