@@ -26,7 +26,7 @@ public class StudOrgActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        setTitle("Творческие колективы и клубы");
+        setTitle("Студенческие объединения");
         getSupportActionBar().setSubtitle(null);
         return super.onCreateOptionsMenu(menu);
     }

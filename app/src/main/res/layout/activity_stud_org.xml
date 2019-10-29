@@ -6,7 +6,5 @@
     <ListView
         android:id="@+id/table"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="0dp"
-        android:divider="@color/white"/>
+        android:layout_height="match_parent"/>
 </android.support.constraint.ConstraintLayout>

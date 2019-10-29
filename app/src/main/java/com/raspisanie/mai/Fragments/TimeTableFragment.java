@@ -3,6 +3,7 @@ package com.raspisanie.mai.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -98,8 +99,12 @@ public class TimeTableFragment extends android.app.Fragment{
             Calendar calendar = Calendar.getInstance();
             // если указана текущая неделя и день уже прошел то он не показывается
             if (week == ((int) Parametrs.getParam("thisWeek"))) {
-                if (Integer.parseInt(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i).getDate().substring(0, 2)) >=
-                        calendar.get(Calendar.DAY_OF_MONTH)) {
+                if ((Integer.parseInt(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i).getDate().substring(0, 2)) >=
+                        calendar.get(Calendar.DAY_OF_MONTH) &&
+                        Integer.parseInt(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i).getDate().substring(3, 5)) ==
+                        calendar.get(Calendar.MONTH) + 1)
+                    || Integer.parseInt(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i).getDate().substring(3, 5)) >
+                        calendar.get(Calendar.MONTH) + 1) {
                     day.add(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i));
                 } else {
                     notFirstDay = true;
@@ -123,7 +128,7 @@ public class TimeTableFragment extends android.app.Fragment{
             listView.addHeaderView(header);
 
             int finalWeek = week;
-            int daySum = ((Week[]) Parametrs.getParam("weeks"))[finalWeek].getDaysList().size() - day.size() -1;
+            int daySum = ((Week[]) Parametrs.getParam("weeks"))[finalWeek].getDaysList().size() - day.size() - 1;
             header.findViewById(R.id.buttonHeader).setOnClickListener(v -> {
                 listView.removeHeaderView(header);
                 for (int i = daySum; i >= 0; i--) {
@@ -142,6 +147,11 @@ public class TimeTableFragment extends android.app.Fragment{
                 adapter.notifyDataSetChanged();
             });
         }
+
+        Calendar calendar = Calendar.getInstance();
+        System.out.println(((Week[]) Parametrs.getParam("weeks"))[week].toString() + "\n"
+                + calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1));
+
         listView.setAdapter(adapter);
     }
 }

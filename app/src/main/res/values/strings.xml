@@ -5,10 +5,11 @@
     <string name="title_time_table">Расписание</string>
     <string name="title_settings">Настройки</string>
     <string name="title_information">Информация</string>
+    <string name="title_exams">Расписание сесии</string>
     <string name="title_campus_map">Общая схема кампуса</string>
 
     <!-- Settings Fragment -->
-    <string name="versionString">0.013 23.10.2019</string>
+    <string name="versionString">0.015 29.10.2019</string>
     <string name="autor">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/progresLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminateTint="@color/colorPrimary"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/examsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/examList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:tint="@color/colorPrimary"
+            android:src="@drawable/ic_whatshot_24px"/>
+        <TextView
+            android:id="@+id/errText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:text="Error text"/>
+    </LinearLayout>
+</LinearLayout>

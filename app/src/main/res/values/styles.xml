@@ -7,12 +7,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/backgraund_splash</item>
+    </style>
+
     <style name="AppActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:listViewStyle">@style/ListViewL</item>
     </style>
-
 
     <style name="TimeTableHeaderButton" parent="android:Widget.Button">
         <item name="android:textColor">@color/white</item>
@@ -20,7 +24,11 @@
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/backgraund_splash</item>
+    <!-- Стили для светлой темы -->
+    <style name="ListViewL" parent="Widget.AppCompat.ListView">
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:divider">@color/white</item>
     </style>
+
+    <!-- Стили для темной темы -->
 </resources>

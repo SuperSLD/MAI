@@ -13,6 +13,7 @@ import com.raspisanie.mai.Classes.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.Subject;
 import com.raspisanie.mai.Classes.Week;
+import com.raspisanie.mai.Fragments.ExamsFragment;
 import com.raspisanie.mai.Fragments.InformationFragment;
 import com.raspisanie.mai.Fragments.SettingsFragment;
 import com.raspisanie.mai.Fragments.TimeTableFragment;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TimeTableFragment timeTableFragment;
     private InformationFragment informationFagment;
     private SettingsFragment settingsFragment;
+    private ExamsFragment examsFragment;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         timeTableFragment = new TimeTableFragment();
         settingsFragment = new SettingsFragment();
         informationFagment = new InformationFragment();
+        examsFragment = new ExamsFragment();
 
         fTrans.add(R.id.fragment, timeTableFragment).commit();
 
@@ -62,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.action_time_table:
                     fTrans.replace(R.id.fragment, timeTableFragment).commit();
+                    break;
+                case R.id.action_exams:
+                    fTrans.replace(R.id.fragment, examsFragment).commit();
                     break;
                 case R.id.action_map:
                     fTrans.replace(R.id.fragment, informationFagment).commit();
