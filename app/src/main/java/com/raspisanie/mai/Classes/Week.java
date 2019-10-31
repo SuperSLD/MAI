@@ -13,14 +13,6 @@ public class Week {
     ArrayList<Day> days;
 
     /**
-     * Пустой конструктор.
-     * (Пока нигде не импользуется)
-     */
-    public Week() {
-
-    }
-
-    /**
      * Перегрузка с вводом дополнительных параметров.
      * @param n номер.
      * @param date дата.
@@ -75,7 +67,7 @@ public class Week {
                 ret += "______" + days.get(i).getSubjectList().get(j).getName() + " " +
                         days.get(i).getSubjectList().get(j).getTime() + "\n"
                 + "_________" + days.get(i).getSubjectList().get(j).getLecturer() + " " +
-                        days.get(i).getSubjectList().get(j).getLecturer() + "\n";
+                        days.get(i).getSubjectList().get(j).getPlace() + "\n";
             }
         }
 

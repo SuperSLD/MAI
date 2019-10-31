@@ -55,76 +55,9 @@ public class ExamsFragment extends android.app.Fragment {
                     && new Gson().fromJson(mSettings.getString("examWeek", ""), Week.class)
                         .getDaysList().size() > 0) {
                 setWeekInListView(view);
+                updateExamList();
             } else {
-                SharedPreferences.Editor editor2 = mSettings.edit();
-                editor2.putString("examWeek", null);
-                editor2.apply();
-                new Thread(() -> {
-                    URLSendRequest url = new URLSendRequest("https://mai.ru/", 50000);
-
-                    Week examsWeek = new Week(0, "-");
-
-                    String s = null;
-                    int countUrl = 0;
-
-                    while (s == null && countUrl < MAX_COUNT) {
-                        s = url.get("education/schedule/session.php?group=" +
-                                ((SimpleTree<String>) Parametrs.getParam("tree")).getChildList()
-                                        .get(mSettings.getInt("kurs", -1)).getChildList()
-                                        .get(mSettings.getInt("fac", -1)).getChildList()
-                                        .get(mSettings.getInt("group", -1)).getValue());
-                        countUrl++;
-                    }
-
-                    if (countUrl < MAX_COUNT) {
-                        try {
-                            String[] dayList = s.split("<div class=\"sc-table-col sc-day-header");
-                            //Составление списка дней.
-                            for (int j = 1; j < dayList.length; j++) {
-                                Day day = new Day(
-                                        dayList[j].split("<span")[0].split(">")[1],
-                                        dayList[j].split("<span class=\"sc-day\">")[1].split("</")[0]
-                                );
-
-                                //Составление списка предметов.
-                                String[] subjectList = dayList[j].split("<div class=\"sc-table-col sc-item-time\">");
-                                for (int k = 1; k < subjectList.length; k++) {
-                                    String lect = "";
-                                    try {
-                                        lect = subjectList[k].split("<span class=\"sc-lecturer\">")[1].split("<")[0];
-                                    } catch (Exception ex) {
-                                    }
-
-                                    Subject subject = new Subject(
-                                            subjectList[k].split(" ")[0] + " - " +
-                                                    subjectList[k].split("<")[0].split(" ")[2],
-                                            subjectList[k].split("table-col sc-item-type\">")[1].split("<")[0],
-                                            subjectList[k].split("<span class=\"sc-title\">")[1].split("<")[0],
-                                            lect,
-                                            subjectList[k].split("marker\">&nbsp;</span>")[1].split("</div>")[0]
-                                                    .replaceAll("<br>", " - ")
-                                    );
-                                    day.addSubject(subject);
-                                }
-                                examsWeek.addDay(day);
-                            }
-                        } catch (IndexOutOfBoundsException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                    System.out.println(examsWeek.toString());
-
-                    Gson gson = new Gson();
-                    SharedPreferences.Editor editor = mSettings.edit();
-                    editor.putString("examWeek", gson.toJson(examsWeek));
-                    editor.apply();
-
-                    if (getActivity() != null) {
-                        getActivity().runOnUiThread(() -> setWeekInListView(view));
-                    } else {
-                        loadEnd = true;
-                    }
-                }).start();
+                updateExamList();
             }
         }
 
@@ -150,5 +83,81 @@ public class ExamsFragment extends android.app.Fragment {
             ((TextView) view.findViewById(R.id.errText)).setText("Расписание вашей сесии отсутствует");
             view.findViewById(R.id.examsLayout).setVisibility(View.GONE);
         }
+    }
+
+    private void updateExamList() {
+        if (new Gson().fromJson(mSettings.getString("examWeek", ""), Week.class) == null) {
+            SharedPreferences.Editor editor = mSettings.edit();
+            editor.putString("examWeek",
+                    new Gson().toJson(new Week(0,"-")));
+        }
+        new Thread(() -> {
+            URLSendRequest url = new URLSendRequest("https://mai.ru/", 50000);
+
+            Week examsWeek = new Week(0, "-");
+
+            String s = null;
+            int countUrl = 0;
+
+            while (s == null && countUrl < MAX_COUNT) {
+                s = url.get("education/schedule/session.php?group=" +
+                        ((SimpleTree<String>) Parametrs.getParam("tree")).getChildList()
+                                .get(mSettings.getInt("kurs", -1)).getChildList()
+                                .get(mSettings.getInt("fac", -1)).getChildList()
+                                .get(mSettings.getInt("group", -1)).getValue());
+                countUrl++;
+            }
+
+            if (countUrl < MAX_COUNT) {
+                try {
+                    String[] dayList = s.split("<div class=\"sc-table-col sc-day-header");
+                    //Составление списка дней.
+                    for (int j = 1; j < dayList.length; j++) {
+                        Day day = new Day(
+                                dayList[j].split("<span")[0].split(">")[1],
+                                dayList[j].split("<span class=\"sc-day\">")[1].split("</")[0]
+                        );
+
+                        //Составление списка предметов.
+                        String[] subjectList = dayList[j].split("<div class=\"sc-table-col sc-item-time\">");
+                        for (int k = 1; k < subjectList.length; k++) {
+                            String lect = "";
+                            try {
+                                lect = subjectList[k].split("<span class=\"sc-lecturer\">")[1].split("<")[0];
+                            } catch (Exception ex) {
+                            }
+
+                            Subject subject = new Subject(
+                                    subjectList[k].split(" ")[0] + " - " +
+                                            subjectList[k].split("<")[0].split(" ")[2],
+                                    subjectList[k].split("table-col sc-item-type\">")[1].split("<")[0],
+                                    subjectList[k].split("<span class=\"sc-title\">")[1].split("<")[0],
+                                    lect,
+                                    subjectList[k].split("marker\">&nbsp;</span>")[1].split("</div>")[0]
+                                            .replaceAll("<br>", " - ")
+                            );
+                            day.addSubject(subject);
+                        }
+                        examsWeek.addDay(day);
+                    }
+                } catch (IndexOutOfBoundsException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            System.out.println(examsWeek.toString());
+
+            if (countUrl < MAX_COUNT) {
+                Gson gson = new Gson();
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("examWeek", gson.toJson(examsWeek));
+                editor.apply();
+            }
+
+            if (getActivity() != null) {
+                getActivity().runOnUiThread(() -> setWeekInListView(view));
+            } else {
+                loadEnd = true;
+            }
+        }).start();
     }
 }
