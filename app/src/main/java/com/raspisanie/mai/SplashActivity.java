@@ -22,6 +22,9 @@ public class SplashActivity extends AppCompatActivity {
         //TODO Сделать красивую заставку (SVG)
 
         SharedPreferences mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
+
+        Parametrs.setParam("dark", true);
+
         Parametrs.setParam("mSettings", mSettings);
         if (mSettings.getInt("group", -1) > -1) {
             Gson gson = new Gson();

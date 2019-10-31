@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+
+        if ((boolean) Parametrs.getParam("dark"))
+            setTheme(R.style.AppDarkTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

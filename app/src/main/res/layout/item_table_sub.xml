@@ -19,14 +19,12 @@
             android:textStyle="bold"
             android:textSize="18dp"
             android:layout_weight="1"
-            android:textColor="@color/timeTableTextColor"
             android:text="Линейная алгебра" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/timeTableTextColor"
             android:textSize="12dp"
             android:layout_weight="1"
             android:text="Горюнов Александр Владимирович" />
@@ -42,7 +40,6 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/timeTableTextColor"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:text="9:00 - 10:30" />
@@ -61,7 +58,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:textColor="@color/timeTableTextColor"
             android:layout_weight="1"
             android:text="7-406" />
     </LinearLayout>

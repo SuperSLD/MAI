@@ -15,6 +15,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/black</item>
 
         <item name="android:listViewStyle">@style/ListViewL</item>
     </style>
@@ -23,6 +24,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/darkBack</item>
+        <item name="android:textColor">@android:color/white</item>
 
         <item name="android:listViewStyle">@style/ListViewL</item>
     </style>
@@ -43,5 +46,9 @@
     <style name="ListViewD" parent="Widget.AppCompat.ListView">
         <item name="android:dividerHeight">0dp</item>
         <item name="android:divider">@color/white</item>
+    </style>
+
+    <style name="LinearLayoutD" parent="Widget.AppCompat.ListView">
+        <item name="android:background">@color/darkLinearBack</item>
     </style>
 </resources>
