@@ -147,11 +147,6 @@ public class TimeTableFragment extends android.app.Fragment{
                 adapter.notifyDataSetChanged();
             });
         }
-
-        Calendar calendar = Calendar.getInstance();
-        System.out.println(((Week[]) Parametrs.getParam("weeks"))[week].toString() + "\n"
-                + calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1));
-
         listView.setAdapter(adapter);
     }
 }

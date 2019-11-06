@@ -27,7 +27,6 @@
                 android:background="@color/colorPrimary"
                 android:text="Пн-Пт\n06:00 - 21:00"/>
 
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"

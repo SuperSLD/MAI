@@ -94,6 +94,7 @@ public class SettingsFragment extends android.app.Fragment {
             editor.putString("creative", "");
             editor.putString("studOrg", "");
             editor.putString("stol", "");
+            editor.putString("lib", "");
             editor.apply();
             startActivity(intent);
         });

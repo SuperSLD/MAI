@@ -82,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
         });
         bottomNavigationView.setSelectedItemId(R.id.action_time_table);
 
-        if (!mSettings.getString("version", "").equals(getResources().getString(R.string.versionString))) {
+        //вывод сообщения с последним нововведением после обновления
+        if (!mSettings.getString("version", "").equals(getResources().getString(R.string.versionString))
+            && mSettings.getString("version", "").length() > 3) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Приложение было обновлено")
                     .setMessage(

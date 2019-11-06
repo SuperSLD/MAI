@@ -19,8 +19,9 @@ public class LoadInformationActivity extends AppCompatActivity {
     private SimpleTree<String> creative = new SimpleTree<>("Творческие коллективы");
     private SimpleTree<String> studOrg = new SimpleTree<>("Студенческие органмзации");
     private SimpleTree<String> stolTree = new SimpleTree<>("Столовые");
+    private SimpleTree<String> libTree = new SimpleTree<>("Библиотеки");
 
-    private final String COUNT = "4";
+    private final String COUNT = "5";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +55,8 @@ public class LoadInformationActivity extends AppCompatActivity {
                     try {
                         SimpleTree<String> sectTree = new SimpleTree<>(
                                 deleteHTML(group[j].split("</td>")[0].split("<td>")[1])
-                                + "<!>" + deleteHTML(group[j].split("</td>")[1].split("<td>")[1])
-                                + "<!>" + deleteHTML(group[j].replaceAll("<!", "</")
+                                        + "<!>" + deleteHTML(group[j].split("</td>")[1].split("<td>")[1])
+                                        + "<!>" + deleteHTML(group[j].replaceAll("<!", "</")
                                         .replaceAll("<a", "</").split("</")[2].split("<td>")[1])
                         );
                         korpTree.addChild(sectTree);
@@ -80,8 +81,8 @@ public class LoadInformationActivity extends AppCompatActivity {
                 try {
                     SimpleTree<String> groupTree = new SimpleTree<>(deleteHTML(
                             group[i].split("</b>")[0]
-                            + "<!>" + group[i].split("<br>")[1]
-                            + "<!>" + group[i].split("<br>")[3]
+                                    + "<!>" + group[i].split("<br>")[1]
+                                    + "<!>" + group[i].split("<br>")[3]
                     ));
 
                     creative.addChild(groupTree);
@@ -105,15 +106,15 @@ public class LoadInformationActivity extends AppCompatActivity {
                 try {
                     SimpleTree<String> orgTree = new SimpleTree<>(deleteHTML(
                             org[i].replaceAll("<br>", "").split("</")[0].split(">")
-                                    [org[i].split("</")[0].split(">").length-1]
-                            + "<!>" + org[i].split("<td valign=\"top\">")[1].split("</td>")[0]
-                            + "<!>" + org[i].split("<td colspan=\"2\" valign=\"top\">")[1].split("</td>")[0]
-                            + "<!>" + org[i].split("<td>")[1].split("</td>")[0]
+                                    [org[i].split("</")[0].split(">").length - 1]
+                                    + "<!>" + org[i].split("<td valign=\"top\">")[1].split("</td>")[0]
+                                    + "<!>" + org[i].split("<td colspan=\"2\" valign=\"top\">")[1].split("</td>")[0]
+                                    + "<!>" + org[i].split("<td>")[1].split("</td>")[0]
                     ));
 
                     studOrg.addChild(orgTree);
                 } catch (IndexOutOfBoundsException ex) {
-                    ex.printStackTrace();
+                    //ex.printStackTrace();
                 }
             }
 
@@ -140,23 +141,56 @@ public class LoadInformationActivity extends AppCompatActivity {
 
                     stolTree.addChild(stolChild);
                 } catch (IndexOutOfBoundsException ex) {
-                    ex.printStackTrace();
+                    //ex.printStackTrace();
                 }
             }
 
             setProgressText("Загружаем другую инфрмацию о ВУЗе...\n4/" + COUNT);
-            System.out.println(stolTree.toString(0));
+
+             /*
+            Загрузка данных о библиотеках
+            */
+            s = null;
+            while (s == null)
+                s = url.get("common/campus/library/");
+            String[] lib = s.split("<th colspan=\"2\">");
+
+            for (int i = 1; i < lib.length; i++) {
+                try {
+                    SimpleTree<String> otdel = new SimpleTree<>(
+                        deleteHTML(lib[i].split("</th>")[0])
+                    );
+                    String[] libs = lib[i].split("<tr>");
+                    for (int j = 2; j < libs.length; j++) {
+                        try {
+                            SimpleTree<String> room = new SimpleTree<>(deleteHTML(
+                                    libs[j].split("<td>")[1].split("</td")[0]
+                                    + "<!>" + libs[j].split("<td>")[2].split("</td")[0]
+                                            .replaceAll("<sup>", " - ")
+                            ));
+                            otdel.addChild(room);
+                        } catch (IndexOutOfBoundsException ex) {}
+                    }
+                    libTree.addChild(otdel);
+                } catch (IndexOutOfBoundsException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            setProgressText("Загружаем другую инфрмацию о ВУЗе...\n5/" + COUNT);
 
             Gson gson = new Gson();
             Parametrs.setParam("sport", sport);
             Parametrs.setParam("creative", creative);
             Parametrs.setParam("studOrg", studOrg);
             Parametrs.setParam("stol", stolTree);
+            Parametrs.setParam("lib", libTree);
             SharedPreferences.Editor editor = mSettings.edit();
             editor.putString("sport", gson.toJson(sport));
             editor.putString("creative", gson.toJson(creative));
             editor.putString("studOrg", gson.toJson(studOrg));
             editor.putString("stol", gson.toJson(stolTree));
+            editor.putString("lib", gson.toJson(libTree));
             editor.apply();
 
             Intent intent = new Intent(LoadInformationActivity.this, MainActivity.class);

@@ -42,6 +42,8 @@ public class SplashActivity extends AppCompatActivity {
                             gson.fromJson(mSettings.getString("studOrg", ""), SimpleTree.class));
                     Parametrs.setParam("stol",
                             gson.fromJson(mSettings.getString("stol", ""), SimpleTree.class));
+                    Parametrs.setParam("lib",
+                            gson.fromJson(mSettings.getString("lib", ""), SimpleTree.class));
 
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
