@@ -23,8 +23,6 @@ public class SplashActivity extends AppCompatActivity {
 
         SharedPreferences mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
-        Parametrs.setParam("dark", true);
-
         Parametrs.setParam("mSettings", mSettings);
         if (mSettings.getInt("group", -1) > -1) {
             Gson gson = new Gson();
@@ -35,12 +33,15 @@ public class SplashActivity extends AppCompatActivity {
             if (mSettings.getString("weeks", "").length() > 10) {
 
                 if (mSettings.getString("sport", "").length() > 10) {
+                    //TODO записать добавленную инфу
                     Parametrs.setParam("sport",
                             gson.fromJson(mSettings.getString("sport", ""), SimpleTree.class));
                     Parametrs.setParam("creative",
                             gson.fromJson(mSettings.getString("creative", ""), SimpleTree.class));
                     Parametrs.setParam("studOrg",
                             gson.fromJson(mSettings.getString("studOrg", ""), SimpleTree.class));
+                    Parametrs.setParam("stol",
+                            gson.fromJson(mSettings.getString("stol", ""), SimpleTree.class));
 
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);

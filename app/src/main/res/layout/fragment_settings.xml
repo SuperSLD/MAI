@@ -27,13 +27,13 @@
                     android:id="@+id/textView0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/greyTextColor"
                     android:text="Ваши данные:" />
                 <TextView
                     android:id="@+id/textView1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Группа M1O-109C-19"
-                    android:textColor="@android:color/black"
                     android:textSize="25dp" />
 
                 <TextView
@@ -41,14 +41,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Факультет №1"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Курс 1"
-                    android:textColor="@android:color/black" />
+                    android:text="Курс 1"/>
             </LinearLayout>
 
             <LinearLayout
@@ -134,7 +133,6 @@
                             android:id="@+id/textViewD0"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@android:color/black"
                             android:padding="5dp"
 
                             android:text="Расписание 400 Byte"/>
@@ -153,7 +151,6 @@
                             android:id="@+id/textViewD1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@android:color/black"
                             android:padding="5dp"
                             android:text="Расписание 400 Byte"/>
                     </LinearLayout>
@@ -171,7 +168,6 @@
                             android:id="@+id/textViewD2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@android:color/black"
                             android:padding="5dp"
 
                             android:text="Расписание 400 Byte"/>
@@ -190,13 +186,13 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/greyTextColor"
                     android:text="Информация о приложении:" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
                     android:text="@string/appInfo" />
 
                 <TextView
@@ -204,13 +200,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:textColor="@color/greyTextColor"
                     android:text="Версия приложения:" />
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
                     android:text="@string/versionString" />
 
                 <TextView
@@ -218,13 +214,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:textColor="@color/greyTextColor"
                     android:text="Автор:" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"
                     android:text="@string/autor" />
             </LinearLayout>
 

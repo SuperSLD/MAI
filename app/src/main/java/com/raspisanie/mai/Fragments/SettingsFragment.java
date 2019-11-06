@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.raspisanie.mai.Activity.LoadInformationActivity;
@@ -74,6 +75,7 @@ public class SettingsFragment extends android.app.Fragment {
             Intent intent =
                     new Intent(getActivity().getBaseContext(), Open.class);
             SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
+            //TODO обнулить добавленную инфу
             editor.putString("weeks", "");
             editor.putString("groupInfo", "");
             editor.putInt("group", -1);
@@ -91,6 +93,7 @@ public class SettingsFragment extends android.app.Fragment {
             editor.putString("sport", "");
             editor.putString("creative", "");
             editor.putString("studOrg", "");
+            editor.putString("stol", "");
             editor.apply();
             startActivity(intent);
         });

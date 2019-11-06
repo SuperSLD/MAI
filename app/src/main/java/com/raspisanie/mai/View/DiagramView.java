@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.R;
 
 public class DiagramView extends View {

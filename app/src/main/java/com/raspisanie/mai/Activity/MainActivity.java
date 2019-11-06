@@ -1,10 +1,12 @@
 package com.raspisanie.mai.Activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -36,10 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-
-        if ((boolean) Parametrs.getParam("dark"))
-            setTheme(R.style.AppDarkTheme);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -83,6 +81,29 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
         bottomNavigationView.setSelectedItemId(R.id.action_time_table);
+
+        if (!mSettings.getString("version", "").equals(getResources().getString(R.string.versionString))) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Приложение было обновлено")
+                    .setMessage(
+                            getResources().getString(R.string.versionString) + "\n\n" +
+                            getResources().getString(R.string.versionMessage)
+                    )
+                    .setIcon(R.drawable.ic_book_24px)
+                    .setCancelable(false)
+                    .setNegativeButton("Понятно",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString("version", getResources().getString(R.string.versionString));
+        editor.apply();
 
         //TODO добавить проверку обновления и вынести диалоговое окно со списком нововведений
     }

@@ -18,8 +18,9 @@ public class LoadInformationActivity extends AppCompatActivity {
     private SimpleTree<String> sport = new SimpleTree<>("Виды спорта");
     private SimpleTree<String> creative = new SimpleTree<>("Творческие коллективы");
     private SimpleTree<String> studOrg = new SimpleTree<>("Студенческие органмзации");
+    private SimpleTree<String> stolTree = new SimpleTree<>("Столовые");
 
-    private final String COUNT = "3";
+    private final String COUNT = "4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,16 +118,45 @@ public class LoadInformationActivity extends AppCompatActivity {
             }
 
             setProgressText("Загружаем другую инфрмацию о ВУЗе...\n3/" + COUNT);
-            System.out.println(studOrg.toString(0));
+
+            /*
+            Загрузка данных о столовых
+            */
+            s = null;
+            while (s == null)
+                s = url.get("common/campus/cafeteria/");
+            String[] stol = s.split("<tr>");
+
+            for (int i = 2; i < stol.length - 1; i++) {
+                try {
+                    String[] stolSpl = stol[i].split("<p>");
+                    SimpleTree<String> stolChild = new SimpleTree<>(deleteHTML(
+                            stolSpl[1]
+                                    + "<!>" + stolSpl[2]
+                                    + "<!>" + stolSpl[3]
+                                    + "<!>" + stolSpl[4]
+                                    + "<!>" + stol[i].split("</tr>")[0].split("<td>")[4]
+                    ));
+
+                    stolTree.addChild(stolChild);
+                } catch (IndexOutOfBoundsException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            setProgressText("Загружаем другую инфрмацию о ВУЗе...\n4/" + COUNT);
+            System.out.println(stolTree.toString(0));
 
             Gson gson = new Gson();
             Parametrs.setParam("sport", sport);
             Parametrs.setParam("creative", creative);
             Parametrs.setParam("studOrg", studOrg);
+            Parametrs.setParam("stol", stolTree);
             SharedPreferences.Editor editor = mSettings.edit();
             editor.putString("sport", gson.toJson(sport));
             editor.putString("creative", gson.toJson(creative));
             editor.putString("studOrg", gson.toJson(studOrg));
+            editor.putString("stol", gson.toJson(stolTree));
             editor.apply();
 
             Intent intent = new Intent(LoadInformationActivity.this, MainActivity.class);
@@ -153,6 +183,11 @@ public class LoadInformationActivity extends AppCompatActivity {
                 .replaceAll("\n", "")
                 .replaceAll("<sup>", "")
                 .replaceAll("</sup>", "")
-                .replaceAll("<br>", "");
+                .replaceAll("<br>", "")
+                .replaceAll("<p>", "")
+                .replaceAll("</p>", "")
+                .replaceAll("<td>", "")
+                .replaceAll("</td>", "")
+                .replaceAll("</tr>", "");
     }
 }

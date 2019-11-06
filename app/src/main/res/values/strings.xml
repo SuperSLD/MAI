@@ -9,7 +9,7 @@
     <string name="title_campus_map">Общая схема кампуса</string>
 
     <!-- Settings Fragment -->
-    <string name="versionString">0.018 30.10.2019</string>
+    <string name="versionString">0.020 06.11.2019</string>
     <string name="autor">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -18,5 +18,11 @@
     <!-- Fragment Info -->
     <string name="titleCumpus">Кампус</string>
     <string name="titleLife">Жизнь</string>
+
+    <string name="versionMessage">
+        Добавлен список столовых с их режимом
+        работы специально для Никиты Тамбова.
+        Чтобы увидеть список столовых обновите данные о вузе.
+    </string>
 
 </resources>

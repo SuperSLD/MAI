@@ -20,16 +20,6 @@
         <item name="android:listViewStyle">@style/ListViewL</item>
     </style>
 
-    <style name="AppDarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/darkBack</item>
-        <item name="android:textColor">@android:color/white</item>
-
-        <item name="android:listViewStyle">@style/ListViewL</item>
-    </style>
-
     <style name="TimeTableHeaderButton" parent="android:Widget.Button">
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/colorPrimary</item>
@@ -40,15 +30,5 @@
     <style name="ListViewL" parent="Widget.AppCompat.ListView">
         <item name="android:dividerHeight">0dp</item>
         <item name="android:divider">@color/white</item>
-    </style>
-
-    <!-- Стили для темной темы  -->
-    <style name="ListViewD" parent="Widget.AppCompat.ListView">
-        <item name="android:dividerHeight">0dp</item>
-        <item name="android:divider">@color/white</item>
-    </style>
-
-    <style name="LinearLayoutD" parent="Widget.AppCompat.ListView">
-        <item name="android:background">@color/darkLinearBack</item>
     </style>
 </resources>

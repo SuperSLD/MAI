@@ -18,6 +18,8 @@
     <color name="diagram1">#65a8c6</color>
     <color name="diagramSubText">#BEBEBE</color>
 
+    <color name="greyTextColor">#A0A0A0</color>
+
     <!-- темной темы -->
     <color name="darkBack">#424242</color>
     <color name="darkLinearBack">#5E5E5E</color>
