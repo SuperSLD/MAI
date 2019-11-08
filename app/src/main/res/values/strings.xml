@@ -9,7 +9,7 @@
     <string name="title_campus_map">Общая схема кампуса</string>
 
     <!-- Settings Fragment -->
-    <string name="versionString">1.021.06.11.2019</string>
+    <string name="versionString">1.022.06.11.2019</string>
     <string name="autor">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -20,7 +20,7 @@
     <string name="titleLife">Жизнь</string>
 
     <string name="versionMessage">
-        Добавлен список отделений библиотеки.
+        Исправлены опечатки.
     </string>
 
 </resources>

@@ -27,7 +27,7 @@
                 android:padding="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Данные не загружены, обновите информауию о вузе"/>
+                android:text="Данные не загружены, обновите информацию о вузе"/>
         </LinearLayout>
 
         <ListView
