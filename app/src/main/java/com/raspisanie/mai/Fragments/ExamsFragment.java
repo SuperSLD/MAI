@@ -15,12 +15,12 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Adapters.ExamTableAdapter;
-import com.raspisanie.mai.Classes.Day;
+import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
-import com.raspisanie.mai.Classes.Subject;
+import com.raspisanie.mai.Classes.TimeTable.Subject;
 import com.raspisanie.mai.Classes.URLSendRequest;
-import com.raspisanie.mai.Classes.Week;
+import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
 
 public class ExamsFragment extends android.app.Fragment {

@@ -1,4 +1,4 @@
-package com.raspisanie.mai.Classes;
+package com.raspisanie.mai.Classes.TimeTable;
 
 import java.util.ArrayList;
 

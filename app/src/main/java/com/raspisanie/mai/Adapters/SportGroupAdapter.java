@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.raspisanie.mai.Classes.Day;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
 

@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -50,7 +52,9 @@ public class SettingsFragment extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, null);
+        SharedPreferences mSettings = getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
+        //Установка теуста в информацию о группе
         SimpleTree<String> tree = (SimpleTree<String>) Parametrs.getParam("tree");
         String groupName = tree.getChildList().get((int)Parametrs.getParam("kurs"))
                 .getChildList().get((int)Parametrs.getParam("fac"))
@@ -63,6 +67,8 @@ public class SettingsFragment extends android.app.Fragment {
         ((TextView) view.findViewById(R.id.textView1)).setText("Группа " + groupName);
         ((TextView) view.findViewById(R.id.textView2)).setText(facName);
         ((TextView) view.findViewById(R.id.textView3)).setText(kursName);
+
+        //Обработчики нажатий на кнопки под информацией
         view.findViewById(R.id.button).setOnClickListener(v -> {
             Intent intent =
                     new Intent(getActivity().getBaseContext(), LoadTimeTableActivity.class);
@@ -99,7 +105,17 @@ public class SettingsFragment extends android.app.Fragment {
             startActivity(intent);
         });
 
-        SharedPreferences mSettings = getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
+        //устнвка данных об фоновом обновлении расписания
+        ((TextView) view.findViewById(R.id.textView101)).setText(mSettings.getString("lastUpdate", "---"));
+        CheckBox checkBox = view.findViewById(R.id.checkbox03);
+        checkBox.setChecked(mSettings.getBoolean("updateChek", true));
+        checkBox.setOnCheckedChangeListener((c, b) -> {
+            SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
+            editor.putBoolean("updateChek", b);
+            editor.apply();
+        });
+
+        //Установка параметров диаграммы
         float[] data = new float[3];
         try {
             data[0] = mSettings.getString("weeks", "").getBytes("UTF-8").length;

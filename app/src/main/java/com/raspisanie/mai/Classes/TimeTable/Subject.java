@@ -1,4 +1,4 @@
-package com.raspisanie.mai.Classes;
+package com.raspisanie.mai.Classes.TimeTable;
 
 public class Subject {
     private String time;

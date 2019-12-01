@@ -1,9 +1,10 @@
 package com.raspisanie.mai.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.raspisanie.mai.Classes.Day;
+import com.google.gson.Gson;
+import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Adapters.TimeTableAdapter;
-import com.raspisanie.mai.Classes.Week;
+import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
+import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
@@ -26,6 +29,8 @@ public class TimeTableFragment extends android.app.Fragment{
     private View header;
     private View header2;
 
+    private static boolean isUpdate = false;
+
     private final ArrayList<Day> day = new ArrayList<>();
     private boolean notFirstDay = false;
 
@@ -33,6 +38,21 @@ public class TimeTableFragment extends android.app.Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
+
+        SharedPreferences mSettings =
+                getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+
+        //Обновление расписания в фоне
+        if (!isUpdate && mSettings.getBoolean("updateChek", true)) {
+            isUpdate = true;
+            new Thread(() -> {
+                if (TimeTableUpdater.update(mSettings)) {
+                    Parametrs.setParam("weeks",
+                            gson.fromJson(mSettings.getString("weeks", ""), Week[].class));
+                }
+            }).start();
+        }
     }
 
     @Override

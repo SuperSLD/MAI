@@ -1,4 +1,7 @@
-package com.raspisanie.mai.Classes;
+package com.raspisanie.mai.Classes.TimeTable;
+
+import com.raspisanie.mai.Classes.ConsoleColor;
+import com.raspisanie.mai.Classes.TimeTable.Day;
 
 import java.util.ArrayList;
 

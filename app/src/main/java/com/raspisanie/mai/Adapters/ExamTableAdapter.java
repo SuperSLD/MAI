@@ -8,11 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.raspisanie.mai.Classes.Day;
+import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class ExamTableAdapter extends BaseAdapter {
     private Context ctx;

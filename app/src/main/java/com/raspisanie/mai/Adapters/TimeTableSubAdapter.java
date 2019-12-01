@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.raspisanie.mai.Classes.Day;
-import com.raspisanie.mai.Classes.Subject;
+import com.raspisanie.mai.Classes.TimeTable.Subject;
 import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
