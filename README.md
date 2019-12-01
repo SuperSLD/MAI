@@ -3,8 +3,12 @@
 
 ![](https://img.shields.io/github/stars/SuperSLD/MAI.svg)
 
+---
+
 **Автор:**
 + [Соляной Леонид](https://vk.com/seks_simvo1)
+
+---
 
 **Страница в Google Play:** https://play.google.com/store/apps/details?id=com.raspisanie.mai
 
