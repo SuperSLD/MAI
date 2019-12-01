@@ -103,7 +103,7 @@ public class TimeTableUpdater {
             SharedPreferences.Editor editor = mSettings.edit();
             editor.putString("weeks", json);
             editor.putString("lastUpdate",
-                    new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime()));
+                    new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()));
             editor.apply();
             return true;
         } else  {

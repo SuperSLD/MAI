@@ -21,6 +21,7 @@ import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -43,8 +44,10 @@ public class TimeTableFragment extends android.app.Fragment{
                 getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
-        //Обновление расписания в фоне
-        if (!isUpdate && mSettings.getBoolean("updateChek", true)) {
+        //Обновление расписания в фоне раз в день.
+        if (!isUpdate && mSettings.getBoolean("updateChek", true)
+            && !mSettings.getString("lastUpdate", "").equals(
+                new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()))) {
             isUpdate = true;
             new Thread(() -> {
                 if (TimeTableUpdater.update(mSettings)) {
