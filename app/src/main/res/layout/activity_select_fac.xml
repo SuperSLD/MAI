@@ -21,7 +21,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:translationZ="5dp">
 
         <TextView
             android:id="@+id/textView2"

@@ -21,6 +21,7 @@
     <string name="titleLife">Жизнь</string>
 
     <string name="versionMessage">
-        Некоторые внутренние изменения.
+        Меню выбора группы выглядит немного лучше и
+        внесены некоторые внутренние изменения.
     </string>
 </resources>
