@@ -9,7 +9,7 @@
     <string name="title_campus_map">Общая схема кампуса</string>
 
     <!-- Settings Fragment -->
-    <string name="versionString">1.023/01.12.2019</string>
+    <string name="versionString">1.024/01.12.2019</string>
     <string name="autor">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -21,9 +21,6 @@
     <string name="titleLife">Жизнь</string>
 
     <string name="versionMessage">
-        Добавлена возможность обновления расписания в фоновом режиме. Теперь
-        вы можете не переживать о том, что пропустите изменения в расписании после сессии.
-        Отключить эту функцию можно в настройках.
+        Некоторые внутренние изменения.
     </string>
-
 </resources>

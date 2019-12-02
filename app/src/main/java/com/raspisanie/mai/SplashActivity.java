@@ -33,7 +33,6 @@ public class SplashActivity extends AppCompatActivity {
             if (mSettings.getString("weeks", "").length() > 10) {
 
                 if (mSettings.getString("sport", "").length() > 10) {
-                    //TODO записать добавленную инфу
                     Parametrs.setParam("sport",
                             gson.fromJson(mSettings.getString("sport", ""), SimpleTree.class));
                     Parametrs.setParam("creative",

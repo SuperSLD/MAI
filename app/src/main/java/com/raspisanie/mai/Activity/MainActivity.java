@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("version", getResources().getString(R.string.versionString));
         editor.apply();
 
-        //TODO добавить проверку обновления и вынести диалоговое окно со списком нововведений
     }
 
     /**
