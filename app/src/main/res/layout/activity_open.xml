@@ -31,7 +31,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Обновляем информацию..."
+        android:text="Загружаем информацию..."
         android:textSize="15dp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,8 @@
         app:layout_constraintVertical_bias="0.498"
         android:visibility="invisible"
         android:background="@color/white"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:translationZ="3dp">
 
         <TextView
             android:id="@+id/textView2"
