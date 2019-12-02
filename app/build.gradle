@@ -14,6 +14,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -23,6 +24,8 @@ android {
 }
 
 dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.4'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
     implementation 'com.android.support:design:28.0.0'
