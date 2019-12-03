@@ -2,6 +2,8 @@ package com.raspisanie.mai.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
@@ -19,11 +21,14 @@ public class FoodActivity extends AppCompatActivity {
 
         if (Parametrs.getParam("stol") != null) {
             findViewById(R.id.errText).setVisibility(View.GONE);
-            ListView listView = findViewById(R.id.list);
+
+            //Создание RecyclerView
+            RecyclerView recyclerView = findViewById(R.id.list);
             StolListAdapter adapter =
                     new StolListAdapter(getBaseContext(),
                             ((SimpleTree<String>) Parametrs.getParam("stol")).getChildList());
-            listView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
         }
     }
 

@@ -2,6 +2,8 @@ package com.raspisanie.mai.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.widget.ListView;
 
@@ -17,11 +19,11 @@ public class StudOrgActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stud_org);
 
-        StudOrgAdapret adapter = new StudOrgAdapret(
-                getBaseContext(), ((SimpleTree<String>) Parametrs.getParam("studOrg")).getChildList());
+        StudOrgAdapret adapter = new StudOrgAdapret(((SimpleTree<String>) Parametrs.getParam("studOrg")).getChildList());
 
-        ListView listView = findViewById(R.id.table);
-        listView.setAdapter(adapter);
+        RecyclerView recyclerView = findViewById(R.id.table);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

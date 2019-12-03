@@ -1,6 +1,8 @@
 package com.raspisanie.mai.Adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,26 +15,75 @@ import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
 
-public class CreativeAdapter extends BaseAdapter {
-    private Context ctx;
-    private LayoutInflater lInflater;
+/**
+ * Адаптер для списка творческих коллективов.
+ */
+public class CreativeAdapter extends RecyclerView.Adapter<CreativeAdapter.CreativeItem> {
+
     private ArrayList<SimpleTree<String>> objects;
 
-    public CreativeAdapter(Context context, ArrayList list) {
-        this.ctx = context;
+    /**
+     * Класс ViewHolder для хранения ссылок на View компоненты.
+     */
+    protected class CreativeItem extends RecyclerView.ViewHolder {
+
+        private TextView text1;
+        private TextView text2;
+        private TextView text3;
+
+        public CreativeItem(@NonNull View itemView) {
+            super(itemView);
+            this.text1 = itemView.findViewById(R.id.t0);
+            this.text2 = itemView.findViewById(R.id.t1);
+            this.text3 = itemView.findViewById(R.id.t2);
+        }
+
+        /**
+         * Передача параметров в view элементы.
+         * @param tree дерево элементов.
+         */
+        public void bind(SimpleTree<String> tree) {
+            try {
+                String[] text = tree.getValue().split("<!>");
+                text1.setText(text[0]);
+                text2.setText(text[1]);
+                text3.setText(text[2]);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Конструктор адаптера.
+     * @param list список элементов для отображения.
+     */
+    public CreativeAdapter(ArrayList list) {
         this.objects = list;
-        this.lInflater = (LayoutInflater) ctx
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    /**
+     * Создание ViewHolder списка c пустыми элементами.
+     * @param viewGroup
+     * @param i позиция элемениа.
+     * @return элемент списка с View элементами.
+     */
+    @NonNull
     @Override
-    public int getCount() {
-        return objects.size();
+    public CreativeItem onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_creative_group, viewGroup, false);
+        return new CreativeItem(view);
     }
 
+    /**
+     * Передача параметров в элемент списка итемов.
+     * @param creativeItem эоемент списка.
+     * @param i
+     */
     @Override
-    public Object getItem(int i) {
-        return objects.get(i);
+    public void onBindViewHolder(@NonNull CreativeItem creativeItem, int i) {
+        creativeItem.bind(objects.get(i));
     }
 
     @Override
@@ -41,20 +92,7 @@ public class CreativeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup parent) {
-        View view = convertView;
-        if (view == null) {
-            view = lInflater.inflate(R.layout.item_creative_group, parent, false);
-        }
-
-        try {
-            String[] text = objects.get(i).getValue().split("<!>");
-            ((TextView) view.findViewById(R.id.t0)).setText(text[0]);
-            ((TextView) view.findViewById(R.id.t1)).setText(text[1]);
-            ((TextView) view.findViewById(R.id.t2)).setText(text[2]);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return view;
+    public int getItemCount() {
+        return objects.size();
     }
 }

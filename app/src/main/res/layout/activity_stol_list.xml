@@ -25,7 +25,7 @@
             android:text="Данные не загружены, обновите информацию о вузе"/>
     </LinearLayout>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

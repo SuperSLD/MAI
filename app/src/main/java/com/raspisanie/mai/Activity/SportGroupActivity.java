@@ -2,6 +2,8 @@ package com.raspisanie.mai.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.widget.ListView;
 
@@ -16,11 +18,11 @@ public class SportGroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sport_group);
 
-        SportGroupAdapter adapter = new SportGroupAdapter(
-                getBaseContext(), ((SimpleTree<String>) Parametrs.getParam("sport")).getChildList());
+        SportGroupAdapter adapter = new SportGroupAdapter(((SimpleTree<String>) Parametrs.getParam("sport")).getChildList());
 
-        ListView listView = findViewById(R.id.table);
-        listView.setAdapter(adapter);
+        RecyclerView recyclerView = findViewById(R.id.table);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

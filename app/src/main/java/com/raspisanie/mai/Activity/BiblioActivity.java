@@ -2,6 +2,8 @@ package com.raspisanie.mai.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
@@ -20,11 +22,11 @@ public class BiblioActivity extends AppCompatActivity {
 
         if (Parametrs.getParam("lib") != null) {
             findViewById(R.id.errText).setVisibility(View.GONE);
-            ListView listView = findViewById(R.id.list);
+            RecyclerView recyclerView = findViewById(R.id.list);
             LibAdapter adapter =
-                    new LibAdapter(getBaseContext(),
-                            ((SimpleTree<String>) Parametrs.getParam("lib")).getChildList());
-            listView.setAdapter(adapter);
+                    new LibAdapter(((SimpleTree<String>) Parametrs.getParam("lib")).getChildList());
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
         }
     }
 

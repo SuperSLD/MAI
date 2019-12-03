@@ -2,6 +2,8 @@ package com.raspisanie.mai.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.widget.Adapter;
 import android.widget.ListView;
@@ -19,10 +21,11 @@ public class CreativGroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creariv_group);
 
-        ListView listView = findViewById(R.id.table);
-        CreativeAdapter adapter = new CreativeAdapter(getBaseContext(),
+        RecyclerView recyclerView = findViewById(R.id.table);
+        CreativeAdapter adapter = new CreativeAdapter(
                 ((SimpleTree<String>) Parametrs.getParam("creative")).getChildList());
-        listView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

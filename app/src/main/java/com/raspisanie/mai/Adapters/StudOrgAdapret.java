@@ -1,6 +1,8 @@
 package com.raspisanie.mai.Adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,26 +15,75 @@ import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
 
-public class StudOrgAdapret extends BaseAdapter {
-    private Context ctx;
-    private LayoutInflater lInflater;
+/**
+ * Адаптер для списка студенческиъ организаций.
+ */
+public class StudOrgAdapret extends RecyclerView.Adapter<StudOrgAdapret.StudOrgItem> {
+
     private ArrayList<SimpleTree<String>> objects;
 
-    public StudOrgAdapret(Context context, ArrayList list) {
-        this.ctx = context;
+    /**
+     * Класс ViewHolder для хранения ссылок на View компоненты.
+     */
+    protected class StudOrgItem extends RecyclerView.ViewHolder {
+
+        private TextView text1;
+        private TextView text2;
+        private TextView text3;
+        private TextView text4;
+
+        public StudOrgItem(@NonNull View itemView) {
+            super(itemView);
+            this.text1 = itemView.findViewById(R.id.t0);
+            this.text2 = itemView.findViewById(R.id.t1);
+            this.text3 = itemView.findViewById(R.id.t2);
+            this.text4 = itemView.findViewById(R.id.t3);
+
+        }
+
+        /**
+         * Передача параметров в view элементы.
+         * @param obj дерево элементов.
+         */
+        public void bind(SimpleTree<String> obj) {
+            String[] text = obj.getValue().split("<!>");
+            text1.setText(text[0]);
+            text2.setText(text[1]);
+            text3.setText(text[2]);
+            text4.setText(text[3]);
+        }
+    }
+
+    /**
+     * Конструктор адаптера.
+     * @param list список элементов для отображения.
+     */
+    public StudOrgAdapret(ArrayList list) {
         this.objects = list;
-        this.lInflater = (LayoutInflater) ctx
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    /**
+     * Создание ViewHolder списка c пустыми элементами.
+     * @param viewGroup
+     * @param i позиция элемениа.
+     * @return элемент списка с View элементами.
+     */
+    @NonNull
     @Override
-    public int getCount() {
-        return objects.size();
+    public StudOrgItem onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_stud_org, viewGroup, false);
+        return new StudOrgAdapret.StudOrgItem(view);
     }
 
+    /**
+     * Передача параметров в элемент списка итемов.
+     * @param studOrgItem эоемент списка.
+     * @param i
+     */
     @Override
-    public Object getItem(int i) {
-        return objects.get(i);
+    public void onBindViewHolder(@NonNull StudOrgItem studOrgItem, int i) {
+        studOrgItem.bind(objects.get(i));
     }
 
     @Override
@@ -41,19 +92,7 @@ public class StudOrgAdapret extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup parent) {
-        View view = convertView;
-        if (view == null) {
-            view = lInflater.inflate(R.layout.item_stud_org, parent, false);
-        }
-
-        System.out.println(i);
-        String[] text = objects.get(i).getValue().split("<!>");
-        ((TextView) view.findViewById(R.id.t0)).setText(text[0]);
-        ((TextView) view.findViewById(R.id.t1)).setText(text[1]);
-        ((TextView) view.findViewById(R.id.t2)).setText(text[2]);
-        ((TextView) view.findViewById(R.id.t3)).setText(text[3]);
-
-        return view;
+    public int getItemCount() {
+        return objects.size();
     }
 }
