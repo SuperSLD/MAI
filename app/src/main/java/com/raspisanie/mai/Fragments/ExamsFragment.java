@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -74,11 +76,12 @@ public class ExamsFragment extends android.app.Fragment {
         Week examWeek = gson.fromJson(mSettings.getString("examWeek", ""), Week.class);
 
         if (examWeek.getDaysList().size() > 0) {
-            ListView listView = view.findViewById(R.id.examList);
+            RecyclerView recyclerView = view.findViewById(R.id.examList);
 
-            ExamTableAdapter adapter = new ExamTableAdapter(getActivity().getBaseContext(), examWeek.getDaysList());
+            ExamTableAdapter adapter = new ExamTableAdapter(examWeek.getDaysList());
 
-            listView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
+            recyclerView.setAdapter(adapter);
         } else {
             ((TextView) view.findViewById(R.id.errText)).setText("Расписание вашей сесии отсутствует");
             view.findViewById(R.id.examsLayout).setVisibility(View.GONE);
