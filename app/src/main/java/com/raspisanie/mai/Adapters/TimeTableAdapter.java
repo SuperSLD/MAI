@@ -16,7 +16,7 @@ import com.raspisanie.mai.R;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class TimeTableAdapter extends RecyclerView.Adapter {
+public class TimeTableAdapter extends BaseAdapter {
     private Context ctx;
     private LayoutInflater lInflater;
     private ArrayList<Day> objects;
@@ -30,15 +30,14 @@ public class TimeTableAdapter extends RecyclerView.Adapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return null;
+    public int getCount() {
+        return objects.size();
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
+    public Object getItem(int i) {
+        return objects.get(i);
     }
 
     @Override
@@ -46,13 +45,9 @@ public class TimeTableAdapter extends RecyclerView.Adapter {
         return 0;
     }
 
-    @Override
-    public int getItemCount() {
-        return objects.size();
-    }
 
     // пункт списка
-    //@Override
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // используем созданные, но не используемые view
         View view =  lInflater.inflate(R.layout.item_table_main, parent, false);
