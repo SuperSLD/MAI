@@ -2,15 +2,25 @@ package com.raspisanie.mai.Adapters.TimeTable;
 
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Button;
 
 import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
+import com.raspisanie.mai.R;
 
 /**
  * ViewHolder заголовка расписания занятий.
  */
 public class HeaderOpenItem extends TimeTableViewHolder {
+
+    Button button;
+
     public HeaderOpenItem(@NonNull View itemView) {
         super(itemView);
+        this.button = itemView.findViewById(R.id.buttonHeader);
+    }
+
+    public void setOnClickListener(View.OnClickListener listener) {
+        button.setOnClickListener(listener);
     }
 
     /**

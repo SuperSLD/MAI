@@ -12,6 +12,8 @@ import com.raspisanie.mai.R;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.xml.transform.sax.TemplatesHandler;
+
 /**
  * Адаптер для отображения расписания.
  */
@@ -20,46 +22,51 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
     private RecyclerView recyclerView;
 
     private boolean now;
+    private boolean notFirstDay;
     private boolean showAllDays;
-    private ArrayList<Day> days;
-    private ArrayList<Day> lastDays;
-
-    private ArrayList<TimeTableViewHolder> dayViewHolders;
+    private ArrayList<Day> startDayList;
+    private ArrayList<Day> day;
+    private int daySum;
 
     /**
      * Конструктор адаптера.
-     * @param days список элементов для отображения.
+     *
+     * @param day1 список элементов для отображения.
      */
-    public TimeTableAdapter(ArrayList days, boolean now){
+    public TimeTableAdapter(ArrayList day1, boolean now) {
         this.now = now;
-        this.days = days;
-        this.lastDays = new ArrayList<>();
-
+        this.notFirstDay = false;
         this.showAllDays = false;
 
-        if (now) {
-            for (int i = 0; i < days.size(); i++) {
-                Calendar calendar = Calendar.getInstance();
-                // если указана текущая неделя и день уже прошел то он не показывается
-                if (!((Integer.parseInt(this.days.get(i).getDate().substring(0, 2)) >=
-                        calendar.get(Calendar.DAY_OF_MONTH) &&
-                        Integer.parseInt(this.days.get(i).getDate().substring(3, 5)) ==
-                                calendar.get(Calendar.MONTH) + 1)
-                        || Integer.parseInt(this.days.get(i).getDate().substring(3, 5)) >
-                        calendar.get(Calendar.MONTH) + 1)) {
-                    this.lastDays.add(this.days.get(i));
-                } else {
-                    this.showAllDays = false;
-                }
-            }
-            for (Day day : this.lastDays) this.days.remove(day);
-        }
+        ArrayList<Day> day = (ArrayList<Day>) day1;
+        startDayList = day;
+        this.day =  new ArrayList<>();
 
-        this.dayViewHolders = new ArrayList<>();
+        for (int i = 0; i < day.size(); i++) {
+            Calendar calendar = Calendar.getInstance();
+            // если указана текущая неделя и день уже прошел то он не показывается
+            if (now) {
+                if ((Integer.parseInt(day.get(i).getDate().substring(0, 2)) >=
+                        calendar.get(Calendar.DAY_OF_MONTH) &&
+                        Integer.parseInt(day.get(i).getDate().substring(3, 5)) ==
+                                calendar.get(Calendar.MONTH) + 1)
+                        || Integer.parseInt(day.get(i).getDate().substring(3, 5)) >
+                        calendar.get(Calendar.MONTH) + 1) {
+                    this.day.add(day.get(i));
+                } else {
+                    notFirstDay = true;
+                }
+            } else {
+                // если неделя не равна текущей то показываем все дни
+                this.day.add(day.get(i));
+            }
+        }
+        daySum = day.size() - this.day.size() - 1;
     }
 
     /**
      * Получение родительского RecyclerView.
+     *
      * @param recyclerView родитель.
      */
     @Override
@@ -70,20 +77,26 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
 
     /**
      * Определение типа элемента в зависимост от позиции.
+     *
      * @param position позиция элемента.
      * @return тип элемента.
      */
     @Override
     public int getItemViewType(int position) {
-        if (!showAllDays) {
-            return position == 0 ? 0 : 1;
-        } else return  0;
+        if (now) {
+            if (position == 0 && notFirstDay) {
+                return showAllDays ? 2 : 1;
+            } else {
+                return 0;
+            }
+        } else return 0;
     }
 
     /**
      * Создание ViewHolder списка c пустыми элементами.
+     *
      * @param viewGroup
-     * @param viewType позиция элемениа.
+     * @param viewType  позиция элемениа.
      * @return элемент списка с View элементами.
      */
     @NonNull
@@ -96,10 +109,23 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
         if (now) {
             switch (viewType) {
                 case 0:
-                    viewHolder = ViewHolderFactory.create(1, inflater, viewGroup);
+                    viewHolder = ViewHolderFactory.create(0, inflater, viewGroup);
                     break;
                 case 1:
-                    viewHolder = ViewHolderFactory.create(0, inflater, viewGroup);
+                    viewHolder = ViewHolderFactory.create(1, inflater, viewGroup);
+                    ((HeaderOpenItem) viewHolder).setOnClickListener(v -> {
+                        showAllDays = true;
+                        notifyItemChanged(0);
+                        updateDayList();
+                    });
+                    break;
+                case 2:
+                    viewHolder = ViewHolderFactory.create(2, inflater, viewGroup);
+                    ((HeaderCloseItem) viewHolder).setOnClickListener(v -> {
+                        showAllDays = false;
+                        notifyItemChanged(0);
+                        updateDayList();
+                    });
                     break;
             }
         } else {
@@ -111,17 +137,33 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
     }
 
     /**
+     * Обновление элементов списка.
+     */
+    private void updateDayList() {
+        if (showAllDays) {
+            for (int i = daySum; i >= 0; i--) {
+                day.add(0, (startDayList.get(i)));
+                notifyItemInserted(i);
+            }
+        } else {
+            for (int i = daySum; i >= 0; i--) {
+                day.remove(0);
+                notifyItemRemoved(i + 1);
+            }
+        }
+    }
+
+    /**
      * Передача параметров в элемент списка итемов.
+     *
      * @param item эоемент списка.
      * @param i
      */
     @Override
     public void onBindViewHolder(@NonNull TimeTableViewHolder item, int i) {
-        if (now) {
-            if (i != 0) item.bind(days.get(i - 1));
-        } else {
-            item.bind(days.get(i));
-        }
+        if (now && notFirstDay) {
+            if (i != 0) item.bind(day.get(i - 1));
+        } else item.bind(day.get(i));
     }
 
     @Override
@@ -135,9 +177,11 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
     @Override
     public int getItemCount() {
         if (now) {
-            if (!showAllDays) {
-                return days.size() + lastDays.size() + 1;
-            } else return days.size();
-        } else return days.size();
+            if (notFirstDay) {
+                return day.size() + 1;
+            } else {
+                return day.size();
+            }
+        } else return day.size();
     }
 }

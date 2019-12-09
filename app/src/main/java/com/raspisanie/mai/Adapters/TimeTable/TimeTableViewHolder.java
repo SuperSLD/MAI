@@ -3,6 +3,9 @@ package com.raspisanie.mai.Adapters.TimeTable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+
+import com.raspisanie.mai.R;
 
 /**
  * Шаблон для ViewHolder расписания предметов.
