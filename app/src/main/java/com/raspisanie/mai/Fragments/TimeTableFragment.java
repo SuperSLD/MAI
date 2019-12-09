@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,9 +16,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.raspisanie.mai.Adapters.TimeTable.TimeTableViewHolder;
 import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.Parametrs;
-import com.raspisanie.mai.Adapters.TimeTableAdapter;
+import com.raspisanie.mai.Adapters.TimeTable.TimeTableAdapter;
 import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
@@ -27,13 +30,7 @@ import java.util.Calendar;
 
 public class TimeTableFragment extends android.app.Fragment{
     View view;
-    private View header;
-    private View header2;
-
     private static boolean isUpdate = false;
-
-    private final ArrayList<Day> day = new ArrayList<>();
-    private boolean notFirstDay = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,18 +104,14 @@ public class TimeTableFragment extends android.app.Fragment{
      * @param week номер текущей недели.
      */
     private void setDaysList(int week) {
+        //TODO разобраться с этим куском кода
+        /*
         // отчищаем список дней
         day.clear();
 
-        // проверяем существует ли эта неделя
-        if (week < 0)
-            week = 0;
-        if (week >= ((Week[]) Parametrs.getParam("weeks")).length)
-            week = ((Week[]) Parametrs.getParam("weeks")).length - 1;
-
         // добавляем в список дни если это нужно
         for (int i = 0;
-             i < ((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().size(); i++) {
+             i < (v.size(); i++) {
             Calendar calendar = Calendar.getInstance();
             // если указана текущая неделя и день уже прошел то он не показывается
             if (week == ((int) Parametrs.getParam("thisWeek"))) {
@@ -137,10 +130,22 @@ public class TimeTableFragment extends android.app.Fragment{
                 day.add(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i));
             }
         }
+        */
 
-        TimeTableAdapter adapter = new TimeTableAdapter(view.getContext(),
-                day, week == ((int) Parametrs.getParam("thisWeek")));
-        ListView listView = view.findViewById(R.id.listItem);
+        // проверяем существует ли эта неделя
+        if (week < 0)
+            week = 0;
+        if (week >= ((Week[]) Parametrs.getParam("weeks")).length)
+            week = ((Week[]) Parametrs.getParam("weeks")).length - 1;
+
+        TimeTableAdapter adapter = new TimeTableAdapter(
+                ((Week[]) Parametrs.getParam("weeks"))[week].getDaysList(),
+                week == ((int) Parametrs.getParam("thisWeek"))
+        );
+        RecyclerView recyclerView = view.findViewById(R.id.listItem);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
+        recyclerView.setAdapter(adapter);
+        /*
         // удаляемм заголовок списка
         listView.removeHeaderView(header);
         listView.removeHeaderView(header2);
@@ -169,7 +174,6 @@ public class TimeTableFragment extends android.app.Fragment{
                 listView.addHeaderView(header);
                 adapter.notifyDataSetChanged();
             });
-        }
-        listView.setAdapter(adapter);
+        }*/
     }
 }

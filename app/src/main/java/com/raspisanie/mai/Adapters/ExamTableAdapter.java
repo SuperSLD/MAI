@@ -1,17 +1,15 @@
 package com.raspisanie.mai.Adapters;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.raspisanie.mai.Adapters.TimeTable.TimeTableSubAdapter;
 import com.raspisanie.mai.Classes.TimeTable.Day;
-import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
 
 import java.util.ArrayList;

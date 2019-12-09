@@ -1,4 +1,4 @@
-package com.raspisanie.mai.Adapters;
+package com.raspisanie.mai.Adapters.TimeTable;
 
 import android.content.Context;
 import android.view.LayoutInflater;
