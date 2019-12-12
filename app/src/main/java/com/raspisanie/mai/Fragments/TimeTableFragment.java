@@ -104,34 +104,6 @@ public class TimeTableFragment extends android.app.Fragment{
      * @param week номер текущей недели.
      */
     private void setDaysList(int week) {
-        //TODO разобраться с этим куском кода
-        /*
-        // отчищаем список дней
-        day.clear();
-
-        // добавляем в список дни если это нужно
-        for (int i = 0;
-             i < (v.size(); i++) {
-            Calendar calendar = Calendar.getInstance();
-            // если указана текущая неделя и день уже прошел то он не показывается
-            if (week == ((int) Parametrs.getParam("thisWeek"))) {
-                if ((Integer.parseInt(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i).getDate().substring(0, 2)) >=
-                        calendar.get(Calendar.DAY_OF_MONTH) &&
-                        Integer.parseInt(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i).getDate().substring(3, 5)) ==
-                        calendar.get(Calendar.MONTH) + 1)
-                    || Integer.parseInt(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i).getDate().substring(3, 5)) >
-                        calendar.get(Calendar.MONTH) + 1) {
-                    day.add(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i));
-                } else {
-                    notFirstDay = true;
-                }
-            } else {
-                // если неделя не равна текущей то показываем все дни
-                day.add(((Week[]) Parametrs.getParam("weeks"))[week].getDaysList().get(i));
-            }
-        }
-        */
-
         // проверяем существует ли эта неделя
         if (week < 0)
             week = 0;
@@ -145,35 +117,5 @@ public class TimeTableFragment extends android.app.Fragment{
         RecyclerView recyclerView = view.findViewById(R.id.listItem);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
         recyclerView.setAdapter(adapter);
-        /*
-        // удаляемм заголовок списка
-        listView.removeHeaderView(header);
-        listView.removeHeaderView(header2);
-        // если нужно устанавливаем новый заголовок
-        if (notFirstDay && week == ((int) Parametrs.getParam("thisWeek")) ) {
-            header = getActivity().getLayoutInflater().inflate(R.layout.header_time_table, null);
-            header2 = getActivity().getLayoutInflater().inflate(R.layout.header_time_table_2, null);
-            listView.addHeaderView(header);
-
-            int finalWeek = week;
-            int daySum = ((Week[]) Parametrs.getParam("weeks"))[finalWeek].getDaysList().size() - day.size() - 1;
-            header.findViewById(R.id.buttonHeader).setOnClickListener(v -> {
-                listView.removeHeaderView(header);
-                for (int i = daySum; i >= 0; i--) {
-                    day.add(0, ((Week[]) Parametrs.getParam("weeks"))[finalWeek].getDaysList().get(i));
-                }
-                listView.addHeaderView(header2);
-                adapter.notifyDataSetChanged();
-            });
-
-            header2.findViewById(R.id.buttonHeader).setOnClickListener(v -> {
-                listView.removeHeaderView(header2);
-                for (int i = 0; i <= daySum; i++) {
-                    day.remove(0);
-                }
-                listView.addHeaderView(header);
-                adapter.notifyDataSetChanged();
-            });
-        }*/
     }
 }

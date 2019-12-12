@@ -1,5 +1,7 @@
 package com.raspisanie.mai.Adapters.TimeTable;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,8 @@ import java.util.Calendar;
 
 import javax.xml.transform.sax.TemplatesHandler;
 
+import jp.wasabeef.blurry.Blurry;
+
 /**
  * Адаптер для отображения расписания.
  */
@@ -25,7 +29,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
     private boolean notFirstDay;
     private boolean showAllDays;
     private ArrayList<Day> startDayList;
-    private ArrayList<Day> day;
+    private ArrayList<Object> day;
     private int daySum;
 
     /**
@@ -137,20 +141,37 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
     }
 
     /**
-     * Обновление элементов списка.
+     * Добавление и удаление скрытых дней.
      */
     private void updateDayList() {
         if (showAllDays) {
             for (int i = daySum; i >= 0; i--) {
-                day.add(0, (startDayList.get(i)));
-                notifyItemInserted(i);
+                insertItem(startDayList.get(i), 0);
             }
         } else {
             for (int i = daySum; i >= 0; i--) {
-                day.remove(0);
-                notifyItemRemoved(i + 1);
+                deleteItem(0);
             }
         }
+    }
+
+    /**
+     * Вставка объекта с анимацией.
+     * @param obj объект.
+     * @param i позиция для нового объекта.
+     */
+    private void insertItem(Object obj, int i) {
+        day.add(i, obj);
+        notifyItemInserted(i);
+    }
+
+    /**
+     * Удаление объекта с анимацией.
+     * @param i удаляемый элемент.
+     */
+    private void deleteItem(int i) {
+        day.remove(i);
+        notifyItemRemoved(i);
     }
 
     /**
