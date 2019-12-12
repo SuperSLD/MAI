@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
                 <TextView
                     android:id="@+id/textView7"
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
                 <TextView
                     android:id="@+id/textView"

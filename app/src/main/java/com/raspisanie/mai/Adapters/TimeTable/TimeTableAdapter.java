@@ -8,11 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.raspisanie.mai.Classes.EventCard;
 import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.transform.sax.TemplatesHandler;
 
@@ -91,7 +94,14 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
             if (position == 0 && notFirstDay) {
                 return showAllDays ? 2 : 1;
             } else {
-                return 0;
+                if (notFirstDay) position--;
+                if (day.get(position) instanceof Day) {
+                    return 0;
+                } else if (day.get(position) instanceof EventCard) {
+                    return 3;
+                } else {
+                    return -1;
+                }
             }
         } else return 0;
     }
@@ -119,6 +129,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                     viewHolder = ViewHolderFactory.create(1, inflater, viewGroup);
                     ((HeaderOpenItem) viewHolder).setOnClickListener(v -> {
                         showAllDays = true;
+                        insertItem(new EventCard("Hello fucking world"), 1);
                         notifyItemChanged(0);
                         updateDayList();
                     });
@@ -130,6 +141,9 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                         notifyItemChanged(0);
                         updateDayList();
                     });
+                    break;
+                case 3:
+                    viewHolder = ViewHolderFactory.create(3, inflater, viewGroup);
                     break;
             }
         } else {
@@ -161,7 +175,12 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
      * @param i позиция для нового объекта.
      */
     private void insertItem(Object obj, int i) {
-        day.add(i, obj);
+        if (i < day.size()) {
+            day.add(i, obj);
+        } else {
+            day.add(obj);
+            i = day.size() - 1;
+        }
         notifyItemInserted(i);
     }
 
@@ -187,6 +206,11 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
         } else item.bind(day.get(i));
     }
 
+    /**
+     * Непонятно зачем оно.
+     * @param i непонятно что за параметр.
+     * @return какойто идентификатор.
+     */
     @Override
     public long getItemId(int i) {
         return 0;

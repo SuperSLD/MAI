@@ -18,10 +18,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="20dp"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
                 <TextView
                     android:id="@+id/textView0"
@@ -34,6 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Группа M1O-109C-19"
+                    android:textColor="@android:color/black"
                     android:textSize="25dp" />
 
                 <TextView
@@ -47,6 +48,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
                     android:text="Курс 1"/>
             </LinearLayout>
 
@@ -54,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
                 <Button
                     android:id="@+id/button0"
@@ -71,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
                 <Button
                     android:id="@+id/button"
@@ -88,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
                 <Button
                     android:id="@+id/button01"
@@ -106,7 +108,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="20dp"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
                 <TextView
                     android:id="@+id/textView100"
@@ -127,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
 
                 <LinearLayout
@@ -170,7 +172,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="20dp"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
                 <com.raspisanie.mai.View.DiagramView
                     android:id="@+id/diagram1"
@@ -244,7 +246,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="20dp"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
                 <TextView
                     android:id="@+id/textView"
@@ -293,7 +295,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/drawable_bottom_border">
 
                 <Button
                     android:id="@+id/button3"

@@ -16,6 +16,8 @@ import com.raspisanie.mai.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Фоновое обновление расписания и проверка.

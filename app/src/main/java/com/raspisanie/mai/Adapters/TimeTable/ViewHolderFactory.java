@@ -6,8 +6,6 @@ import android.view.ViewGroup;
 
 import com.raspisanie.mai.R;
 
-import java.util.zip.Inflater;
-
 /**
  * Фабрика TimeTableViewHolder объектов.
  */
@@ -34,6 +32,9 @@ public class ViewHolderFactory {
             case 2:
                 view = inflater.inflate(R.layout.header_time_table_2, viewGroup, false);
                 return new HeaderCloseItem(view);
+            case 3:
+                view = inflater.inflate(R.layout.item_events_card, viewGroup, false);
+                return new EventCardItem(view);
             default:
                 return null;
         }

@@ -54,7 +54,7 @@ public class SettingsFragment extends android.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, null);
         SharedPreferences mSettings = getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
-        //Установка теуста в информацию о группе
+        //Установка текста в информацию о группе
         SimpleTree<String> tree = (SimpleTree<String>) Parametrs.getParam("tree");
         String groupName = tree.getChildList().get((int)Parametrs.getParam("kurs"))
                 .getChildList().get((int)Parametrs.getParam("fac"))
@@ -67,6 +67,8 @@ public class SettingsFragment extends android.app.Fragment {
         ((TextView) view.findViewById(R.id.textView1)).setText("Группа " + groupName);
         ((TextView) view.findViewById(R.id.textView2)).setText(facName);
         ((TextView) view.findViewById(R.id.textView3)).setText(kursName);
+
+
 
         //Обработчики нажатий на кнопки под информацией
         view.findViewById(R.id.button).setOnClickListener(v -> {

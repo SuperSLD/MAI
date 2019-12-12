@@ -15,6 +15,6 @@
         android:drawableTint="@android:color/white"
         android:drawablePadding="10dp"
         android:textAllCaps="false"
-        android:background="@drawable/button_primary"
+        android:background="@drawable/drawable_button_primary"
         android:text="Показать скрытые дни" />
 </LinearLayout>

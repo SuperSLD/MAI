@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textSize="15dp"
-                android:background="@drawable/border_top_corners"
+                android:background="@drawable/drawable_border_top_corners"
                 android:textColor="@color/white"
                 android:text="Спортивный комплекс МАИ № 1, корпус № 12 «Черепаха» МАИ" />
 
