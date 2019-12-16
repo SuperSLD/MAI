@@ -112,7 +112,7 @@ public class TimeTableFragment extends android.app.Fragment{
 
         TimeTableAdapter adapter = new TimeTableAdapter(
                 ((Week[]) Parametrs.getParam("weeks"))[week].getDaysList(),
-                week == ((int) Parametrs.getParam("thisWeek"))
+                week == ((int) Parametrs.getParam("thisWeek")), getActivity().getBaseContext()
         );
         RecyclerView recyclerView = view.findViewById(R.id.listItem);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));

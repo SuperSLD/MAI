@@ -1,14 +1,12 @@
 package com.raspisanie.mai.Adapters.TimeTable;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.raspisanie.mai.Classes.EventCard;
+import com.raspisanie.mai.Classes.TimeTable.EventCard;
 import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.R;
 
@@ -17,16 +15,10 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.transform.sax.TemplatesHandler;
-
-import jp.wasabeef.blurry.Blurry;
-
 /**
  * Адаптер для отображения расписания.
  */
 public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> {
-
-    private RecyclerView recyclerView;
 
     private boolean now;
     private boolean notFirstDay;
@@ -40,7 +32,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
      *
      * @param day1 список элементов для отображения.
      */
-    public TimeTableAdapter(ArrayList day1, boolean now) {
+    public TimeTableAdapter(ArrayList day1, boolean now, Context context) {
         this.now = now;
         this.notFirstDay = false;
         this.showAllDays = false;
@@ -69,17 +61,11 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
             }
         }
         daySum = day.size() - this.day.size() - 1;
-    }
 
-    /**
-     * Получение родительского RecyclerView.
-     *
-     * @param recyclerView родитель.
-     */
-    @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        this.recyclerView = recyclerView;
+        this.day.add(1,new EventCard("Вуз Пром Экспо",
+                "17.12.2019",
+                EventCard.decodeSampledBitmapFromResource(
+                        context.getResources(), R.drawable.test_image, 100, 100)));
     }
 
     /**
@@ -90,6 +76,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
      */
     @Override
     public int getItemViewType(int position) {
+        //TODO при возможности поправить и сделать короче.
         if (now) {
             if (position == 0 && notFirstDay) {
                 return showAllDays ? 2 : 1;
@@ -103,7 +90,15 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                     return -1;
                 }
             }
-        } else return 0;
+        } else {
+            if (day.get(position) instanceof Day) {
+                return 0;
+            } else if (day.get(position) instanceof EventCard) {
+                return 3;
+            } else {
+                return -1;
+            }
+        }
     }
 
     /**
@@ -119,39 +114,52 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         TimeTableViewHolder viewHolder = null;
         ViewHolderFactory.setNow(now);
+        ViewHolderFactory.setTimeTableAdapter(this);
 
-        if (now) {
-            switch (viewType) {
-                case 0:
-                    viewHolder = ViewHolderFactory.create(0, inflater, viewGroup);
-                    break;
-                case 1:
-                    viewHolder = ViewHolderFactory.create(1, inflater, viewGroup);
-                    ((HeaderOpenItem) viewHolder).setOnClickListener(v -> {
-                        showAllDays = true;
-                        insertItem(new EventCard("Hello fucking world"), 1);
-                        notifyItemChanged(0);
-                        updateDayList();
-                    });
-                    break;
-                case 2:
-                    viewHolder = ViewHolderFactory.create(2, inflater, viewGroup);
-                    ((HeaderCloseItem) viewHolder).setOnClickListener(v -> {
-                        showAllDays = false;
-                        notifyItemChanged(0);
-                        updateDayList();
-                    });
-                    break;
-                case 3:
-                    viewHolder = ViewHolderFactory.create(3, inflater, viewGroup);
-                    break;
-            }
-        } else {
-            viewHolder = ViewHolderFactory.create(0, inflater, viewGroup);
+        switch (viewType) {
+            case 0:
+                viewHolder = ViewHolderFactory.create(0, inflater, viewGroup);
+                break;
+            case 1:
+                viewHolder = ViewHolderFactory.create(1, inflater, viewGroup);
+                ((HeaderOpenItem) viewHolder).setOnClickListener(v -> {
+                    showAllDays = true;
+                    notifyItemChanged(0);
+                    updateDayList();
+                    /*insertItem(new EventCard("Вуз Пром Экспо",
+                            "13.12.2019",
+                            EventCard.decodeSampledBitmapFromResource(
+                            viewGroup.getContext().getResources(), R.drawable.test_image, 100, 100)), 0);*/
+                });
+                break;
+            case 2:
+                viewHolder = ViewHolderFactory.create(2, inflater, viewGroup);
+                ((HeaderCloseItem) viewHolder).setOnClickListener(v -> {
+                    showAllDays = false;
+                    notifyItemChanged(0);
+                    updateDayList();
+                });
+                break;
+            case 3:
+                viewHolder = ViewHolderFactory.create(3, inflater, viewGroup);
+                TimeTableViewHolder finalViewHolder = viewHolder;
+                break;
         }
 
-
         return viewHolder;
+    }
+
+    /**
+     * Передача параметров в элемент списка итемов.
+     *
+     * @param item эоемент списка.
+     * @param i
+     */
+    @Override
+    public void onBindViewHolder(@NonNull TimeTableViewHolder item, int i) {
+        if (now && notFirstDay) {
+            if (i != 0) item.bind(day.get(i - 1));
+        } else item.bind(day.get(i));
     }
 
     /**
@@ -174,7 +182,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
      * @param obj объект.
      * @param i позиция для нового объекта.
      */
-    private void insertItem(Object obj, int i) {
+    public void insertItem(Object obj, int i) {
         if (i < day.size()) {
             day.add(i, obj);
         } else {
@@ -186,24 +194,25 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
 
     /**
      * Удаление объекта с анимацией.
-     * @param i удаляемый элемент.
+     * @param i позиция удаляемного элемента.
      */
-    private void deleteItem(int i) {
+    public void deleteItem(int i) {
         day.remove(i);
         notifyItemRemoved(i);
     }
 
     /**
-     * Передача параметров в элемент списка итемов.
-     *
-     * @param item эоемент списка.
-     * @param i
+     * Удаление EventCard с анимацией.
+     * @param ID идентификатор элемента.
      */
-    @Override
-    public void onBindViewHolder(@NonNull TimeTableViewHolder item, int i) {
-        if (now && notFirstDay) {
-            if (i != 0) item.bind(day.get(i - 1));
-        } else item.bind(day.get(i));
+    public void deleteEventCardByID(int ID) {
+        for (int i = 0; i < day.size(); i++) {
+            if (day.get(i) instanceof EventCard && ((EventCard) day.get(i)).getEventCardID() == ID) {
+                day.remove(i);
+                if (now) i++;
+                notifyItemRemoved(i);
+            }
+        }
     }
 
     /**
@@ -213,7 +222,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
      */
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
     /**

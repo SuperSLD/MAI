@@ -15,6 +15,7 @@ public class ViewHolderFactory {
      * Параметр необходимый для игициализации некоторых объектов.
      */
     private static boolean now;
+    private static TimeTableAdapter timeTableAdapter;
 
     /**
      * Возвращает объект в зависимости от входного кода.
@@ -34,7 +35,7 @@ public class ViewHolderFactory {
                 return new HeaderCloseItem(view);
             case 3:
                 view = inflater.inflate(R.layout.item_events_card, viewGroup, false);
-                return new EventCardItem(view);
+                return new EventCardItem(view, viewGroup.getContext(), timeTableAdapter);
             default:
                 return null;
         }
@@ -46,5 +47,13 @@ public class ViewHolderFactory {
      */
     public static void setNow(boolean bol) {
         now = bol;
+    }
+
+    /**
+     * Установка адаптера расписания.
+     * @param timeTableAdapter
+     */
+    public static void setTimeTableAdapter(TimeTableAdapter timeTableAdapter) {
+        ViewHolderFactory.timeTableAdapter = timeTableAdapter;
     }
 }
