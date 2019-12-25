@@ -46,7 +46,6 @@ public class EventCardListManager {
                         "bitmap["+i+"/"+(list.length-1)+"]: " + (ev.getBitmap() != null));
                 i++;
             }
-            eventCards.add(new EventCard("Тестовое событие","25 дек", bytes[0]));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -88,9 +87,9 @@ public class EventCardListManager {
                 String encoded = Base64.encodeToString(b, Base64.DEFAULT);
                 bitmapStrings.add(encoded);
                 events.add(new EventCard(eventName, eventDate, encoded));
-
             } catch (Exception ex) {
                 ex.printStackTrace();
+                Logger.getLogger("mailog").log(Level.INFO, "event card list updater error");
             }
         }
 
@@ -103,6 +102,8 @@ public class EventCardListManager {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putString("events", gson.toJson(eventCards));
         editor.putString("eventsBitmap", gson.toJson(bitmapStrings));
+        editor.putString("lastUpdateEvents",
+                new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()));
         editor.apply();
     }
 

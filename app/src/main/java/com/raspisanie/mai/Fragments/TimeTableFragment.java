@@ -46,19 +46,21 @@ public class TimeTableFragment extends android.app.Fragment{
 
         //TODO вернуть проверку даты
         //Обновление расписания в фоне раз в день.
-        if (!isUpdate && mSettings.getBoolean("updateChek", true)
-            && !mSettings.getString("lastUpdate", "").equals(
-                new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()))) {
+        if (!isUpdate && mSettings.getBoolean("updateChek", true)) {
             isUpdate = true;
-            new Thread(() -> {
-                EventCardListManager.eventCardListUpdate(mSettings);
-            }).start();
-            new Thread(() -> {
-                if (TimeTableUpdater.update(mSettings)) {
-                    Parametrs.setParam("weeks",
-                            gson.fromJson(mSettings.getString("weeks", ""), Week[].class));
-                }
-            }).start();
+            if(!mSettings.getString("lastUpdate", "").equals(
+                new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime())))
+                new Thread(() -> {
+                    if (TimeTableUpdater.update(mSettings)) {
+                        Parametrs.setParam("weeks",
+                                gson.fromJson(mSettings.getString("weeks", ""), Week[].class));
+                    }
+                }).start();
+            if(!mSettings.getString("lastUpdateEvents", "").equals(
+                new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime())))
+                new Thread(() -> {
+                    EventCardListManager.eventCardListUpdate(mSettings);
+                }).start();
         }
     }
 
