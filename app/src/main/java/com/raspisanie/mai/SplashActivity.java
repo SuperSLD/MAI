@@ -13,15 +13,21 @@ import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Activity.MainActivity;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
+import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Logger.getLogger("mailog").log(Level.INFO, "start MAI app");
         //TODO Сделать красивую заставку (SVG)
 
         SharedPreferences mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
+
+        EventCardListManager.initList(mSettings);
 
         Parametrs.setParam("mSettings", mSettings);
         if (mSettings.getInt("group", -1) > -1) {

@@ -20,6 +20,7 @@ import com.raspisanie.mai.Adapters.TimeTable.TimeTableViewHolder;
 import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Adapters.TimeTable.TimeTableAdapter;
+import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
 import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
@@ -31,6 +32,8 @@ import java.util.Calendar;
 public class TimeTableFragment extends android.app.Fragment{
     View view;
     private static boolean isUpdate = false;
+    private TimeTableAdapter adapter;
+    private int week;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,11 +44,15 @@ public class TimeTableFragment extends android.app.Fragment{
                 getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
+        //TODO вернуть проверку даты
         //Обновление расписания в фоне раз в день.
         if (!isUpdate && mSettings.getBoolean("updateChek", true)
             && !mSettings.getString("lastUpdate", "").equals(
                 new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()))) {
             isUpdate = true;
+            new Thread(() -> {
+                EventCardListManager.eventCardListUpdate(mSettings);
+            }).start();
             new Thread(() -> {
                 if (TimeTableUpdater.update(mSettings)) {
                     Parametrs.setParam("weeks",
@@ -93,26 +100,22 @@ public class TimeTableFragment extends android.app.Fragment{
         return view;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
     /**
      * Передаем в ListView adapter с списком дней текущей недели.
      * Сам список дней объявлен глобальным чтоб его можно было динамически изменять.
      * @param week номер текущей недели.
      */
-    private void setDaysList(int week) {
+    public void setDaysList(int week) {
         // проверяем существует ли эта неделя
         if (week < 0)
             week = 0;
         if (week >= ((Week[]) Parametrs.getParam("weeks")).length)
             week = ((Week[]) Parametrs.getParam("weeks")).length - 1;
+        this.week = week;
 
-        TimeTableAdapter adapter = new TimeTableAdapter(
+        adapter = new TimeTableAdapter(
                 ((Week[]) Parametrs.getParam("weeks"))[week].getDaysList(),
-                week == ((int) Parametrs.getParam("thisWeek")), getActivity().getBaseContext()
+                week == ((int) Parametrs.getParam("thisWeek"))
         );
         RecyclerView recyclerView = view.findViewById(R.id.listItem);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));

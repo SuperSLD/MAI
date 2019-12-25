@@ -48,15 +48,17 @@ public class EventCardItem extends TimeTableViewHolder {
     public void bind(Object obj) {
         EventCard eventCard = (EventCard) obj;
         imageView.post(() -> {
-            int delta = 50;
-            Blurry.with(context)
-                    .radius(25)
-                    //.color(Color.argb(170, 101, 168, 198))
-                    .color(Color.argb(170, 50-delta, 108-delta, 198-delta))
-                    .async()
-                    .animate(3000)
-                    .from(eventCard.getBitmap())
-                    .into(imageView);
+            if (eventCard.getBitmap() != null) {
+                int delta = 50;
+                Blurry.with(context)
+                        .radius(25)
+                        //.color(Color.argb(170, 101, 168, 198))
+                        .color(Color.argb(170, 50 - delta, 108 - delta, 198 - delta))
+                        .async()
+                        .animate(3000)
+                        .from(eventCard.getBitmap())
+                        .into(imageView);
+            }
         });
 
         textViewName.setText(eventCard.getName());

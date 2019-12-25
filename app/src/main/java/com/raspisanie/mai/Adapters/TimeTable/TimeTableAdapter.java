@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.raspisanie.mai.Classes.TimeTable.EventCard;
 import com.raspisanie.mai.Classes.TimeTable.Day;
+import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
 import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
      *
      * @param day1 список элементов для отображения.
      */
-    public TimeTableAdapter(ArrayList day1, boolean now, Context context) {
+    public TimeTableAdapter(ArrayList day1, boolean now) {
         this.now = now;
         this.notFirstDay = false;
         this.showAllDays = false;
@@ -61,11 +62,6 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
             }
         }
         daySum = day.size() - this.day.size() - 1;
-
-        this.day.add(1,new EventCard("Вуз Пром Экспо",
-                "17.12.2019",
-                EventCard.decodeSampledBitmapFromResource(
-                        context.getResources(), R.drawable.test_image, 100, 100)));
     }
 
     /**
@@ -126,10 +122,6 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                     showAllDays = true;
                     notifyItemChanged(0);
                     updateDayList();
-                    /*insertItem(new EventCard("Вуз Пром Экспо",
-                            "13.12.2019",
-                            EventCard.decodeSampledBitmapFromResource(
-                            viewGroup.getContext().getResources(), R.drawable.test_image, 100, 100)), 0);*/
                 });
                 break;
             case 2:

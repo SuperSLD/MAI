@@ -25,4 +25,22 @@ public class Parametrs {
     public static Object getParam(String key) {
         return parametrs.get(key);
     }
+
+    /**
+     * Получение целого числа.
+     * @param key ключ.
+     * @return целое чсло.
+     */
+    public static int getInt(String key) {
+        return (int) parametrs.get(key);
+    }
+
+    /**
+     * Получение строки.
+     * @param key ключ.
+     * @return строка.
+     */
+    public static String getSrtring(String key) {
+        return (String) parametrs.get(key);
+    }
 }
