@@ -26,7 +26,7 @@ public class EventCard {
         this.date = date;
         byte[] imageAsBytes = Base64.decode(bitmap.getBytes(), Base64.DEFAULT);
         this.bitmap = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
-        Logger.getLogger("mailog").log(Level.INFO, "create EventCard");
+        Logger.getLogger("mailog").log(Level.INFO, "create EventCard " + date);
         eventCardCount++;
         this.eventCardID = eventCardCount;
     }

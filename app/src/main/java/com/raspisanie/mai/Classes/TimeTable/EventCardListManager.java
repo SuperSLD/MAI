@@ -8,11 +8,16 @@ import android.graphics.Matrix;
 import android.util.Base64;
 
 import com.google.gson.Gson;
+import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.URLSendRequest;
 
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,6 +46,7 @@ public class EventCardListManager {
                         "bitmap["+i+"/"+(list.length-1)+"]: " + (ev.getBitmap() != null));
                 i++;
             }
+            eventCards.add(new EventCard("Тестовое событие","25 дек", bytes[0]));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -125,9 +131,71 @@ public class EventCardListManager {
 
     /**
      * Вставка карточек событий в текущую неделю.
-     * @param day список объектов недели.
+     * @param list список объектов недели.
      */
-    public static void insertEventCardsInList(ArrayList<Object> day) {
+    public static void insertEventCardsInList(ArrayList<Object> list, int week) {
+        for (EventCard event :eventCards) {
+            boolean insert = false;
+            String[] eventDate = {event.getDate().split(" ")[0], getM(event.getDate().split(" ")[1])};
+            for (int i = 0; i < list.size(); i++) if (list.get(i) instanceof Day) {
+                Logger.getLogger("mailog").log(Level.INFO, "EventCardListManager event date:"
+                        + event.getDate().split(" ")[0] + "."
+                        + getM(event.getDate().split(" ")[1]) + " //day date:"
+                        + ((Day) list.get(i)).getDate());
+                String[] dayDate   = ((Day) list.get(i)).getDate().split("\\.");
+                if (dayDate[0].equals(eventDate[0])
+                        && dayDate[1].equals(eventDate[1])) {
+                    int dayPosition = list.indexOf(list.get(i));
+                    if (dayPosition == list.size()-1) {
+                        list.add(event);
+                    } else {
+                        list.add(dayPosition + 1, event);
+                    }
+                    insert = true;
+                }
+            }
+            if ( isThisWeek(eventDate, week) && !insert){
+                list.add(event);
+            }
+        }
+    }
 
+    /**
+     * Номер месяца по его сокращенному названию.
+     */
+    private static String getM(String m) {
+        String[] M = {
+                "янв", "фев", "апр",
+                "мар", "май", "июн",
+                "июл", "авг", "сен",
+                "окт", "ноя", "дек"};
+        for (int i = 0; i < M.length; i++)
+            if (M[i].equals(m)) return Integer.toString(i+1);
+        return Integer.toString(1);
+    }
+
+    /**
+     * Проверка принадлежности события к текущей недели.
+     * @param dateString
+     * @return
+     */
+    private static boolean isThisWeek(String[] dateString, int week) {
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
+        Date date = null;
+        try {
+            String s = dateString[0] + "." + dateString[1] + "."
+                    + Calendar.getInstance().get(Calendar.YEAR);
+            date = ft.parse(s);
+        } catch (Exception ex) { ex.printStackTrace(); }
+        Date top = null;
+        Date down = null;
+        try {
+            top = ft.parse(((Week[])Parametrs.getParam("weeks"))[week].getDate().split(" - ")[1]);
+            down = ft.parse(((Week[])Parametrs.getParam("weeks"))[week].getDate().split(" - ")[0]);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return ((!date.before(down) && date.before(top)))
+                || (date.compareTo(top) == 0 || date.compareTo(down) == 0);
     }
 }

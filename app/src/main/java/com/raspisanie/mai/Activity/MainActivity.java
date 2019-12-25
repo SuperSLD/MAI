@@ -115,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
         //<><><><><><>
     }
 
+    /**
+     * Определение номера текущей недели в списке.
+     */
     private void setThisWeek() {
         int thisWeek = 0;
         SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");

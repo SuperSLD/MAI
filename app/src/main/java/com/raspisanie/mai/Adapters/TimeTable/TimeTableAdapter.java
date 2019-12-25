@@ -33,13 +33,13 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
      *
      * @param day1 список элементов для отображения.
      */
-    public TimeTableAdapter(ArrayList day1, boolean now) {
+    public TimeTableAdapter(ArrayList day1, int week, boolean now) {
         this.now = now;
         this.notFirstDay = false;
         this.showAllDays = false;
 
         ArrayList<Day> day = (ArrayList<Day>) day1;
-        startDayList = day;
+        this.startDayList = day;
         this.day =  new ArrayList<>();
 
         for (int i = 0; i < day.size(); i++) {
@@ -62,6 +62,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
             }
         }
         daySum = day.size() - this.day.size() - 1;
+        EventCardListManager.insertEventCardsInList(this.day, week);
     }
 
     /**
