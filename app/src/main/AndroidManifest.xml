@@ -59,7 +59,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.CampusMapActivity"
+            android:name=".Activity.EventInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppActionBar">
             <intent-filter>

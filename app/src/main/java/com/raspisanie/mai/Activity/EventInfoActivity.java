@@ -6,16 +6,16 @@ import android.view.Menu;
 
 import com.raspisanie.mai.R;
 
-public class CampusMapActivity extends AppCompatActivity {
+public class EventInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_campus_map);
+        setContentView(R.layout.activity_event_info);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.campus_map_menu, menu);
+        getMenuInflater().inflate(R.menu.event_info_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 }
