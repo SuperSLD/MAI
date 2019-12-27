@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.raspisanie.mai.Activity.MainActivity;
 import com.raspisanie.mai.Classes.TimeTable.EventCard;
 import com.raspisanie.mai.R;
 
@@ -24,20 +25,25 @@ public class EventCardItem extends TimeTableViewHolder {
     private TextView textViewName;
     private TextView textViewDate;
     private Button closeButton;
+    private Button infoButton;
 
     private Context context;
     private ImageView imageView;
 
     private TimeTableAdapter mainAdapter;
+    private MainActivity activity;
 
-    public EventCardItem(@NonNull View itemView, Context context, TimeTableAdapter adapter) {
+    public EventCardItem(@NonNull View itemView, Context context, TimeTableAdapter adapter, MainActivity activity) {
         super(itemView);
         this.textViewName = itemView.findViewById(R.id.name);
         this.textViewDate = itemView.findViewById(R.id.date);
         this.closeButton = itemView.findViewById(R.id.buttonClose);
+        this.infoButton = itemView.findViewById(R.id.buttonInfo);
+
         this.context = context;
         this.imageView = itemView.findViewById(R.id.image);
         this.mainAdapter = adapter;
+        this.activity = activity;
     }
 
     /**
@@ -65,5 +71,7 @@ public class EventCardItem extends TimeTableViewHolder {
         textViewDate.setText(eventCard.getDate());
         closeButton.setOnClickListener(
                 v -> mainAdapter.deleteEventCardByID(eventCard.getEventCardID()));
+        infoButton.setOnClickListener(
+                v -> activity.openEventInfo(eventCard));
     }
 }

@@ -2,6 +2,7 @@ package com.raspisanie.mai.Activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.google.gson.Gson;
+import com.raspisanie.mai.Adapters.TimeTable.ViewHolderFactory;
 import com.raspisanie.mai.Classes.Parametrs;
+import com.raspisanie.mai.Classes.TimeTable.EventCard;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.Fragments.ExamsFragment;
 import com.raspisanie.mai.Fragments.InformationFragment;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         Parametrs.setParam("weeks", weeks);
 
         setThisWeek();
+        ViewHolderFactory.setMainContext(this);
 
         Parametrs.setParam("kurs", mSettings.getInt("kurs", -1));
         Parametrs.setParam("fac", mSettings.getInt("fac", -1));
@@ -140,5 +144,15 @@ public class MainActivity extends AppCompatActivity {
             if (date.compareTo(top) == 0 || date.compareTo(down) == 0) thisWeek = i;
         }
         Parametrs.setParam("thisWeek", thisWeek);
+    }
+
+    /**
+     * Открытие информации из карточки события.
+     * @param eventCard
+     */
+    public void openEventInfo(EventCard eventCard) {
+        Intent intent = new Intent(this, EventInfoActivity.class);
+        Parametrs.setParam("eventInfoParam", eventCard);
+        startActivity(intent);
     }
 }

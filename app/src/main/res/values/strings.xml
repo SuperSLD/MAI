@@ -7,6 +7,7 @@
     <string name="title_information">Информация</string>
     <string name="title_exams">Расписание сессии</string>
     <string name="title_campus_map">Общая схема кампуса</string>
+    <string name="title_event_info">Информация о событии</string>
 
     <!-- Settings Fragment -->
     <string name="versionString">1.028/25.12.2019</string>

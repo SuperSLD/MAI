@@ -16,12 +16,12 @@ public class EventCard {
     private String name;
     private String date;
     private Bitmap bitmap;
-    private String bitmapString;
+    private String info;
 
     private static int eventCardCount = 0;
     private int eventCardID;
 
-    public EventCard(String name, String date, String bitmap) {
+    public EventCard(String name, String date, String bitmap, String info) {
         this.name = name;
         this.date = date;
         byte[] imageAsBytes = Base64.decode(bitmap.getBytes(), Base64.DEFAULT);
@@ -29,6 +29,7 @@ public class EventCard {
         Logger.getLogger("mailog").log(Level.INFO, "create EventCard " + date);
         eventCardCount++;
         this.eventCardID = eventCardCount;
+        this.info = info;
     }
 
     /**
@@ -64,5 +65,13 @@ public class EventCard {
      */
     public Bitmap getBitmap() {
         return bitmap;
+    }
+
+    /**
+     * Получение информации.
+     * @return
+     */
+    public String getInfo() {
+        return info;
     }
 }

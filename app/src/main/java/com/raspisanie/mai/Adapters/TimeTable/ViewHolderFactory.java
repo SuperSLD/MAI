@@ -1,9 +1,11 @@
 package com.raspisanie.mai.Adapters.TimeTable;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.raspisanie.mai.Activity.MainActivity;
 import com.raspisanie.mai.R;
 
 /**
@@ -12,10 +14,11 @@ import com.raspisanie.mai.R;
 public class ViewHolderFactory {
 
     /**
-     * Параметр необходимый для игициализации некоторых объектов.
+     * Параметры необходимый для игициализации некоторых объектов.
      */
     private static boolean now;
     private static TimeTableAdapter timeTableAdapter;
+    private static MainActivity activity;
 
     /**
      * Возвращает объект в зависимости от входного кода.
@@ -35,7 +38,7 @@ public class ViewHolderFactory {
                 return new HeaderCloseItem(view);
             case 3:
                 view = inflater.inflate(R.layout.item_events_card, viewGroup, false);
-                return new EventCardItem(view, viewGroup.getContext(), timeTableAdapter);
+                return new EventCardItem(view, viewGroup.getContext(), timeTableAdapter, activity);
             default:
                 return null;
         }
@@ -55,5 +58,13 @@ public class ViewHolderFactory {
      */
     public static void setTimeTableAdapter(TimeTableAdapter timeTableAdapter) {
         ViewHolderFactory.timeTableAdapter = timeTableAdapter;
+    }
+
+    /**
+     * Установка контекста главной активноси.
+     * @param activity
+     */
+    public static void setMainContext(MainActivity activity) {
+        ViewHolderFactory.activity = activity;
     }
 }

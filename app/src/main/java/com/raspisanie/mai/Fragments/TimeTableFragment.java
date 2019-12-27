@@ -56,7 +56,7 @@ public class TimeTableFragment extends android.app.Fragment{
                                 gson.fromJson(mSettings.getString("weeks", ""), Week[].class));
                     }
                 }).start();
-            if(!mSettings.getString("lastUpdateEvents", "").equals(
+            if(true || !mSettings.getString("lastUpdateEvents", "").equals(
                 new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime())))
                 new Thread(() -> {
                     EventCardListManager.eventCardListUpdate(mSettings);

@@ -11,6 +11,10 @@ import com.google.gson.Gson;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.URLSendRequest;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.safety.Whitelist;
+
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
 import java.text.ParseException;
@@ -41,7 +45,7 @@ public class EventCardListManager {
             Logger.getLogger("mailog").log(Level.INFO, "events: " + list.length + "/ bytes:" + bytes.length);
             int i = 0;
             for (EventCard ev : list) {
-                eventCards.add(new EventCard(ev.getName(), ev.getDate(), bytes[i]));
+                eventCards.add(new EventCard(ev.getName(), ev.getDate(), bytes[i], ev.getInfo()));
                 Logger.getLogger("mailog").log(Level.INFO,
                         "bitmap["+i+"/"+(list.length-1)+"]: " + (ev.getBitmap() != null));
                 i++;
@@ -86,7 +90,18 @@ public class EventCardListManager {
                 byte[] b = baos.toByteArray();
                 String encoded = Base64.encodeToString(b, Base64.DEFAULT);
                 bitmapStrings.add(encoded);
-                events.add(new EventCard(eventName, eventDate, encoded));
+
+                String info = null;
+                while (info == null) {
+                    String urlString =
+                            "/press/events/detail.php?" +
+                                    eventsHtml[i].split("<h5><a href=\"/press/events/detail\\.php\\?")[1].split("\">")[0];
+                    Logger.getLogger("mailog").log(Level.INFO, "INFORM " + urlString);
+                    info = url.get(urlString);
+                }
+                info = info.split("<div class=\"text text-lg\">")[1].split("</div>")[0];
+
+                events.add(new EventCard(eventName, eventDate, encoded, informationConvert(info)));
             } catch (Exception ex) {
                 ex.printStackTrace();
                 Logger.getLogger("mailog").log(Level.INFO, "event card list updater error");
@@ -198,5 +213,29 @@ public class EventCardListManager {
         }
         return ((!date.before(down) && date.before(top)))
                 || (date.compareTo(top) == 0 || date.compareTo(down) == 0);
+    }
+
+    /**
+     * Преобоазование текста информации в читаемый вид.
+     * @return
+     */
+    private static String informationConvert(String inf){
+        Document jsoupDoc = Jsoup.parse(inf);
+
+        //set pretty print to false, so \n is not removed
+        jsoupDoc.outputSettings(new Document.OutputSettings().prettyPrint(false));
+
+        //select all <br> tags and append \n after that
+        jsoupDoc.select("br").after("\\n");
+
+        //select all <p> tags and prepend \n before that
+        jsoupDoc.select("p").before("\\n");
+
+        //get the HTML from the document, and retaining original new lines
+        String str = jsoupDoc.html().replaceAll("\\\\n", "\n");
+
+        String strWithNewLines =
+                Jsoup.clean(str, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+        return strWithNewLines.replaceAll("&nbsp;", " ");
     }
 }
