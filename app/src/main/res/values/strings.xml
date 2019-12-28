@@ -10,7 +10,7 @@
     <string name="title_event_info">Информация о событии</string>
 
     <!-- Settings Fragment -->
-    <string name="versionString">1.028/25.12.2019</string>
+    <string name="versionString">1.030/28.12.2019</string>
     <string name="autor">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -22,6 +22,6 @@
     <string name="titleLife">Жизнь</string>
 
     <string name="versionMessage">
-        Добавлены карточки событий, проходящих в МАИ.
+        Исправлены отступы в информации о событии.
     </string>
 </resources>

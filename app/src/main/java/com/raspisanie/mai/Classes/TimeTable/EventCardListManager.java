@@ -236,6 +236,9 @@ public class EventCardListManager {
 
         String strWithNewLines =
                 Jsoup.clean(str, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
-        return strWithNewLines.replaceAll("&nbsp;", " ");
+        return strWithNewLines.replaceAll("&nbsp;", " ")
+                .replaceAll("  ", " ")
+                .replaceAll("\n\n", "\n")
+                .replaceAll("\n\n", "\n");
     }
 }
