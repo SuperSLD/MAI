@@ -13,6 +13,8 @@ import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.Classes.URLSendRequest;
 import com.raspisanie.mai.R;
 
+import org.jsoup.Jsoup;
+
 public class LoadInformationActivity extends AppCompatActivity {
     private SharedPreferences mSettings;
     private SimpleTree<String> sport = new SimpleTree<>("Виды спорта");
@@ -133,8 +135,8 @@ public class LoadInformationActivity extends AppCompatActivity {
                     String[] stolSpl = stol[i].split("<p>");
                     SimpleTree<String> stolChild = new SimpleTree<>(deleteHTML(
                             stolSpl[1]
-                                    + "<!>" + stolSpl[2]
-                                    + "<!>" + stolSpl[3]
+                                    + "<!>" + Jsoup.parse(stolSpl[2]).text()
+                                    + "<!>" + Jsoup.parse(stolSpl[3]).text()
                                     + "<!>" + stolSpl[4]
                                     + "<!>" + stol[i].split("</tr>")[0].split("<td>")[4]
                     ));
@@ -164,10 +166,11 @@ public class LoadInformationActivity extends AppCompatActivity {
                     for (int j = 2; j < libs.length; j++) {
                         try {
                             SimpleTree<String> room = new SimpleTree<>(deleteHTML(
+                                    Jsoup.parse(
                                     libs[j].split("<td>")[1].split("</td")[0]
                                     + "<!>" + libs[j].split("<td>")[2].split("</td")[0]
                                             .replaceAll("<sup>", " - ")
-                            ));
+                            ).text()));
                             otdel.addChild(room);
                         } catch (IndexOutOfBoundsException ex) {}
                     }

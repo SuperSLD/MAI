@@ -77,6 +77,16 @@
                     android:textColor="@android:color/black"
                     android:textSize="20dp"/>
             </LinearLayout>
+            <Button
+                android:id="@+id/backDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:text="Назад"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18dp"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

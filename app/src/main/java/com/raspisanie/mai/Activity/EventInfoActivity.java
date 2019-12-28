@@ -42,6 +42,9 @@ public class EventInfoActivity extends AppCompatActivity {
         findViewById(R.id.back).setOnClickListener(v -> {
             onBackPressed();
         });
+        findViewById(R.id.backDown).setOnClickListener(v -> {
+            onBackPressed();
+        });
         ((TextView)findViewById(R.id.name)).setText(eventCard.getName());
         ((TextView)findViewById(R.id.date)).setText(eventCard.getDate());
         ((TextView)findViewById(R.id.information)).setText(eventCard.getInfo());
