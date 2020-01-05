@@ -10,7 +10,7 @@
     <string name="title_event_info">Информация о событии</string>
 
     <!-- Settings Fragment -->
-    <string name="versionString">1.031/28.12.2019</string>
+    <string name="versionString">1.034/30.12.2019</string>
     <string name="autor">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -22,7 +22,7 @@
     <string name="titleLife">Жизнь</string>
 
     <string name="versionMessage">
-        В информации о событии теперь есть кнопка "Назад".
-        И исправлен текст в списке столовых.
+        Если неделя отсутствует, то вмсто того, чтоб показать
+        первую неделю, приложение скажет о том что ее нет.
     </string>
 </resources>

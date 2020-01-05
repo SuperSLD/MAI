@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -108,19 +109,25 @@ public class TimeTableFragment extends android.app.Fragment{
      * @param week номер текущей недели.
      */
     public void setDaysList(int week) {
-        // проверяем существует ли эта неделя
-        if (week < 0)
-            week = 0;
-        if (week >= ((Week[]) Parametrs.getParam("weeks")).length)
-            week = ((Week[]) Parametrs.getParam("weeks")).length - 1;
-        this.week = week;
-
-        adapter = new TimeTableAdapter(
-                ((Week[]) Parametrs.getParam("weeks"))[week].getDaysList(), week,
-                week == ((int) Parametrs.getParam("thisWeek"))
-        );
+        LinearLayout linearLayout = view.findViewById(R.id.falseWeek);
         RecyclerView recyclerView = view.findViewById(R.id.listItem);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
-        recyclerView.setAdapter(adapter);
+        Week w = null;
+        try {
+            w = ((Week[]) Parametrs.getParam("weeks"))[week];
+        } catch (IndexOutOfBoundsException ex) {}
+
+        if (w != null) {
+            linearLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            adapter = new TimeTableAdapter(
+                    w.getDaysList(), week,
+                    week == ((int) Parametrs.getParam("thisWeek"))
+            );
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
+            recyclerView.setAdapter(adapter);
+        } else {
+            linearLayout.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
     }
 }

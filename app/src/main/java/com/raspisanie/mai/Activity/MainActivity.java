@@ -117,6 +117,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //<><><><><><>
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(startMain);
     }
 
     /**
@@ -140,8 +144,15 @@ public class MainActivity extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            if ((!date.before(down) && date.before(top))) thisWeek = i;
-            if (date.compareTo(top) == 0 || date.compareTo(down) == 0) thisWeek = i;
+            if (((!date.before(down) && date.before(top)))
+                    || (date.compareTo(top) == 0 || date.compareTo(down) == 0)) thisWeek = i;
+
+            if (date.after(top)) {
+                thisWeek = weeks.length;
+            }
+            if (date.before(down)) {
+                thisWeek = -1;
+            }
         }
         Parametrs.setParam("thisWeek", thisWeek);
     }
