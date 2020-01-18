@@ -78,7 +78,7 @@ public class EventCardListManager {
                         .replaceAll("&raquo;", "\"")
                         .replaceAll("&laquo;", "\"");
                 String eventDate = eventsHtml[i].split("<p class=\"b-date\">")[1].split("</p>")[0]
-                        .replaceAll("&mdash;", "-");
+                        .replaceAll("&mdash;", "- ").replaceAll("до ", "");
 
                 String urlImage = "https://mai.ru" + eventsHtml[i].split("class=\"img-responsive\" src=\"")[1].split("\"></")[0];
                 Logger.getLogger("mailog").log(Level.INFO, "url:" + urlImage);
@@ -202,7 +202,10 @@ public class EventCardListManager {
             String s = dateString[0] + "." + dateString[1] + "."
                     + Calendar.getInstance().get(Calendar.YEAR);
             date = ft.parse(s);
-        } catch (Exception ex) { ex.printStackTrace(); }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
         Date top = null;
         Date down = null;
         try {
