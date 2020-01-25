@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Adapters.TimeTable.ViewHolderFactory;
+import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.TimeTable.EventCard;
 import com.raspisanie.mai.Classes.TimeTable.Week;
@@ -26,6 +27,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
     private Week[] weeks;
@@ -49,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
         setThisWeek();
         ViewHolderFactory.setMainContext(this);
+
+        InformationConnection.setPref(mSettings);
+        Logger.getLogger("mailog").log(Level.INFO, "information / " + InformationConnection.isOpen());
+        if (!InformationConnection.isOpen()) {
+            InformationConnection.openConnection();
+        }
 
         Parametrs.setParam("kurs", mSettings.getInt("kurs", -1));
         Parametrs.setParam("fac", mSettings.getInt("fac", -1));

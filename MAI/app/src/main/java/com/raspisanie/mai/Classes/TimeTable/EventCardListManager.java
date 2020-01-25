@@ -60,18 +60,18 @@ public class EventCardListManager {
      * @param mSettings
      */
     public static void eventCardListUpdate(SharedPreferences mSettings) {
-        ArrayList<EventCard> events = new ArrayList<>();
-        ArrayList<String> bitmapStrings = new ArrayList<>();
-        URLSendRequest url;
-        url = new URLSendRequest("https://mai.ru", 50000);
+        try {
+            ArrayList<EventCard> events = new ArrayList<>();
+            ArrayList<String> bitmapStrings = new ArrayList<>();
+            URLSendRequest url;
+            url = new URLSendRequest("https://mai.ru", 50000);
 
-        String s = null;
-        while (s == null)
-            s = url.get("/press/events/");
+            String s = null;
+            while (s == null)
+                s = url.get("/press/events/");
 
-        String[] eventsHtml = s.split("<div class=\"row j-marg-bottom\"");
-        for (int i = 1; i < eventsHtml.length; i++) {
-            try {
+            String[] eventsHtml = s.split("<div class=\"row j-marg-bottom\"");
+            for (int i = 1; i < eventsHtml.length; i++) {
                 String eventName = eventsHtml[i].split("<h5><a href=\"")[1].split(">")[1].split("</a")[0]
                         .replaceAll("&nbsp;", " ")
                         .replaceAll("&mdash;", " ")
@@ -83,8 +83,8 @@ public class EventCardListManager {
                 String urlImage = "https://mai.ru" + eventsHtml[i].split("class=\"img-responsive\" src=\"")[1].split("\"></")[0];
                 Logger.getLogger("mailog").log(Level.INFO, "url:" + urlImage);
                 URL newurl = new URL(urlImage);
-                Bitmap bitmap = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
-                bitmap = getResizedBitmap(bitmap, bitmap.getWidth()/2, bitmap.getHeight()/2);
+                Bitmap bitmap = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+                bitmap = getResizedBitmap(bitmap, bitmap.getWidth() / 2, bitmap.getHeight() / 2);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos); //bm is the bitmap object
                 byte[] b = baos.toByteArray();
@@ -102,24 +102,22 @@ public class EventCardListManager {
                 info = info.split("<div class=\"text text-lg\">")[1].split("</div>")[0];
 
                 events.add(new EventCard(eventName, eventDate, encoded, informationConvert(info)));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                Logger.getLogger("mailog").log(Level.INFO, "event card list updater error");
             }
+
+            eventCards.clear();
+            eventCards.addAll(events);
+            Logger.getLogger("mailog").log(Level.INFO, "EventCardListManager load end");
+
+            //сохранение
+            Gson gson = new Gson();
+            SharedPreferences.Editor editor = mSettings.edit();
+            editor.putString("events", gson.toJson(eventCards));
+            editor.putString("eventsBitmap", gson.toJson(bitmapStrings));
+            editor.putString("lastUpdateEvents",
+                    new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()));
+            editor.apply();
+        } catch (Exception ex) {
         }
-
-        eventCards.clear();
-        eventCards.addAll(events);
-        Logger.getLogger("mailog").log(Level.INFO, "EventCardListManager load end");
-
-        //сохранение
-        Gson gson = new Gson();
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString("events", gson.toJson(eventCards));
-        editor.putString("eventsBitmap", gson.toJson(bitmapStrings));
-        editor.putString("lastUpdateEvents",
-                new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()));
-        editor.apply();
     }
 
     /**

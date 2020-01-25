@@ -11,6 +11,7 @@ import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Activity.MainActivity;
+import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
@@ -26,7 +27,6 @@ public class SplashActivity extends AppCompatActivity {
         //TODO Сделать красивую заставку (SVG)
 
         SharedPreferences mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
-
         EventCardListManager.initList(mSettings);
 
         Parametrs.setParam("mSettings", mSettings);
@@ -63,7 +63,6 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intent);
             return;
         }
-
         Intent intent = new Intent(this, Open.class);
         startActivity(intent);
         finish();

@@ -143,6 +143,9 @@ public class SettingsFragment extends android.app.Fragment {
                         getResources().getColor(R.color.diagram2),
                         getResources().getColor(R.color.diagram3)
                 });
+
+        ((TextView) view.findViewById(R.id.textVie001)).setText(mSettings.getString("infoId", "Вас еще не занесли."));
+
         return view;
     }
 
