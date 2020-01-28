@@ -9,6 +9,7 @@ import android.widget.Adapter;
 import android.widget.ListView;
 
 import com.raspisanie.mai.Adapters.CreativeAdapter;
+import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
@@ -20,6 +21,8 @@ public class CreativGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creariv_group);
+
+        InformationConnection.sendInfoActivity(this.getClass(), "onCreate()");
 
         RecyclerView recyclerView = findViewById(R.id.table);
         CreativeAdapter adapter = new CreativeAdapter(

@@ -13,11 +13,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Adapters.TimeTable.TimeTableViewHolder;
+import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Adapters.TimeTable.TimeTableAdapter;
@@ -34,7 +38,8 @@ public class TimeTableFragment extends android.app.Fragment{
     View view;
     private static boolean isUpdate = false;
     private TimeTableAdapter adapter;
-    private int week;
+
+    private boolean update = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,18 +50,19 @@ public class TimeTableFragment extends android.app.Fragment{
                 getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
-        //TODO вернуть проверку даты
-        //Обновление расписания в фоне раз в день.
+        //Обновление расписания раз в день.
         if (!isUpdate && mSettings.getBoolean("updateChek", true)) {
             isUpdate = true;
             if(!mSettings.getString("lastUpdate", "").equals(
-                new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime())))
+                new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()))) {
                 new Thread(() -> {
-                    if (TimeTableUpdater.update(mSettings)) {
+                    update = TimeTableUpdater.update(mSettings);
+                    if (update) {
                         Parametrs.setParam("weeks",
                                 gson.fromJson(mSettings.getString("weeks", ""), Week[].class));
                     }
                 }).start();
+            } else TimeTableUpdater.setLoadStatus(true);
             if(!mSettings.getString("lastUpdateEvents", "").equals(
                 new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime())))
                 new Thread(() -> {
@@ -77,15 +83,15 @@ public class TimeTableFragment extends android.app.Fragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.but1:
-                setDaysList((int) Parametrs.getParam("thisWeek") - 1);
+                setDaysList(Parametrs.getInt("thisWeek") - 1);
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Предыдущая неделя");
                 break;
             case R.id.but2:
-                setDaysList((int) Parametrs.getParam("thisWeek"));
+                setDaysList(Parametrs.getInt("thisWeek"));
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Текущая неделя");
                 break;
             case R.id.but3:
-                setDaysList((int) Parametrs.getParam("thisWeek") + 1);
+                setDaysList(Parametrs.getInt("thisWeek") + 1);
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Следующая неделя");
                 break;
         }
@@ -100,6 +106,8 @@ public class TimeTableFragment extends android.app.Fragment{
             setDaysList((int) Parametrs.getParam("thisWeek"));
         }
 
+        InformationConnection.sendInfoActivity(this.getClass(), "onCreateView()");
+
         return view;
     }
 
@@ -111,7 +119,9 @@ public class TimeTableFragment extends android.app.Fragment{
     public void setDaysList(int week) {
         LinearLayout linearLayout = view.findViewById(R.id.falseWeek);
         RecyclerView recyclerView = view.findViewById(R.id.listItem);
+
         Week w = null;
+        if (week < 0) week = 0;
         try {
             w = ((Week[]) Parametrs.getParam("weeks"))[week];
         } catch (IndexOutOfBoundsException ex) {}
@@ -128,6 +138,42 @@ public class TimeTableFragment extends android.app.Fragment{
         } else {
             linearLayout.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
+
+            ProgressBar progressBar = view.findViewById(R.id.progress);
+            ImageView imageView     = view.findViewById(R.id.image);
+            TextView textView       = view.findViewById(R.id.infoText);
+
+            if (!TimeTableUpdater.isLoad()) {
+                progressBar.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.GONE);
+                textView.setText("Загрузка");
+
+                new Thread(() -> {
+                    try {
+                        String progr = "";
+                        while (!TimeTableUpdater.isLoad()) {
+                            if (!progr.equals(TimeTableUpdater.getProgressString())) {
+                                getActivity().runOnUiThread(() ->
+                                        textView.setText("Загрузка\n" + TimeTableUpdater.getProgressString()));
+                            }
+                            progr = TimeTableUpdater.getProgressString();
+                        }
+                        getActivity().runOnUiThread(() -> {
+                            if (!update) {
+                                progressBar.setVisibility(View.GONE);
+                                imageView.setVisibility(View.VISIBLE);
+                                textView.setText("Новое расписание отсутствует");
+                            } else {
+                                setDaysList(Parametrs.getInt("thisWeek"));
+                            }
+                        });
+                    } catch (Exception ex) {}
+                }).start();
+            } else {
+                progressBar.setVisibility(View.GONE);
+                imageView.setVisibility(View.VISIBLE);
+                textView.setText("Новое расписание отсутствует");
+            }
         }
     }
 }

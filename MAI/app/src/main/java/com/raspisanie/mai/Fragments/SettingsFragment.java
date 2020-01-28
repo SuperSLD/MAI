@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.Open;
+import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
@@ -53,6 +54,8 @@ public class SettingsFragment extends android.app.Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, null);
         SharedPreferences mSettings = getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
+
+        InformationConnection.sendInfoActivity(this.getClass(), "onCreateView()");
 
         //Установка текста в информацию о группе
         SimpleTree<String> tree = (SimpleTree<String>) Parametrs.getParam("tree");

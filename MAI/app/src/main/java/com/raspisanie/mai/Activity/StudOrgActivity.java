@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.raspisanie.mai.Adapters.SportGroupAdapter;
 import com.raspisanie.mai.Adapters.StudOrgAdapret;
+import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
@@ -18,6 +19,8 @@ public class StudOrgActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stud_org);
+
+        InformationConnection.sendInfoActivity(this.getClass(), "onCreate()");
 
         StudOrgAdapret adapter = new StudOrgAdapret(((SimpleTree<String>) Parametrs.getParam("studOrg")).getChildList());
 

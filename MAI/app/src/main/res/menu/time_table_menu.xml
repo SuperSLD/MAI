@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/spinner"
+        android:id="@+id/menu_spinner"
         android:icon="@drawable/ic_calendar_today_24px"
         app:iconTint="@color/white"
         android:title=""

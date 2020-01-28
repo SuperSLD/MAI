@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.widget.ListView;
 
 import com.raspisanie.mai.Adapters.SportGroupAdapter;
+import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
@@ -17,6 +18,8 @@ public class SportGroupActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sport_group);
+
+        InformationConnection.sendInfoActivity(this.getClass(), "onCreate()");
 
         SportGroupAdapter adapter = new SportGroupAdapter(((SimpleTree<String>) Parametrs.getParam("sport")).getChildList());
 

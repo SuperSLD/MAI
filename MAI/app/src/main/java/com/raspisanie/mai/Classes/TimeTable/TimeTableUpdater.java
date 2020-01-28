@@ -24,6 +24,12 @@ import java.util.logging.Logger;
  */
 public class TimeTableUpdater {
 
+    private static int weekListSize;
+    private static int position;
+    private static boolean isNewWeekList = false;
+
+    private static boolean isLoad = false;
+
     /**
      * Обновление расписания.
      * @param mSettings SharedPreferences.
@@ -32,6 +38,8 @@ public class TimeTableUpdater {
     public static boolean update(SharedPreferences mSettings) {
         try {
             ArrayList<Week> weeks;
+
+            int data = Parametrs.getParam("weeks").toString().length();
 
             URLSendRequest url;
             url = new URLSendRequest("https://mai.ru/", 50000);
@@ -46,6 +54,8 @@ public class TimeTableUpdater {
 
             s = s.split("<table class=\"table\" >")[1];
             String[] weekList = s.split("</table><br>")[0].split("</a></td>");
+
+            weekListSize = weekList.length - 1;
 
             //Составление списка недель.
             weeks = new ArrayList<>();
@@ -95,10 +105,13 @@ public class TimeTableUpdater {
                     }
 
                     weeks.get(i).addDay(day);
+                    position = i;
                 }
             }
 
             if (weeks.size() > 0) {
+                if (data != weeks.toString().length()) isNewWeekList = true;
+
                 Gson gson = new Gson();
                 String json = gson.toJson(weeks);
 
@@ -107,6 +120,7 @@ public class TimeTableUpdater {
                 editor.putString("lastUpdate",
                         new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()));
                 editor.apply();
+                isLoad = true;
                 return true;
             } else {
                 return false;
@@ -114,5 +128,34 @@ public class TimeTableUpdater {
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    /**
+     * Получение строки прогресса.
+     */
+    public static String getProgressString() {
+        return position + "/" + weekListSize;
+    }
+
+    /**
+     * Проверка окончания загрузки.
+     */
+    public static boolean isLoad() {
+        return isLoad;
+    }
+
+    /**
+     * Установка статуса загрузки.
+     */
+    public static void  setLoadStatus(boolean load) {
+        isLoad = load;
+    }
+
+    /**
+     * Проверка на наличие нового расписания.
+     * @return
+     */
+    public static boolean isIsNewWeekList() {
+        return isNewWeekList;
     }
 }

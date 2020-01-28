@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Adapters.ExamTableAdapter;
+import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
@@ -51,6 +52,8 @@ public class ExamsFragment extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mSettings = getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
+
+        InformationConnection.sendInfoActivity(this.getClass(), "onCreateView()");
 
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_exams, null);

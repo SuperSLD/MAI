@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.raspisanie.mai.Adapters.LibAdapter;
 import com.raspisanie.mai.Adapters.StolListAdapter;
+import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
@@ -19,6 +20,8 @@ public class BiblioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_biblio);
+
+        InformationConnection.sendInfoActivity(this.getClass(), "onCreate()");
 
         if (Parametrs.getParam("lib") != null) {
             findViewById(R.id.errText).setVisibility(View.GONE);

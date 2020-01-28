@@ -97,9 +97,9 @@ public class InformationConnection {
      * @param cl
      */
     public static void sendInfoActivity(Class cl, String parametrs) {
-        if (ws.isOpen() && !pref.getString("infoId","0").equals("0")) {
-            ws.sendText("activity<!>"+pref.getString("infoId","")+"<!>"+cl.getName()
-            +"<!>"+(parametrs.length() > 0 ? "+++" : parametrs));
+        if (ws.isOpen()) {
+            ws.sendText("activity<!>"+cl.getName()
+            +"<!>"+parametrs);
         }
     }
 
