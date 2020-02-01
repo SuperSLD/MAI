@@ -39,7 +39,7 @@ public class TimeTableUpdater {
         try {
             ArrayList<Week> weeks;
 
-            int data = Parametrs.getParam("weeks").toString().length();
+            String data = ((Week[]) Parametrs.getParam("weeks"))[0].getDate();
 
             URLSendRequest url;
             url = new URLSendRequest("https://mai.ru/", 50000);
@@ -110,7 +110,7 @@ public class TimeTableUpdater {
             }
 
             if (weeks.size() > 0) {
-                if (data != weeks.toString().length()) isNewWeekList = true;
+                if (!data.equals(weeks.get(0).getDate())) isNewWeekList = true;
 
                 Gson gson = new Gson();
                 String json = gson.toJson(weeks);
@@ -121,6 +121,7 @@ public class TimeTableUpdater {
                         new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()));
                 editor.apply();
                 isLoad = true;
+                MainActivity.setThisWeek();
                 return true;
             } else {
                 return false;
@@ -155,7 +156,7 @@ public class TimeTableUpdater {
      * Проверка на наличие нового расписания.
      * @return
      */
-    public static boolean isIsNewWeekList() {
+    public static boolean isNewWeekList() {
         return isNewWeekList;
     }
 }

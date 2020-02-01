@@ -135,7 +135,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Определение номера текущей недели в списке.
      */
-    private void setThisWeek() {
+    public static void setThisWeek() {
+        Week[] weeks = (Week[]) Parametrs.getParam("weeks");
+
         int thisWeek = 0;
         SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
         Date date = null;

@@ -29,7 +29,6 @@
                 app:iconTint="@color/colorPrimaryDark"
                 android:title="Следующая неделя"
                 android:icon="@drawable/ic_fast_forward_24px">
-
             </item>
         </menu>
 

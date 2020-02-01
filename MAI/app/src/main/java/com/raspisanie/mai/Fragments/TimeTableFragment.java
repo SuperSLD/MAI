@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.raspisanie.mai.Activity.MainActivity;
 import com.raspisanie.mai.Adapters.TimeTable.TimeTableViewHolder;
 import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.TimeTable.Day;
@@ -30,15 +31,18 @@ import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
 
+import java.lang.reflect.Type;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class TimeTableFragment extends android.app.Fragment{
     View view;
     private static boolean isUpdate = false;
     private TimeTableAdapter adapter;
-
+    private SharedPreferences mSettings;
     private boolean update = false;
 
     @Override
@@ -46,7 +50,7 @@ public class TimeTableFragment extends android.app.Fragment{
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
-        SharedPreferences mSettings =
+        mSettings =
                 getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
@@ -91,8 +95,11 @@ public class TimeTableFragment extends android.app.Fragment{
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Текущая неделя");
                 break;
             case R.id.but3:
+                /*
                 setDaysList(Parametrs.getInt("thisWeek") + 1);
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Следующая неделя");
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Следующая неделя"); */
+                SelectWeekDialogFragment dialog = new SelectWeekDialogFragment();
+                dialog.show(((AppCompatActivity) getActivity()).getSupportFragmentManager(), "tag");
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -162,9 +169,18 @@ public class TimeTableFragment extends android.app.Fragment{
                             if (!update) {
                                 progressBar.setVisibility(View.GONE);
                                 imageView.setVisibility(View.VISIBLE);
-                                textView.setText("Новое расписание отсутствует");
+                                textView.setText("Расписание отсутствует");
                             } else {
-                                setDaysList(Parametrs.getInt("thisWeek"));
+                                if (TimeTableUpdater.isNewWeekList()) {
+                                    Week[] weeks = new Gson().fromJson(mSettings.getString("weeks", ""), Week[].class);
+                                    Parametrs.setParam("weeks", weeks);
+                                    MainActivity.setThisWeek();
+                                    setDaysList(Parametrs.getInt("thisWeek"));
+                                } else {
+                                    progressBar.setVisibility(View.GONE);
+                                    imageView.setVisibility(View.VISIBLE);
+                                    textView.setText("Расписание отсутствует");
+                                }
                             }
                         });
                     } catch (Exception ex) {}
@@ -172,7 +188,7 @@ public class TimeTableFragment extends android.app.Fragment{
             } else {
                 progressBar.setVisibility(View.GONE);
                 imageView.setVisibility(View.VISIBLE);
-                textView.setText("Новое расписание отсутствует");
+                textView.setText("Расписание отсутствует");
             }
         }
     }
