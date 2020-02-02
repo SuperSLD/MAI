@@ -1,5 +1,6 @@
 package com.raspisanie.mai.Fragments;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -23,6 +24,9 @@ import com.raspisanie.mai.R;
  */
 public class SelectWeekDialogFragment extends DialogFragment {
 
+    private int position;
+    private Runnable runnable;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getDialog().setTitle("Title!");
@@ -30,9 +34,25 @@ public class SelectWeekDialogFragment extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         ListView listView = v.findViewById(R.id.list);
-        SelectWeekAdapter adapter = new SelectWeekAdapter(getContext(), (Week[]) Parametrs.getParam("weeks"));
+        SelectWeekAdapter adapter = new SelectWeekAdapter(getContext(), (Week[]) Parametrs.getParam("weeks"), this);
         listView.setAdapter(adapter);
 
         return v;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setButtonAction(Runnable runnable) {
+        this.runnable = runnable;
+    }
+
+    public void runButtonAction() {
+        this.runnable.run();
     }
 }

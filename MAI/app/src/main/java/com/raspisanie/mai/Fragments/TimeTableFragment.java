@@ -95,10 +95,17 @@ public class TimeTableFragment extends android.app.Fragment{
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Текущая неделя");
                 break;
             case R.id.but3:
-                /*
                 setDaysList(Parametrs.getInt("thisWeek") + 1);
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Следующая неделя"); */
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Следующая неделя");
+                break;
+            case R.id.but4:
                 SelectWeekDialogFragment dialog = new SelectWeekDialogFragment();
+                dialog.setButtonAction(() -> {
+                    setDaysList(dialog.getPosition());
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(
+                            ((Week[]) Parametrs.getParam("weeks"))[dialog.getPosition()].getDate()
+                    );
+                });
                 dialog.show(((AppCompatActivity) getActivity()).getSupportFragmentManager(), "tag");
                 break;
         }

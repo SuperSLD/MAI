@@ -161,10 +161,8 @@ public class MainActivity extends AppCompatActivity {
             if (date.after(top)) {
                 thisWeek = weeks.length;
             }
-            if (date.before(down)) {
-                thisWeek = -1;
-            }
         }
+        if (thisWeek < 0) thisWeek = 0;
         Parametrs.setParam("thisWeek", thisWeek);
     }
 
