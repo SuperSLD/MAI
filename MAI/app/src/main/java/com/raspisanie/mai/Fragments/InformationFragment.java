@@ -12,13 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.raspisanie.mai.Activity.BiblioActivity;
+import com.raspisanie.mai.Activity.CampusMapActivity;
 import com.raspisanie.mai.Activity.CreativGroupActivity;
 import com.raspisanie.mai.Activity.FoodActivity;
 import com.raspisanie.mai.Activity.SportGroupActivity;
 import com.raspisanie.mai.Activity.StudOrgActivity;
 import com.raspisanie.mai.Classes.InformationConnection;
+import com.raspisanie.mai.InformationConnection.InformationRename;
 import com.raspisanie.mai.R;
 
+@InformationRename(name = "InformationFragment")
 public class InformationFragment extends Fragment {
 
     @Override
@@ -42,11 +45,10 @@ public class InformationFragment extends Fragment {
 
         InformationConnection.sendInfoActivity(this.getClass(), "onCreateView()");
 
-        /*
         view.findViewById(R.id.button0).setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity().getBaseContext(), EventInfoActivity.class);
+            Intent intent = new Intent(getActivity().getBaseContext(), CampusMapActivity.class);
             startActivity(intent);
-        });*/
+        });
         view.findViewById(R.id.button1).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), FoodActivity.class);
             startActivity(intent);

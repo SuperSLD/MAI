@@ -15,35 +15,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Activity.MainActivity;
-import com.raspisanie.mai.Adapters.TimeTable.TimeTableViewHolder;
 import com.raspisanie.mai.Classes.InformationConnection;
-import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Adapters.TimeTable.TimeTableAdapter;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
 import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
 import com.raspisanie.mai.Classes.TimeTable.Week;
+import com.raspisanie.mai.InformationConnection.InformationRename;
 import com.raspisanie.mai.R;
 
-import java.lang.reflect.Type;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
+@InformationRename(name = "TimeTableFragment")
 public class TimeTableFragment extends android.app.Fragment{
     View view;
     private static boolean isUpdate = false;
     private TimeTableAdapter adapter;
     private SharedPreferences mSettings;
     private boolean update = false;
+
+    private MenuItem next;
+    private MenuItem prev;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,14 +87,22 @@ public class TimeTableFragment extends android.app.Fragment{
             case R.id.but1:
                 setDaysList(Parametrs.getInt("thisWeek") - 1);
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Предыдущая неделя");
+                item.setVisible(false);
+                prev = item;
+                if (next != null) next.setVisible(true);
                 break;
             case R.id.but2:
                 setDaysList(Parametrs.getInt("thisWeek"));
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Текущая неделя");
+                if (next != null) next.setVisible(true);
+                if (prev != null) prev.setVisible(true);
                 break;
             case R.id.but3:
                 setDaysList(Parametrs.getInt("thisWeek") + 1);
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Следующая неделя");
+                item.setVisible(false);
+                if (prev != null) prev.setVisible(true);
+                next = item;
                 break;
             case R.id.but4:
                 SelectWeekDialogFragment dialog = new SelectWeekDialogFragment();
@@ -105,6 +111,8 @@ public class TimeTableFragment extends android.app.Fragment{
                     ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(
                             ((Week[]) Parametrs.getParam("weeks"))[dialog.getPosition()].getDate()
                     );
+                    if (next != null) next.setVisible(true);
+                    if (prev != null) prev.setVisible(true);
                 });
                 dialog.show(((AppCompatActivity) getActivity()).getSupportFragmentManager(), "tag");
                 break;

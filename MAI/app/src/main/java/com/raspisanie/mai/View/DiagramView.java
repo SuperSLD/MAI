@@ -80,6 +80,7 @@ public class DiagramView extends View {
         Paint paint = new Paint();
         int h = getMeasuredHeight();
         int w = getMeasuredWidth();
+        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
 
         // диаграмма
         if (data == null) {

@@ -26,11 +26,13 @@ import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
+import com.raspisanie.mai.InformationConnection.InformationRename;
 import com.raspisanie.mai.R;
 import com.raspisanie.mai.View.DiagramView;
 
 import java.io.UnsupportedEncodingException;
 
+@InformationRename(name = "SettingsFragment")
 public class SettingsFragment extends android.app.Fragment {
 
     @Override

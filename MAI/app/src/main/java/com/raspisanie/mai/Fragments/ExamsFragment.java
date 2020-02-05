@@ -26,8 +26,10 @@ import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.Classes.TimeTable.Subject;
 import com.raspisanie.mai.Classes.URLSendRequest;
 import com.raspisanie.mai.Classes.TimeTable.Week;
+import com.raspisanie.mai.InformationConnection.InformationRename;
 import com.raspisanie.mai.R;
 
+@InformationRename(name = "ExamsFragment")
 public class ExamsFragment extends android.app.Fragment {
     private View view;
     private SharedPreferences mSettings;

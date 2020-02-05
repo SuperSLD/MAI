@@ -7,6 +7,7 @@ import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketFactory;
 import com.neovisionaries.ws.client.WebSocketFrame;
+import com.raspisanie.mai.InformationConnection.InformationRename;
 
 import java.util.List;
 import java.util.Map;
@@ -20,9 +21,6 @@ public class InformationConnection {
     private static WebSocket ws;
     private static boolean open = false;
     private static SharedPreferences pref;
-
-    private Thread timer = new Thread(() -> {
-    });
 
     /**
      * Открытие подключения.
@@ -94,7 +92,17 @@ public class InformationConnection {
      */
     public static void sendInfoActivity(Class cl, String parametrs) {
         if (ws != null && ws.isOpen()) {
-            ws.sendText("activity<!>"+cl.getName()
+            String className = "";
+            try {
+                Class<?> clas = Class.forName(cl.getName());
+                InformationRename annotationRename = clas.getAnnotation(InformationRename.class);
+                if (annotationRename.name().equals("-")) {
+                    className = cl.getName();
+                } else {
+                    className = annotationRename.name();
+                }
+            } catch (Exception ex) {}
+            ws.sendText("activity<!>"+className
             +"<!>"+parametrs);
         }
     }

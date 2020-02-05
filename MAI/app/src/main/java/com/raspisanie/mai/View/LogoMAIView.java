@@ -42,6 +42,7 @@ public class LogoMAIView extends View {
         float w = getMeasuredWidth();
 
         Paint paint = new Paint();
+        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(getResources().getColor(R.color.colorAccent));
 
         // фон
