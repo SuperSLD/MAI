@@ -21,7 +21,9 @@ public class FileUtils {
                     stringBuilder.append(line);
                     stringBuilder.append("\r\n");
                 }
-            } finally {
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }finally {
                 if (bufferedReader != null) {
                     bufferedReader.close();
                 }
