@@ -1,7 +1,6 @@
-package com.raspisanie.mai.Classes.MapClasses;
+package com.raspisanie.mai.View.MapView.Classes;
 
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
 
 /**
  * Класс хранящий обекты карты.

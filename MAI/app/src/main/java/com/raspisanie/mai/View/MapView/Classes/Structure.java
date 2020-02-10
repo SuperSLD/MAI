@@ -1,4 +1,4 @@
-package com.raspisanie.mai.Classes.MapClasses;
+package com.raspisanie.mai.View.MapView.Classes;
 
 import java.util.ArrayList;
 
