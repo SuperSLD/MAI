@@ -34,12 +34,12 @@ public class CampusMapActivity  extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        //mapView.onPause();
+        mapView.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //mapView.onResume();
+        mapView.onResume();
     }
 }

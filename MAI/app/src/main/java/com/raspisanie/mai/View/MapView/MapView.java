@@ -3,8 +3,10 @@ package com.raspisanie.mai.View.MapView;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 import com.raspisanie.mai.R;
 import com.raspisanie.mai.View.MapView.Classes.Map;
@@ -13,6 +15,8 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -32,6 +36,7 @@ import static android.opengl.GLES20.glUniform4f;
 import static android.opengl.GLES20.glUseProgram;
 import static android.opengl.GLES20.glVertexAttribPointer;
 import static android.opengl.GLES20.glViewport;
+import static android.opengl.GLU.gluLookAt;
 
 public class MapView extends GLSurfaceView {
     private Map map;
@@ -40,6 +45,10 @@ public class MapView extends GLSurfaceView {
     private float cameraX = 0;
     private float cameraY = 0;
 
+    float[] vertices = {
+            -1f, -1f,
+            1f, 1f,
+            -1f, 1f,};
 
     public MapView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -61,7 +70,14 @@ public class MapView extends GLSurfaceView {
         map = new Map(data);
         scrollBy(getWidth()/2, getHeight()/2);
 
+        setEGLContextClientVersion(2);
         setRenderer(new OpenGLRenderer(context));
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Logger.getLogger("mapview").log(Level.INFO, "MapView x: " + event.getX() + " / y: " + event.getY());
+        return true;
     }
 
     @Override
@@ -83,6 +99,7 @@ public class MapView extends GLSurfaceView {
 
         @Override
         public void onSurfaceCreated(GL10 arg0, EGLConfig arg1) {
+            Logger.getLogger("mapview").log(Level.INFO, "MapView onSurfaceCreated");
             glClearColor(0f, 0f, 0f, 1f);
             int vertexShaderId = ShaderUtils.createShader(context, GL_VERTEX_SHADER, R.raw.vertex_shader);
             int fragmentShaderId = ShaderUtils.createShader(context, GL_FRAGMENT_SHADER, R.raw.fragment_shader);
@@ -93,18 +110,18 @@ public class MapView extends GLSurfaceView {
 
         @Override
         public void onSurfaceChanged(GL10 arg0, int width, int height) {
+            Logger.getLogger("mapview").log(Level.INFO, "MapView onSurfaceChanged");
             glViewport(0, 0, width, height);
         }
 
         private void prepareData() {
-            float[] vertices = {-0.5f, -0.2f, 0.0f, 0.2f, 0.5f, -0.2f,};
             vertexData = ByteBuffer.allocateDirect(vertices.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
             vertexData.put(vertices);
         }
 
         private void bindData() {
             uColorLocation = glGetUniformLocation(programId, "u_Color");
-            glUniform4f(uColorLocation, 0.0f, 0.0f, 1.0f, 1.0f);
+            glUniform4f(uColorLocation, 0.0f, 0.0f, 1.0f, 0.2f);
             aPositionLocation = glGetAttribLocation(programId, "a_Position");
             vertexData.position(0);
             glVertexAttribPointer(aPositionLocation, 2, GL_FLOAT, false, 0, vertexData);
@@ -114,7 +131,9 @@ public class MapView extends GLSurfaceView {
         @Override
         public void onDrawFrame(GL10 arg0) {
             glClear(GL_COLOR_BUFFER_BIT);
-            glDrawArrays(GL_TRIANGLES, 0, 3);
+            glClearColor(240/255f,240/255f,240/255f,1f);
+
+            glDrawArrays(GL_TRIANGLES, 0, 6);
         }
     }
 }
