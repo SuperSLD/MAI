@@ -9,6 +9,7 @@ size = 600
 root = tk.Tk()
 canvas = tk.Canvas(root, width=size * 2, height=size)
 canvas.pack()
+canvas.pack(fill="both", expand=True)
 root.title("Editor")
 
 map = Map()
