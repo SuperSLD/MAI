@@ -10,5 +10,6 @@ public class GrassZone extends MapObject {
 
     public GrassZone() {
         super();
+        isPolygon = true;
     }
 }

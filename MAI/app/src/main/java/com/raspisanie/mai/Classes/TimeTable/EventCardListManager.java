@@ -153,9 +153,9 @@ public class EventCardListManager {
             String[] eventDate = {event.getDate().split(" ")[0], getM(event.getDate().split(" ")[1])};
             for (int i = 0; i < list.size(); i++) if (list.get(i) instanceof Day) {
                 Logger.getLogger("mailog").log(Level.INFO, "EventCardListManager event date:"
-                        + event.getDate().split(" ")[0] + "."
-                        + getM(event.getDate().split(" ")[1]) + " //day date:"
-                        + ((Day) list.get(i)).getDate());
+                        + eventDate[0] + "."
+                        + eventDate[1] + " //day date:"
+                        + ((Day) list.get(i)).getDate() + " name:" + event.getName());
                 String[] dayDate   = ((Day) list.get(i)).getDate().split("\\.");
                 if (dayDate[0].equals(eventDate[0])
                         && dayDate[1].equals(eventDate[1])) {
@@ -168,7 +168,9 @@ public class EventCardListManager {
                     insert = true;
                 }
             }
-            if ( isThisWeek(eventDate, week) && !insert){
+            if ( isThisWeek(eventDate, week) && !insert
+                    && Integer.parseInt(eventDate[0])
+                    >= Integer.parseInt(((Day) list.get(list.size()-1)).getDate().split("\\.")[0])){
                 list.add(event);
             }
         }
@@ -179,12 +181,12 @@ public class EventCardListManager {
      */
     private static String getM(String m) {
         String[] M = {
-                "янв", "фев", "апр",
-                "мар", "май", "июн",
+                "янв", "фев", "мар",
+                "апр", "май", "июн",
                 "июл", "авг", "сен",
                 "окт", "ноя", "дек"};
         for (int i = 0; i < M.length; i++)
-            if (M[i].equals(m)) return Integer.toString(i+1);
+            if (M[i].equals(m)) return i+1 > 9 ? Integer.toString(i+1) : "0" + (i+1);
         return Integer.toString(1);
     }
 

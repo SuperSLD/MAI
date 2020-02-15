@@ -10,7 +10,7 @@
     <string name="title_event_info">Информация о событии</string>
 
     <!-- Settings Fragment -->
-    <string name="versionString">1.044/05.02.2020</string>
+    <string name="versionString">1.045/15.02.2020</string>
     <string name="autor">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -22,7 +22,6 @@
     <string name="titleLife">Жизнь</string>
 
     <string name="versionMessage">
-        Теперь при выборе следующей или предыдущей недели кнопка будет пропадать.
-        И сглаживание пикселей у круговой диаграммы в настройках готово.
+        Исправлено отображение карточек событий.
     </string>
 </resources>

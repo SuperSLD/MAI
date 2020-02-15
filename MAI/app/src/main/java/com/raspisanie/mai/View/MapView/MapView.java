@@ -2,8 +2,10 @@ package com.raspisanie.mai.View.MapView;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -15,6 +17,7 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,13 +45,22 @@ public class MapView extends GLSurfaceView {
     private Map map;
     private Context context;
 
-    private float cameraX = 0;
-    private float cameraY = 0;
+    private final float[] viewMatrix = new float[16];
+    private float[] mProjectionMatrix = new float[16];
+    private float[] mModelMatrix = new float[16];
+    private float[] mMVPMatrix = new float[16];
 
-    float[] vertices = {
-            -1f, -1f,
-            1f, 1f,
-            -1f, 1f,};
+
+    /** Используется для передачи в матрицу преобразований. */
+    private int mMVPMatrixHandle;
+
+    /** Используется для передачи информации о положении модели. */
+    private int mPositionHandle;
+
+    /** Используется для передачи информации о цвете модели. */
+    private int mColorHandle;
+
+    float[] vertices;
 
     public MapView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -70,6 +82,7 @@ public class MapView extends GLSurfaceView {
         map = new Map(data);
         scrollBy(getWidth()/2, getHeight()/2);
 
+        vertices = map.getVertices();
         setEGLContextClientVersion(2);
         setRenderer(new OpenGLRenderer(context));
     }
@@ -133,7 +146,7 @@ public class MapView extends GLSurfaceView {
             glClear(GL_COLOR_BUFFER_BIT);
             glClearColor(240/255f,240/255f,240/255f,1f);
 
-            glDrawArrays(GL_TRIANGLES, 0, 6);
+            glDrawArrays(GL_TRIANGLES, 0, vertices.length/2);
         }
     }
 }

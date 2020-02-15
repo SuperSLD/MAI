@@ -1,6 +1,9 @@
 package com.raspisanie.mai.View.MapView.Classes;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Класс хранящий обекты карты.
@@ -9,6 +12,8 @@ public class Map {
     private ArrayList<Structure> structures;
     private ArrayList<GrassZone> grassZones;
     private ArrayList<Road>      roads;
+
+    private float[] vertices;
 
     public Map(String data) {
         structures = new ArrayList<>();
@@ -63,17 +68,51 @@ public class Map {
                 roads.add(road);
             } catch (Exception ex) {}
         }
+
+        Logger.getLogger("mapview").log(Level.INFO, "map create " + structures.size()+" : "+
+                grassZones.size() + " : " +roads.size());
+
+        ArrayList<Float> v  = new ArrayList<>();
+
+        for (Structure structure : structures) {
+            structure.addTriangles(v);
+        }
+
+        vertices = new float[v.size()];
+        for (int i = 0; i < v.size(); i++) {
+            vertices[i] = v.get(i);
+        }
     }
 
+    /**
+     * Получение списка зданий.
+     * @return
+     */
     public ArrayList<Structure> getStructures() {
         return structures;
     }
 
+    /**
+     * Получение списка газонов.
+     * @return
+     */
     public ArrayList<GrassZone> getGrassZones() {
         return grassZones;
     }
 
+    /**
+     * Получение списка дорог.
+     * @return
+     */
     public ArrayList<Road> getRoads() {
         return roads;
+    }
+
+    /**
+     * Получение списка вершин.
+     * @return
+     */
+    public float[] getVertices() {
+        return vertices;
     }
 }

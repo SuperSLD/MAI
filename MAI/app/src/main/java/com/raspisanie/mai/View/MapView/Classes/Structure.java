@@ -17,16 +17,7 @@ public class Structure extends MapObject {
         this.type = type;
         this.location = location;
         this.name = name;
-    }
-
-    /**
-     * добавление точки здания
-     * @param x
-     * @param y
-     */
-    public void addVector(int x, int y) {
-        this.x.add(x);
-        this.y.add(y);
+        isPolygon = true;
     }
 
     /**
