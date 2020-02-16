@@ -15,10 +15,13 @@ public class Map {
 
     private float[] vertices;
 
+    private int[] typeCount = new int[5];
+    private int grassCount = 0;
+
     public Map(String data) {
         structures = new ArrayList<>();
         grassZones = new ArrayList<>();
-        roads      = new ArrayList<>();
+        roads = new ArrayList<>();
 
         String[] dataObjects = data.split("<<>>@");
         String[] dataStructure = dataObjects[0].split("@");
@@ -34,10 +37,11 @@ public class Map {
                     structure.addVector(Integer.parseInt(vector[0]), Integer.parseInt(vector[1]));
                 }
                 structures.add(structure);
-            } catch (Exception ex) {}
+            } catch (Exception ex) {
+            }
         }
 
-        String[] dataGrass= dataObjects[1].split("@");
+        String[] dataGrass = dataObjects[1].split("@");
         for (int i = 0; i < dataGrass.length; i++) {
             try {
                 String[] param = dataGrass[i].split(">>");
@@ -50,7 +54,8 @@ public class Map {
                     grassZone.addVector(Integer.parseInt(vector[0]), Integer.parseInt(vector[1]));
                 }
                 grassZones.add(grassZone);
-            } catch (Exception ex) {}
+            } catch (Exception ex) {
+            }
         }
 
         String[] dataRoad = dataObjects[2].split("@");
@@ -66,16 +71,30 @@ public class Map {
                     road.addVector(Integer.parseInt(vector[0]), Integer.parseInt(vector[1]));
                 }
                 roads.add(road);
-            } catch (Exception ex) {}
+            } catch (Exception ex) {
+            }
         }
 
-        Logger.getLogger("mapview").log(Level.INFO, "map create " + structures.size()+" : "+
-                grassZones.size() + " : " +roads.size());
+        Logger.getLogger("mapview").log(Level.INFO, "map create " + structures.size() + " : " +
+                grassZones.size() + " : " + roads.size());
 
-        ArrayList<Float> v  = new ArrayList<>();
+        ArrayList<Float> v = new ArrayList<>();
 
-        for (Structure structure : structures) {
-            structure.addTriangles(v);
+        int lastV = 0;
+        for (GrassZone grassZone : grassZones) {
+            if (grassZone.getX().size() >= 3) {
+                grassZone.addTriangles(v);
+                grassCount += (v.size() - lastV) / 2;
+                lastV = v.size();
+            }
+        }
+        for (int i = 0; i < typeCount.length; i++) {
+            for (Structure structure : structures)
+                if (structure.getType() == i && structure.getX().size() >= 3) {
+                    structure.addTriangles(v);
+                    typeCount[i] += (v.size() - lastV) / 2;
+                    lastV = v.size();
+                }
         }
 
         vertices = new float[v.size()];
@@ -114,5 +133,21 @@ public class Map {
      */
     public float[] getVertices() {
         return vertices;
+    }
+
+    /**
+     * Получение количества вершин кадого типа.
+     * @return
+     */
+    public int[] getTypeCount() {
+        return typeCount;
+    }
+
+    /**
+     * Получение количества вершин газонов.
+     * @return
+     */
+    public int getGrassCount() {
+        return grassCount;
     }
 }

@@ -13,6 +13,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <com.raspisanie.mai.View.MapView.MapView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
             <com.raspisanie.mai.View.LogoMAIView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"/>

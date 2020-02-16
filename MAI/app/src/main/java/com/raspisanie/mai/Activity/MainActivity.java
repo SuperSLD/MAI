@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Adapters.TimeTable.ViewHolderFactory;
-import com.raspisanie.mai.Classes.InformationConnection;
+import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.TimeTable.EventCard;
 import com.raspisanie.mai.Classes.TimeTable.Week;

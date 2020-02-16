@@ -35,6 +35,7 @@ import static android.opengl.GLES20.glDrawArrays;
 import static android.opengl.GLES20.glEnableVertexAttribArray;
 import static android.opengl.GLES20.glGetAttribLocation;
 import static android.opengl.GLES20.glGetUniformLocation;
+import static android.opengl.GLES20.glUniform1f;
 import static android.opengl.GLES20.glUniform4f;
 import static android.opengl.GLES20.glUseProgram;
 import static android.opengl.GLES20.glVertexAttribPointer;
@@ -104,6 +105,9 @@ public class MapView extends GLSurfaceView {
         private FloatBuffer vertexData;
         private int uColorLocation;
         private int aPositionLocation;
+        private int uWindowKLocation;
+
+        private float uWindowK = 1;
 
         public OpenGLRenderer(Context context) {
             this.context = context;
@@ -125,6 +129,8 @@ public class MapView extends GLSurfaceView {
         public void onSurfaceChanged(GL10 arg0, int width, int height) {
             Logger.getLogger("mapview").log(Level.INFO, "MapView onSurfaceChanged");
             glViewport(0, 0, width, height);
+            uWindowK = width/(float)height;
+            Logger.getLogger("mapview").log(Level.INFO, "uWindowK= " + uWindowK);
         }
 
         private void prepareData() {
@@ -134,8 +140,10 @@ public class MapView extends GLSurfaceView {
 
         private void bindData() {
             uColorLocation = glGetUniformLocation(programId, "u_Color");
-            glUniform4f(uColorLocation, 0.0f, 0.0f, 1.0f, 0.2f);
             aPositionLocation = glGetAttribLocation(programId, "a_Position");
+            uWindowKLocation = glGetUniformLocation(programId, "uWindowK");
+
+            glUniform1f(uWindowKLocation, uWindowK);
             vertexData.position(0);
             glVertexAttribPointer(aPositionLocation, 2, GL_FLOAT, false, 0, vertexData);
             glEnableVertexAttribArray(aPositionLocation);
@@ -146,7 +154,24 @@ public class MapView extends GLSurfaceView {
             glClear(GL_COLOR_BUFFER_BIT);
             glClearColor(240/255f,240/255f,240/255f,1f);
 
-            glDrawArrays(GL_TRIANGLES, 0, vertices.length/2);
+            glUniform1f(uWindowKLocation, uWindowK);
+
+            int startIndex = 0;
+            glUniform4f(uColorLocation, 197/255f, 239/255f, 199/255f, 1f);
+            glDrawArrays(GL_TRIANGLES, 0, map.getGrassCount());
+            startIndex += map.getGrassCount();
+
+            glUniform4f(uColorLocation, 1/255f, 128/255f, 182/255f, 1f);
+            glDrawArrays(GL_TRIANGLES, startIndex, map.getTypeCount()[0]);
+            startIndex += map.getTypeCount()[0];
+
+            glUniform4f(uColorLocation, 196/255f, 196/255f, 196/255f, 1f);
+            glDrawArrays(GL_TRIANGLES, startIndex , map.getTypeCount()[1]);
+            startIndex += map.getTypeCount()[1];
+
+            glUniform4f(uColorLocation, 255/255f, 217/255f, 142/255f, 1f);
+            glDrawArrays(GL_TRIANGLES, startIndex, map.getTypeCount()[2]);
+            startIndex += map.getTypeCount()[2];
         }
     }
 }

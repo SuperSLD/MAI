@@ -1,6 +1,9 @@
 package com.raspisanie.mai.View.MapView;
 import android.content.Context;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static android.opengl.GLES20.GL_COMPILE_STATUS;
 import static android.opengl.GLES20.GL_LINK_STATUS;
 import static android.opengl.GLES20.glAttachShader;
@@ -48,6 +51,7 @@ public class ShaderUtils {
         glGetShaderiv(shaderId, GL_COMPILE_STATUS, compileStatus, 0);
         if (compileStatus[0] == 0) {
             glDeleteShader(shaderId);
+            Logger.getLogger("mapview").log(Level.WARNING, "GL_COMPILE_STATUS = 0");
             return 0;
         }
         return shaderId;

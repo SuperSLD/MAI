@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Activity.MainActivity;
-import com.raspisanie.mai.Classes.InformationConnection;
+import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Adapters.TimeTable.TimeTableAdapter;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;

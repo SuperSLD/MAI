@@ -168,9 +168,7 @@ public class EventCardListManager {
                     insert = true;
                 }
             }
-            if ( isThisWeek(eventDate, week) && !insert
-                    && Integer.parseInt(eventDate[0])
-                    >= Integer.parseInt(((Day) list.get(list.size()-1)).getDate().split("\\.")[0])){
+            if ( isThisWeek(eventDate, week) && !insert){
                 list.add(event);
             }
         }

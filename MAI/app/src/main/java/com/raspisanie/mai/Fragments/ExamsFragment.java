@@ -2,10 +2,8 @@ package com.raspisanie.mai.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,12 +12,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Adapters.ExamTableAdapter;
-import com.raspisanie.mai.Classes.InformationConnection;
+import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;

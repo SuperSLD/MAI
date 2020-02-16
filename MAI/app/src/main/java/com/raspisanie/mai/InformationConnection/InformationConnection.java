@@ -1,4 +1,4 @@
-package com.raspisanie.mai.Classes;
+package com.raspisanie.mai.InformationConnection;
 
 import android.content.SharedPreferences;
 
@@ -7,6 +7,8 @@ import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketFactory;
 import com.neovisionaries.ws.client.WebSocketFrame;
+import com.raspisanie.mai.Classes.Parametrs;
+import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.InformationConnection.InformationRename;
 
 import java.util.List;

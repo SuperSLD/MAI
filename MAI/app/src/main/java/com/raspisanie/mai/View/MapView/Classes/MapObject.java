@@ -12,6 +12,7 @@ public class MapObject {
     protected ArrayList<Integer> y;
 
     protected boolean isPolygon = false;
+    protected boolean isLine    = false;
         
     public MapObject() {
         x = new ArrayList<>();
@@ -98,7 +99,6 @@ public class MapObject {
                     x.get(2), y.get(2)));
 
             for (Triangle triangle : triangles) {
-                System.out.println(triangle.toString());
                 for (int j = 0; j < triangle.getXArray().length; j++) {
                     v.add(triangle.getXArray()[j] * 0.001f);
                     v.add(triangle.getYArray()[j] * -0.001f);
@@ -112,10 +112,10 @@ public class MapObject {
      * Получение индекса вершины.
      * Для упрощения проверки на соответсвия размерам списка.
      * @param i входной индекс
-     * @return индекс i E [0; x,size()]
+     * @return индекс i E [0; x,size())
      */
     private int getI(int i){
-        return i >= x.size() ? i % x.size() : i >= 0 ? i : x.size() - i;
+        return i >= x.size() ? i % x.size() : i >= 0 ? i : x.size() - Math.abs(i);
     }
 
     /**
@@ -182,6 +182,16 @@ public class MapObject {
         @Override
         public String toString() {
             return "[("+x[0]+";"+y[0]+"),("+x[1]+";"+y[1]+"),("+x[2]+";"+y[2]+")]";
+        }
+    }
+
+    /**
+     * Добавление в список точек линий.
+     * @param v
+     */
+    public void addLines(ArrayList<Float> v) {
+        if (isLine) {
+
         }
     }
 }

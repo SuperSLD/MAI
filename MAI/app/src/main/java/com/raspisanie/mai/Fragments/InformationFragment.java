@@ -17,7 +17,7 @@ import com.raspisanie.mai.Activity.CreativGroupActivity;
 import com.raspisanie.mai.Activity.FoodActivity;
 import com.raspisanie.mai.Activity.SportGroupActivity;
 import com.raspisanie.mai.Activity.StudOrgActivity;
-import com.raspisanie.mai.Classes.InformationConnection;
+import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.InformationConnection.InformationRename;
 import com.raspisanie.mai.R;
 
