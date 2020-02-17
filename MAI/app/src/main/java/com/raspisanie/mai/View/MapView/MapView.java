@@ -8,10 +8,13 @@ import android.opengl.Matrix;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.raspisanie.mai.R;
 import com.raspisanie.mai.View.MapView.Classes.Map;
+import com.raspisanie.mai.View.MapView.Classes.Road;
+import com.raspisanie.mai.View.MapView.Classes.Structure;
 
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -27,6 +30,8 @@ import javax.microedition.khronos.opengles.GL10;
 import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
 import static android.opengl.GLES20.GL_FLOAT;
 import static android.opengl.GLES20.GL_FRAGMENT_SHADER;
+import static android.opengl.GLES20.GL_LINES;
+import static android.opengl.GLES20.GL_LINE_STRIP;
 import static android.opengl.GLES20.GL_TRIANGLES;
 import static android.opengl.GLES20.GL_VERTEX_SHADER;
 import static android.opengl.GLES20.glClear;
@@ -35,6 +40,7 @@ import static android.opengl.GLES20.glDrawArrays;
 import static android.opengl.GLES20.glEnableVertexAttribArray;
 import static android.opengl.GLES20.glGetAttribLocation;
 import static android.opengl.GLES20.glGetUniformLocation;
+import static android.opengl.GLES20.glLineWidth;
 import static android.opengl.GLES20.glUniform1f;
 import static android.opengl.GLES20.glUniform4f;
 import static android.opengl.GLES20.glUseProgram;
@@ -46,20 +52,15 @@ public class MapView extends GLSurfaceView {
     private Map map;
     private Context context;
 
-    private final float[] viewMatrix = new float[16];
-    private float[] mProjectionMatrix = new float[16];
-    private float[] mModelMatrix = new float[16];
-    private float[] mMVPMatrix = new float[16];
+    private float startX = 0;
+    private float startY = 0;
+    private float centerX = 0;
+    private float centerY = 0;
 
+    private final GestureDetector gestureDetector;
 
-    /** Используется для передачи в матрицу преобразований. */
-    private int mMVPMatrixHandle;
-
-    /** Используется для передачи информации о положении модели. */
-    private int mPositionHandle;
-
-    /** Используется для передачи информации о цвете модели. */
-    private int mColorHandle;
+    private int w;
+    private int h;
 
     float[] vertices;
 
@@ -77,7 +78,6 @@ public class MapView extends GLSurfaceView {
             input.read(buffer);
             input.close();
 
-            // byte buffer into a string
             data = new String(buffer);
         } catch (Exception ex) {}
         map = new Map(data);
@@ -86,17 +86,8 @@ public class MapView extends GLSurfaceView {
         vertices = map.getVertices();
         setEGLContextClientVersion(2);
         setRenderer(new OpenGLRenderer(context));
-    }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        Logger.getLogger("mapview").log(Level.INFO, "MapView x: " + event.getX() + " / y: " + event.getY());
-        return true;
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(widthMeasureSpec,heightMeasureSpec);
+        gestureDetector = new GestureDetector(context, new MapGestureListener());
     }
 
     public class OpenGLRenderer implements GLSurfaceView.Renderer {
@@ -106,6 +97,8 @@ public class MapView extends GLSurfaceView {
         private int uColorLocation;
         private int aPositionLocation;
         private int uWindowKLocation;
+        private int uCenterXLocation;
+        private int uCenterYLocation;
 
         private float uWindowK = 1;
 
@@ -117,7 +110,6 @@ public class MapView extends GLSurfaceView {
         @Override
         public void onSurfaceCreated(GL10 arg0, EGLConfig arg1) {
             Logger.getLogger("mapview").log(Level.INFO, "MapView onSurfaceCreated");
-            glClearColor(0f, 0f, 0f, 1f);
             int vertexShaderId = ShaderUtils.createShader(context, GL_VERTEX_SHADER, R.raw.vertex_shader);
             int fragmentShaderId = ShaderUtils.createShader(context, GL_FRAGMENT_SHADER, R.raw.fragment_shader);
             programId = ShaderUtils.createProgram(vertexShaderId, fragmentShaderId);
@@ -130,6 +122,8 @@ public class MapView extends GLSurfaceView {
             Logger.getLogger("mapview").log(Level.INFO, "MapView onSurfaceChanged");
             glViewport(0, 0, width, height);
             uWindowK = width/(float)height;
+            h = height;
+            w = width;
             Logger.getLogger("mapview").log(Level.INFO, "uWindowK= " + uWindowK);
         }
 
@@ -142,6 +136,8 @@ public class MapView extends GLSurfaceView {
             uColorLocation = glGetUniformLocation(programId, "u_Color");
             aPositionLocation = glGetAttribLocation(programId, "a_Position");
             uWindowKLocation = glGetUniformLocation(programId, "uWindowK");
+            uCenterXLocation = glGetUniformLocation(programId, "uCenterX");
+            uCenterYLocation = glGetUniformLocation(programId, "uCenterY");
 
             glUniform1f(uWindowKLocation, uWindowK);
             vertexData.position(0);
@@ -155,23 +151,55 @@ public class MapView extends GLSurfaceView {
             glClearColor(240/255f,240/255f,240/255f,1f);
 
             glUniform1f(uWindowKLocation, uWindowK);
+            glUniform1f(uCenterXLocation, centerX);
+            glUniform1f(uCenterYLocation, centerY);
 
+            //Рисуем газоны
             int startIndex = 0;
             glUniform4f(uColorLocation, 197/255f, 239/255f, 199/255f, 1f);
             glDrawArrays(GL_TRIANGLES, 0, map.getGrassCount());
             startIndex += map.getGrassCount();
 
-            glUniform4f(uColorLocation, 1/255f, 128/255f, 182/255f, 1f);
-            glDrawArrays(GL_TRIANGLES, startIndex, map.getTypeCount()[0]);
-            startIndex += map.getTypeCount()[0];
+            for (int i = 0; i < 4; i++) {
+                glLineWidth(Road.SIZE[i] * 0.5f);
+                glUniform4f(uColorLocation, Road.COLORS[i][0], Road.COLORS[i][1], Road.COLORS[i][2], 1f);
+                glDrawArrays(GL_LINES, startIndex, map.getTypeRoadCount()[i]);
+                startIndex += map.getTypeRoadCount()[i];
+            }
 
-            glUniform4f(uColorLocation, 196/255f, 196/255f, 196/255f, 1f);
-            glDrawArrays(GL_TRIANGLES, startIndex , map.getTypeCount()[1]);
-            startIndex += map.getTypeCount()[1];
+            for (int i = 0; i < 3; i++) {
+                glUniform4f(uColorLocation, Structure.COLORS[i][0], Structure.COLORS[i][1], Structure.COLORS[i][2], 1f);
+                glDrawArrays(GL_TRIANGLES, startIndex, map.getTypeStructureCount()[i]);
+                startIndex += map.getTypeStructureCount()[i];
+            }
+        }
+    }
 
-            glUniform4f(uColorLocation, 255/255f, 217/255f, 142/255f, 1f);
-            glDrawArrays(GL_TRIANGLES, startIndex, map.getTypeCount()[2]);
-            startIndex += map.getTypeCount()[2];
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (gestureDetector.onTouchEvent(event)) return true;
+        return true;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return true;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    private class MapGestureListener extends GestureDetector.SimpleOnGestureListener
+    {
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+        {
+            Logger.getLogger("mapview").log(Level.INFO, "scroll x= " + distanceX + " y= " + distanceY);
+            centerX -= distanceX/(float) w;
+            centerY -= distanceY/(float) h;
+            return false;
         }
     }
 }

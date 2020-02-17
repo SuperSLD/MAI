@@ -49,9 +49,9 @@ public class MapObject {
      * в списов вершин.
      * @return
      */
-    public void addTriangles(ArrayList<Float> v) {
+    public int addTriangles(ArrayList<Float> v) {
         ArrayList<Triangle> triangles = new ArrayList<>();
-
+        int count = 0;
         if (isPolygon) {
             int maxIndex = 0;
             int max = Integer.MIN_VALUE;
@@ -100,12 +100,14 @@ public class MapObject {
 
             for (Triangle triangle : triangles) {
                 for (int j = 0; j < triangle.getXArray().length; j++) {
-                    v.add(triangle.getXArray()[j] * 0.001f);
-                    v.add(triangle.getYArray()[j] * -0.001f);
+                    v.add((float) triangle.getXArray()[j]);
+                    v.add((float) triangle.getYArray()[j]);
+                    count++;
                 }
             }
             Logger.getLogger("mapview").log(Level.INFO, "triangles create : " + triangles.size());
         }
+        return count;
     }
 
     /**
@@ -189,9 +191,18 @@ public class MapObject {
      * Добавление в список точек линий.
      * @param v
      */
-    public void addLines(ArrayList<Float> v) {
+    public int addLines(ArrayList<Float> v, int type) {
+        int count = 0;
         if (isLine) {
-
+            for (int i = 0; i < x.size()-1; i++) {
+                v.add((float) x.get(i));
+                v.add((float) y.get(i));
+                v.add((float) x.get(i+1));
+                v.add((float) y.get(i+1));
+                count += 2;
+            }
+            Logger.getLogger("mapview").log(Level.INFO, "create line: " + count);
         }
+        return count;
     }
 }

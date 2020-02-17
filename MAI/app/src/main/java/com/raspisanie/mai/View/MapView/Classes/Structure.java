@@ -6,7 +6,10 @@ import java.util.ArrayList;
  * Клас с информацией о здании.
  */
 public class Structure extends MapObject {
-    private static final String[] COLORS = {"#0480B7", "#C4C4C4", "#FFDA8C", "#0094FF"};
+    public static final float[][] COLORS = {
+            {1/255f, 128/255f, 182/255f},
+            {196/255f, 196/255f, 196/255f},
+            {255/255f, 217/255f, 142/255f}};
 
     private int type;
     private String location;
@@ -32,7 +35,7 @@ public class Structure extends MapObject {
      * Получение цвета в зависимости от типа.
      * @return
      */
-    public String getColor() {
-        return COLORS[type];
+    public float[][] getColor() {
+        return COLORS;
     }
 }

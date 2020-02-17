@@ -15,7 +15,8 @@ public class Map {
 
     private float[] vertices;
 
-    private int[] typeCount = new int[5];
+    private int[] typeStructureCount = new int[5];
+    private int[] typeRoadCount = new int[5];
     private int grassCount = 0;
 
     public Map(String data) {
@@ -80,20 +81,21 @@ public class Map {
 
         ArrayList<Float> v = new ArrayList<>();
 
-        int lastV = 0;
         for (GrassZone grassZone : grassZones) {
             if (grassZone.getX().size() >= 3) {
-                grassZone.addTriangles(v);
-                grassCount += (v.size() - lastV) / 2;
-                lastV = v.size();
+                grassCount += grassZone.addTriangles(v);
             }
         }
-        for (int i = 0; i < typeCount.length; i++) {
+        for (int i = 0; i < typeRoadCount.length; i++) {
+            for (Road road: roads)
+                if (road.getType() == i && road.getX().size() >= 2) {
+                    typeRoadCount[i] += road.addLines(v);
+                }
+        }
+        for (int i = 0; i < typeStructureCount.length; i++) {
             for (Structure structure : structures)
                 if (structure.getType() == i && structure.getX().size() >= 3) {
-                    structure.addTriangles(v);
-                    typeCount[i] += (v.size() - lastV) / 2;
-                    lastV = v.size();
+                    typeStructureCount[i] += structure.addTriangles(v);
                 }
         }
 
@@ -101,30 +103,6 @@ public class Map {
         for (int i = 0; i < v.size(); i++) {
             vertices[i] = v.get(i);
         }
-    }
-
-    /**
-     * Получение списка зданий.
-     * @return
-     */
-    public ArrayList<Structure> getStructures() {
-        return structures;
-    }
-
-    /**
-     * Получение списка газонов.
-     * @return
-     */
-    public ArrayList<GrassZone> getGrassZones() {
-        return grassZones;
-    }
-
-    /**
-     * Получение списка дорог.
-     * @return
-     */
-    public ArrayList<Road> getRoads() {
-        return roads;
     }
 
     /**
@@ -139,8 +117,16 @@ public class Map {
      * Получение количества вершин кадого типа.
      * @return
      */
-    public int[] getTypeCount() {
-        return typeCount;
+    public int[] getTypeStructureCount() {
+        return typeStructureCount;
+    }
+
+    /**
+     * Получение количества верин по типу.
+     * @return
+     */
+    public int[] getTypeRoadCount() {
+        return typeRoadCount;
     }
 
     /**
