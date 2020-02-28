@@ -197,8 +197,8 @@ public class MapObject {
             for (int i = 0; i < x.size()-1; i++) {
                 v.add((float) x.get(i));
                 v.add((float) y.get(i));
-                v.add((float) x.get(i+1));
-                v.add((float) y.get(i+1));
+                v.add((float) x.get(i + 1));
+                v.add((float) y.get(i + 1));
                 count += 2;
             }
             Logger.getLogger("mapview").log(Level.INFO, "create line: " + count);

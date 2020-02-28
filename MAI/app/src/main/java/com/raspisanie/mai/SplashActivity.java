@@ -11,7 +11,6 @@ import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Activity.MainActivity;
-import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;

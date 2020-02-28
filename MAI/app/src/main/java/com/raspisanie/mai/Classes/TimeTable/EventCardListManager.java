@@ -31,12 +31,14 @@ import java.util.logging.Logger;
 public class EventCardListManager {
 
     public static ArrayList<EventCard> eventCards = new ArrayList<>();
+    private static SharedPreferences paramenrs;
 
     /**
      * Инициализация списка.
      */
     public static void initList(SharedPreferences mSettings) {
         try {
+            paramenrs = mSettings;
             Logger.getLogger("mailog").log(Level.INFO, "init events list");
             String json = mSettings.getString("events", "");
             Gson gson = new Gson();
@@ -148,6 +150,7 @@ public class EventCardListManager {
      * @param list список объектов недели.
      */
     public static void insertEventCardsInList(ArrayList<Object> list, int week) {
+        if (!paramenrs.getBoolean("eventChek", true)) return;
         for (EventCard event :eventCards) {
             boolean insert = false;
             String[] eventDate = {event.getDate().split(" ")[0], getM(event.getDate().split(" ")[1])};

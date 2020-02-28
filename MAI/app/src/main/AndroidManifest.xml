@@ -114,8 +114,7 @@
         </activity>
         <activity
             android:name=".Activity.CampusMapActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppActionBar">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

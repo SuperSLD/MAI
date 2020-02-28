@@ -113,8 +113,16 @@ public class SettingsFragment extends android.app.Fragment {
         CheckBox checkBox = view.findViewById(R.id.checkbox03);
         checkBox.setChecked(mSettings.getBoolean("updateChek", true));
         checkBox.setOnCheckedChangeListener((c, b) -> {
-            SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
+            SharedPreferences.Editor editor = mSettings.edit();
             editor.putBoolean("updateChek", b);
+            editor.apply();
+        });
+
+        checkBox = view.findViewById(R.id.checkbox01);
+        checkBox.setChecked(mSettings.getBoolean("eventChek", true));
+        checkBox.setOnCheckedChangeListener((c, b) -> {
+            SharedPreferences.Editor editor = mSettings.edit();
+            editor.putBoolean("eventChek", b);
             editor.apply();
         });
 

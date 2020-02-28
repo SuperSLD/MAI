@@ -9,9 +9,9 @@ import android.widget.Adapter;
 import android.widget.ListView;
 
 import com.raspisanie.mai.Adapters.CreativeAdapter;
-import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
+import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.R;
 
 import java.lang.reflect.Parameter;

@@ -89,7 +89,7 @@ public class Map {
         for (int i = 0; i < typeRoadCount.length; i++) {
             for (Road road: roads)
                 if (road.getType() == i && road.getX().size() >= 2) {
-                    typeRoadCount[i] += road.addLines(v);
+                    typeRoadCount[i] += road.addLines(v, i);
                 }
         }
         for (int i = 0; i < typeStructureCount.length; i++) {

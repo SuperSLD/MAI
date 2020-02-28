@@ -15,6 +15,9 @@ import com.raspisanie.mai.R;
 
 import org.jsoup.Jsoup;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class LoadInformationActivity extends AppCompatActivity {
     private SharedPreferences mSettings;
     private SimpleTree<String> sport = new SimpleTree<>("Виды спорта");
@@ -72,19 +75,19 @@ public class LoadInformationActivity extends AppCompatActivity {
             setProgressText("Загружаем другую инфрмацию о ВУЗе...\n1/" + COUNT);
 
             /*
-            Загрузка данных о спортивных секциях
+            Загрузка данных о творческих колективах.
              */
             s = null;
             while (s == null)
                 s = url.get("life/create/dkit/kollektivy-dkit.php");
-            String[] group = s.split("<p>")[1].split("<b>");
+            String[] group = s.split("<b>");
 
             for (int i = 1; i < group.length; i++) {
                 try {
                     SimpleTree<String> groupTree = new SimpleTree<>(deleteHTML(
                             group[i].split("</b>")[0]
-                                    + "<!>" + group[i].split("<br>")[1]
-                                    + "<!>" + group[i].split("<br>")[3]
+                                    + "<!>" + group[i].split("<p>")[1].split("</p>")[0]
+                                    + "<!>" + group[i].split("<p>")[2].split("</p>")[0]
                     ));
 
                     creative.addChild(groupTree);
@@ -104,7 +107,7 @@ public class LoadInformationActivity extends AppCompatActivity {
 
             String[] org = s.split("<th colspan=");
 
-            for (int i = 1; i < group.length; i++) {
+            for (int i = 1; i < org.length; i++) {
                 try {
                     SimpleTree<String> orgTree = new SimpleTree<>(deleteHTML(
                             org[i].replaceAll("<br>", "").split("</")[0].split(">")
@@ -116,10 +119,9 @@ public class LoadInformationActivity extends AppCompatActivity {
 
                     studOrg.addChild(orgTree);
                 } catch (IndexOutOfBoundsException ex) {
-                    //ex.printStackTrace();
+                    ex.printStackTrace();
                 }
             }
-
             setProgressText("Загружаем другую инфрмацию о ВУЗе...\n3/" + COUNT);
 
             /*
@@ -225,6 +227,8 @@ public class LoadInformationActivity extends AppCompatActivity {
                 .replaceAll("</p>", "")
                 .replaceAll("<td>", "")
                 .replaceAll("</td>", "")
-                .replaceAll("</tr>", "");
+                .replaceAll("</tr>", "")
+                .replaceAll("<nobr>", "")
+                .replaceAll("</nobr>", "");
     }
 }

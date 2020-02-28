@@ -8,9 +8,9 @@ import android.view.Menu;
 import android.widget.ListView;
 
 import com.raspisanie.mai.Adapters.SportGroupAdapter;
-import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
+import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.R;
 
 public class SportGroupActivity extends AppCompatActivity {

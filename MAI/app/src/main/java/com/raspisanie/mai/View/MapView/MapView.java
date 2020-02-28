@@ -2,14 +2,12 @@ package com.raspisanie.mai.View.MapView;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.opengl.Matrix;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 
 import com.raspisanie.mai.R;
 import com.raspisanie.mai.View.MapView.Classes.Map;
@@ -20,7 +18,6 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +28,6 @@ import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
 import static android.opengl.GLES20.GL_FLOAT;
 import static android.opengl.GLES20.GL_FRAGMENT_SHADER;
 import static android.opengl.GLES20.GL_LINES;
-import static android.opengl.GLES20.GL_LINE_STRIP;
 import static android.opengl.GLES20.GL_TRIANGLES;
 import static android.opengl.GLES20.GL_VERTEX_SHADER;
 import static android.opengl.GLES20.glClear;
@@ -46,18 +42,20 @@ import static android.opengl.GLES20.glUniform4f;
 import static android.opengl.GLES20.glUseProgram;
 import static android.opengl.GLES20.glVertexAttribPointer;
 import static android.opengl.GLES20.glViewport;
-import static android.opengl.GLU.gluLookAt;
 
 public class MapView extends GLSurfaceView {
     private Map map;
     private Context context;
 
-    private float startX = 0;
-    private float startY = 0;
+    private boolean move = false;
+    private float lastX;
+    private float lastY;
     private float centerX = 0;
     private float centerY = 0;
+    private float zoom = 1f;
 
     private final GestureDetector gestureDetector;
+    private final ScaleGestureDetector scaleDetector;
 
     private int w;
     private int h;
@@ -88,8 +86,12 @@ public class MapView extends GLSurfaceView {
         setRenderer(new OpenGLRenderer(context));
 
         gestureDetector = new GestureDetector(context, new MapGestureListener());
+        scaleDetector = new ScaleGestureDetector(context, new ScaleListener());
     }
 
+    /**
+     * Отрисовка карты.
+     */
     public class OpenGLRenderer implements GLSurfaceView.Renderer {
         private Context context;
         private int programId;
@@ -99,6 +101,7 @@ public class MapView extends GLSurfaceView {
         private int uWindowKLocation;
         private int uCenterXLocation;
         private int uCenterYLocation;
+        private int uZoomLocation;
 
         private float uWindowK = 1;
 
@@ -133,11 +136,12 @@ public class MapView extends GLSurfaceView {
         }
 
         private void bindData() {
-            uColorLocation = glGetUniformLocation(programId, "u_Color");
+            uColorLocation    = glGetUniformLocation(programId, "u_Color");
             aPositionLocation = glGetAttribLocation(programId, "a_Position");
-            uWindowKLocation = glGetUniformLocation(programId, "uWindowK");
-            uCenterXLocation = glGetUniformLocation(programId, "uCenterX");
-            uCenterYLocation = glGetUniformLocation(programId, "uCenterY");
+            uWindowKLocation  = glGetUniformLocation(programId, "uWindowK");
+            uCenterXLocation  = glGetUniformLocation(programId, "uCenterX");
+            uCenterYLocation  = glGetUniformLocation(programId, "uCenterY");
+            uZoomLocation = glGetUniformLocation(programId, "uZoom");
 
             glUniform1f(uWindowKLocation, uWindowK);
             vertexData.position(0);
@@ -150,24 +154,24 @@ public class MapView extends GLSurfaceView {
             glClear(GL_COLOR_BUFFER_BIT);
             glClearColor(240/255f,240/255f,240/255f,1f);
 
+            glUniform1f(uZoomLocation,    zoom);
             glUniform1f(uWindowKLocation, uWindowK);
             glUniform1f(uCenterXLocation, centerX);
             glUniform1f(uCenterYLocation, centerY);
 
-            //Рисуем газоны
             int startIndex = 0;
             glUniform4f(uColorLocation, 197/255f, 239/255f, 199/255f, 1f);
             glDrawArrays(GL_TRIANGLES, 0, map.getGrassCount());
             startIndex += map.getGrassCount();
 
             for (int i = 0; i < 4; i++) {
-                glLineWidth(Road.SIZE[i] * 0.5f);
+                glLineWidth(Road.SIZE[i] * 0.5f * 5 * zoom);
                 glUniform4f(uColorLocation, Road.COLORS[i][0], Road.COLORS[i][1], Road.COLORS[i][2], 1f);
                 glDrawArrays(GL_LINES, startIndex, map.getTypeRoadCount()[i]);
                 startIndex += map.getTypeRoadCount()[i];
             }
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 4; i++) {
                 glUniform4f(uColorLocation, Structure.COLORS[i][0], Structure.COLORS[i][1], Structure.COLORS[i][2], 1f);
                 glDrawArrays(GL_TRIANGLES, startIndex, map.getTypeStructureCount()[i]);
                 startIndex += map.getTypeStructureCount()[i];
@@ -177,7 +181,31 @@ public class MapView extends GLSurfaceView {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if (gestureDetector.onTouchEvent(event)) return true;
+        gestureDetector.onTouchEvent(event);
+        scaleDetector.onTouchEvent(event);
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                move = true;
+                break;
+            case MotionEvent.ACTION_UP:
+                move = false;
+                new Thread(() -> {
+                    int k = 15;
+                    while (lastX != 0 || lastY != 0) {
+                        lastX -= lastX/k;
+                        lastY -= lastY/k;
+
+                        centerX -= lastX;
+                        centerY -= lastY;
+
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) {}
+                        if (move) break;
+                    }
+                }).start();
+                break;
+        }
         return true;
     }
 
@@ -199,7 +227,23 @@ public class MapView extends GLSurfaceView {
             Logger.getLogger("mapview").log(Level.INFO, "scroll x= " + distanceX + " y= " + distanceY);
             centerX -= distanceX/(float) w;
             centerY -= distanceY/(float) h;
+
+            lastX = distanceX/w;
+            lastY = distanceY/h;
             return false;
+        }
+    }
+
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
+        @Override
+        public boolean onScale(ScaleGestureDetector detector) {
+            float scaleFactor = detector.getScaleFactor();
+
+            zoom    *= scaleFactor;
+            centerX *= scaleFactor;
+            centerY *= scaleFactor;
+            Logger.getLogger("mapview").log(Level.INFO, "SCALE_EVENT");
+            return true;
         }
     }
 }

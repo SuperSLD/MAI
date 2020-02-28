@@ -12,10 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <com.raspisanie.mai.View.MapView.MapView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
             
             <com.raspisanie.mai.View.LogoMAIView
                 android:layout_width="match_parent"
@@ -38,7 +34,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"/>
 
-                <Button
+                <!--<Button
                     android:id="@+id/button0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,7 +42,7 @@
                     android:drawableLeft="@drawable/ic_map_24px"
                     android:drawableTint="@android:color/darker_gray"
                     android:textAllCaps="false"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    style="@style/Widget.AppCompat.Button.Borderless"/>-->
 
                 <Button
                     android:id="@+id/button1"

@@ -10,9 +10,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.raspisanie.mai.Classes.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.TimeTable.EventCard;
+import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.R;
 
 import jp.wasabeef.blurry.Blurry;
