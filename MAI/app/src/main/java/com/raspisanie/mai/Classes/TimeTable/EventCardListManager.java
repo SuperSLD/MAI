@@ -31,19 +31,19 @@ import java.util.logging.Logger;
 public class EventCardListManager {
 
     public static ArrayList<EventCard> eventCards = new ArrayList<>();
-    private static SharedPreferences paramenrs;
+    private static SharedPreferences parametrs;
 
     /**
      * Инициализация списка.
      */
-    public static void initList(SharedPreferences mSettings) {
+    public static void initList(Context context) {
         try {
-            paramenrs = mSettings;
+            parametrs = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
             Logger.getLogger("mailog").log(Level.INFO, "init events list");
-            String json = mSettings.getString("events", "");
+            String json = parametrs.getString("events", "");
             Gson gson = new Gson();
             EventCard[] list = gson.fromJson(json, EventCard[].class);
-            String[] bytes = gson.fromJson(mSettings.getString("eventsBitmap", ""), String[].class);
+            String[] bytes = gson.fromJson(parametrs.getString("eventsBitmap", ""), String[].class);
             Logger.getLogger("mailog").log(Level.INFO, "events: " + list.length + "/ bytes:" + bytes.length);
             int i = 0;
             for (EventCard ev : list) {
@@ -150,7 +150,7 @@ public class EventCardListManager {
      * @param list список объектов недели.
      */
     public static void insertEventCardsInList(ArrayList<Object> list, int week) {
-        if (!paramenrs.getBoolean("eventChek", true)) return;
+        if (parametrs != null && !parametrs.getBoolean("eventCheck", true)) return;
         for (EventCard event :eventCards) {
             boolean insert = false;
             String[] eventDate = {event.getDate().split(" ")[0], getM(event.getDate().split(" ")[1])};

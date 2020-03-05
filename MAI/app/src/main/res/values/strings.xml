@@ -10,7 +10,7 @@
     <string name="title_event_info">Информация о событии</string>
 
     <!-- Settings Fragment -->
-    <string name="versionString">1.048/27.02.2020</string>
+    <string name="versionString">1.049/05.03.2020</string>
     <string name="autor">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -22,6 +22,6 @@
     <string name="titleLife">Жизнь</string>
 
     <string name="versionMessage">
-        Информацию о событиях теперь можно скрыть в настройках.
+        Обновлен экран загрузки приложения и исправлены некоторые баги.
     </string>
 </resources>
