@@ -9,6 +9,8 @@ import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.R;
 
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ViewHolder дня расписания занятий.
@@ -40,15 +42,17 @@ public class TimeTableItem extends TimeTableViewHolder {
     public void bind(Object object) {
         Day day = (Day) object;
         Calendar calendar = Calendar.getInstance();
+
         if (now) {
-            if (Integer.parseInt(day.getDate().substring(0, 2)) !=
+            if (Integer.parseInt(day.getDate().split("\\.")[0]) !=
                     calendar.get(Calendar.DAY_OF_MONTH)) {
                 dayHeader.setBackgroundResource(R.color.dayGreyHeader);
+            } else {
+                Logger.getLogger("mailog").log(Level.INFO, "time table adapter: BIND THIS DAY");
             }
         } else {
             dayHeader.setBackgroundResource(R.color.dayGreyHeader);
         }
-
 
         textDayDate.setText(day.getDate());
         textDayName.setText(day.getName());

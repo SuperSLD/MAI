@@ -1,15 +1,14 @@
 package com.raspisanie.mai.Adapters.TimeTable;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.raspisanie.mai.Classes.TimeTable.EventCard;
 import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
-import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,8 +24,11 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
     private boolean notFirstDay;
     private boolean showAllDays;
     private ArrayList<Day> startDayList;
-    private ArrayList<Object> day;
+    private ArrayList<Object> objects;
     private int daySum;
+
+    private ItemTouchHelper itemTouchHelper;
+    private RecyclerView recyclerView;
 
     /**
      * Конструктор адаптера.
@@ -40,7 +42,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
 
         ArrayList<Day> day = (ArrayList<Day>) day1;
         this.startDayList = day;
-        this.day =  new ArrayList<>();
+        this.objects =  new ArrayList<>();
 
         for (int i = 0; i < day.size(); i++) {
             Calendar calendar = Calendar.getInstance();
@@ -52,17 +54,26 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                                 calendar.get(Calendar.MONTH) + 1)
                         || Integer.parseInt(day.get(i).getDate().substring(3, 5)) >
                         calendar.get(Calendar.MONTH) + 1) {
-                    this.day.add(day.get(i));
+                    this.objects.add(day.get(i));
                 } else {
                     notFirstDay = true;
                 }
             } else {
                 // если неделя не равна текущей то показываем все дни
-                this.day.add(day.get(i));
+                this.objects.add(day.get(i));
             }
         }
-        daySum = day.size() - this.day.size() - 1;
-        EventCardListManager.insertEventCardsInList(this.day, week);
+        daySum = day.size() - this.objects.size() - 1;
+        EventCardListManager.insertEventCardsInList(this.objects, week);
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        this.recyclerView = recyclerView;
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new SwipeListener(0, ItemTouchHelper.LEFT);
+        itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
+        itemTouchHelper.attachToRecyclerView(this.recyclerView);
     }
 
     /**
@@ -79,18 +90,18 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                 return showAllDays ? 2 : 1;
             } else {
                 if (notFirstDay) position--;
-                if (day.get(position) instanceof Day) {
+                if (objects.get(position) instanceof Day) {
                     return 0;
-                } else if (day.get(position) instanceof EventCard) {
+                } else if (objects.get(position) instanceof EventCard) {
                     return 3;
                 } else {
                     return -1;
                 }
             }
         } else {
-            if (day.get(position) instanceof Day) {
+            if (objects.get(position) instanceof Day) {
                 return 0;
-            } else if (day.get(position) instanceof EventCard) {
+            } else if (objects.get(position) instanceof EventCard) {
                 return 3;
             } else {
                 return -1;
@@ -135,7 +146,6 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                 break;
             case 3:
                 viewHolder = ViewHolderFactory.create(3, inflater, viewGroup);
-                TimeTableViewHolder finalViewHolder = viewHolder;
                 break;
         }
 
@@ -151,8 +161,8 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull TimeTableViewHolder item, int i) {
         if (now && notFirstDay) {
-            if (i != 0) item.bind(day.get(i - 1));
-        } else item.bind(day.get(i));
+            if (i != 0) item.bind(objects.get(i - 1));
+        } else item.bind(objects.get(i));
     }
 
     /**
@@ -168,6 +178,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                 deleteItem(0);
             }
         }
+        Logger.getLogger("mailog").log(Level.INFO, "objects list [size = "+ objects.size()+"]");
     }
 
     /**
@@ -176,11 +187,11 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
      * @param i позиция для нового объекта.
      */
     public void insertItem(Object obj, int i) {
-        if (i < day.size()) {
-            day.add(i, obj);
+        if (i < objects.size()) {
+            objects.add(i, obj);
         } else {
-            day.add(obj);
-            i = day.size() - 1;
+            objects.add(obj);
+            i = objects.size() - 1;
         }
         notifyItemInserted(i);
     }
@@ -190,7 +201,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
      * @param i позиция удаляемного элемента.
      */
     public void deleteItem(int i) {
-        day.remove(i);
+        objects.remove(i);
         notifyItemRemoved(i);
     }
 
@@ -199,13 +210,18 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
      * @param ID идентификатор элемента.
      */
     public void deleteEventCardByID(int ID) {
-        for (int i = 0; i < day.size(); i++) {
-            if (day.get(i) instanceof EventCard && ((EventCard) day.get(i)).getEventCardID() == ID) {
-                day.remove(i);
+        for (int i = 0; i < objects.size(); i++) {
+            if (objects.get(i) instanceof EventCard && ((EventCard) objects.get(i)).getEventCardID() == ID) {
+                Logger.getLogger("mailog").log(Level.INFO, "search event card by id ["+((EventCard) objects.get(i)).getEventCardID()
+                        +" / "+ ID + " / size = "+ objects.size()+"]");
+                objects.remove(i);
                 if (now) i++;
                 notifyItemRemoved(i);
+                Logger.getLogger("mailog").log(Level.INFO, "DELETE EVENT CARD = " + ID + " / objects size after remove =" + objects.size());
+                return;
             }
         }
+        Logger.getLogger("mailog").log(Level.INFO, "event card not found [ID = "+ID+" size = "+ objects.size()+"]");
     }
 
     /**
@@ -225,10 +241,10 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
     public int getItemCount() {
         if (now) {
             if (notFirstDay) {
-                return day.size() + 1;
+                return objects.size() + 1;
             } else {
-                return day.size();
+                return objects.size();
             }
-        } else return day.size();
+        } else return objects.size();
     }
 }

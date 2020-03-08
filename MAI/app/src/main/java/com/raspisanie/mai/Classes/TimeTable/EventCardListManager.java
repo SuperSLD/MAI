@@ -30,6 +30,7 @@ import java.util.logging.Logger;
  */
 public class EventCardListManager {
 
+    private static String[] state;
     public static ArrayList<EventCard> eventCards = new ArrayList<>();
     private static SharedPreferences parametrs;
 
@@ -40,6 +41,8 @@ public class EventCardListManager {
         try {
             parametrs = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
             Logger.getLogger("mailog").log(Level.INFO, "init events list");
+            state = parametrs.getString("cardState",
+                    "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,00,0,0,0,0").split(",");
             String json = parametrs.getString("events", "");
             Gson gson = new Gson();
             EventCard[] list = gson.fromJson(json, EventCard[].class);
@@ -47,7 +50,7 @@ public class EventCardListManager {
             Logger.getLogger("mailog").log(Level.INFO, "events: " + list.length + "/ bytes:" + bytes.length);
             int i = 0;
             for (EventCard ev : list) {
-                eventCards.add(new EventCard(ev.getName(), ev.getDate(), bytes[i], ev.getInfo()));
+                eventCards.add(new EventCard(ev.getName(), ev.getDate(), bytes[i], ev.getInfo(), state[i]));
                 Logger.getLogger("mailog").log(Level.INFO,
                         "bitmap["+i+"/"+(list.length-1)+"]: " + (ev.getBitmap() != null));
                 i++;
@@ -73,7 +76,9 @@ public class EventCardListManager {
                 s = url.get("/press/events/");
 
             String[] eventsHtml = s.split("<div class=\"row j-marg-bottom\"");
+            state = new String[eventsHtml.length];
             for (int i = 1; i < eventsHtml.length; i++) {
+                state[i] = "0";
                 String eventName = eventsHtml[i].split("<h5><a href=\"")[1].split(">")[1].split("</a")[0]
                         .replaceAll("&nbsp;", " ")
                         .replaceAll("&mdash;", " ")
@@ -103,7 +108,7 @@ public class EventCardListManager {
                 }
                 info = info.split("<div class=\"text text-lg\">")[1].split("</div>")[0];
 
-                events.add(new EventCard(eventName, eventDate, encoded, informationConvert(info)));
+                events.add(new EventCard(eventName, eventDate, encoded, informationConvert(info), "0"));
             }
 
             eventCards.clear();
@@ -119,6 +124,7 @@ public class EventCardListManager {
                     new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()));
             editor.apply();
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -152,27 +158,30 @@ public class EventCardListManager {
     public static void insertEventCardsInList(ArrayList<Object> list, int week) {
         if (parametrs != null && !parametrs.getBoolean("eventCheck", true)) return;
         for (EventCard event :eventCards) {
-            boolean insert = false;
-            String[] eventDate = {event.getDate().split(" ")[0], getM(event.getDate().split(" ")[1])};
-            for (int i = 0; i < list.size(); i++) if (list.get(i) instanceof Day) {
-                Logger.getLogger("mailog").log(Level.INFO, "EventCardListManager event date:"
-                        + eventDate[0] + "."
-                        + eventDate[1] + " //day date:"
-                        + ((Day) list.get(i)).getDate() + " name:" + event.getName());
-                String[] dayDate   = ((Day) list.get(i)).getDate().split("\\.");
-                if (dayDate[0].equals(eventDate[0])
-                        && dayDate[1].equals(eventDate[1])) {
-                    int dayPosition = list.indexOf(list.get(i));
-                    if (dayPosition == list.size()-1) {
-                        list.add(event);
-                    } else {
-                        list.add(dayPosition + 1, event);
+            if (!event.isDelete()) {
+                boolean insert = false;
+                String[] eventDate = {event.getDate().split(" ")[0], getM(event.getDate().split(" ")[1])};
+                for (int i = 0; i < list.size(); i++)
+                    if (list.get(i) instanceof Day) {
+                        Logger.getLogger("mailog").log(Level.INFO, "EventCardListManager event date:"
+                                + eventDate[0] + "."
+                                + eventDate[1] + " //day date:"
+                                + ((Day) list.get(i)).getDate() + " name:" + event.getName());
+                        String[] dayDate = ((Day) list.get(i)).getDate().split("\\.");
+                        if (dayDate[0].equals(eventDate[0])
+                                && dayDate[1].equals(eventDate[1])) {
+                            int dayPosition = list.indexOf(list.get(i));
+                            if (dayPosition == list.size() - 1) {
+                                list.add(event);
+                            } else {
+                                list.add(dayPosition + 1, event);
+                            }
+                            insert = true;
+                        }
                     }
-                    insert = true;
+                if (isThisWeek(eventDate, week) && !insert) {
+                    list.add(event);
                 }
-            }
-            if ( isThisWeek(eventDate, week) && !insert){
-                list.add(event);
             }
         }
     }
@@ -244,5 +253,27 @@ public class EventCardListManager {
                 .replaceAll("  ", " ")
                 .replaceAll("\n\n", "\n")
                 .replaceAll("\n\n", "\n");
+    }
+
+    /**
+     * Обнуление всех скрытых карточек.
+     */
+    public static void unarchiveEventList() {
+        for (EventCard event : eventCards) {
+            event.setDeleteState(false);
+        }
+        saveCardState();
+    }
+
+    /**
+     * Сораненик состония карточек.
+     */
+    public static void saveCardState() {
+        String s = "";
+        for (int i = 0; i < eventCards.size(); i++) {
+            state[i] = eventCards.get(i).isDelete() ? "1" : "0";
+            s += state[i] + ",";
+        }
+        parametrs.edit().putString("cardState", s).apply();
     }
 }

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.Open;
+import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
 import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
@@ -106,6 +107,9 @@ public class SettingsFragment extends android.app.Fragment {
             editor.putString("lib", "");
             editor.apply();
             startActivity(intent);
+        });
+        view.findViewById(R.id.seteventsrtate).setOnClickListener(v -> {
+            EventCardListManager.unarchiveEventList();
         });
 
         //устнвка данных об фоновом обновлении расписания

@@ -17,19 +17,21 @@ public class EventCard {
     private String date;
     private Bitmap bitmap;
     private String info;
+    private boolean delete = false;
 
     private static int eventCardCount = 0;
     private int eventCardID;
 
-    public EventCard(String name, String date, String bitmap, String info) {
+    public EventCard(String name, String date, String bitmap, String info, String delete) {
         this.name = name;
         this.date = date;
         byte[] imageAsBytes = Base64.decode(bitmap.getBytes(), Base64.DEFAULT);
         this.bitmap = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
-        Logger.getLogger("mailog").log(Level.INFO, "create EventCard " + date);
         eventCardCount++;
         this.eventCardID = eventCardCount;
+        Logger.getLogger("mailog").log(Level.INFO, "create EventCard " + date + " ID: " + eventCardID);
         this.info = info;
+        this.delete = delete.equals("1") ? true : false;
     }
 
     /**
@@ -73,5 +75,21 @@ public class EventCard {
      */
     public String getInfo() {
         return info;
+    }
+
+    /**
+     * Получение информации о состоянии карточки.
+     */
+    public boolean isDelete() {
+        return delete;
+    }
+
+    /**
+     * восстановление карточек.
+     * @param isDelete (true если карточка скрыта).
+     */
+    public void setDeleteState(boolean isDelete) {
+        this.delete = isDelete;
+        EventCardListManager.saveCardState();
     }
 }

@@ -107,6 +107,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="@drawable/drawable_bottom_border">
+
+                <Button
+                    android:id="@+id/seteventsrtate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Вернуть все скрытые события"
+                    android:drawableLeft="@drawable/ic_unarchive_24px"
+                    android:drawableTint="@android:color/darker_gray"
+                    android:textAllCaps="false"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:padding="20dp"
                 android:background="@drawable/drawable_bottom_border">
 
@@ -145,6 +162,7 @@
                         android:drawableLeft="@drawable/ic_sync_alt_24px"
                         android:drawableTint="@android:color/darker_gray"
                         android:textAllCaps="false"
+                        android:clickable="false"
                         style="@style/Widget.AppCompat.Button.Borderless"/>
                 </LinearLayout>
 
@@ -187,6 +205,7 @@
                         android:drawableLeft="@drawable/ic_view_agenda_24px"
                         android:drawableTint="@android:color/darker_gray"
                         android:textAllCaps="false"
+                        android:clickable="false"
                         style="@style/Widget.AppCompat.Button.Borderless"/>
                 </LinearLayout>
 
