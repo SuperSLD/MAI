@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InformationConnection {
-    private static final String SERVER_IP = "89.250.2.13:8080";
+    private static final String SERVER_IP = "89.250.2.13";
     //private static final String SERVER_IP = "192.168.1.55:8080";
 
     private static WebSocket ws;
@@ -25,6 +25,8 @@ public class InformationConnection {
     private static SharedPreferences pref;
 
     /**
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
      * Открытие подключения.
      */
     public static void openConnection() {
@@ -89,6 +91,8 @@ public class InformationConnection {
     }
 
     /**
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
      * Отправка информации о классе к которому обратилось приложение.
      * @param cl
      */

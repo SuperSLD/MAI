@@ -1,5 +1,10 @@
 package com.raspisanie.mai.Classes.TimeTable;
 
+/**
+ * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+ *
+ * Класс для хранения информацции об предмеах.
+ */
 public class Subject {
     private String time;
     private String type;
@@ -8,6 +13,7 @@ public class Subject {
     private String place;
 
     /**
+     *
      * Конструктор.
      * @param time время занятия.
      * @param type тип занятия.

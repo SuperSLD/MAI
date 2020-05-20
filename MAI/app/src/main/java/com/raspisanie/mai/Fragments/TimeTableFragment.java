@@ -44,6 +44,7 @@ public class TimeTableFragment extends android.app.Fragment{
     private boolean update = false;
 
     private int selectWeek;
+    private TimeTableUpdater timeTableUpdater;
 
     private MenuItem next;
     private MenuItem prev;
@@ -53,6 +54,7 @@ public class TimeTableFragment extends android.app.Fragment{
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
+        timeTableUpdater = new TimeTableUpdater();
         mSettings =
                 getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -63,13 +65,13 @@ public class TimeTableFragment extends android.app.Fragment{
             if(!mSettings.getString("lastUpdate", "").equals(
                 new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()))) {
                 new Thread(() -> {
-                    update = TimeTableUpdater.update(mSettings);
+                    update = timeTableUpdater.update(mSettings);
                     if (update) {
                         Parametrs.setParam("weeks",
                                 gson.fromJson(mSettings.getString("weeks", ""), Week[].class));
                     }
                 }).start();
-            } else TimeTableUpdater.setLoadStatus(true);
+            } else timeTableUpdater.setLoadStatus(true);
             if(!mSettings.getString("lastUpdateEvents", "").equals(
                 new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime())))
                 new Thread(() -> {
@@ -144,6 +146,8 @@ public class TimeTableFragment extends android.app.Fragment{
     }
 
     /**
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
      * Передаем в ListView adapter с списком дней текущей недели.
      * Сам список дней объявлен глобальным чтоб его можно было динамически изменять.
      * @param week номер текущей недели.
@@ -175,7 +179,7 @@ public class TimeTableFragment extends android.app.Fragment{
             ImageView imageView     = view.findViewById(R.id.image);
             TextView textView       = view.findViewById(R.id.infoText);
 
-            if (!TimeTableUpdater.isLoad()) {
+            if (!timeTableUpdater.isLoad()) {
                 progressBar.setVisibility(View.VISIBLE);
                 imageView.setVisibility(View.GONE);
                 textView.setText("Загрузка");
@@ -183,12 +187,12 @@ public class TimeTableFragment extends android.app.Fragment{
                 new Thread(() -> {
                     try {
                         String progr = "";
-                        while (!TimeTableUpdater.isLoad()) {
-                            if (!progr.equals(TimeTableUpdater.getProgressString())) {
+                        while (!timeTableUpdater.isLoad()) {
+                            if (!progr.equals(timeTableUpdater.getProgressString())) {
                                 getActivity().runOnUiThread(() ->
-                                        textView.setText("Загрузка\n" + TimeTableUpdater.getProgressString()));
+                                        textView.setText("Загрузка\n" + timeTableUpdater.getProgressString()));
                             }
-                            progr = TimeTableUpdater.getProgressString();
+                            progr = timeTableUpdater.getProgressString();
                         }
                         getActivity().runOnUiThread(() -> {
                             if (!update) {
@@ -196,7 +200,7 @@ public class TimeTableFragment extends android.app.Fragment{
                                 imageView.setVisibility(View.VISIBLE);
                                 textView.setText("Расписание отсутствует");
                             } else {
-                                if (TimeTableUpdater.isNewWeekList()) {
+                                if (timeTableUpdater.isNewWeekList()) {
                                     Week[] weeks = new Gson().fromJson(mSettings.getString("weeks", ""), Week[].class);
                                     Parametrs.setParam("weeks", weeks);
                                     MainActivity.setThisWeek();

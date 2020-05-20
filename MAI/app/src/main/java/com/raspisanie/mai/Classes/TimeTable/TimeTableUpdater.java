@@ -22,26 +22,35 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Фоновое обновление расписания и проверка.
+ * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+ *
+ * Обновление и загрузка расписания а также проверка.
  */
 public class TimeTableUpdater {
 
-    private static int weekListSize;
-    private static int position;
-    private static boolean isNewWeekList = false;
+    private int weekListSize;
+    private int position;
+    private boolean isNewWeekList = false;
 
-    private static boolean isLoad = false;
+    private boolean isLoad = false;
 
     /**
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
      * Обновление расписания.
      * @param mSettings SharedPreferences.
      * @return если обновлено true.
      */
-    public static boolean update(SharedPreferences mSettings) {
+    public boolean update(SharedPreferences mSettings) {
         try {
             ArrayList<Week> weeks;
 
-            String data = ((Week[]) Parametrs.getParam("weeks"))[0].getDate();
+            String dateWeek = null;
+            try {
+                dateWeek = ((Week[]) Parametrs.getParam("weeks"))[0].getDate();
+            } catch (NullPointerException ex) {
+                dateWeek = "none";
+            }
 
             URLSendRequest url;
             url = new URLSendRequest("https://mai.ru/", 50000);
@@ -58,17 +67,18 @@ public class TimeTableUpdater {
             String[] weekList = s.split("</table><br>")[0].split("</a></td>");
 
             weekListSize = weekList.length - 1;
+            Logger.getLogger("mai_time_table").log(Level.INFO, "weekListSize = " + weekListSize);
 
             //Составление списка недель.
             weeks = new ArrayList<>();
             for (int i = 0; i < weekList.length - 1; i++) {
                 int n = Integer.parseInt(
                         weekList[i].split("<tr><td >")[1].split("</td><td>")[0]);
-                String date = weekList[i].split("\">")[1];
+                String data = weekList[i].split("\">")[1];
                 String getString = "education/schedule/detail.php" +
                         weekList[i].split("\">")[0].split("href=\"")[1];
-                weeks.add(new Week(n, date));
-                System.out.println("номер недели - " + n + " / дата - " + date
+                weeks.add(new Week(n, data));
+                System.out.println("номер недели - " + n + " / дата - " + data
                         + " / get - " + getString);
 
                 final int I = i + 1;
@@ -88,13 +98,36 @@ public class TimeTableUpdater {
                     //Составление списка предметов.
                     String[] subjectList = dayList[j].split("<div class=\"sc-table-col sc-item-time\">");
                     for (int k = 1; k < subjectList.length; k++) {
-                        String lect = "";
-                        try {
-                            lect = subjectList[k].split("<span class=\"sc-lecturer\">")[1].split("<")[0];
-                        } catch (Exception ex) {
-                        }
-
+                        String time = "";
+                        String type = "";
+                        String name = "";
+                        String lecturer = "";
                         String location = "";
+
+                        try {
+                            time = subjectList[k].split("</div>")[0];
+                            time = Jsoup.parse(time).text();//.replaceAll("&ndash;", "-");;
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                        try {
+                            type = subjectList[k].split("<div class=\"sc-table-col sc-item-type\">")[1].split("</div>")[0];
+                            type = Jsoup.parse(type).text();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                        try {
+                            name = subjectList[k].split("<span class=\"sc-title\">")[1].split("</span>")[0];
+                            name = Jsoup.parse(name).text();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                        try {
+                            lecturer = subjectList[k].split("<span class=\"sc-lecturer\">")[1].split("</span")[0];
+                            lecturer = Jsoup.parse(lecturer).text();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                         try {
                             location = subjectList[k].split("<div class=\"sc-table-col sc-item-location\">")[1].split("</div>")[0]
                                     .replaceAll("<br>", " - ");
@@ -104,23 +137,23 @@ public class TimeTableUpdater {
                         }
 
                         Subject subject = new Subject(
-                                subjectList[k].split(" ")[0] + " - " +
-                                        subjectList[k].split("<")[0].split(" ")[2],
-                                subjectList[k].split("table-col sc-item-type\">")[1].split("<")[0],
-                                subjectList[k].split("<span class=\"sc-title\">")[1].split("<")[0],
-                                lect,
+                                time,
+                                type,
+                                name,
+                                lecturer,
                                 location
                         );
                         day.addSubject(subject);
                     }
 
                     weeks.get(i).addDay(day);
-                    position = i;
                 }
+                position = i;
+                Logger.getLogger("mai_time_table").log(Level.INFO, "position (loaded weeks) = " + position);
             }
 
             if (weeks.size() > 0) {
-                if (!data.equals(weeks.get(0).getDate())) isNewWeekList = true;
+                if (!dateWeek.equals(weeks.get(0).getDate())) isNewWeekList = true;
 
                 Gson gson = new Gson();
                 String json = gson.toJson(weeks);
@@ -137,6 +170,7 @@ public class TimeTableUpdater {
                 return false;
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             return false;
         }
     }
@@ -144,21 +178,21 @@ public class TimeTableUpdater {
     /**
      * Получение строки прогресса.
      */
-    public static String getProgressString() {
-        return position + "/" + weekListSize;
+    public String getProgressString() {
+        return (position + 1) + "/" + weekListSize;
     }
 
     /**
      * Проверка окончания загрузки.
      */
-    public static boolean isLoad() {
+    public boolean isLoad() {
         return isLoad;
     }
 
     /**
      * Установка статуса загрузки.
      */
-    public static void  setLoadStatus(boolean load) {
+    public void setLoadStatus(boolean load) {
         isLoad = load;
     }
 
@@ -166,7 +200,7 @@ public class TimeTableUpdater {
      * Проверка на наличие нового расписания.
      * @return
      */
-    public static boolean isNewWeekList() {
+    public boolean isNewWeekList() {
         return isNewWeekList;
     }
 }

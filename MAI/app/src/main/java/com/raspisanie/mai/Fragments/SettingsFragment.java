@@ -142,7 +142,7 @@ public class SettingsFragment extends android.app.Fragment {
             e.printStackTrace();
         }
 
-        ((TextView) view.findViewById(R.id.textViewD0)).setText(String.format("Расписание ? %s KB",  Integer.toString((int)data[0]/1024)));
+        ((TextView) view.findViewById(R.id.textViewD0)).setText(String.format("Расписание %s KB",  Integer.toString((int)data[0]/1024)));
         ((TextView) view.findViewById(R.id.textViewD1)).setText(String.format("Информация о группах %s KB", Integer.toString((int)data[1]/1024)));
         ((TextView) view.findViewById(R.id.textViewD2)).setText(String.format("Информация о ВУЗе %s KB", Integer.toString((int)data[2]/1024)));
 

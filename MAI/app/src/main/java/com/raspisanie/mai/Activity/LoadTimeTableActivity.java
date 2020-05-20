@@ -13,6 +13,7 @@ import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.Classes.TimeTable.Subject;
+import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
 import com.raspisanie.mai.Classes.URLSendRequest;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
@@ -23,7 +24,6 @@ import java.util.ArrayList;
 
 public class LoadTimeTableActivity extends AppCompatActivity {
     private SharedPreferences mSettings;
-    private ArrayList<Week> weeks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,107 +32,37 @@ public class LoadTimeTableActivity extends AppCompatActivity {
 
         mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
+        final TimeTableUpdater timeTableUpdater = new TimeTableUpdater();
+
+        final boolean[] isUpdate = {false};
         new Thread(() -> {
-            URLSendRequest url;
-            url = new URLSendRequest("https://mai.ru/", 50000);
-
-            String s = null;
-            while (s == null)
-            s = url.get("education/schedule/detail.php?group=" +
-                    ((SimpleTree<String>) Parametrs.getParam("tree")).getChildList()
-                            .get(mSettings.getInt("kurs", -1)).getChildList()
-                            .get(mSettings.getInt("fac", -1)).getChildList()
-                            .get(mSettings.getInt("group", -1)).getValue());
-
-            s = s.split("<table class=\"table\" >")[1];
-            String[] weekList = s.split("</table><br>")[0].split("</a></td>");
-
-            //Составление списка недель.
-            weeks = new ArrayList<>();
-            try {
-                for (int i = 0; i < weekList.length - 1; i++) {
-                    int n = Integer.parseInt(
-                            weekList[i].split("<tr><td >")[1].split("</td><td>")[0]);
-                    String date = weekList[i].split("\">")[1];
-                    String getString = "education/schedule/detail.php" +
-                            weekList[i].split("\">")[0].split("href=\"")[1];
-                    weeks.add(new Week(n, date));
-                    System.out.println("номер недели - " + n + " / дата - " + date
-                            + " / get - " + getString);
-
-                    final int I = i + 1;
-                    final int I2 = weekList.length - 1;
+            isUpdate[0] = timeTableUpdater.update(mSettings);
+        }).start();
+        new Thread(() -> {
+            String lastProgress = "";
+            while (true) {
+                if (!lastProgress.equals(timeTableUpdater.getProgressString())) {
                     runOnUiThread(() -> ((TextView) findViewById(R.id.textViewProgress)).setText(
-                                    "Загружаем ваше расписание...\n" +
-                                            I + "/" + I2));
-
-                    s = null;
-                    while (s == null)
-                    s = url.get(getString);
-                    String[] dayList = s.split("<div class=\"sc-table-col sc-day-header");
-                    //Составление списка дней.
-                    for (int j = 1; j < dayList.length; j++) {
-                        Day day = new Day(
-                                dayList[j].split("<span")[0].split(">")[1],
-                                dayList[j].split("<span class=\"sc-day\">")[1].split("</")[0]
-                        );
-
-                        //Составление списка предметов.
-                        String[] subjectList = dayList[j].split("<div class=\"sc-table-col sc-item-time\">");
-                        for (int k = 1; k < subjectList.length; k++) {
-                            String lect = "";
-                            try {
-                                lect = subjectList[k].split("<span class=\"sc-lecturer\">")[1].split("<")[0];
-                            } catch (Exception ex) {
-                            }
-
-                            String location = "";
-                            try {
-                                location = subjectList[k].split("<div class=\"sc-table-col sc-item-location\">")[1].split("</div>")[0]
-                                        .replaceAll("<br>", " - ");
-                                location = Jsoup.parse(location).text();
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-
-                            Subject subject = new Subject(
-                                    subjectList[k].split(" ")[0] + " - " +
-                                            subjectList[k].split("<")[0].split(" ")[2],
-                                    subjectList[k].split("table-col sc-item-type\">")[1].split("<")[0],
-                                    subjectList[k].split("<span class=\"sc-title\">")[1].split("<")[0],
-                                    lect,
-                                    location
-                            );
-                            day.addSubject(subject);
-                        }
-
-                        weeks.get(i).addDay(day);
-                    }
-
+                            "Загружаем ваше расписание...\n" + timeTableUpdater.getProgressString()));
                 }
-            } catch (IndexOutOfBoundsException ex) {
-                ex.printStackTrace();
+
+                if (timeTableUpdater.isLoad() || isUpdate[0]) {
+                    if (mSettings.getString("sport", "").length() > 10) {
+                        Intent intent = new Intent(LoadTimeTableActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        return;
+                    }
+                    Intent intent = new Intent(LoadTimeTableActivity.this, LoadInformationActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                lastProgress = timeTableUpdater.getProgressString();
             }
-
-            Gson gson = new Gson();
-            String json = gson.toJson(weeks);
-
-            SharedPreferences.Editor editor = mSettings.edit();
-            editor.putString("weeks", json);
-            editor.apply();
-
-            if (mSettings.getString("sport", "").length() > 10) {
-                Intent intent = new Intent(LoadTimeTableActivity.this, MainActivity.class);
-                startActivity(intent);
-                return;
-            }
-            Intent intent = new Intent(LoadTimeTableActivity.this, LoadInformationActivity.class);
-            startActivity(intent);
         }).start();
     }
 
     /**
-     * Переопределение метода нажатия кнопки назад.
+     * Переопределение метода нажатия кнопки назад
      */
     @Override
     public void onBackPressed() {

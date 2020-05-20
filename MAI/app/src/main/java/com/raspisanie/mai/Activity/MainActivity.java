@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        Logger.getLogger("mailog").log(Level.INFO, "MainActivity start method onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
