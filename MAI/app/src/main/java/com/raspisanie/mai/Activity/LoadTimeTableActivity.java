@@ -17,6 +17,8 @@ import com.raspisanie.mai.Classes.URLSendRequest;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
 
+import org.jsoup.Jsoup;
+
 import java.util.ArrayList;
 
 public class LoadTimeTableActivity extends AppCompatActivity {
@@ -84,14 +86,22 @@ public class LoadTimeTableActivity extends AppCompatActivity {
                             } catch (Exception ex) {
                             }
 
+                            String location = "";
+                            try {
+                                location = subjectList[k].split("<div class=\"sc-table-col sc-item-location\">")[1].split("</div>")[0]
+                                        .replaceAll("<br>", " - ");
+                                location = Jsoup.parse(location).text();
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+
                             Subject subject = new Subject(
                                     subjectList[k].split(" ")[0] + " - " +
                                             subjectList[k].split("<")[0].split(" ")[2],
                                     subjectList[k].split("table-col sc-item-type\">")[1].split("<")[0],
                                     subjectList[k].split("<span class=\"sc-title\">")[1].split("<")[0],
                                     lect,
-                                    subjectList[k].split("marker\">&nbsp;</span>")[1].split("</div>")[0]
-                                    .replaceAll("<br>", " - ")
+                                    location
                             );
                             day.addSubject(subject);
                         }
