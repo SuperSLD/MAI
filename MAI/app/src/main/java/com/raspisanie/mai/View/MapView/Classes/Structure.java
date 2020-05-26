@@ -3,6 +3,8 @@ package com.raspisanie.mai.View.MapView.Classes;
 import java.util.ArrayList;
 
 /**
+ * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+ *
  * Клас с информацией о здании.
  */
 public class Structure extends MapObject {
@@ -38,5 +40,34 @@ public class Structure extends MapObject {
      */
     public float[][] getColor() {
         return COLORS;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Установка адреса.
+     * @param location
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
+     * Получение адреса
+     * @return
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * Получение имени объекта.
+     * @return
+     */
+    public String getName() {
+        if (name.length() == 0) return null;
+        return name;
     }
 }

@@ -1,11 +1,15 @@
 package com.raspisanie.mai.View.MapView.Classes;
 
+import com.raspisanie.mai.View.MapView.GLTextureManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+ *
  * Класс хранящий обекты карты.
  */
 public class Map {
@@ -19,6 +23,13 @@ public class Map {
     private int[] typeRoadCount = new int[5];
     private int grassCount = 0;
 
+    /**
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
+     * Коструктор карты.
+     * Создае карту на основе файла .campus
+     * @param data
+     */
     public Map(String data) {
         structures = new ArrayList<>();
         grassZones = new ArrayList<>();
@@ -37,7 +48,13 @@ public class Map {
                     String[] vector = vectors[j].split("\\|");
                     structure.addVector(Integer.parseInt(vector[0]), Integer.parseInt(vector[1]));
                 }
-                structures.add(structure);
+                structure.setLocation(param[1]);
+                structure.setName(param[2]);
+                Logger.getLogger("mapview").log(
+                        Level.INFO, "create structure [name= " + structure.getName() +
+                                "; location= " + structure.getLocation() + "]"
+                );
+                        structures.add(structure);
             } catch (Exception ex) {
             }
         }
@@ -102,6 +119,18 @@ public class Map {
         vertices = new float[v.size()];
         for (int i = 0; i < v.size(); i++) {
             vertices[i] = v.get(i);
+        }
+    }
+
+    /**
+     * Создание текстовых текстур для отображения их на карте.
+     * @param glTextureManager
+     */
+    public void createTextTextures(GLTextureManager glTextureManager) {
+        for (Structure structure : structures) {
+            if (structure.getName() != null) {
+                glTextureManager.createTextTexture(structure.getName());
+            }
         }
     }
 

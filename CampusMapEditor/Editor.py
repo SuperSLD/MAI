@@ -13,7 +13,7 @@ canvas.pack(fill="both", expand=True)
 root.title("Editor")
 
 map = Map()
-file = open("campusMap.campus")
+file = open("campusMap.campus", encoding="utf-8")
 map.decode(file.read())
 
 img = tk.PhotoImage(file=os.getcwd() + '\images\yandexMap.png')
@@ -115,7 +115,7 @@ def create_map_object(event):
         minStruct = None
     if event.keycode == 13:
         data = map.encode()
-        file = open("campusMap.campus", "w")
+        file = open("campusMap.campus", "w", encoding="utf-8")
         print(data)
         file.write(data)
 

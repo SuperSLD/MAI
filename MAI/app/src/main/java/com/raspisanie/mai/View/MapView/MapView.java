@@ -24,6 +24,10 @@ import java.util.logging.Logger;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import static android.opengl.GLES10.glActiveTexture;
+import static android.opengl.GLES10.glBindTexture;
+import static android.opengl.GLES11.glTexCoordPointer;
+import static android.opengl.GLES11.glVertexPointer;
 import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
 import static android.opengl.GLES20.GL_FLOAT;
 import static android.opengl.GLES20.GL_FRAGMENT_SHADER;
@@ -43,6 +47,11 @@ import static android.opengl.GLES20.glUseProgram;
 import static android.opengl.GLES20.glVertexAttribPointer;
 import static android.opengl.GLES20.glViewport;
 
+/**
+ * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+ *
+ * Отображение карты кампуса.
+ */
 public class MapView extends GLSurfaceView {
     private Map map;
     private Context context;
@@ -56,6 +65,8 @@ public class MapView extends GLSurfaceView {
 
     private final GestureDetector gestureDetector;
     private final ScaleGestureDetector scaleDetector;
+
+    private GLTextureManager glTextureManager;
 
     private int w;
     private int h;
@@ -81,7 +92,10 @@ public class MapView extends GLSurfaceView {
         map = new Map(data);
         scrollBy(getWidth()/2, getHeight()/2);
 
+        glTextureManager = new GLTextureManager(context);
+
         vertices = map.getVertices();
+        map.createTextTextures(glTextureManager);
         setEGLContextClientVersion(2);
         setRenderer(new OpenGLRenderer(context));
 
@@ -90,7 +104,9 @@ public class MapView extends GLSurfaceView {
     }
 
     /**
-     * Отрисовка карты.
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
+     * Отрисовка карты по составленному списку треугольников.
      */
     public class OpenGLRenderer implements GLSurfaceView.Renderer {
         private Context context;
@@ -149,6 +165,20 @@ public class MapView extends GLSurfaceView {
             glEnableVertexAttribArray(aPositionLocation);
         }
 
+        private final float[] VERTEX_COORDINATES = new float[] {
+                -1.0f, +1.0f, 0.0f,
+                +1.0f, +1.0f, 0.0f,
+                -1.0f, -1.0f, 0.0f,
+                +1.0f, -1.0f, 0.0f
+        };
+
+        private final float[] TEXTURE_COORDINATES = new float[] {
+                0.0f, 0.0f,
+                1.0f, 0.0f,
+                0.0f, 1.0f,
+                1.0f, 1.0f
+        };
+
         @Override
         public void onDrawFrame(GL10 arg0) {
             glClear(GL_COLOR_BUFFER_BIT);
@@ -176,6 +206,15 @@ public class MapView extends GLSurfaceView {
                 glDrawArrays(GL_TRIANGLES, startIndex, map.getTypeStructureCount()[i]);
                 startIndex += map.getTypeStructureCount()[i];
             }
+
+            glActiveTexture(GL10.GL_TEXTURE0);
+            glBindTexture(GL10.GL_TEXTURE_2D, glTextureManager.getTextureId("0000"));
+
+            /*
+            glVertexPointer(3, GL10.GL_FLOAT, 0, VERTEX_BUFFER);
+            glTexCoordPointer(2, GL10.GL_FLOAT, 0, TEXCOORD_BUFFER);
+            glDrawArrays(GL10.GL_TRIANGLE_STRIP, 0, 4);
+             */
         }
     }
 

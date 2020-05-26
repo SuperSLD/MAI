@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Лучше тут ничего не трогать.
+ */
 public class FileUtils {
     public static String readTextFromRaw(Context context, int resourceId) {
         StringBuilder stringBuilder = new StringBuilder();

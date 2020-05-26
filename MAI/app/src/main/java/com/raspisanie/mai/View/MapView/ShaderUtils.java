@@ -17,6 +17,9 @@ import static android.opengl.GLES20.glGetShaderiv;
 import static android.opengl.GLES20.glLinkProgram;
 import static android.opengl.GLES20.glShaderSource;
 
+/**
+ * Лучше тут ничего не трогать.
+ */
 public class ShaderUtils {
     public static int createProgram(int vertexShaderId, int fragmentShaderId) {
         final int programId = glCreateProgram();

@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *  @author Леонид Соляной (solyanoy.leonid@gmail.com)
+ *
+ *  Объект на карте (жом, газон и т. д.)
+ */
 public class MapObject {
     protected ArrayList<Integer> x;
     protected ArrayList<Integer> y;
@@ -44,7 +49,9 @@ public class MapObject {
     }
 
     /**
-     * Добавление триугольников, принадлежащих
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
+     * Добавление треугольников, принадлежащих
      * данному объекту, если он является многоугольником,
      * в списов вершин.
      * @return
@@ -61,14 +68,16 @@ public class MapObject {
                     maxIndex = i;
                 }
             }
-            //      |i  j  k |
-            //VxU = |x1 y1 0 | = i(y1*0-y2*0) - j(x1*0 - x2*0) + k(x1*y2- x2*y1) = x1*y2 - x2*y1
-            //      |x2 y2 0 |
-            boolean vectorsOrientation = vectorMiltiplicationAbs(maxIndex-1, maxIndex, maxIndex+1);
+            /*
+                   |i  j  k |
+             VxU = |x1 y1 0 | = i(y1*0-y2*0) - j(x1*0 - x2*0) + k(x1*y2- x2*y1) = x1*y2 - x2*y1
+                   |x2 y2 0 |
+            */
+            boolean vectorsOrientation = vectorMultiplicationAbs(maxIndex-1, maxIndex, maxIndex+1);
 
             int i = 0;
             while (x.size() > 3) {
-                if (vectorMiltiplicationAbs(i, i+1, i+2) == vectorsOrientation) {
+                if (vectorMultiplicationAbs(i, i+1, i+2) == vectorsOrientation) {
                     boolean correct = true;
                     for (int j = 0; j < x.size(); j++) {
                         if (    (x.get(j) != x.get(getI(i)) && x.get(j) != x.get(getI(i+1)) && x.get(j) != x.get(getI(i+2))) &&
@@ -111,6 +120,8 @@ public class MapObject {
     }
 
     /**
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
      * Получение индекса вершины.
      * Для упрощения проверки на соответсвия размерам списка.
      * @param i входной индекс
@@ -121,6 +132,8 @@ public class MapObject {
     }
 
     /**
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
      * Определение направления вектора полученного в результате
      * векторного умножения двух сторон полигона.
      * @param p1 точка
@@ -128,7 +141,7 @@ public class MapObject {
      * @param p3 точка
      * @return совпажает ли направление вектора с положительным направлением.
      */
-    private boolean vectorMiltiplicationAbs(int p1, int p2, int p3) {
+    private boolean vectorMultiplicationAbs(int p1, int p2, int p3) {
         int x1 = x.get(getI(p1)) - x.get(getI(p2));
         int y1 = y.get(getI(p1)) - y.get(getI(p2));
 
@@ -137,7 +150,10 @@ public class MapObject {
         return x1*y2 - x2*y1 >= 0;
     }
 
-    /**Проверка на принадлежность точки к треугольнику.
+    /**
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
+     * Проверка на принадлежность точки к треугольнику.
      * @return true если тока в треугольнике.
      */
     private boolean pointInTriangle(int x1, int y1,
@@ -151,6 +167,8 @@ public class MapObject {
     }
 
     /**
+     * @author Леонид Соляной (solyanoy.leonid@gmail.com)
+     *
      * Класс для хранения данных о треугольниках.
      */
     protected class Triangle{
