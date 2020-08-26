@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InformationConnection {
-    private static final String SERVER_IP = "89.250.2.13";
+    private static final String SERVER_IP = "jutter.online";
     //private static final String SERVER_IP = "192.168.1.55:8080";
 
     private static WebSocket ws;

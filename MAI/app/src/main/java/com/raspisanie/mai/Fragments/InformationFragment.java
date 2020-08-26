@@ -46,10 +46,10 @@ public class InformationFragment extends Fragment {
         InformationConnection.sendInfoActivity(this.getClass(), "onCreateView()");
 
 
-        view.findViewById(R.id.button0).setOnClickListener(v -> {
+        /*view.findViewById(R.id.button0).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), CampusMapActivity.class);
             startActivity(intent);
-        });
+        });*/
         view.findViewById(R.id.button1).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), FoodActivity.class);
             startActivity(intent);
