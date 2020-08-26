@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if (thisWeek < 0) thisWeek = 0;
+        Logger.getLogger("mai_log").log(Level.INFO, "this week -> " + thisWeek);
         Parametrs.setParam("thisWeek", thisWeek);
     }
 

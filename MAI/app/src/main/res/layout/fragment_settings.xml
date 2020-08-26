@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/greyTextColor"
-                    android:text="Ваши данные:" />
+                    android:text="@string/fragment_settings_title1" />
                 <TextView
                     android:id="@+id/textView1"
                     android:layout_width="match_parent"
@@ -349,7 +349,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
-                    android:text="@string/autor" />
+                    android:text="@string/author" />
             </LinearLayout>
 
             <LinearLayout

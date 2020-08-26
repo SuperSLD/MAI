@@ -273,15 +273,20 @@ public class MapView extends GLSurfaceView {
         }
     }
 
+    /**
+     * Масштабирование карты. В обозначенных пределах.
+     */
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
             float scaleFactor = detector.getScaleFactor();
 
-            zoom    *= scaleFactor;
-            centerX *= scaleFactor;
-            centerY *= scaleFactor;
-            Logger.getLogger("mapview").log(Level.INFO, "SCALE_EVENT");
+            if (zoom > 0.23605603f && zoom < 1.6001107f) {
+                zoom *= scaleFactor;
+                centerX *= scaleFactor;
+                centerY *= scaleFactor;
+                Logger.getLogger("mapview").log(Level.INFO, "SCALE_EVENT zoom = " + zoom);
+            }
             return true;
         }
     }

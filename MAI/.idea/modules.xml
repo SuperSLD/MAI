@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Documents-GitHub-MAI-MAI.iml" filepath="$PROJECT_DIR$/Documents-GitHub-MAI-MAI.iml" group="MAI" />
       <module fileurl="file://$PROJECT_DIR$/GitHub-MAI-MAI.iml" filepath="$PROJECT_DIR$/GitHub-MAI-MAI.iml" group="MAI" />
+      <module fileurl="file://$PROJECT_DIR$/app/GitHub-MAI-MAI-app.iml" filepath="$PROJECT_DIR$/app/GitHub-MAI-MAI-app.iml" group="MAI/app" />
       <module fileurl="file://$PROJECT_DIR$/MAI.iml" filepath="$PROJECT_DIR$/MAI.iml" />
       <module fileurl="file://$PROJECT_DIR$/MAI-MAI.iml" filepath="$PROJECT_DIR$/MAI-MAI.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/MAI-MAI-app.iml" filepath="$PROJECT_DIR$/app/MAI-MAI-app.iml" group="MAI/app" />

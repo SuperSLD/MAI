@@ -1,5 +1,6 @@
 package com.raspisanie.mai.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -48,6 +49,7 @@ public class SettingsFragment extends android.app.Fragment {
 
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +69,10 @@ public class SettingsFragment extends android.app.Fragment {
         String kursName  = tree.getChildList().get((int)Parametrs.getParam("kurs"))
                 .getValue();
 
-        ((TextView) view.findViewById(R.id.textView1)).setText("Группа " + groupName);
+        ((TextView) view.findViewById(R.id.textView1)).setText(
+                getResources().getString(R.string.fragment_settings_title2)
+                + groupName
+        );
         ((TextView) view.findViewById(R.id.textView2)).setText(facName);
         ((TextView) view.findViewById(R.id.textView3)).setText(kursName);
 

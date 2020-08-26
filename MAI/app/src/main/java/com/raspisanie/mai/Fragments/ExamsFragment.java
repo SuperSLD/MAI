@@ -89,7 +89,7 @@ public class ExamsFragment extends android.app.Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
             recyclerView.setAdapter(adapter);
         } else {
-            ((TextView) view.findViewById(R.id.errText)).setText("Расписание вашей сесии отсутствует");
+            ((TextView) view.findViewById(R.id.errText)).setText(R.string.exam_fragment_error_string);
             view.findViewById(R.id.examsLayout).setVisibility(View.GONE);
         }
     }

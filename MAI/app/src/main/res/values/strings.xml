@@ -10,16 +10,29 @@
     <string name="title_event_info">Информация о событии</string>
 
     <!-- Settings Fragment -->
+    <string name="fragment_settings_title1">Ваши данные:</string>
+    <string name="fragment_settings_title2">Группа</string>
     <string name="versionString">1.1.005/021.05.2020</string>
-    <string name="autor">Соляной Леонид</string>
+    <string name="author">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
         Вся информация загружается один раз и потом доступна без доступа в интернет.</string>
     <string name="setting_data">Дата последнего фонового обновления:</string>
 
-    <!-- Fragment Info -->
+    <!-- Fragment Information -->
     <string name="titleCumpus">Кампус</string>
     <string name="titleLife">Жизнь</string>
+    <string name="fragment_information_map">Общая схема кампуса</string>
+    <string name="fragment_information_food">Столовые и буфеты</string>
+    <string name="fragment_information_books">Библиотеки</string>
+    <string name="fragment_information_sport_group">Спортивные секции</string>
+    <string name="fragment_information_stud_organisation">Студенческие обхединения</string>
+    <string name="fragment_information_creative_group">Творческие коллективы и клубы</string>
+
+    <!-- Fragment Time Table -->
+
+    <!-- Fragment Exams -->
+    <string name="exam_fragment_error_string">Расписание вашей сесии отсутствует</string>
 
     <!--Прочие строки -->
     <string name="versionMessage">
