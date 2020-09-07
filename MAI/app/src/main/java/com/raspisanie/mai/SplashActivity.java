@@ -53,15 +53,18 @@ public class SplashActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
                         return;
                     }
                     Intent intent = new Intent(SplashActivity.this, LoadInformationActivity.class);
                     startActivity(intent);
+                    finish();
                     return;
                 }
 
                 Intent intent = new Intent(SplashActivity.this, LoadTimeTableActivity.class);
                 startActivity(intent);
+                finish();
                 return;
             }
             Intent intent = new Intent(this, Open.class);

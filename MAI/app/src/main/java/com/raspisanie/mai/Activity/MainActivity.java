@@ -13,7 +13,6 @@ import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Adapters.TimeTable.ViewHolderFactory;
-import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.TimeTable.EventCard;
 import com.raspisanie.mai.Classes.TimeTable.Week;
@@ -53,12 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
         setThisWeek();
         ViewHolderFactory.setMainContext(this);
-
-        InformationConnection.setPref(mSettings);
-        Logger.getLogger("mailog").log(Level.INFO, "information / " + InformationConnection.isOpen());
-        if (!InformationConnection.isOpen()) {
-            InformationConnection.openConnection();
-        }
 
         Parametrs.setParam("kurs", mSettings.getInt("kurs", -1));
         Parametrs.setParam("fac", mSettings.getInt("fac", -1));
@@ -119,18 +112,6 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("version", getResources().getString(R.string.versionString));
         editor.apply();
 
-    }
-
-    /**
-     * Переопределение метода нажатия кнопки назад.
-     */
-    @Override
-    public void onBackPressed() {
-        //<><><><><><>
-        Intent startMain = new Intent(Intent.ACTION_MAIN);
-        startMain.addCategory(Intent.CATEGORY_HOME);
-        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(startMain);
     }
 
     /**

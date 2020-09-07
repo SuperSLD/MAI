@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.TimeTable.EventCard;
-import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.R;
 
 import jp.wasabeef.blurry.Blurry;
@@ -26,8 +25,6 @@ public class EventInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
         eventCard = (EventCard) Parametrs.getParam("eventInfoParam");
-
-        InformationConnection.sendInfoActivity(this.getClass(), "onCreate()");
 
         ImageView imageView = findViewById(R.id.background);
         if (eventCard.getBitmap() != null) {

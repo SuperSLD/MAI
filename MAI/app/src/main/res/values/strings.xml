@@ -12,7 +12,7 @@
     <!-- Settings Fragment -->
     <string name="fragment_settings_title1">Ваши данные:</string>
     <string name="fragment_settings_title2">Группа</string>
-    <string name="versionString">1.1.006/26.08.2020</string>
+    <string name="versionString">1.1.008/06.09.2020</string>
     <string name="author">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -26,7 +26,7 @@
     <string name="fragment_information_food">Столовые и буфеты</string>
     <string name="fragment_information_books">Библиотеки</string>
     <string name="fragment_information_sport_group">Спортивные секции</string>
-    <string name="fragment_information_stud_organisation">Студенческие обхединения</string>
+    <string name="fragment_information_stud_organisation">Студенческие объединения</string>
     <string name="fragment_information_creative_group">Творческие коллективы и клубы</string>
 
     <!-- Fragment Time Table -->
@@ -36,8 +36,6 @@
 
     <!--Прочие строки -->
     <string name="versionMessage">
-        На сайте маи в расписании допущена ошибка. Поэтому недели смещены на одну вперед.
-        Сообщение об этой ошибке уже отправлено в поддержку. Возможно скоро ошибка будет исправлена.
-        Когда это произойдет расписание само обновится или его можно будет обновить самостоятельно.
+        Рефакторинг кода.
     </string>
 </resources>

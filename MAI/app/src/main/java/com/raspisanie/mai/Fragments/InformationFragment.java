@@ -17,11 +17,9 @@ import com.raspisanie.mai.Activity.CreativGroupActivity;
 import com.raspisanie.mai.Activity.FoodActivity;
 import com.raspisanie.mai.Activity.SportGroupActivity;
 import com.raspisanie.mai.Activity.StudOrgActivity;
-import com.raspisanie.mai.InformationConnection.InformationConnection;
-import com.raspisanie.mai.InformationConnection.InformationRename;
+
 import com.raspisanie.mai.R;
 
-@InformationRename(name = "InformationFragment")
 public class InformationFragment extends Fragment {
 
     @Override
@@ -42,9 +40,6 @@ public class InformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_information, null);
-
-        InformationConnection.sendInfoActivity(this.getClass(), "onCreateView()");
-
 
         /*view.findViewById(R.id.button0).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), CampusMapActivity.class);

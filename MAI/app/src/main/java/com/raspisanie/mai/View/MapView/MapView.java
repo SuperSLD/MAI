@@ -281,7 +281,8 @@ public class MapView extends GLSurfaceView {
         public boolean onScale(ScaleGestureDetector detector) {
             float scaleFactor = detector.getScaleFactor();
 
-            if (zoom > 0.23605603f && zoom < 1.6001107f) {
+            //TODO: Ограничить область зума
+            if (true) {//zoom > 0.23605603f && zoom < 1.6001107f) {
                 zoom *= scaleFactor;
                 centerX *= scaleFactor;
                 centerY *= scaleFactor;

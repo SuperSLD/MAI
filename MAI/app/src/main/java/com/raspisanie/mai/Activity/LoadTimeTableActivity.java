@@ -50,10 +50,12 @@ public class LoadTimeTableActivity extends AppCompatActivity {
                     if (mSettings.getString("sport", "").length() > 10) {
                         Intent intent = new Intent(LoadTimeTableActivity.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
                         return;
                     }
                     Intent intent = new Intent(LoadTimeTableActivity.this, LoadInformationActivity.class);
                     startActivity(intent);
+                    finish();
                     return;
                 }
                 lastProgress = timeTableUpdater.getProgressString();

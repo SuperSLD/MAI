@@ -16,19 +16,16 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Adapters.ExamTableAdapter;
-import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.Classes.TimeTable.Day;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.Classes.TimeTable.Subject;
 import com.raspisanie.mai.Classes.URLSendRequest;
 import com.raspisanie.mai.Classes.TimeTable.Week;
-import com.raspisanie.mai.InformationConnection.InformationRename;
 import com.raspisanie.mai.R;
 
 import org.jsoup.Jsoup;
 
-@InformationRename(name = "ExamsFragment")
 public class ExamsFragment extends android.app.Fragment {
     private View view;
     private SharedPreferences mSettings;
@@ -53,8 +50,6 @@ public class ExamsFragment extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mSettings = getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
-
-        InformationConnection.sendInfoActivity(this.getClass(), "onCreateView()");
 
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_exams, null);

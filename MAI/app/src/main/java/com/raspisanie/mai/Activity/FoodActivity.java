@@ -11,7 +11,6 @@ import android.widget.ListView;
 import com.raspisanie.mai.Adapters.StolListAdapter;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
-import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.R;
 
 public class FoodActivity extends AppCompatActivity {
@@ -19,8 +18,6 @@ public class FoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stol_list);
-
-        InformationConnection.sendInfoActivity(this.getClass(), "onCreate()");
 
         if (Parametrs.getParam("stol") != null) {
             findViewById(R.id.errText).setVisibility(View.GONE);

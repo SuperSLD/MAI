@@ -22,16 +22,13 @@ import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
-import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
-import com.raspisanie.mai.InformationConnection.InformationRename;
 import com.raspisanie.mai.R;
 import com.raspisanie.mai.View.DiagramView;
 
 import java.io.UnsupportedEncodingException;
 
-@InformationRename(name = "SettingsFragment")
 public class SettingsFragment extends android.app.Fragment {
 
     @Override
@@ -57,9 +54,6 @@ public class SettingsFragment extends android.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, null);
         SharedPreferences mSettings = getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
-        InformationConnection.sendInfoActivity(this.getClass(), "onCreateView()");
-
-        //Установка текста в информацию о группе
         SimpleTree<String> tree = (SimpleTree<String>) Parametrs.getParam("tree");
         String groupName = tree.getChildList().get((int)Parametrs.getParam("kurs"))
                 .getChildList().get((int)Parametrs.getParam("fac"))
@@ -162,8 +156,6 @@ public class SettingsFragment extends android.app.Fragment {
                         getResources().getColor(R.color.diagram2),
                         getResources().getColor(R.color.diagram3)
                 });
-
-        ((TextView) view.findViewById(R.id.textVie001)).setText(mSettings.getString("infoId", "Вас еще не занесли."));
 
         return view;
     }

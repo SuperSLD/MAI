@@ -200,6 +200,7 @@ public class LoadInformationActivity extends AppCompatActivity {
 
             Intent intent = new Intent(LoadInformationActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }).start();
     }
 
@@ -209,6 +210,14 @@ public class LoadInformationActivity extends AppCompatActivity {
      */
     private void setProgressText(String s) {
         runOnUiThread(() -> ((TextView) findViewById(R.id.textViewProgress)).setText(s));
+    }
+
+    /**
+     * Переопределение метода нажатия кнопки назад
+     */
+    @Override
+    public void onBackPressed() {
+        // <><><><>
     }
 
     /**

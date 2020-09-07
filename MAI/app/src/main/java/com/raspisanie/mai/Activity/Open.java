@@ -136,7 +136,7 @@ public class Open extends AppCompatActivity {
     }
 
     /**
-     * Переопределение метода нажатия кнопки назад.
+     * Переопределение метода нажатия кнопки назад
      */
     @Override
     public void onBackPressed() {

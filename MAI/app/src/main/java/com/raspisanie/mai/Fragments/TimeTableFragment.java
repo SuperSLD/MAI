@@ -21,13 +21,11 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Activity.MainActivity;
-import com.raspisanie.mai.InformationConnection.InformationConnection;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Adapters.TimeTable.TimeTableAdapter;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
 import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
 import com.raspisanie.mai.Classes.TimeTable.Week;
-import com.raspisanie.mai.InformationConnection.InformationRename;
 import com.raspisanie.mai.R;
 
 import java.text.SimpleDateFormat;
@@ -35,7 +33,6 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@InformationRename(name = "TimeTableFragment")
 public class TimeTableFragment extends android.app.Fragment{
     View view;
     private static boolean isUpdate = false;
@@ -139,8 +136,6 @@ public class TimeTableFragment extends android.app.Fragment{
             view = inflater.inflate(R.layout.fragment_time_table, null);
             setDaysList((int) Parametrs.getParam("thisWeek"));
         }
-
-        InformationConnection.sendInfoActivity(this.getClass(), "onCreateView()");
 
         return view;
     }
