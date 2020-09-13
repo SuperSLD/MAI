@@ -11,6 +11,7 @@ import java.io.File;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Вебсокет для обработки потока данных от
@@ -88,5 +89,16 @@ public class ConnectionWebsocket {
     @OnError
     public void onError(Throwable t) {
         System.out.println("onError::" + t.getMessage());
+    }
+
+    public static String generateKey(int length) {
+        String key = "";
+        String listSymbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            key += listSymbols.charAt(random.nextInt(listSymbols.length()));
+        }
+
+        return key;
     }
 }

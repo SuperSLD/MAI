@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Century Gothic Regular';
+    src: url('CenturyGothic.ttf');
+    src: url('CenturyGothic.ttf?#iefix') format('embedded-opentype'),
+    url('CenturyGothic.ttf') format('woff'),
+    url('CenturyGothic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Century Gothic Regular";
+}
+
+div.main_container {
+    width: 100vh;
+    padding: 10px;
+}
