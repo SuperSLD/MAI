@@ -12,7 +12,7 @@
     <!-- Settings Fragment -->
     <string name="fragment_settings_title1">Ваши данные:</string>
     <string name="fragment_settings_title2">Группа</string>
-    <string name="versionString">1.1.008/06.09.2020</string>
+    <string name="versionString">1.1.009/15.09.2020</string>
     <string name="author">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -36,6 +36,6 @@
 
     <!--Прочие строки -->
     <string name="versionMessage">
-        Рефакторинг кода.
+        Исправлен вылет при загрузке.
     </string>
 </resources>

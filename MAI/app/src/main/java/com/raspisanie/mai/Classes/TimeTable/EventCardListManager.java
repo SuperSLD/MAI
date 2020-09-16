@@ -159,28 +159,32 @@ public class EventCardListManager {
         if (parametrs != null && !parametrs.getBoolean("eventCheck", true)) return;
         for (EventCard event :eventCards) {
             if (!event.isDelete()) {
-                boolean insert = false;
-                String[] eventDate = {event.getDate().split(" ")[0], getM(event.getDate().split(" ")[1])};
-                for (int i = 0; i < list.size(); i++)
-                    if (list.get(i) instanceof Day) {
-                        Logger.getLogger("mailog").log(Level.INFO, "EventCardListManager event date:"
-                                + eventDate[0] + "."
-                                + eventDate[1] + " //day date:"
-                                + ((Day) list.get(i)).getDate() + " name:" + event.getName());
-                        String[] dayDate = ((Day) list.get(i)).getDate().split("\\.");
-                        if (dayDate[0].equals(eventDate[0])
-                                && dayDate[1].equals(eventDate[1])) {
-                            int dayPosition = list.indexOf(list.get(i));
-                            if (dayPosition == list.size() - 1) {
-                                list.add(event);
-                            } else {
-                                list.add(dayPosition + 1, event);
+                try {
+                    boolean insert = false;
+                    String[] eventDate = {event.getDate().split(" ")[0], getM(event.getDate().split(" ")[1])};
+                    for (int i = 0; i < list.size(); i++)
+                        if (list.get(i) instanceof Day) {
+                            Logger.getLogger("mailog").log(Level.INFO, "EventCardListManager event date:"
+                                    + eventDate[0] + "."
+                                    + eventDate[1] + " //day date:"
+                                    + ((Day) list.get(i)).getDate() + " name:" + event.getName());
+                            String[] dayDate = ((Day) list.get(i)).getDate().split("\\.");
+                            if (dayDate[0].equals(eventDate[0])
+                                    && dayDate[1].equals(eventDate[1])) {
+                                int dayPosition = list.indexOf(list.get(i));
+                                if (dayPosition == list.size() - 1) {
+                                    list.add(event);
+                                } else {
+                                    list.add(dayPosition + 1, event);
+                                }
+                                insert = true;
                             }
-                            insert = true;
                         }
+                    if (isThisWeek(eventDate, week) && !insert) {
+                        list.add(event);
                     }
-                if (isThisWeek(eventDate, week) && !insert) {
-                    list.add(event);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         }

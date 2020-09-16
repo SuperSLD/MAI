@@ -31,6 +31,7 @@ textarea.key {
     height: 130px;
     margin: 10px;
     border: 1px solid lightgrey;
+    padding: 10px;
     border-radius: 10px;
     outline: none;
     resize: none;
