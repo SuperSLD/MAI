@@ -62,5 +62,29 @@ public class AuthorisationServlet extends HttpServlet {
     private void setAttribute(HttpSession session, HttpServletRequest req) {
         req.setAttribute("user_level", session.getAttribute("level"));
         req.setAttribute("title","Новости");
+
+        String newsHtml = "";
+        try {
+            ResultSet rs = DBConnector.executeQuery("SELECT title, news_text, date_string FROM news ORDER BY date_string DESC LIMIT 100");
+            while (rs.next()) {
+                newsHtml += insertDataInHtml(
+                        rs.getString("title"),
+                        rs.getString("news_text"),
+                        rs.getString("date_string"));
+            }
+        } catch (Exception ex) {
+
+        }
+        req.setAttribute("news", newsHtml);
+    }
+
+    public static String insertDataInHtml(String title, String text, String date) {
+        return "<div class=\"note\">" +
+                "<span class=\"news_title\"><b>"+title+"</b></span><br><br>" +
+                "<span class=\"news_content\">" + text +
+                "</span><br>" +
+                "<div align='right'><span class=\"news_time\">" + date +
+                "</span></div>" +
+                "</div>";
     }
 }

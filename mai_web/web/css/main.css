@@ -20,7 +20,6 @@ div.main_container {
 }
 div.add_news {
     margin-top: 20px;
-    height: 20px;
     border-radius: 10px;
     border: 1px solid lightgrey;
     padding: 10px;
@@ -42,4 +41,56 @@ span.news_content {
 span.news_time {
     font-size: 15px;
     color: lightgrey;
+}
+span.subtitle {
+    font-size: 15px;
+    color: lightgrey;
+    margin: 10px;
+}
+span.title_add_note {
+    font-size: 17px;
+    color: black;
+    margin: 10px;
+}
+input.title_input {
+    width: calc(100vh - 20px);
+    height: 30px;
+    font-size: 17px;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+textarea.text_input {
+    width: calc(100vh - 20px);
+    height: 100px;
+    font-size: 17px;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    outline: none;
+    resize: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+button {
+    padding: 5px;
+    color: #3089FF;
+    border-radius: 10px;
+    background: white;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: 1px solid #3089FF;
+    outline: none;
+}
+button:hover {
+    color: white;
+    background: #3089FF;
+}
+button:active {
+    color: white;
+    background: #383EFF;
 }

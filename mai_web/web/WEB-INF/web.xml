@@ -12,4 +12,13 @@
         <servlet-name>authorisation</servlet-name>
         <url-pattern>/auth</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>news</servlet-name>
+        <servlet-class>Servlets.NewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>news</servlet-name>
+        <url-pattern>/news</url-pattern>
+    </servlet-mapping>
 </web-app>
