@@ -24,7 +24,8 @@ function init () {
             var object = JSON.parse(this.responseText);
             console.log(object);
             alert(object.err_text + "\n\nError code: " + object.err_code);
-            if (object.err_code = "0") {
+            if (object.err_code == "0") {
+                console.log("add html");
                 var newsContainer = document.getElementById("news_container");
                 newsContainer.innerHTML = object.html + newsContainer.innerHTML
                 document.getElementById("title_new_note").value = "";
