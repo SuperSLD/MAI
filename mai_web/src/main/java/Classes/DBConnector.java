@@ -24,7 +24,15 @@ public class DBConnector {
 
             Class.forName(properties.getProperty("db_class_name"));
 
-            con = DriverManager.getConnection(properties.getProperty("connection"), properties);
+            while (true) {
+                try {
+                    con = DriverManager.getConnection(properties.getProperty("connection"), properties);
+                    break;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Thread.sleep(10000);
+                }
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

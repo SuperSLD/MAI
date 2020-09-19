@@ -40,6 +40,7 @@ public class EventCardItem extends TimeTableViewHolder {
 
     private LinearLayout background;
     private LinearLayout foreground;
+    private LinearLayout nonSwipeForeground;
     private EventCard eventCard;
 
     public EventCardItem(@NonNull View itemView, Context context, TimeTableAdapter adapter, MainActivity activity) {
@@ -63,6 +64,7 @@ public class EventCardItem extends TimeTableViewHolder {
      */
     @Override
     public void bind(Object obj) {
+        foreground.setVisibility(View.VISIBLE);
         EventCard eventCard = (EventCard) obj;
         this.eventCard = eventCard;
         imageView.post(() -> {
@@ -114,12 +116,18 @@ public class EventCardItem extends TimeTableViewHolder {
     public void swipe(Canvas c, RecyclerView recyclerView, float dX, float dY,
                        int actionState, boolean isCurrentlyActive) {
 
-        if (dX < 0)
+        if (dX < 0) {
             background.setVisibility(View.VISIBLE);
-        if (dX == 0)
+            getDefaultUIUtil().onDraw(c, recyclerView, foreground, dX, dY,
+                    actionState, isCurrentlyActive);
+        }
+        if (dX == 0) {
             background.setVisibility(View.INVISIBLE);
-
-        getDefaultUIUtil().onDraw(c, recyclerView, foreground, dX, dY,
-                actionState, isCurrentlyActive);
+        }
+        if (dX == -foreground.getWidth()) {
+            foreground.setVisibility(View.INVISIBLE);
+            getDefaultUIUtil().onDraw(c, recyclerView, foreground, 0, dY,
+                    actionState, isCurrentlyActive);
+        }
     }
 }
