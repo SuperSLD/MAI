@@ -34,7 +34,7 @@ public class EventCardListManager {
 
     private static String[] state;
     public static ArrayList<EventCard> eventCards = new ArrayList<>();
-    private static SharedPreferences parametrs;
+    private static SharedPreferences settings;
 
     public EventCardListManager() {
         //TODO: паттерн одиночки заюзать
@@ -45,14 +45,14 @@ public class EventCardListManager {
      */
     public static void initList(Context context) {
         try {
-            parametrs = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
+            settings = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
             Logger.getLogger("mailog").log(Level.INFO, "init events list");
-            state = parametrs.getString("cardState",
+            state = settings.getString("cardState",
                     "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0").split(",");
-            String json = parametrs.getString("events", "");
+            String json = settings.getString("events", "");
             Gson gson = new Gson();
             EventCard[] list = gson.fromJson(json, EventCard[].class);
-            String[] bytes = gson.fromJson(parametrs.getString("eventsBitmap", ""), String[].class);
+            String[] bytes = gson.fromJson(settings.getString("eventsBitmap", ""), String[].class);
             Logger.getLogger("mailog").log(Level.INFO, "events: " + list.length + "/ bytes:" + bytes.length);
             int i = 0;
             for (EventCard ev : list) {
@@ -169,7 +169,7 @@ public class EventCardListManager {
      * @param list список объектов недели.
      */
     public static void insertEventCardsInList(ArrayList<Object> list, int week) {
-        if (parametrs != null && !parametrs.getBoolean("eventCheck", true)) return;
+        if (settings != null && !settings.getBoolean("eventCheck", true)) return;
         for (EventCard event :eventCards) {
             if (!event.isDelete()) {
                 try {
@@ -291,6 +291,6 @@ public class EventCardListManager {
             state[i] = eventCards.get(i).isDelete() ? "1" : "0";
             s += state[i] + ",";
         }
-        parametrs.edit().putString("cardState", s).apply();
+        settings.edit().putString("cardState", s).apply();
     }
 }

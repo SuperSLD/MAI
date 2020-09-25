@@ -48,6 +48,7 @@ public class TimeTableItem extends TimeTableViewHolder {
                     calendar.get(Calendar.DAY_OF_MONTH)) {
                 dayHeader.setBackgroundResource(R.color.dayGreyHeader);
             } else {
+                dayHeader.setBackgroundResource(R.color.colorPrimary);
                 Logger.getLogger("mailog").log(Level.INFO, "time table adapter: BIND THIS DAY");
             }
         } else {
