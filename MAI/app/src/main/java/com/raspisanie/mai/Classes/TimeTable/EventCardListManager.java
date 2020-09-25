@@ -30,9 +30,15 @@ import java.util.logging.Logger;
  */
 public class EventCardListManager {
 
+    private static EventCardListManager eventCardListManager;
+
     private static String[] state;
     public static ArrayList<EventCard> eventCards = new ArrayList<>();
     private static SharedPreferences parametrs;
+
+    public EventCardListManager() {
+        //TODO: паттерн одиночки заюзать
+    }
 
     /**
      * Инициализация списка.
@@ -42,7 +48,7 @@ public class EventCardListManager {
             parametrs = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
             Logger.getLogger("mailog").log(Level.INFO, "init events list");
             state = parametrs.getString("cardState",
-                    "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,00,0,0,0,0").split(",");
+                    "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0").split(",");
             String json = parametrs.getString("events", "");
             Gson gson = new Gson();
             EventCard[] list = gson.fromJson(json, EventCard[].class);
@@ -72,8 +78,14 @@ public class EventCardListManager {
             url = new URLSendRequest("https://mai.ru", 50000);
 
             String s = null;
-            while (s == null)
-                s = url.get("/press/events/");
+            while (s == null) {
+                try {
+                    s = url.get("/press/events/");
+                    Thread.sleep(10000);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
 
             String[] eventsHtml = s.split("<div class=\"row j-marg-bottom\"");
             state = new String[eventsHtml.length];
@@ -88,15 +100,15 @@ public class EventCardListManager {
                         .replaceAll("&mdash;", "- ").replaceAll("до ", "");
 
                 String urlImage = "https://mai.ru" + eventsHtml[i].split("class=\"img-responsive\" src=\"")[1].split("\"></")[0];
-                Logger.getLogger("mailog").log(Level.INFO, "url:" + urlImage);
+                Logger.getLogger("mailog").log(Level.INFO, "url event image:" + urlImage);
                 URL newurl = new URL(urlImage);
                 Bitmap bitmap = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
                 bitmap = getResizedBitmap(bitmap, bitmap.getWidth() / 2, bitmap.getHeight() / 2);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos); //bm is the bitmap object
                 byte[] b = baos.toByteArray();
-                String encoded = Base64.encodeToString(b, Base64.DEFAULT);
-                bitmapStrings.add(encoded);
+                String encodedBitmap = Base64.encodeToString(b, Base64.DEFAULT);
+                bitmapStrings.add(encodedBitmap);
 
                 String info = null;
                 while (info == null) {
@@ -108,7 +120,8 @@ public class EventCardListManager {
                 }
                 info = info.split("<div class=\"text text-lg\">")[1].split("</div>")[0];
 
-                events.add(new EventCard(eventName, eventDate, encoded, informationConvert(info), "0"));
+                EventCard eventCard = new EventCard(eventName, eventDate, encodedBitmap, informationConvert(info), "0");
+                events.add(eventCard);
             }
 
             eventCards.clear();

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
+import com.raspisanie.mai.Activity.NewsActivity;
 import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
 import com.raspisanie.mai.Classes.Parametrs;
@@ -64,7 +65,7 @@ public class SettingsFragment extends android.app.Fragment {
                 .getValue();
 
         ((TextView) view.findViewById(R.id.textView1)).setText(
-                getResources().getString(R.string.fragment_settings_title2)
+                getResources().getString(R.string.fragment_settings_title2)  + " "
                 + groupName
         );
         ((TextView) view.findViewById(R.id.textView2)).setText(facName);
@@ -74,41 +75,23 @@ public class SettingsFragment extends android.app.Fragment {
 
         //Обработчики нажатий на кнопки под информацией
         view.findViewById(R.id.button).setOnClickListener(v -> {
-            Intent intent =
-                    new Intent(getActivity().getBaseContext(), LoadTimeTableActivity.class);
-            SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
-            editor.putString("weeks", "");
-            editor.apply();
-            startActivity(intent);
+            reloadTimeTable();
         });
         view.findViewById(R.id.button0).setOnClickListener(v -> {
-            Intent intent =
-                    new Intent(getActivity().getBaseContext(), Open.class);
-            SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
-            editor.putString("weeks", "");
-            editor.putString("groupInfo", "");
-            editor.putInt("group", -1);
-            editor.apply();
-            startActivity(intent);
+            reloadUserInformation();
         });
         view.findViewById(R.id.button3).setOnClickListener(v -> {
             Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://mai.ru"));
             startActivity(myIntent);
         });
         view.findViewById(R.id.button01).setOnClickListener(v -> {
-            Intent intent =
-                    new Intent(getActivity().getBaseContext(), LoadInformationActivity.class);
-            SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
-            editor.putString("sport", "");
-            editor.putString("creative", "");
-            editor.putString("studOrg", "");
-            editor.putString("stol", "");
-            editor.putString("lib", "");
-            editor.apply();
-            startActivity(intent);
+            reloadInformation();
         });
         view.findViewById(R.id.seteventsrtate).setOnClickListener(v -> {
-            EventCardListManager.unarchiveEventList();
+            reloadEvents();
+        });
+        view.findViewById(R.id.appnews).setOnClickListener(v -> {
+            openNewsList();
         });
 
         //устнвка данных об фоновом обновлении расписания
@@ -158,6 +141,69 @@ public class SettingsFragment extends android.app.Fragment {
                 });
 
         return view;
+    }
+
+    /**
+     * Открытие списка новостей приложения.
+     * @author Соляной Леонид (solyanoy.leonid@gmail.com)
+     */
+    private void openNewsList() {
+        Intent intent =
+                new Intent(getActivity().getBaseContext(), NewsActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Перезагрузка информации о группе и всей остальной информации.
+     * @author Соляной Леонид (solyanoy.leonid@gmail.com)
+     */
+    private void reloadUserInformation() {
+        Intent intent =
+                new Intent(getActivity().getBaseContext(), Open.class);
+        SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
+        editor.putString("weeks", "");
+        editor.putString("groupInfo", "");
+        editor.putInt("group", -1);
+        editor.apply();
+        startActivity(intent);
+    }
+
+    /**
+     * Перезагрущка расписания.
+     * @author Соляной Леонид (solyanoy.leonid@gmail.com)
+     */
+    private void reloadTimeTable() {
+        Intent intent =
+                new Intent(getActivity().getBaseContext(), LoadTimeTableActivity.class);
+        SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
+        editor.putString("weeks", "");
+        editor.apply();
+        startActivity(intent);
+    }
+
+    /**
+     * Перезагрзка информации о вузе.
+     * @author Соляной Леонид (solyanoy.leonid@gmail.com)
+     */
+    private void reloadInformation() {
+        Intent intent =
+                new Intent(getActivity().getBaseContext(), LoadInformationActivity.class);
+        SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
+        editor.putString("sport", "");
+        editor.putString("creative", "");
+        editor.putString("studOrg", "");
+        editor.putString("stol", "");
+        editor.putString("lib", "");
+        editor.apply();
+        startActivity(intent);
+    }
+
+    /**
+     * Возвращение всех скрытых событий.
+     * @author Соляной Леонид (solyanoy.leonid@gmail.com)
+     */
+    private void reloadEvents() {
+        EventCardListManager.unarchiveEventList();
     }
 
     @Override

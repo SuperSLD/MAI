@@ -11,6 +11,7 @@ import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Activity.MainActivity;
+import com.raspisanie.mai.Classes.NewsManager;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
@@ -29,6 +30,7 @@ public class SplashActivity extends AppCompatActivity {
 
         new Thread(() -> {
             EventCardListManager.initList(this);
+            NewsManager.init(getBaseContext(), mSettings);
 
             Parametrs.setParam("mSettings", mSettings);
             if (mSettings.getInt("group", -1) > -1) {

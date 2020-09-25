@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Adapters.TimeTable.ViewHolderFactory;
+import com.raspisanie.mai.Classes.NewsManager;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.TimeTable.EventCard;
 import com.raspisanie.mai.Classes.TimeTable.Week;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         weeks = gson.fromJson(mSettings.getString("weeks", ""), Week[].class);
         Parametrs.setParam("weeks", weeks);
 
+        NewsManager.getInstance().loadNews();
         setThisWeek();
         ViewHolderFactory.setMainContext(this);
 
@@ -88,13 +90,27 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.action_time_table);
 
         //вывод сообщения с последним нововведением после обновления
+        createUpdateMessage();
+
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString("version", getResources().getString(R.string.versionString));
+        editor.apply();
+
+    }
+
+    /**
+     * Создание сообщения с описанием именений в последней весрии.
+     *
+     * @author Соляной Леонид (solyanoy.leonid@gmail.com)
+     */
+    private void createUpdateMessage() {
         if (!mSettings.getString("version", "").equals(getResources().getString(R.string.versionString))
-            && mSettings.getString("version", "").length() > 3) {
+                && mSettings.getString("version", "").length() > 3) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Приложение было обновлено")
                     .setMessage(
                             getResources().getString(R.string.versionString) + "\n\n" +
-                            getResources().getString(R.string.versionMessage)
+                                    getResources().getString(R.string.versionMessage)
                     )
                     .setIcon(R.drawable.ic_book_24px)
                     .setCancelable(false)
@@ -107,15 +123,12 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog alert = builder.create();
             alert.show();
         }
-
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString("version", getResources().getString(R.string.versionString));
-        editor.apply();
-
     }
 
     /**
      * Определение номера текущей недели в списке.
+     *
+     * @author Соляной Леонид (solyanoy.leonid@gmail.com)
      */
     public static void setThisWeek() {
         Week[] weeks = (Week[]) Parametrs.getParam("weeks");
@@ -152,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Открытие информации из карточки события.
      * @param eventCard
+     *
+     * @author Соляной Леонид (solyanoy.leonid@gmail.com)
      */
     public void openEventInfo(EventCard eventCard) {
         Intent intent = new Intent(this, EventInfoActivity.class);

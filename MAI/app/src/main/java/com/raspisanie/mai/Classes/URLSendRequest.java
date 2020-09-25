@@ -2,6 +2,7 @@ package com.raspisanie.mai.Classes;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -11,6 +12,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *  Класс для упрощения отправки запросов на сервер
@@ -53,6 +56,7 @@ public class URLSendRequest {
             HttpURLConnection conn = null;
             try {
                 String q = SERVER_URL + SERVER_GET;
+                Logger.getLogger("url").log(Level.INFO, q);
                 URL url = new URL(q);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");

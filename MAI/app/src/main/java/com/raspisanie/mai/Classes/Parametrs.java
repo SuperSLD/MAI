@@ -6,6 +6,8 @@ import java.util.HashMap;
  * Хранение обхектов для передачи между активностями.
  */
 public class Parametrs {
+    public static final String SERVER_IP = "https://jutter.online:433/mai_web/";
+
     private static HashMap <String, Object> parametrs = new HashMap<>();
 
     /**

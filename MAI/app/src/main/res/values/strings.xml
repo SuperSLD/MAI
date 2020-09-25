@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">МАИ</string>
 
+    <!-- Activity title -->
+    <string name="activity_title_news">Новости приложения</string>
+
     <!-- Menu Title -->
     <string name="title_time_table">Расписание</string>
     <string name="title_settings">Настройки</string>
@@ -10,9 +13,21 @@
     <string name="title_event_info">Информация о событии</string>
 
     <!-- Settings Fragment -->
+    <string name="fragment_settings_button1">Изменить данные о группе</string>
+    <string name="fragment_settings_button2">Перезагрузить расписание</string>
+    <string name="fragment_settings_button3">Обновить информацию о ВУЗе</string>
+    <string name="fragment_settings_button4">Вернуть все скрытые события</string>
+    <string name="fragment_settings_buttonnews">Новости приложения</string>
+    <string name="fragment_settings_update_data">Обновлять информацию</string>
+    <string name="fragment_settings_view_events">Показывать события</string>
+    <string name="fragment_settings_info_title">Информация о приложении:</string>
+    <string name="fragment_settings_info_version">Версия приложения:</string>
+    <string name="fragment_settings_info_author">Автор:</string>
+    <string name="fragment_settings_open_mai_web">Открыть сайт МАИ</string>
+
     <string name="fragment_settings_title1">Ваши данные:</string>
     <string name="fragment_settings_title2">Группа</string>
-    <string name="versionString">1.1.010/20.09.2020</string>
+    <string name="versionString">1.1.011/25.09.2020</string>
     <string name="author">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -36,6 +51,7 @@
 
     <!--Прочие строки -->
     <string name="versionMessage">
-        Исправлены свайпы событий вправо. Теперь при свайпе события другое событие не скрывается за синим экраном.
+        Теперь в приложении есть свои новости. Во вклажке нстройки есть раздел новостей, в котором будет
+        публиковаться информация об проблемах в работе приложения или сайта mai.
     </string>
 </resources>

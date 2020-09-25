@@ -1,6 +1,7 @@
 package Servlets;
 
 import Classes.DBConnector;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -10,13 +11,44 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class NewsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
 
+        JSONObject object = new JSONObject();
+        PrintWriter writer = resp.getWriter();
+        try {
+            ResultSet rs = DBConnector.executeQuery(
+                    "SELECT id, title, news_text, date_string " +
+                        "FROM news " +
+                        "WHERE date_string > '" + req.getParameter("last_date") + "' " +
+                        "ORDER BY date_string DESC LIMIT 100");
+
+            JSONArray array = new JSONArray();
+            while (rs.next()) {
+                JSONObject news = new JSONObject();
+
+                news.put("id", rs.getString("id"));
+                news.put("title", rs.getString("title"));
+                news.put("text", rs.getString("news_text"));
+                news.put("date", rs.getString("date_string"));
+
+                array.put(news);
+            }
+            object.put("err_c0de", "0");
+            object.put("news_list", array);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            object.put("err_code", "1");
+            object.put("err_text", "Ошибка на сервере.");
+        }
+        writer.print(object.toString());
     }
 
     @Override
