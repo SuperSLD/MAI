@@ -8,7 +8,7 @@ function init () {
         console.log("send request");
         var url = document.contextPath + "/news?act=add&" +
             "title="+document.getElementById("title_new_note").value +
-            "&text="+document.getElementById("text_new").value;
+            "&text="+document.getElementById("text_new").value.replace(/\n/g, "!@nl");
 
         var http = new XMLHttpRequest();
         http.open("POST", url, true);

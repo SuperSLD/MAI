@@ -47,23 +47,29 @@ public class SettingsFragment extends android.app.Fragment {
 
     }
 
-    @SuppressLint("SetTextI18n")
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, null);
         SharedPreferences mSettings = getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
-        SimpleTree<String> tree = (SimpleTree<String>) Parametrs.getParam("tree");
-        String groupName = tree.getChildList().get((int)Parametrs.getParam("kurs"))
-                .getChildList().get((int)Parametrs.getParam("fac"))
-                .getChildList().get((int)Parametrs.getParam("group")).getValue();
-        String facName   = tree.getChildList().get((int)Parametrs.getParam("kurs"))
-                .getChildList().get((int)Parametrs.getParam("fac")).getValue();
-        String kursName  = tree.getChildList().get((int)Parametrs.getParam("kurs"))
-                .getValue();
+        String groupName = "default";
+        String facName = "default";
+        String kursName = "default";
+        try {
+            SimpleTree<String> tree = (SimpleTree<String>) Parametrs.getParam("tree");
+            groupName = tree.getChildList().get((int)Parametrs.getParam("kurs"))
+                    .getChildList().get((int)Parametrs.getParam("fac"))
+                    .getChildList().get((int)Parametrs.getParam("group")).getValue();
+            facName   = tree.getChildList().get((int)Parametrs.getParam("kurs"))
+                    .getChildList().get((int)Parametrs.getParam("fac")).getValue();
+            kursName  = tree.getChildList().get((int)Parametrs.getParam("kurs"))
+                    .getValue();
 
+
+        } catch (IndexOutOfBoundsException ex) {
+
+        }
         ((TextView) view.findViewById(R.id.textView1)).setText(
                 getResources().getString(R.string.fragment_settings_title2)  + " "
                 + groupName
@@ -203,7 +209,7 @@ public class SettingsFragment extends android.app.Fragment {
      * @author Соляной Леонид (solyanoy.leonid@gmail.com)
      */
     private void reloadEvents() {
-        EventCardListManager.unarchiveEventList();
+        EventCardListManager.getInstance().unarchiveEventList();
     }
 
     @Override

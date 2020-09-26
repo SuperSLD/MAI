@@ -19,6 +19,9 @@ import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +32,14 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
         new Thread(() -> {
-            EventCardListManager.initList(this);
-            NewsManager.init(getBaseContext(), mSettings);
+            Realm.init(getBaseContext());
+            RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                    .name("mai_data.realm")
+                    .deleteRealmIfMigrationNeeded()
+                    .build();
+            Realm.setDefaultConfiguration(realmConfiguration);
+            NewsManager.init(mSettings);
+            EventCardListManager.init(this);
 
             Parametrs.setParam("mSettings", mSettings);
             if (mSettings.getInt("group", -1) > -1) {

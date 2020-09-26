@@ -30,17 +30,11 @@ public class NewsManager {
 
     private ArrayList<NewsObject> newsObjects = new ArrayList<>();
     private SharedPreferences settings;
-    private RealmConfiguration realmConfiguration;
 
     private NewsManager(SharedPreferences settings) {
-        realmConfiguration = new RealmConfiguration.Builder()
-                .name("mai_data.realm")
-                .deleteRealmIfMigrationNeeded()
-                .build();
-
         this.settings = settings;
 
-        Realm realm = Realm.getInstance(realmConfiguration);
+        Realm realm = Realm.getDefaultInstance();
         Logger.getLogger("mailog").log(Level.INFO, "News try add from REALM .....");
         RealmResults<NewsModel> results = realm
                 .where(NewsModel.class)
@@ -65,13 +59,11 @@ public class NewsManager {
 
     /**
      * Инициализация.
-     * @param context контекст приложения.
      *
      * @author Соляной Леонид (solyanoy.leonid@gmail.com)
      */
-    public static void init(Context context, SharedPreferences s) {
+    public static void init(SharedPreferences s) {
         if (newsManager == null) {
-            Realm.init(context);
             newsManager = new NewsManager(s);
         }
     }
@@ -90,7 +82,7 @@ public class NewsManager {
      * @author Соляной Леонид (solyanoy.leonid@gmail.com)
      */
     private void addNews(Realm realm, NewsObject newsObject) {
-        newsObjects.add(newsObject);
+        newsObjects.add(0, newsObject);
 
         realm.beginTransaction();
         NewsModel newsModel = new NewsModel();
@@ -112,7 +104,7 @@ public class NewsManager {
         URLSendRequest url = new URLSendRequest(Parametrs.SERVER_IP, 2000);
         new Thread(() -> {
             try {
-                Realm realm = Realm.getInstance(realmConfiguration);
+                Realm realm = Realm.getDefaultInstance();
                 String s = null;
                 while (s == null) {
                     Logger.getLogger("mailog").log(Level.INFO, "News try connect");

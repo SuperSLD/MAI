@@ -72,7 +72,7 @@ public class TimeTableFragment extends android.app.Fragment{
             if(!mSettings.getString("lastUpdateEvents", "").equals(
                 new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime())))
                 new Thread(() -> {
-                    EventCardListManager.eventCardListUpdate(mSettings);
+                    EventCardListManager.getInstance().eventCardListUpdate(mSettings);
                 }).start();
         }
     }

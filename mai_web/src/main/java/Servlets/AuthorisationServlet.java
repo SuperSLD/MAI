@@ -69,7 +69,7 @@ public class AuthorisationServlet extends HttpServlet {
             while (rs.next()) {
                 newsHtml += insertDataInHtml(
                         rs.getString("title"),
-                        rs.getString("news_text"),
+                        rs.getString("news_text").replaceAll("!@nl", "<br>"),
                         rs.getString("date_string"));
             }
         } catch (Exception ex) {

@@ -64,7 +64,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
             }
         }
         daySum = day.size() - this.objects.size() - 1;
-        EventCardListManager.insertEventCardsInList(this.objects, week);
+        EventCardListManager.getInstance().insertEventCardsInList(this.objects, week);
     }
 
     @Override

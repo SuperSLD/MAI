@@ -36,7 +36,7 @@ public class NewsServlet extends HttpServlet {
 
                 news.put("id", rs.getString("id"));
                 news.put("title", rs.getString("title"));
-                news.put("text", rs.getString("news_text"));
+                news.put("text", rs.getString("news_text").replaceAll("!@nl", "\n"));
                 news.put("date", rs.getString("date_string"));
 
                 array.put(news);

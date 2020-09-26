@@ -6,8 +6,8 @@ android {
         applicationId "com.raspisanie.mai"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 11010
-        versionName "1.1.010"
+        versionCode 11012
+        versionName "1.1.012"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {

@@ -8,7 +8,9 @@ import android.graphics.Matrix;
 import android.util.Base64;
 
 import com.google.gson.Gson;
+import com.raspisanie.mai.Classes.NewsManager;
 import com.raspisanie.mai.Classes.Parametrs;
+import com.raspisanie.mai.Classes.RealmModels.EventCardModel;
 import com.raspisanie.mai.Classes.URLSendRequest;
 
 import org.jsoup.Jsoup;
@@ -25,6 +27,9 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 /**
  * Управление списком событитий.
  */
@@ -36,44 +41,53 @@ public class EventCardListManager {
     public static ArrayList<EventCard> eventCards = new ArrayList<>();
     private static SharedPreferences settings;
 
-    public EventCardListManager() {
-        //TODO: паттерн одиночки заюзать
-    }
-
-    /**
-     * Инициализация списка.
-     */
-    public static void initList(Context context) {
+    private EventCardListManager(Context context) {
         try {
+
             settings = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
-            Logger.getLogger("mailog").log(Level.INFO, "init events list");
-            state = settings.getString("cardState",
-                    "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0").split(",");
-            String json = settings.getString("events", "");
-            Gson gson = new Gson();
-            EventCard[] list = gson.fromJson(json, EventCard[].class);
-            String[] bytes = gson.fromJson(settings.getString("eventsBitmap", ""), String[].class);
-            Logger.getLogger("mailog").log(Level.INFO, "events: " + list.length + "/ bytes:" + bytes.length);
-            int i = 0;
-            for (EventCard ev : list) {
-                eventCards.add(new EventCard(ev.getName(), ev.getDate(), bytes[i], ev.getInfo(), state[i]));
-                Logger.getLogger("mailog").log(Level.INFO,
-                        "bitmap["+i+"/"+(list.length-1)+"]: " + (ev.getBitmap() != null));
-                i++;
+            Realm realm = Realm.getDefaultInstance();
+
+            RealmResults<EventCardModel> realmResults = realm.where(EventCardModel.class).findAll();
+
+            for (EventCardModel model : realmResults) {
+                eventCards.add(new EventCard(
+                        model.getName(),
+                        model.getDate(),
+                        model.getBitmap(),
+                        model.getInfo(),
+                        model.isDelete()
+                ));
+                Logger.getLogger("mailog").log(Level.INFO, "EventCardListManager event load from REALM ["+model.getName()+"]");
             }
+
+            realm.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     /**
-     * Обновление списка.
-     * @param mSettings
+     * Инициализация списка.
      */
-    public static void eventCardListUpdate(SharedPreferences mSettings) {
+    public static void init(Context context) {
+        if (eventCardListManager == null) {
+            eventCardListManager = new EventCardListManager(context);
+        }
+    }
+
+    /**
+     * Получение текущего объекта.
+     */
+    public static EventCardListManager getInstance() {
+        return eventCardListManager;
+    }
+
+    /**
+     * Обновление списка.
+     */
+    public void eventCardListUpdate(SharedPreferences settings) {
         try {
             ArrayList<EventCard> events = new ArrayList<>();
-            ArrayList<String> bitmapStrings = new ArrayList<>();
             URLSendRequest url;
             url = new URLSendRequest("https://mai.ru", 50000);
 
@@ -81,7 +95,7 @@ public class EventCardListManager {
             while (s == null) {
                 try {
                     s = url.get("/press/events/");
-                    Thread.sleep(10000);
+                    Thread.sleep(1000);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -103,12 +117,11 @@ public class EventCardListManager {
                 Logger.getLogger("mailog").log(Level.INFO, "url event image:" + urlImage);
                 URL newurl = new URL(urlImage);
                 Bitmap bitmap = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
-                bitmap = getResizedBitmap(bitmap, bitmap.getWidth() / 2, bitmap.getHeight() / 2);
+                bitmap = getResizedBitmap(bitmap, bitmap.getWidth() / 5, bitmap.getHeight() / 5);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos); //bm is the bitmap object
                 byte[] b = baos.toByteArray();
                 String encodedBitmap = Base64.encodeToString(b, Base64.DEFAULT);
-                bitmapStrings.add(encodedBitmap);
 
                 String info = null;
                 while (info == null) {
@@ -117,25 +130,29 @@ public class EventCardListManager {
                                     eventsHtml[i].split("<h5><a href=\"/press/events/detail\\.php\\?")[1].split("\">")[0];
                     Logger.getLogger("mailog").log(Level.INFO, "INFORM " + urlString);
                     info = url.get(urlString);
+                    Thread.sleep(1000);
                 }
                 info = info.split("<div class=\"text text-lg\">")[1].split("</div>")[0];
 
-                EventCard eventCard = new EventCard(eventName, eventDate, encodedBitmap, informationConvert(info), "0");
-                events.add(eventCard);
+                EventCard eventCard = new EventCard(eventName, eventDate, encodedBitmap, informationConvert(info), false);
+                int index = eventCards.indexOf(eventCard);
+                if (index >= 0) {
+                    eventCard.setDeleteState(eventCards.get(index).isDelete());
+                }
+
+                Realm realm = Realm.getDefaultInstance();
+                updateEventCardModel(realm, eventCard);
+                realm.close();
+
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("lastUpdateEvents",
+                        new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()));
+                editor.apply();
             }
 
             eventCards.clear();
             eventCards.addAll(events);
             Logger.getLogger("mailog").log(Level.INFO, "EventCardListManager load end");
-
-            //сохранение
-            Gson gson = new Gson();
-            SharedPreferences.Editor editor = mSettings.edit();
-            editor.putString("events", gson.toJson(eventCards));
-            editor.putString("eventsBitmap", gson.toJson(bitmapStrings));
-            editor.putString("lastUpdateEvents",
-                    new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()));
-            editor.apply();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -147,7 +164,7 @@ public class EventCardListManager {
      * @param newWidth конечная ширина.
      * @param newHeight конечная высота.
      */
-    private static Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+    private Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
         int height = bm.getHeight();
         float scaleWidth = ((float) newWidth) / width;
@@ -168,7 +185,7 @@ public class EventCardListManager {
      * Вставка карточек событий в текущую неделю.
      * @param list список объектов недели.
      */
-    public static void insertEventCardsInList(ArrayList<Object> list, int week) {
+    public void insertEventCardsInList(ArrayList<Object> list, int week) {
         if (settings != null && !settings.getBoolean("eventCheck", true)) return;
         for (EventCard event :eventCards) {
             if (!event.isDelete()) {
@@ -206,7 +223,7 @@ public class EventCardListManager {
     /**
      * Номер месяца по его сокращенному названию.
      */
-    private static String getM(String m) {
+    private String getM(String m) {
         String[] M = {
                 "янв", "фев", "мар",
                 "апр", "май", "июн",
@@ -222,7 +239,7 @@ public class EventCardListManager {
      * @param dateString
      * @return
      */
-    private static boolean isThisWeek(String[] dateString, int week) {
+    private boolean isThisWeek(String[] dateString, int week) {
         SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
         Date date = null;
         try {
@@ -249,7 +266,7 @@ public class EventCardListManager {
      * Преобоазование текста информации в читаемый вид.
      * @return
      */
-    private static String informationConvert(String inf){
+    private String informationConvert(String inf){
         Document jsoupDoc = Jsoup.parse(inf);
 
         //set pretty print to false, so \n is not removed
@@ -275,22 +292,40 @@ public class EventCardListManager {
     /**
      * Обнуление всех скрытых карточек.
      */
-    public static void unarchiveEventList() {
+    public void unarchiveEventList() {
+        Realm realm = Realm.getDefaultInstance();
         for (EventCard event : eventCards) {
             event.setDeleteState(false);
+            updateEventCardModel(realm, event);
         }
-        saveCardState();
+        realm.close();
+
     }
 
     /**
      * Сораненик состония карточек.
      */
-    public static void saveCardState() {
-        String s = "";
-        for (int i = 0; i < eventCards.size(); i++) {
-            state[i] = eventCards.get(i).isDelete() ? "1" : "0";
-            s += state[i] + ",";
-        }
-        settings.edit().putString("cardState", s).apply();
+    public void saveCardState(EventCard eventCard) {
+        Realm realm = Realm.getDefaultInstance();
+        updateEventCardModel(realm, eventCard);
+        realm.close();
+    }
+
+    /**
+     * Обновление карточки в реалме.
+     */
+    private void updateEventCardModel(Realm realm, EventCard eventCard) {
+        realm.beginTransaction();
+        EventCardModel model = new EventCardModel();
+
+        model.setDelete(eventCard.isDelete());
+        model.setBitmap(eventCard.getEncodedBitmap());
+        model.setDate(eventCard.getDate());
+        model.setInfo(eventCard.getInfo());
+        model.setName(eventCard.getName());
+        realm.insertOrUpdate(model);
+
+        realm.commitTransaction();
+
     }
 }
