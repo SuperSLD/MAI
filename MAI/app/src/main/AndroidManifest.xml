@@ -98,7 +98,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.FoodActivity"
+            android:name=".Activity.CanteenActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppActionBar">
             <intent-filter>

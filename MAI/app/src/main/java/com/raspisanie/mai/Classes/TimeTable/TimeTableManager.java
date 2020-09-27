@@ -1,17 +1,15 @@
 package com.raspisanie.mai.Classes.TimeTable;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.raspisanie.mai.Activity.LoadInformationActivity;
-import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.MainActivity;
 import com.raspisanie.mai.Classes.Parametrs;
+import com.raspisanie.mai.Classes.RealmModels.DayModel;
+import com.raspisanie.mai.Classes.RealmModels.SubjectModel;
+import com.raspisanie.mai.Classes.RealmModels.WeekModel;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.Classes.URLSendRequest;
-import com.raspisanie.mai.R;
 
 import org.jsoup.Jsoup;
 
@@ -21,18 +19,67 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
+
 /**
  * @author Леонид Соляной (solyanoy.leonid@gmail.com)
  *
  * Обновление и загрузка расписания а также проверка.
  */
-public class TimeTableUpdater {
+public class TimeTableManager {
 
     private int weekListSize;
     private int position;
     private boolean isNewWeekList = false;
 
     private boolean isLoad = false;
+
+    private ArrayList<Week> weeks;
+    private int thisWeek;
+
+    private static TimeTableManager timeTableManager;
+
+    private TimeTableManager() {
+        this.weeks = new ArrayList<>();
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<WeekModel> realmResults = realm.where(WeekModel.class).sort("id").findAll();
+
+        for (WeekModel weekModel : realmResults) {
+            Week week = new Week(weekModel.n, weekModel.date);
+            for (DayModel dayModel : weekModel.days) {
+                Day day = new Day(dayModel.date, dayModel.name);
+                for (SubjectModel subjectModel : dayModel.subjects) {
+                    Subject subject = new Subject(
+                            subjectModel.time,
+                            subjectModel.type,
+                            subjectModel.name,
+                            subjectModel.lecturer,
+                            subjectModel.place
+                    );
+                    day.addSubject(subject);
+                }
+                week.addDay(day);
+            }
+            weeks.add(week);
+        }
+        realm.close();
+    }
+
+    public static void init() {
+        if (timeTableManager == null) {
+            timeTableManager = new TimeTableManager();
+        }
+    }
+
+    /**
+     * Получение текущего одиночного объекта.
+     * @return объект.
+     */
+    public static TimeTableManager getInstance() {
+        return timeTableManager;
+    }
 
     /**
      * @author Леонид Соляной (solyanoy.leonid@gmail.com)
@@ -43,6 +90,9 @@ public class TimeTableUpdater {
      */
     public boolean update(SharedPreferences mSettings) {
         try {
+            isLoad = false;
+            isNewWeekList = false;
+
             ArrayList<Week> weeks;
 
             String dateWeek = null;
@@ -70,6 +120,7 @@ public class TimeTableUpdater {
             Logger.getLogger("mai_time_table").log(Level.INFO, "weekListSize = " + weekListSize);
 
             //Составление списка недель.
+            Realm realm = Realm.getDefaultInstance();
             weeks = new ArrayList<>();
             for (int i = 0; i < weekList.length - 1; i++) {
                 int n = Integer.parseInt(
@@ -77,8 +128,8 @@ public class TimeTableUpdater {
                 String data = weekList[i].split("\">")[1];
                 String getString = "education/schedule/detail.php" +
                         weekList[i].split("\">")[0].split("href=\"")[1];
-                weeks.add(new Week(n, data));
-                System.out.println("номер недели - " + n + " / дата - " + data
+                Week week = new Week(n, data);
+                Logger.getLogger("mailog").log(Level.INFO, "номер недели - " + n + " / дата - " + data
                         + " / get - " + getString);
 
                 final int I = i + 1;
@@ -146,20 +197,22 @@ public class TimeTableUpdater {
                         day.addSubject(subject);
                     }
 
-                    weeks.get(i).addDay(day);
+                    week.addDay(day);
                 }
                 position = i;
+                weeks.add(week);
                 Logger.getLogger("mai_time_table").log(Level.INFO, "position (loaded weeks) = " + position);
             }
-
+            for (Week week : weeks) {
+                saveWeekInRealm(realm, week, week.getN());
+            }
+            realm.close();
+            this.weeks.clear();
+            this.weeks.addAll(weeks);
             if (weeks.size() > 0) {
                 if (!dateWeek.equals(weeks.get(0).getDate())) isNewWeekList = true;
 
-                Gson gson = new Gson();
-                String json = gson.toJson(weeks);
-
                 SharedPreferences.Editor editor = mSettings.edit();
-                editor.putString("weeks", json);
                 editor.putString("lastUpdate",
                         new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()));
                 editor.apply();
@@ -176,10 +229,18 @@ public class TimeTableUpdater {
     }
 
     /**
+     * Получение списка недель.
+     * @return
+     */
+    public ArrayList<Week> getWeeks() {
+        return weeks;
+    }
+
+    /**
      * Получение строки прогресса.
      */
     public String getProgressString() {
-        return (position + 1) + "/" + weekListSize;
+        return (position + 1) + "/" + (weekListSize > 0 ? weekListSize : "???");
     }
 
     /**
@@ -202,5 +263,55 @@ public class TimeTableUpdater {
      */
     public boolean isNewWeekList() {
         return isNewWeekList;
+    }
+
+    /**
+     * Получение текущей недели.
+     * @return номер текущей недели.
+     */
+    public int getThisWeek() {
+        return thisWeek;
+    }
+
+    /**
+     * Установка текущей недели.
+     * @param thisWeek номер текущей недели.
+     */
+    public void setThisWeek(int thisWeek) {
+        this.thisWeek = thisWeek;
+    }
+
+    /**
+     * Сохранение недели в реалме.
+     * @param realm реалм объект.
+     * @param week сохраняемая неделя.
+     */
+    private void saveWeekInRealm(Realm realm, Week week, int count) {
+        realm.beginTransaction();
+        WeekModel weekModel = new WeekModel();
+        weekModel.id = count;
+        weekModel.n = week.getN();
+        weekModel.date = week.getDate();
+        weekModel.days = new RealmList<>();
+        for (Day day : week.getDaysList()) {
+            DayModel dayModel = new DayModel();
+            dayModel.date = day.getDate();
+            dayModel.name = day.getName();
+            dayModel.subjects = new RealmList<>();
+            for (Subject subject : day.getSubjectList()) {
+                SubjectModel subjectModel = new SubjectModel();
+                subjectModel.lecturer = subject.getLecturer();
+                subjectModel.name = subject.getName();
+                subjectModel.place = subject.getPlace();
+                subjectModel.time = subject.getTime();
+                subjectModel.type = subject.getType();
+
+                dayModel.subjects.add(subjectModel);
+            }
+
+            weekModel.days.add(dayModel);
+        }
+        realm.insertOrUpdate(weekModel);
+        realm.commitTransaction();
     }
 }

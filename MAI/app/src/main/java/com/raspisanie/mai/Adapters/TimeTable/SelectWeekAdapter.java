@@ -9,17 +9,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.raspisanie.mai.Classes.Parametrs;
+import com.raspisanie.mai.Classes.TimeTable.TimeTableManager;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.Fragments.SelectWeekDialogFragment;
 import com.raspisanie.mai.R;
 
+import java.util.ArrayList;
+
 public class SelectWeekAdapter extends BaseAdapter {
-    private Week[] weeks;
+    private ArrayList<Week> weeks;
     private LayoutInflater lInflater;
     private Context context;
     private SelectWeekDialogFragment dialog;
 
-    public SelectWeekAdapter(Context context, Week[] weeks, SelectWeekDialogFragment dialog) {
+    public SelectWeekAdapter(Context context, ArrayList<Week> weeks, SelectWeekDialogFragment dialog) {
         this.weeks = weeks;
         this.dialog = dialog;
         this.context = context;
@@ -29,12 +32,12 @@ public class SelectWeekAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return weeks.length;
+        return weeks.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return weeks[i];
+        return weeks.get(i);
     }
 
     @Override
@@ -49,10 +52,21 @@ public class SelectWeekAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.item_select_week_list, viewGroup, false);
         }
 
-        ((TextView) view.findViewById(R.id.number)).setText("Неделя " + weeks[i].getN());
-        ((TextView) view.findViewById(R.id.date)).setText(weeks[i].getDate());
+        TextView number = view.findViewById(R.id.number);
+        TextView date = view.findViewById(R.id.date);
+        TextView current = view.findViewById(R.id.current);
+
+        number.setText("Неделя " + weeks.get(i).getN());
+        date.setText(weeks.get(i).getDate());
 
         Button button = view.findViewById(R.id.closeButton);
+        if (weeks.get(i).getN() == TimeTableManager.getInstance().getThisWeek() + 1) {
+            button.setVisibility(View.GONE);
+            current.setVisibility(View.VISIBLE);
+        } else {
+            button.setVisibility(View.VISIBLE);
+            current.setVisibility(View.GONE);
+        }
 
         button.setOnClickListener(v -> {
             dialog.dismiss();

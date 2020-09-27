@@ -16,6 +16,7 @@ import com.raspisanie.mai.Adapters.TimeTable.ViewHolderFactory;
 import com.raspisanie.mai.Classes.NewsManager;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.TimeTable.EventCard;
+import com.raspisanie.mai.Classes.TimeTable.TimeTableManager;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.Fragments.ExamsFragment;
 import com.raspisanie.mai.Fragments.InformationFragment;
@@ -25,6 +26,7 @@ import com.raspisanie.mai.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -47,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        weeks = gson.fromJson(mSettings.getString("weeks", ""), Week[].class);
-        Parametrs.setParam("weeks", weeks);
 
         NewsManager.getInstance().loadNews();
         setThisWeek();
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
      * @author Соляной Леонид (solyanoy.leonid@gmail.com)
      */
     public static void setThisWeek() {
-        Week[] weeks = (Week[]) Parametrs.getParam("weeks");
+        ArrayList<Week> weeks = TimeTableManager.getInstance().getWeeks();
 
         int thisWeek = 0;
         SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
@@ -141,12 +140,12 @@ public class MainActivity extends AppCompatActivity {
                     (Calendar.getInstance().get(Calendar.MONTH)+1) + "." + Calendar.getInstance().get(Calendar.YEAR);
             date = ft.parse(s);
         } catch (Exception ex) { ex.printStackTrace(); }
-        for (int i = 0; i < weeks.length; i++) {
+        for (int i = 0; i < weeks.size(); i++) {
             Date top = null;
             Date down = null;
             try {
-                top = ft.parse(weeks[i].getDate().split(" - ")[1]);
-                down = ft.parse(weeks[i].getDate().split(" - ")[0]);
+                top = ft.parse(weeks.get(i).getDate().split(" - ")[1]);
+                down = ft.parse(weeks.get(i).getDate().split(" - ")[0]);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -154,12 +153,12 @@ public class MainActivity extends AppCompatActivity {
                     || (date.compareTo(top) == 0 || date.compareTo(down) == 0)) thisWeek = i;
 
             if (date.after(top)) {
-                thisWeek = weeks.length;
+                thisWeek = weeks.size();
             }
         }
         if (thisWeek < 0) thisWeek = 0;
         Logger.getLogger("mai_log").log(Level.INFO, "this week -> " + thisWeek);
-        Parametrs.setParam("thisWeek", thisWeek);
+        TimeTableManager.getInstance().setThisWeek(thisWeek);
     }
 
     /**

@@ -22,13 +22,17 @@ import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.NewsActivity;
 import com.raspisanie.mai.Activity.Open;
+import com.raspisanie.mai.Classes.RealmModels.WeekModel;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
+import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
 import com.raspisanie.mai.View.DiagramView;
 
 import java.io.UnsupportedEncodingException;
+
+import io.realm.Realm;
 
 public class SettingsFragment extends android.app.Fragment {
 
@@ -65,7 +69,6 @@ public class SettingsFragment extends android.app.Fragment {
                     .getChildList().get((int)Parametrs.getParam("fac")).getValue();
             kursName  = tree.getChildList().get((int)Parametrs.getParam("kurs"))
                     .getValue();
-
 
         } catch (IndexOutOfBoundsException ex) {
 
@@ -167,10 +170,13 @@ public class SettingsFragment extends android.app.Fragment {
         Intent intent =
                 new Intent(getActivity().getBaseContext(), Open.class);
         SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
-        editor.putString("weeks", "");
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.delete(WeekModel.class);
         editor.putString("groupInfo", "");
         editor.putInt("group", -1);
         editor.apply();
+        realm.commitTransaction();
         startActivity(intent);
     }
 
@@ -181,9 +187,10 @@ public class SettingsFragment extends android.app.Fragment {
     private void reloadTimeTable() {
         Intent intent =
                 new Intent(getActivity().getBaseContext(), LoadTimeTableActivity.class);
-        SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
-        editor.putString("weeks", "");
-        editor.apply();
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.delete(WeekModel.class);
+        realm.commitTransaction();
         startActivity(intent);
     }
 

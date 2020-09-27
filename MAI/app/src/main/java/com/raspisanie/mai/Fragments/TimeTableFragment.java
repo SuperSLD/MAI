@@ -2,7 +2,6 @@ package com.raspisanie.mai.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -24,14 +23,12 @@ import com.raspisanie.mai.Activity.MainActivity;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Adapters.TimeTable.TimeTableAdapter;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
-import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
+import com.raspisanie.mai.Classes.TimeTable.TimeTableManager;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TimeTableFragment extends android.app.Fragment{
     View view;
@@ -41,7 +38,7 @@ public class TimeTableFragment extends android.app.Fragment{
     private boolean update = false;
 
     private int selectWeek;
-    private TimeTableUpdater timeTableUpdater;
+    private TimeTableManager timeTableManager;
 
     private MenuItem next;
     private MenuItem prev;
@@ -51,7 +48,7 @@ public class TimeTableFragment extends android.app.Fragment{
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
-        timeTableUpdater = new TimeTableUpdater();
+        timeTableManager = TimeTableManager.getInstance();
         mSettings =
                 getActivity().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -62,13 +59,9 @@ public class TimeTableFragment extends android.app.Fragment{
             if(!mSettings.getString("lastUpdate", "").equals(
                 new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime()))) {
                 new Thread(() -> {
-                    update = timeTableUpdater.update(mSettings);
-                    if (update) {
-                        Parametrs.setParam("weeks",
-                                gson.fromJson(mSettings.getString("weeks", ""), Week[].class));
-                    }
+                    update = timeTableManager.update(mSettings);
                 }).start();
-            } else timeTableUpdater.setLoadStatus(true);
+            } else timeTableManager.setLoadStatus(true);
             if(!mSettings.getString("lastUpdateEvents", "").equals(
                 new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime())))
                 new Thread(() -> {
@@ -89,23 +82,23 @@ public class TimeTableFragment extends android.app.Fragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.but1:
-                setDaysList(Parametrs.getInt("thisWeek") - 1);
-                selectWeek = Parametrs.getInt("thisWeek") - 1;
+                setDaysList(TimeTableManager.getInstance().getThisWeek() - 1);
+                selectWeek = TimeTableManager.getInstance().getThisWeek() - 1;
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Предыдущая неделя");
                 item.setVisible(false);
                 prev = item;
                 if (next != null) next.setVisible(true);
                 break;
             case R.id.but2:
-                setDaysList(Parametrs.getInt("thisWeek"));
-                selectWeek = Parametrs.getInt("thisWeek");
+                setDaysList(TimeTableManager.getInstance().getThisWeek());
+                selectWeek = TimeTableManager.getInstance().getThisWeek();
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Текущая неделя");
                 if (next != null) next.setVisible(true);
                 if (prev != null) prev.setVisible(true);
                 break;
             case R.id.but3:
-                setDaysList(Parametrs.getInt("thisWeek") + 1);
-                selectWeek = Parametrs.getInt("thisWeek") + 1;
+                setDaysList(TimeTableManager.getInstance().getThisWeek() + 1);
+                selectWeek = TimeTableManager.getInstance().getThisWeek() + 1;
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Следующая неделя");
                 item.setVisible(false);
                 if (prev != null) prev.setVisible(true);
@@ -117,7 +110,7 @@ public class TimeTableFragment extends android.app.Fragment{
                     setDaysList(dialog.getPosition());
                     selectWeek = dialog.getPosition();
                     ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(
-                            ((Week[]) Parametrs.getParam("weeks"))[dialog.getPosition()].getDate()
+                            TimeTableManager.getInstance().getWeeks().get(dialog.getPosition()).getDate()
                     );
                     if (next != null) next.setVisible(true);
                     if (prev != null) prev.setVisible(true);
@@ -131,10 +124,10 @@ public class TimeTableFragment extends android.app.Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        selectWeek = Parametrs.getInt("thisWeek");
+        selectWeek = TimeTableManager.getInstance().getThisWeek();
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_time_table, null);
-            setDaysList((int) Parametrs.getParam("thisWeek"));
+            setDaysList(selectWeek);
         }
 
         return view;
@@ -154,7 +147,7 @@ public class TimeTableFragment extends android.app.Fragment{
         Week w = null;
         if (week < 0) week = 0;
         try {
-            w = ((Week[]) Parametrs.getParam("weeks"))[week];
+            w = TimeTableManager.getInstance().getWeeks().get(week);
         } catch (IndexOutOfBoundsException ex) {}
 
         if (w != null) {
@@ -162,7 +155,7 @@ public class TimeTableFragment extends android.app.Fragment{
             recyclerView.setVisibility(View.VISIBLE);
             adapter = new TimeTableAdapter(
                     w.getDaysList(), week,
-                    week == ((int) Parametrs.getParam("thisWeek"))
+                    week == TimeTableManager.getInstance().getThisWeek()
             );
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
             recyclerView.setAdapter(adapter);
@@ -174,7 +167,7 @@ public class TimeTableFragment extends android.app.Fragment{
             ImageView imageView     = view.findViewById(R.id.image);
             TextView textView       = view.findViewById(R.id.infoText);
 
-            if (!timeTableUpdater.isLoad()) {
+            if (!timeTableManager.isLoad()) {
                 progressBar.setVisibility(View.VISIBLE);
                 imageView.setVisibility(View.GONE);
                 textView.setText("Загрузка");
@@ -182,12 +175,12 @@ public class TimeTableFragment extends android.app.Fragment{
                 new Thread(() -> {
                     try {
                         String progr = "";
-                        while (!timeTableUpdater.isLoad()) {
-                            if (!progr.equals(timeTableUpdater.getProgressString())) {
+                        while (!timeTableManager.isLoad()) {
+                            if (!progr.equals(timeTableManager.getProgressString())) {
                                 getActivity().runOnUiThread(() ->
-                                        textView.setText("Загрузка\n" + timeTableUpdater.getProgressString()));
+                                        textView.setText("Загрузка\n" + timeTableManager.getProgressString()));
                             }
-                            progr = timeTableUpdater.getProgressString();
+                            progr = timeTableManager.getProgressString();
                         }
                         getActivity().runOnUiThread(() -> {
                             if (!update) {
@@ -195,11 +188,9 @@ public class TimeTableFragment extends android.app.Fragment{
                                 imageView.setVisibility(View.VISIBLE);
                                 textView.setText("Расписание отсутствует");
                             } else {
-                                if (timeTableUpdater.isNewWeekList()) {
-                                    Week[] weeks = new Gson().fromJson(mSettings.getString("weeks", ""), Week[].class);
-                                    Parametrs.setParam("weeks", weeks);
+                                if (timeTableManager.isNewWeekList()) {
                                     MainActivity.setThisWeek();
-                                    setDaysList(Parametrs.getInt("thisWeek"));
+                                    setDaysList(TimeTableManager.getInstance().getThisWeek());
                                 } else {
                                     progressBar.setVisibility(View.GONE);
                                     imageView.setVisibility(View.VISIBLE);

@@ -237,7 +237,7 @@ public class EventCardListManager {
     /**
      * Проверка принадлежности события к текущей недели.
      * @param dateString
-     * @return
+     * @return не помню что это.
      */
     private boolean isThisWeek(String[] dateString, int week) {
         SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
@@ -253,8 +253,8 @@ public class EventCardListManager {
         Date top = null;
         Date down = null;
         try {
-            top = ft.parse(((Week[])Parametrs.getParam("weeks"))[week].getDate().split(" - ")[1]);
-            down = ft.parse(((Week[])Parametrs.getParam("weeks"))[week].getDate().split(" - ")[0]);
+            top = ft.parse((TimeTableManager.getInstance().getWeeks().get(week).getDate().split(" - ")[1]));
+            down = ft.parse((TimeTableManager.getInstance().getWeeks().get(week).getDate().split(" - ")[0]));
         } catch (ParseException e) {
             e.printStackTrace();
         }

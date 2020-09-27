@@ -12,9 +12,11 @@ import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.Open;
 import com.raspisanie.mai.Activity.MainActivity;
 import com.raspisanie.mai.Classes.NewsManager;
+import com.raspisanie.mai.Classes.OtherDataManager;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
+import com.raspisanie.mai.Classes.TimeTable.TimeTableManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +40,8 @@ public class SplashActivity extends AppCompatActivity {
                     .deleteRealmIfMigrationNeeded()
                     .build();
             Realm.setDefaultConfiguration(realmConfiguration);
+            TimeTableManager.init();
+            OtherDataManager.init();
             NewsManager.init(mSettings);
             EventCardListManager.init(this);
 
@@ -48,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
                 SimpleTree<String> tree = gson.fromJson(text, SimpleTree.class);
                 Parametrs.setParam("tree", tree);
 
-                if (mSettings.getString("weeks", "").length() > 10) {
+                if (TimeTableManager.getInstance().getWeeks().size() > 0) {
 
                     if (mSettings.getString("sport", "").length() > 10) {
                         Parametrs.setParam("sport",

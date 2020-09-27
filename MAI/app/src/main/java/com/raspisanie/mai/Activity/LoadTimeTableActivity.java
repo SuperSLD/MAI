@@ -8,19 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.raspisanie.mai.Classes.TimeTable.Day;
-import com.raspisanie.mai.Classes.Parametrs;
-import com.raspisanie.mai.Classes.SimpleTree;
-import com.raspisanie.mai.Classes.TimeTable.Subject;
-import com.raspisanie.mai.Classes.TimeTable.TimeTableUpdater;
-import com.raspisanie.mai.Classes.URLSendRequest;
-import com.raspisanie.mai.Classes.TimeTable.Week;
+import com.raspisanie.mai.Classes.TimeTable.TimeTableManager;
 import com.raspisanie.mai.R;
-
-import org.jsoup.Jsoup;
-
-import java.util.ArrayList;
 
 public class LoadTimeTableActivity extends AppCompatActivity {
     private SharedPreferences mSettings;
@@ -32,21 +21,21 @@ public class LoadTimeTableActivity extends AppCompatActivity {
 
         mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
-        final TimeTableUpdater timeTableUpdater = new TimeTableUpdater();
+        final TimeTableManager timeTableManager = TimeTableManager.getInstance();
 
         final boolean[] isUpdate = {false};
         new Thread(() -> {
-            isUpdate[0] = timeTableUpdater.update(mSettings);
+            isUpdate[0] = timeTableManager.update(mSettings);
         }).start();
         new Thread(() -> {
             String lastProgress = "";
             while (true) {
-                if (!lastProgress.equals(timeTableUpdater.getProgressString())) {
+                if (!lastProgress.equals(timeTableManager.getProgressString())) {
                     runOnUiThread(() -> ((TextView) findViewById(R.id.textViewProgress)).setText(
-                            "Загружаем ваше расписание...\n" + timeTableUpdater.getProgressString()));
+                            "Загружаем ваше расписание...\n" + timeTableManager.getProgressString()));
                 }
 
-                if (timeTableUpdater.isLoad() || isUpdate[0]) {
+                if (timeTableManager.isLoad() || isUpdate[0]) {
                     if (mSettings.getString("sport", "").length() > 10) {
                         Intent intent = new Intent(LoadTimeTableActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -58,7 +47,7 @@ public class LoadTimeTableActivity extends AppCompatActivity {
                     finish();
                     return;
                 }
-                lastProgress = timeTableUpdater.getProgressString();
+                lastProgress = timeTableManager.getProgressString();
             }
         }).start();
     }

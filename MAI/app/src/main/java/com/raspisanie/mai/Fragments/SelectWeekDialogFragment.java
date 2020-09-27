@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.raspisanie.mai.Adapters.TimeTable.SelectWeekAdapter;
 import com.raspisanie.mai.Classes.Parametrs;
+import com.raspisanie.mai.Classes.TimeTable.TimeTableManager;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
 
@@ -34,7 +35,7 @@ public class SelectWeekDialogFragment extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         ListView listView = v.findViewById(R.id.list);
-        SelectWeekAdapter adapter = new SelectWeekAdapter(getContext(), (Week[]) Parametrs.getParam("weeks"), this);
+        SelectWeekAdapter adapter = new SelectWeekAdapter(getContext(), TimeTableManager.getInstance().getWeeks(), this);
         listView.setAdapter(adapter);
 
         return v;

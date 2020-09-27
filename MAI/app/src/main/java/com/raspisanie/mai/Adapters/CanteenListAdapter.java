@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.raspisanie.mai.Classes.DataModels.CanteenObject;
+import com.raspisanie.mai.Classes.RealmModels.CanteenModel;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
 
@@ -16,9 +18,9 @@ import java.util.ArrayList;
 /**
  * Адаптер для списка столовых и буфетов.
  */
-public class StolListAdapter extends RecyclerView.Adapter<StolListAdapter.StolItem> {
+public class CanteenListAdapter extends RecyclerView.Adapter<CanteenListAdapter.StolItem> {
     private Context ctx;
-    private ArrayList<SimpleTree<String>> objects;
+    private ArrayList<CanteenObject> objects;
 
     /**
      * Класс ViewHolder для хранения ссылок на View компоненты.
@@ -38,17 +40,16 @@ public class StolListAdapter extends RecyclerView.Adapter<StolListAdapter.StolIt
 
         /**
          * Передача параметров в view элементы.
-         * @param tree дерево элементов.
+         * @param object дерево элементов.
          */
-        public void bind(SimpleTree<String> tree) {
-            String[] mass = tree.getValue().split("<!>");
+        public void bind(CanteenObject object) {
             String time = "";
             try {
-                time += mass[4].replaceAll(" ", "\n");
+                time += object.getDate().replaceAll(" ", "\n");
             } catch (IndexOutOfBoundsException ex) {}
             timeText.setText(time);
-            nameText.setText(mass[1]);
-            placeText.setText(mass[2]);
+            nameText.setText(object.getName());
+            placeText.setText(object.getPlace());
         }
     }
 
@@ -57,7 +58,7 @@ public class StolListAdapter extends RecyclerView.Adapter<StolListAdapter.StolIt
      * @param context контекст activity.
      * @param list список элементов для отображения.
      */
-    public StolListAdapter(Context context, ArrayList list) {
+    public CanteenListAdapter(Context context, ArrayList list) {
         this.ctx = context;
         this.objects = list;
     }

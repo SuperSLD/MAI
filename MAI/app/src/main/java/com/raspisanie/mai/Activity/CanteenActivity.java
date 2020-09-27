@@ -6,14 +6,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ListView;
 
-import com.raspisanie.mai.Adapters.StolListAdapter;
+import com.raspisanie.mai.Adapters.CanteenListAdapter;
+import com.raspisanie.mai.Classes.OtherDataManager;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
 
-public class FoodActivity extends AppCompatActivity {
+public class CanteenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +24,8 @@ public class FoodActivity extends AppCompatActivity {
 
             //Создание RecyclerView
             RecyclerView recyclerView = findViewById(R.id.list);
-            StolListAdapter adapter =
-                    new StolListAdapter(getBaseContext(),
-                            ((SimpleTree<String>) Parametrs.getParam("stol")).getChildList());
+            CanteenListAdapter adapter =
+                    new CanteenListAdapter(getBaseContext(),OtherDataManager.getInstance().getCanteenList());
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
         }

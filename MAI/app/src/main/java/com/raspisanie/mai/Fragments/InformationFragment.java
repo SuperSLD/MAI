@@ -12,9 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.raspisanie.mai.Activity.BiblioActivity;
-import com.raspisanie.mai.Activity.CampusMapActivity;
 import com.raspisanie.mai.Activity.CreativGroupActivity;
-import com.raspisanie.mai.Activity.FoodActivity;
+import com.raspisanie.mai.Activity.CanteenActivity;
 import com.raspisanie.mai.Activity.SportGroupActivity;
 import com.raspisanie.mai.Activity.StudOrgActivity;
 
@@ -46,7 +45,7 @@ public class InformationFragment extends Fragment {
             startActivity(intent);
         });*/
         view.findViewById(R.id.button1).setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity().getBaseContext(), FoodActivity.class);
+            Intent intent = new Intent(getActivity().getBaseContext(), CanteenActivity.class);
             startActivity(intent);
         });
         view.findViewById(R.id.button2).setOnClickListener(v -> {
