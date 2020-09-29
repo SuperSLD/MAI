@@ -11,7 +11,8 @@
         <item name="android:windowBackground">@drawable/drawable_backgraund_splash</item>
     </style>
 
-    <style name="AppActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppActionBar" parent="Theme.AppCompat.Light">
+        <!--<item name="actionBarStyle">@style/WhiteActionBarTheme</item>-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -19,6 +20,22 @@
 
         <item name="android:listViewStyle">@style/ListViewL</item>
     </style>
+
+    <!--
+    <style name="WhiteActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/white</item>
+        <item name="titleTextStyle">@android:color/black</item>
+    </style>
+
+    <style name="MyActionBarTitleText"
+        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="MyActionBarTabText"
+        parent="@style/Widget.AppCompat.ActionBar.TabText">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style> -->
 
     <style name="TimeTableHeaderButton" parent="android:Widget.Button">
         <item name="android:textColor">@color/white</item>

@@ -6,5 +6,11 @@ import io.realm.annotations.Required;
 
 public class CreativeGroupModel extends RealmObject {
     @PrimaryKey
-    int id;
+    public int id;
+    @Required
+    public String name;
+    @Required
+    public String administrator;
+    @Required
+    public String information;
 }

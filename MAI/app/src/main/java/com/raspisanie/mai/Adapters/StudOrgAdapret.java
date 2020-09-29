@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.raspisanie.mai.Classes.DataModels.StudentGroupObject;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  */
 public class StudOrgAdapret extends RecyclerView.Adapter<StudOrgAdapret.StudOrgItem> {
 
-    private ArrayList<SimpleTree<String>> objects;
+    private ArrayList<StudentGroupObject> objects;
 
     /**
      * Класс ViewHolder для хранения ссылок на View компоненты.
@@ -45,12 +46,11 @@ public class StudOrgAdapret extends RecyclerView.Adapter<StudOrgAdapret.StudOrgI
          * Передача параметров в view элементы.
          * @param obj дерево элементов.
          */
-        public void bind(SimpleTree<String> obj) {
-            String[] text = obj.getValue().split("<!>");
-            text1.setText(text[0]);
-            text2.setText(text[1]);
-            text3.setText(text[2]);
-            text4.setText(text[3]);
+        public void bind(StudentGroupObject obj) {
+            text1.setText(obj.getName());
+            text2.setText(obj.getAdministrator());
+            text3.setText(obj.getPhoneNumber());
+            text4.setText(obj.getInformation());
         }
     }
 

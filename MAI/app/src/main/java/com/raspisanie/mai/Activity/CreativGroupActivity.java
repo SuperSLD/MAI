@@ -5,10 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.ListView;
 
 import com.raspisanie.mai.Adapters.CreativeAdapter;
+import com.raspisanie.mai.Classes.OtherDataManager;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
@@ -21,11 +23,14 @@ public class CreativGroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creariv_group);
 
-        RecyclerView recyclerView = findViewById(R.id.table);
-        CreativeAdapter adapter = new CreativeAdapter(
-                ((SimpleTree<String>) Parametrs.getParam("creative")).getChildList());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        if (OtherDataManager.getInstance().getCreativeGroupList().size() > 0) {
+            findViewById(R.id.errText).setVisibility(View.GONE);
+            RecyclerView recyclerView = findViewById(R.id.table);
+            CreativeAdapter adapter = new CreativeAdapter(
+                    OtherDataManager.getInstance().getCreativeGroupList());
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     @Override

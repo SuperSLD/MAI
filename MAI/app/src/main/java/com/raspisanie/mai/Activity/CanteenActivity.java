@@ -9,17 +9,15 @@ import android.view.View;
 
 import com.raspisanie.mai.Adapters.CanteenListAdapter;
 import com.raspisanie.mai.Classes.OtherDataManager;
-import com.raspisanie.mai.Classes.Parametrs;
-import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
 
 public class CanteenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stol_list);
+        setContentView(R.layout.activity_canteen_list);
 
-        if (Parametrs.getParam("stol") != null) {
+        if (OtherDataManager.getInstance().getCanteenList().size() > 0) {
             findViewById(R.id.errText).setVisibility(View.GONE);
 
             //Создание RecyclerView

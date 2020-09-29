@@ -54,18 +54,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 if (TimeTableManager.getInstance().getWeeks().size() > 0) {
 
-                    if (mSettings.getString("sport", "").length() > 10) {
-                        Parametrs.setParam("sport",
-                                gson.fromJson(mSettings.getString("sport", ""), SimpleTree.class));
-                        Parametrs.setParam("creative",
-                                gson.fromJson(mSettings.getString("creative", ""), SimpleTree.class));
-                        Parametrs.setParam("studOrg",
-                                gson.fromJson(mSettings.getString("studOrg", ""), SimpleTree.class));
-                        Parametrs.setParam("stol",
-                                gson.fromJson(mSettings.getString("stol", ""), SimpleTree.class));
-                        Parametrs.setParam("lib",
-                                gson.fromJson(mSettings.getString("lib", ""), SimpleTree.class));
-
+                    if (OtherDataManager.getInstance().getCanteenList().size() > 0) {
                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();

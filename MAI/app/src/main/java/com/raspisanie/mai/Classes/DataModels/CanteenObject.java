@@ -1,5 +1,7 @@
 package com.raspisanie.mai.Classes.DataModels;
 
+import android.support.annotation.NonNull;
+
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
@@ -46,5 +48,11 @@ public class CanteenObject {
 
     public String getPlace() {
         return place;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return id + name + date + place;
     }
 }

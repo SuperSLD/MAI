@@ -92,6 +92,8 @@ public class TimeTableManager {
         try {
             isLoad = false;
             isNewWeekList = false;
+            weekListSize = 0;
+            position = 0;
 
             ArrayList<Week> weeks;
 

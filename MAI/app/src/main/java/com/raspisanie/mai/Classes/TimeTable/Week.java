@@ -64,12 +64,12 @@ public class Week {
 
         ret += ConsoleColor.ANSI_YELLOW + "неделя " + this.n + " " + this.date + "\n" + ConsoleColor.ANSI_RESET;
         for (int i = 0; i < days.size(); i++) {
-            ret += "___" + days.get(i).getName() + " "
+            ret += days.get(i).getName() + " "
                     + days.get(i).getDate() + "\n";
             for (int j = 0; j < days.get(i).getSubjectList().size(); j++) {
-                ret += "______" + days.get(i).getSubjectList().get(j).getName() + " " +
+                ret += days.get(i).getSubjectList().get(j).getName() + " " +
                         days.get(i).getSubjectList().get(j).getTime() + "\n"
-                + "_________" + days.get(i).getSubjectList().get(j).getLecturer() + " " +
+                + days.get(i).getSubjectList().get(j).getLecturer() + " " +
                         days.get(i).getSubjectList().get(j).getPlace() + "\n";
             }
         }

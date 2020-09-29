@@ -90,7 +90,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.BiblioActivity"
+            android:name=".Activity.LibraryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppActionBar">
             <intent-filter>

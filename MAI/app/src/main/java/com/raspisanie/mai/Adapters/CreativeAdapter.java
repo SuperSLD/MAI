@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.raspisanie.mai.Classes.DataModels.CreativeGroupObject;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  */
 public class CreativeAdapter extends RecyclerView.Adapter<CreativeAdapter.CreativeItem> {
 
-    private ArrayList<SimpleTree<String>> objects;
+    private ArrayList<CreativeGroupObject> objects;
 
     /**
      * Класс ViewHolder для хранения ссылок на View компоненты.
@@ -42,12 +43,11 @@ public class CreativeAdapter extends RecyclerView.Adapter<CreativeAdapter.Creati
          * Передача параметров в view элементы.
          * @param tree дерево элементов.
          */
-        public void bind(SimpleTree<String> tree) {
+        public void bind(CreativeGroupObject creativeGroupObject) {
             try {
-                String[] text = tree.getValue().split("<!>");
-                text1.setText(text[0]);
-                text2.setText(text[1]);
-                text3.setText(text[2]);
+                text1.setText(creativeGroupObject.getName());
+                text2.setText(creativeGroupObject.getAdministrator());
+                text3.setText(creativeGroupObject.getInformation());
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

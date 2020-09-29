@@ -11,7 +11,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.raspisanie.mai.Activity.BiblioActivity;
+import com.raspisanie.mai.Activity.LibraryActivity;
 import com.raspisanie.mai.Activity.CreativGroupActivity;
 import com.raspisanie.mai.Activity.CanteenActivity;
 import com.raspisanie.mai.Activity.SportGroupActivity;
@@ -49,7 +49,7 @@ public class InformationFragment extends Fragment {
             startActivity(intent);
         });
         view.findViewById(R.id.button2).setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity().getBaseContext(), BiblioActivity.class);
+            Intent intent = new Intent(getActivity().getBaseContext(), LibraryActivity.class);
             startActivity(intent);
         });
         view.findViewById(R.id.button00).setOnClickListener(v -> {

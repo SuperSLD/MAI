@@ -31,7 +31,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="40dp"
             android:tint="@color/colorPrimary"
             android:src="@drawable/ic_whatshot_24px"/>
         <TextView
@@ -39,7 +39,6 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="20dp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             android:text="Error text"/>

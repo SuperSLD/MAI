@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.raspisanie.mai.Classes.OtherDataManager;
 import com.raspisanie.mai.Classes.TimeTable.TimeTableManager;
 import com.raspisanie.mai.R;
 
@@ -36,7 +37,7 @@ public class LoadTimeTableActivity extends AppCompatActivity {
                 }
 
                 if (timeTableManager.isLoad() || isUpdate[0]) {
-                    if (mSettings.getString("sport", "").length() > 10) {
+                    if (OtherDataManager.getInstance().getCanteenList().size() > 0) {
                         Intent intent = new Intent(LoadTimeTableActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();

@@ -22,15 +22,24 @@ import com.raspisanie.mai.Activity.LoadInformationActivity;
 import com.raspisanie.mai.Activity.LoadTimeTableActivity;
 import com.raspisanie.mai.Activity.NewsActivity;
 import com.raspisanie.mai.Activity.Open;
+import com.raspisanie.mai.Classes.OtherDataManager;
 import com.raspisanie.mai.Classes.RealmModels.WeekModel;
 import com.raspisanie.mai.Classes.TimeTable.EventCardListManager;
 import com.raspisanie.mai.Classes.Parametrs;
 import com.raspisanie.mai.Classes.SimpleTree;
+import com.raspisanie.mai.Classes.TimeTable.TimeTableManager;
 import com.raspisanie.mai.Classes.TimeTable.Week;
 import com.raspisanie.mai.R;
 import com.raspisanie.mai.View.DiagramView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import io.realm.Realm;
 
@@ -124,11 +133,14 @@ public class SettingsFragment extends android.app.Fragment {
         //Установка параметров диаграммы
         float[] data = new float[3];
         try {
-            data[0] = mSettings.getString("weeks", "").getBytes("UTF-8").length;
+            data[0] = TimeTableManager.getInstance().getWeeks().toString().getBytes("UTF-8").length;
             data[1] = mSettings.getString("groupInfo", "").getBytes("UTF-8").length;
-            data[2] = mSettings.getString("sport", "").getBytes("UTF-8").length
-            + mSettings.getString("creative", "").getBytes("UTF-8").length
-            + mSettings.getString("studOrg", "").getBytes("UTF-8").length;
+            data[2] =
+                    (OtherDataManager.getInstance().getSportGroupList().toString().getBytes("UTF-8").length) +
+                    (OtherDataManager.getInstance().getCanteenList().toString().getBytes("UTF-8").length) +
+                    (OtherDataManager.getInstance().getCreativeGroupList().toString().getBytes("UTF-8").length) +
+                    (OtherDataManager.getInstance().getLibraryList().toString().getBytes("UTF-8").length) +
+                    (OtherDataManager.getInstance().getStudentGroupList().toString().getBytes("UTF-8").length);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -201,13 +213,6 @@ public class SettingsFragment extends android.app.Fragment {
     private void reloadInformation() {
         Intent intent =
                 new Intent(getActivity().getBaseContext(), LoadInformationActivity.class);
-        SharedPreferences.Editor editor = ((SharedPreferences) Parametrs.getParam("mSettings")).edit();
-        editor.putString("sport", "");
-        editor.putString("creative", "");
-        editor.putString("studOrg", "");
-        editor.putString("stol", "");
-        editor.putString("lib", "");
-        editor.apply();
         startActivity(intent);
     }
 

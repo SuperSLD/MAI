@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.raspisanie.mai.Classes.DataModels.SportGroupObject;
 import com.raspisanie.mai.Classes.SimpleTree;
 import com.raspisanie.mai.R;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  */
 public class SportGroupAdapter extends RecyclerView.Adapter<SportGroupAdapter.SportGroupItem> {
 
-    private ArrayList<SimpleTree<String>> objects;
+    private ArrayList<SportGroupObject> objects;
 
     /**
      * Класс ViewHolder для хранения ссылок на View компоненты.
@@ -40,18 +41,18 @@ public class SportGroupAdapter extends RecyclerView.Adapter<SportGroupAdapter.Sp
 
         /**
          * Передача параметров в view элементы.
-         * @param tree дерево элементов.
+         * @param sportGroupObject дерево элементов.
          */
-        public void bind(SimpleTree<String> tree) {
-            titleText.setText(tree.getValue());
+        public void bind(SportGroupObject sportGroupObject) {
+            titleText.setText(sportGroupObject.getName());
 
-            SportGroupSubAdapter adapter = new SportGroupSubAdapter(view.getContext() ,tree.getChildList());
+            SportGroupSubAdapter adapter = new SportGroupSubAdapter(view.getContext() ,sportGroupObject.getSportSections());
 
             LinearLayout newLinearLayout = new LinearLayout(view.getContext());
             newLinearLayout.setOrientation(LinearLayout.VERTICAL);
 
             newLinearLayout.removeAllViews();
-            for (int j = 0 ; j < tree.getChildList().size(); j++)
+            for (int j = 0 ; j < sportGroupObject.getSportSections().size(); j++)
                 newLinearLayout.addView(adapter.getView(j, null, newLinearLayout));
 
             linearLayout.removeAllViews();
@@ -61,10 +62,10 @@ public class SportGroupAdapter extends RecyclerView.Adapter<SportGroupAdapter.Sp
 
     /**
      * Конструктор адаптера.
-     * @param korpus список элементов для отображения.
+     * @param list список элементов для отображения.
      */
-    public SportGroupAdapter(ArrayList korpus) {
-        this.objects = korpus;
+    public SportGroupAdapter(ArrayList list) {
+        this.objects = list;
     }
 
     /**
@@ -99,5 +100,51 @@ public class SportGroupAdapter extends RecyclerView.Adapter<SportGroupAdapter.Sp
     @Override
     public int getItemCount() {
         return objects.size();
+    }
+
+    private class SportGroupSubAdapter extends BaseAdapter {
+        private Context ctx;
+        private LayoutInflater lInflater;
+        private ArrayList<SportGroupObject.SportSection> objects;
+
+        public SportGroupSubAdapter(Context context, ArrayList list) {
+            this.ctx = context;
+            this.objects = list;
+            this.lInflater = (LayoutInflater) ctx
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public int getCount() {
+            return objects.size();
+        }
+
+        @Override
+        public SportGroupObject.SportSection getItem(int i) {
+            return objects.get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = convertView;
+            if (view == null) {
+                view = lInflater.inflate(R.layout.item_sport_group_sub, parent, false);
+            }
+
+            try {
+                ((TextView) view.findViewById(R.id.t1)).setText(getItem(position).getName());
+                ((TextView) view.findViewById(R.id.t2)).setText(getItem(position).getAdministrator());
+                ((TextView) view.findViewById(R.id.t3)).setText(getItem(position).getPhoneNumber());
+            } catch (IndexOutOfBoundsException ex) {
+                ex.printStackTrace();
+            }
+
+            return view;
+        }
     }
 }
