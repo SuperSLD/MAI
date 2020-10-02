@@ -1,6 +1,7 @@
 package Servlets;
 
 import Classes.DBConnector;
+import Classes.SqlSecurity;
 import Sockets.ConnectionWebsocket;
 import org.json.JSONObject;
 
@@ -38,6 +39,9 @@ public class AuthorisationServlet extends HttpServlet {
         System.out.println("key -> " + req.getParameter("key"));
 
         try {
+            if (!SqlSecurity.checkInjection(req.getParameter("key"))) {
+                return;
+            }
             ResultSet rs = DBConnector.executeQuery("SELECT id, level_user FROM auth_keys WHERE key_user='" +
                     req.getParameter("key") + "'");
             if (rs.next()) {

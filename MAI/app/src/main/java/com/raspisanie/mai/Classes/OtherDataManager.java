@@ -242,6 +242,7 @@ public class OtherDataManager {
 
                 realm.beginTransaction();
                 StudentGroupModel studentGroupModel = new StudentGroupModel();
+                studentGroupModel.id = i;
                 studentGroupModel.administrator = studentGroupObject.getAdministrator();
                 studentGroupModel.information = studentGroupObject.getInformation();
                 studentGroupModel.name = studentGroupObject.getName();

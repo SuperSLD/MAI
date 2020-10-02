@@ -122,7 +122,7 @@
         <activity
             android:name=".Activity.NewsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppActionBar">
+            android:theme="@style/AppActionBar.TransparentStatusBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

@@ -1,5 +1,6 @@
 package com.raspisanie.mai.Activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,9 @@ public class StudOrgActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stud_org);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setSupportActionBar(findViewById(R.id.toolbar_actionbar));
+        }
 
         if (OtherDataManager.getInstance().getStudentGroupList().size() > 0) {
             findViewById(R.id.errText).setVisibility(View.GONE);
@@ -33,7 +37,7 @@ public class StudOrgActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        setTitle("Студенческие объединения");
+        getSupportActionBar().setTitle("Студенческие объединения");
         getSupportActionBar().setSubtitle(null);
         return super.onCreateOptionsMenu(menu);
     }

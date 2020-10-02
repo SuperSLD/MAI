@@ -1,5 +1,6 @@
 package com.raspisanie.mai.Activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,9 @@ public class CanteenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canteen_list);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setSupportActionBar(findViewById(R.id.toolbar_actionbar));
+        }
 
         if (OtherDataManager.getInstance().getCanteenList().size() > 0) {
             findViewById(R.id.errText).setVisibility(View.GONE);
@@ -31,7 +35,7 @@ public class CanteenActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        setTitle("Столовые и буфеты");
+        getSupportActionBar().setTitle("Столовые и буфеты");
         getSupportActionBar().setSubtitle(null);
         return super.onCreateOptionsMenu(menu);
     }

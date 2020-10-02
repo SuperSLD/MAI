@@ -1,5 +1,6 @@
 package com.raspisanie.mai.Activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,9 @@ public class SportGroupActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sport_group);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setSupportActionBar(findViewById(R.id.toolbar_actionbar));
+        }
 
         if (OtherDataManager.getInstance().getSportGroupList().size() > 0) {
             findViewById(R.id.errText).setVisibility(View.GONE);
@@ -32,7 +36,7 @@ public class SportGroupActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        setTitle("Спортивные секции");
+        getSupportActionBar().setTitle("Спортивные секции");
         getSupportActionBar().setSubtitle(null);
         return super.onCreateOptionsMenu(menu);
     }

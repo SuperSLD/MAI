@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.raspisanie.mai.Activity.LibraryActivity;
 import com.raspisanie.mai.Activity.CreativGroupActivity;
@@ -31,8 +32,10 @@ public class InformationFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.information_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        getActivity().setTitle(R.string.title_information);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_information);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 
     @Override

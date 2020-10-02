@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar"/>
 
     <LinearLayout
         android:id="@+id/errText"
@@ -29,4 +32,4 @@
         android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

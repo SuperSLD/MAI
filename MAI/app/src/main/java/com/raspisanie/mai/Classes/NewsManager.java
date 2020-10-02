@@ -54,6 +54,7 @@ public class NewsManager {
                     "[" + news.getDate() + "]");
             newsObjects.add(news);
         }
+
         realm.close();
     }
 

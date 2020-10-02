@@ -27,7 +27,7 @@
 
     <string name="fragment_settings_title1">Ваши данные:</string>
     <string name="fragment_settings_title2">Группа</string>
-    <string name="versionString">1.1.013/29.09.2020</string>
+    <string name="versionString">1.1.014/21.10.2020</string>
     <string name="author">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -51,6 +51,7 @@
 
     <!--Прочие строки -->
     <string name="versionMessage">
-        Рефакторинг кода.
+        Все вы долго ждали темную тему, но приложение стало еще светлее. Обновлен дизайн всех
+        разделов приложения. Так же исправлены некоторые ошибки вызывающие вылет приложения.
     </string>
 </resources>

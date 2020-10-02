@@ -56,9 +56,9 @@ public class LogoMAIView extends View {
 
         // надпись
         paint.setColor(getResources().getColor(R.color.white));
-        paint.setTextSize(h/2);
+        paint.setTextSize(h/3);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setFakeBoldText(true);
-        canvas.drawText("MAИ", w/2 - w/4, h, paint);
+        canvas.drawText("MAИ", w/2 - w/4, h-35, paint);
     }
 }

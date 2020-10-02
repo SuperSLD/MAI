@@ -1,15 +1,19 @@
 package com.raspisanie.mai.Activity;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.google.gson.Gson;
 import com.raspisanie.mai.Adapters.TimeTable.ViewHolderFactory;
@@ -47,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         Logger.getLogger("mailog").log(Level.INFO, "MainActivity start method onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setSupportActionBar(findViewById(R.id.toolbar_actionbar));
+        }
 
         mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
@@ -69,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
-            android.app.FragmentTransaction fTrans = getFragmentManager().beginTransaction();
+            FragmentTransaction fTrans = getFragmentManager().beginTransaction();
+            getSupportActionBar().show();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             switch (item.getItemId()) {
                 case R.id.action_time_table:
                     fTrans.replace(R.id.fragment, timeTableFragment).commit();

@@ -1,6 +1,7 @@
 package Servlets;
 
 import Classes.DBConnector;
+import Classes.SqlSecurity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -24,11 +25,14 @@ public class NewsServlet extends HttpServlet {
         JSONObject object = new JSONObject();
         PrintWriter writer = resp.getWriter();
         try {
+            if (!SqlSecurity.checkInjection(req.getParameter("last_date"))) {
+                return;
+            }
             ResultSet rs = DBConnector.executeQuery(
                     "SELECT id, title, news_text, date_string " +
                         "FROM news " +
                         "WHERE date_string > '" + req.getParameter("last_date") + "' " +
-                        "ORDER BY date_string DESC LIMIT 100");
+                        "ORDER BY date_string LIMIT 100");
 
             JSONArray array = new JSONArray();
             while (rs.next()) {

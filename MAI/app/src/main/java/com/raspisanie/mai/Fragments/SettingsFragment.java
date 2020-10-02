@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -55,7 +56,7 @@ public class SettingsFragment extends android.app.Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.settings_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        getActivity().setTitle(R.string.title_settings);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_settings);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
     }

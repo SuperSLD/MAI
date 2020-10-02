@@ -23,6 +23,9 @@ public class SportGroupObject {
         public SportSection(String name, String administrator, String phoneNumber) {
             this.phoneNumber = phoneNumber;
             this.name = name;
+            if (this.getName().charAt(0) == ' ') {
+                this.name = this.getName().replaceFirst(" ", "");
+            }
             this.administrator = administrator;
         }
 

@@ -42,7 +42,7 @@ public class ExamsFragment extends android.app.Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        getActivity().setTitle(R.string.title_exams);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_exams);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("");
     }
 

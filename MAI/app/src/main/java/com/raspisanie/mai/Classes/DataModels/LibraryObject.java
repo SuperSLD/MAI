@@ -13,6 +13,9 @@ public class LibraryObject {
 
     public LibraryObject(String name) {
         this.name = name;
+        if (this.getName().charAt(0) == ' ') {
+            this.name = this.getName().replaceFirst(" ", "");
+        }
         this.sections = new ArrayList<>();
     }
 

@@ -22,6 +22,7 @@ public class LoadTimeTableActivity extends AppCompatActivity {
 
         mSettings = getSharedPreferences("appSettings", Context.MODE_PRIVATE);
 
+        if (TimeTableManager.getInstance() == null) TimeTableManager.init();
         final TimeTableManager timeTableManager = TimeTableManager.getInstance();
 
         final boolean[] isUpdate = {false};

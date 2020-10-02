@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_spinner"
         android:icon="@drawable/ic_calendar_today_24px"
-        app:iconTint="@color/white"
+        app:iconTint="@color/colorPrimary"
         android:title=""
         app:showAsAction="always">
         <menu>

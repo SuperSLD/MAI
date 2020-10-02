@@ -1,5 +1,6 @@
 package com.raspisanie.mai.Activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,9 @@ public class LibraryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setSupportActionBar(findViewById(R.id.toolbar_actionbar));
+        }
 
         if (OtherDataManager.getInstance().getLibraryList().size() > 0) {
             findViewById(R.id.errText).setVisibility(View.GONE);
@@ -31,7 +35,7 @@ public class LibraryActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        setTitle("Библиотеки");
+        getSupportActionBar().setTitle("Библиотеки");
         getSupportActionBar().setSubtitle(null);
         return super.onCreateOptionsMenu(menu);
     }

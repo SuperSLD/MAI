@@ -74,7 +74,7 @@ public class TimeTableFragment extends android.app.Fragment{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.time_table_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        getActivity().setTitle(R.string.title_time_table);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_time_table);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Текущая неделя");
     }
 
