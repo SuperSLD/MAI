@@ -181,4 +181,8 @@ public class MainActivity extends AppCompatActivity {
         Parametrs.setParam("eventInfoParam", eventCard);
         startActivity(intent);
     }
+
+    public void setNextWeek() {
+        timeTableFragment.setNextWeek();
+    }
 }

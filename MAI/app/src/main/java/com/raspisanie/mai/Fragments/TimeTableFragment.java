@@ -97,12 +97,9 @@ public class TimeTableFragment extends android.app.Fragment{
                 if (prev != null) prev.setVisible(true);
                 break;
             case R.id.but3:
-                setDaysList(TimeTableManager.getInstance().getThisWeek() + 1);
-                selectWeek = TimeTableManager.getInstance().getThisWeek() + 1;
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Следующая неделя");
                 item.setVisible(false);
-                if (prev != null) prev.setVisible(true);
                 next = item;
+                setNextWeek();
                 break;
             case R.id.but4:
                 SelectWeekDialogFragment dialog = new SelectWeekDialogFragment();
@@ -217,5 +214,13 @@ public class TimeTableFragment extends android.app.Fragment{
     public void onResume() {
         super.onResume();
         setDaysList(selectWeek);
+    }
+
+    public void setNextWeek() {
+        setDaysList(TimeTableManager.getInstance().getThisWeek() + 1);
+        selectWeek = TimeTableManager.getInstance().getThisWeek() + 1;
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Следующая неделя");
+        if (prev != null) prev.setVisible(true);
+        if (next != null) next.setVisible(false);
     }
 }

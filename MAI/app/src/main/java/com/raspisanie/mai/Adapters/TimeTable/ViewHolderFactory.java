@@ -39,6 +39,9 @@ public class ViewHolderFactory {
             case 3:
                 view = inflater.inflate(R.layout.item_events_card, viewGroup, false);
                 return new EventCardItem(view, viewGroup.getContext(), timeTableAdapter, activity);
+            case 4:
+                view = inflater.inflate(R.layout.item_next_week, viewGroup, false);
+                return new NextWeekItem(view, activity);
             default:
                 return null;
         }

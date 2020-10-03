@@ -11,6 +11,7 @@
     <string name="title_exams">Расписание сессии</string>
     <string name="title_campus_map">Общая схема кампуса</string>
     <string name="title_event_info">Информация о событии</string>
+    <string name="title_news_app">Новости приложения</string>
 
     <!-- Settings Fragment -->
     <string name="fragment_settings_button1">Изменить данные о группе</string>
@@ -27,7 +28,7 @@
 
     <string name="fragment_settings_title1">Ваши данные:</string>
     <string name="fragment_settings_title2">Группа</string>
-    <string name="versionString">1.1.014/21.10.2020</string>
+    <string name="versionString">1.1.017/03.10.2020</string>
     <string name="author">Соляной Леонид</string>
     <string name="appInfo">Неофициальное приложение МАИ,написанное студентом для студентов,
         чтоб облегчить доступ к расписанию и другой информации.
@@ -45,13 +46,14 @@
     <string name="fragment_information_creative_group">Творческие коллективы и клубы</string>
 
     <!-- Fragment Time Table -->
+    <string name="fragment_time_table_next_week_item">У вас больше нет пар на этой неделе</string>
+    <string name="fragment_time_table_open_next_week_button">Перейти к следующей неделе</string>
 
     <!-- Fragment Exams -->
     <string name="exam_fragment_error_string">Расписание вашей сесии отсутствует</string>
 
     <!--Прочие строки -->
     <string name="versionMessage">
-        Все вы долго ждали темную тему, но приложение стало еще светлее. Обновлен дизайн всех
-        разделов приложения. Так же исправлены некоторые ошибки вызывающие вылет приложения.
+        Исправления дизайна.
     </string>
 </resources>

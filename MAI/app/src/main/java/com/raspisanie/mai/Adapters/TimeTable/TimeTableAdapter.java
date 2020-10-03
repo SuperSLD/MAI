@@ -63,6 +63,9 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                 this.objects.add(day.get(i));
             }
         }
+        if (objects.size() == 0) {
+            objects.add(new NextWeek());
+        }
         daySum = day.size() - this.objects.size() - 1;
         EventCardListManager.getInstance().insertEventCardsInList(this.objects, week);
     }
@@ -94,6 +97,8 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                     return 0;
                 } else if (objects.get(position) instanceof EventCard) {
                     return 3;
+                } if (objects.get(position) instanceof NextWeek) {
+                    return 4;
                 } else {
                     return -1;
                 }
@@ -103,6 +108,8 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                 return 0;
             } else if (objects.get(position) instanceof EventCard) {
                 return 3;
+            } if (objects.get(position) instanceof NextWeek) {
+                return 4;
             } else {
                 return -1;
             }
@@ -146,6 +153,9 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
                 break;
             case 3:
                 viewHolder = ViewHolderFactory.create(3, inflater, viewGroup);
+                break;
+            case 4:
+                viewHolder = ViewHolderFactory.create(4, inflater, viewGroup);
                 break;
         }
 
@@ -247,4 +257,6 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableViewHolder> 
             }
         } else return objects.size();
     }
+
+    private class NextWeek { }
 }
