@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/notes_page"
+        android:title=""
+        android:icon="@drawable/ic_help_24px"/>
+    <item
+        android:id="@+id/clients_page"
+        android:title=""
+        android:icon="@drawable/ic_whatshot_24px"/>
+    <item
+        android:id="@+id/finance_page"
+        android:title=""
+        android:icon="@drawable/ic_today_24px"/>
+    <item
+        android:id="@+id/profile_page"
+        android:title=""
+        android:icon="@drawable/ic_settings_24px" />
+</menu>
