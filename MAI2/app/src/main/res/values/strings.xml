@@ -2,6 +2,12 @@
     <string name="app_name">MAI</string>
     <string name="app_v">2.0</string>
 
+    <!-- Navigation -->
+    <string name="info_navigation">Инфо</string>
+    <string name="exams_navigation">Экзамены</string>
+    <string name="timetable_navigation">Расписание</string>
+    <string name="settings_navigation">Настройки</string>
+
     <!-- Start Fragment -->
     <string name="start_timetable">Расписание</string>
     <string name="start_description">Простматривайте свое расписание, узнавайте новости и находите интересующие вас события полностью офлайн. Найдите интересные вам увлечения.</string>
