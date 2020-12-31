@@ -1,10 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MAI2" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.MAI2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/white</item>
         <item name="colorPrimaryVariant">@color/colorAccent</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
 
+        <item name="colorOnSurface">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+
+        <!-- Shape -->
+
+        <!-- Components Style -->
+        <item name="buttonStyle">@style/ButtonSolid</item>
     </style>
 </resources>

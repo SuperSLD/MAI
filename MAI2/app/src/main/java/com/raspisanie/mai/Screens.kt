@@ -46,7 +46,7 @@ object Screens {
     }
 
     object MainContainer : SupportAppScreen() {
-        override fun getFragment() = MainContainerFragment()
+        override fun getFragment() = MainContainerFragment.create()
     }
 
     const val INFO_ROUTER = "INFO_ROUTER"

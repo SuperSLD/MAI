@@ -6,7 +6,7 @@ import com.raspisanie.mai.common.base.FlowFragment
 import ru.terrakok.cicerone.commands.BackTo
 import ru.terrakok.cicerone.commands.Replace
 
-class FlowMainFragment : FlowFragment(Screens.SELECT_GROUP_ROUTER) {
+class FlowMainFragment : FlowFragment(Screens.CONTAINER_ROUTER) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

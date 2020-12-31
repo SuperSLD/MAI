@@ -13,4 +13,9 @@
     <string name="start_description">Простматривайте свое расписание, узнавайте новости и находите интересующие вас события полностью офлайн. Найдите интересные вам увлечения.</string>
     <string name="start_button">Выбрать учебную группу</string>
 
+    <!-- Settings Fragment -->
+    <string name="settings_dark_theme">Темная тема</string>
+    <string name="settings_info_card">ваши данные</string>
+    <string name="settings_select_group">Выбрать другую группу</string>
+
 </resources>

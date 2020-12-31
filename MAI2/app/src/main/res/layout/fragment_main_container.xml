@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:clipToPadding="false"
+        android:backgroundTint="@color/colorBackground"
         android:elevation="8dp" />
 
 </LinearLayout>

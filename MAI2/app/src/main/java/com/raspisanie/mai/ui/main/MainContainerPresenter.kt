@@ -19,6 +19,7 @@ class MainContainerPresenter : BasePresenter<MainContainerView>() {
     override fun attachView(view: MainContainerView?) {
         super.attachView(view)
         bottomVisibilityController.show()
+        viewState.initBottomNavigation()
     }
 
     override fun onFirstViewAttach() {

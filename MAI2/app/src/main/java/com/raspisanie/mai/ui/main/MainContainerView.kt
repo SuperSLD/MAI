@@ -13,4 +13,7 @@ interface MainContainerView : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun changeBottomTab(screen: SupportAppScreen)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun initBottomNavigation()
 }

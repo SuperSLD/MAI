@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Primary -->
     <color name="colorPrimary">#0596FF</color>
+    <color name="colorPrimarySecondary">#0596FF</color>
     <color name="colorPrimaryLite">#3EACFB</color>
-    <color name="colorAccent">#A2D8FF</color>
+    <color name="colorAccent">#7EC9FF</color>
+    <color name="colorAccentLite">#A2D8FF</color>
 
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorBackgroundSecondary">#FFFFFF</color>
+
+    <!-- Text -->
     <color name="colorTextPrimary">#FF000000</color>
     <color name="colorTextHint">#909DA9</color>
+    <color name="colorTextWhite">#FFFFFF</color>
 
+    <!-- Navigation -->
     <color name="colorBottomNavigation">#ABBBCC</color>
+
+    <!-- Gradient -->
+    <color name="colorGradientTop">#C7ACFF</color>
+
+    <!-- Button -->
     <color name="colorButtonDisabled">#C8C7CC</color>
 
+    <!-- Border -->
     <color name="colorBorder">#E1E1E1</color>
 
+    <!-- Other -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 

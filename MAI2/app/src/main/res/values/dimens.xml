@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="textBigTitle">36sp</dimen>
+    <dimen name="textTitle">24sp</dimen>
     <dimen name="textNormalHint">18sp</dimen>
     <dimen name="textButton">16sp</dimen>
 
     <dimen name="paddingMax">24dp</dimen>
     <dimen name="paddingMid">16dp</dimen>
     <dimen name="paddingMin">8dp</dimen>
+
+    <dimen name="radiusBig">24dp</dimen>
+    <dimen name="radiusNormal">8dp</dimen>
 </resources>

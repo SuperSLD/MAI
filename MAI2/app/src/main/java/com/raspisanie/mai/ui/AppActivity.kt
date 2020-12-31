@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.common.base.BaseFragment
+import com.raspisanie.mai.extesions.getIsDayTheme
 
 class AppActivity : AppCompatActivity() {
     private val currentFragment: BaseFragment?
