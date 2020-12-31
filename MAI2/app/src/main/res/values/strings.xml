@@ -13,9 +13,41 @@
     <string name="start_description">Простматривайте свое расписание, узнавайте новости и находите интересующие вас события полностью офлайн. Найдите интересные вам увлечения.</string>
     <string name="start_button">Выбрать учебную группу</string>
 
+    <!-- Info Fragment -->
+    <string name="info_title">МАИ</string>
+    <string name="info_campus_title">Кампус</string>
+    <string name="info_life_title">Жизнь</string>
+    <string name="info_button_map">Схема кампуса</string>
+    <string name="info_button_canteen">Столовые и буфеты</string>
+    <string name="info_button_library">Библиотеки</string>
+    <string name="info_button_sport">Спортивные секции</string>
+    <string name="info_button_students">Студенческие организации</string>
+    <string name="info_button_creative">Творческие коллективы</string>
+
+
+    <!-- Exam Fragment -->
+
+    <!-- Timetable Fragment -->
+
     <!-- Settings Fragment -->
     <string name="settings_dark_theme">Темная тема</string>
     <string name="settings_info_card">ваши данные</string>
+
     <string name="settings_select_group">Выбрать другую группу</string>
+    <string name="settings_reload_timetable">Перезагрзить расписание</string>
+    <string name="settings_reload_other">Перезагрузить данные о ВУЗе</string>
+    <string name="settings_events_restore">Вернуть скрытые события</string>
+    <string name="settings_support">Поддержка</string>
+    <string name="settings_news">Новости приложения</string>
+    <string name="settings_mai_link">Перейти на сайт МАИ</string>
+
+    <string name="settings_diagram_text">Устройство</string>
+    <string name="settings_diagram_kb">KB</string>
+    <string name="settings_app_id">ID устройства:</string>
+    <string name="settings_description_title">Информация о приложении:</string>
+    <string name="settings_description">Неофициальное приложение МАИ, написанное студентом для студентов, чтоб облегчить доступ к расписанию и другой информации. Вся информация загружается один раз и потом доступна без доступа в интернет.</string>
+    <string name="settings_version_title">Версия и сборка:</string>
+    <string name="settings_author_title">Автор:</string>
+    <string name="settings_author">Соляной Леонид / Институт №1</string>
 
 </resources>

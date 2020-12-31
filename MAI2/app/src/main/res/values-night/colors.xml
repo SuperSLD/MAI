@@ -23,6 +23,10 @@
     <!-- Button -->
     <color name="colorButtonDisabled">#C8C7CC</color>
 
+    <!-- Diagram -->
+    <color name="colorDiagram2">#ACD7FF</color>
+    <color name="colorDiagram1">#2579C6</color>
+
     <!-- Border -->
     <color name="colorBorder">#292929</color>
 

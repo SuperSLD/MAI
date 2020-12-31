@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Documents-GitHub-MAI-MAI.iml" filepath="$PROJECT_DIR$/Documents-GitHub-MAI-MAI.iml" group="MAI" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Documents-GitHub-MAI-MAI~1.iml" filepath="$PROJECT_DIR$/.idea/modules/Documents-GitHub-MAI-MAI~1.iml" group="MAI" />
-      <module fileurl="file://$PROJECT_DIR$/GitHub-MAI-MAI.iml" filepath="$PROJECT_DIR$/GitHub-MAI-MAI.iml" group="MAI" />
-      <module fileurl="file://$PROJECT_DIR$/app/GitHub-MAI-MAI-app.iml" filepath="$PROJECT_DIR$/app/GitHub-MAI-MAI-app.iml" group="MAI/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/GitHub-MAI-MAI-app~1.iml" filepath="$PROJECT_DIR$/.idea/modules/app/GitHub-MAI-MAI-app~1.iml" group="MAI/app" />
-      <module fileurl="file://$PROJECT_DIR$/MAI.iml" filepath="$PROJECT_DIR$/MAI.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MAI-MAI.iml" filepath="$PROJECT_DIR$/MAI-MAI.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/MAI-MAI-app.iml" filepath="$PROJECT_DIR$/app/MAI-MAI-app.iml" group="MAI/app" />
-      <module fileurl="file://$PROJECT_DIR$/app/MAI-app.iml" filepath="$PROJECT_DIR$/app/MAI-app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MAI.MAI.iml" filepath="$PROJECT_DIR$/.idea/modules/MAI.MAI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MAI.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MAI.app.iml" />
     </modules>
   </component>
 </project>

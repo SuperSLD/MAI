@@ -43,9 +43,13 @@ class AppActivity : AppCompatActivity() {
                         View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                decorView.systemUiVisibility = decorView.systemUiVisibility or
-                        View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR or
-                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                if (context.getIsDayTheme()) {
+                    decorView.systemUiVisibility = decorView.systemUiVisibility or
+                            View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR or
+                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                } else {
+                    decorView.systemUiVisibility = decorView.systemUiVisibility
+                }
             }
 
             statusBarColor = ContextCompat.getColor(context, R.color.colorStatusBar)

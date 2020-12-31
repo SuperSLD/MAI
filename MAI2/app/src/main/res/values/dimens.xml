@@ -4,6 +4,8 @@
     <dimen name="textTitle">24sp</dimen>
     <dimen name="textNormalHint">18sp</dimen>
     <dimen name="textButton">16sp</dimen>
+    <dimen name="textNormal">16sp</dimen>
+    <dimen name="textNormalMin">14sp</dimen>
 
     <dimen name="paddingMax">24dp</dimen>
     <dimen name="paddingMid">16dp</dimen>

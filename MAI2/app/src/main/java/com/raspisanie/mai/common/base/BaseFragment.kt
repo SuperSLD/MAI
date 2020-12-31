@@ -46,13 +46,12 @@ open class BaseFragment(private val layoutRes: Int) : MvpAppCompatFragment() {
         instanceStateSaved = true
     }
 
-    private fun showIcon (imageView: ImageView, icon: Int): ImageView {
+    protected fun showIcon (imageView: ImageView, icon: Int): ImageView {
 
         imageView.setImageResource(icon)
         imageView.visibility = View.VISIBLE
         return imageView
     }
-
 
     open fun onBackPressed() {}
 }
