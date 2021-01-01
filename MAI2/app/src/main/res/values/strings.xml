@@ -26,8 +26,22 @@
 
 
     <!-- Exam Fragment -->
+    <string name="exams_title">Экзамены</string>
+    <string name="exams_none_timetable">Расписание ваших экзаменов отсутствует</string>
 
     <!-- Timetable Fragment -->
+    <string name="timetable_title_current">Текущая неделя</string>
+    <string name="timetable_title_other">Неделя №</string>
+    <string name="timetable_now">Сегодня</string>
+    <string-array name="timetable_days">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+        <item>Воскресенье</item>
+    </string-array>
 
     <!-- Settings Fragment -->
     <string name="settings_dark_theme">Темная тема</string>

@@ -1,4 +1,4 @@
-package pro.midev.iprofi.common.base
+package com.raspisanie.mai.common.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

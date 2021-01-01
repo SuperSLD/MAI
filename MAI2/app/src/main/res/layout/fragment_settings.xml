@@ -11,9 +11,7 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:id="@+id/scrollingContent"
-            android:layout_marginTop="@dimen/paddingMax"
-            android:paddingLeft="@dimen/paddingMax"
-            android:paddingRight="@dimen/paddingMax"
+            android:padding="@dimen/paddingMax"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -248,10 +246,7 @@
                 android:id="@+id/lNews"
                 layout="@layout/item_settings"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorBorder"/>
+
             <com.google.android.material.card.MaterialCardView
                     android:layout_marginTop="@dimen/paddingMid"
                     android:layout_width="match_parent"

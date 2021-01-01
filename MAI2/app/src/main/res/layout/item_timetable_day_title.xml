@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="@dimen/paddingMid"
+    android:paddingLeft="@dimen/paddingMid"
+    android:paddingTop="@dimen/paddingMid"
+    android:paddingBottom="@dimen/paddingMid">
+
+    <TextView
+        android:id="@+id/tvDayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вторник"
+        android:textSize="@dimen/textTitle"
+        android:textColor="@color/colorTextPrimary"
+        android:fontFamily="@font/roboto_bold"/>
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.01"
+        android:textSize="@dimen/textNormalHint"
+        android:textColor="@color/colorTextHint"
+        android:layout_marginLeft="@dimen/paddingMin"
+        android:layout_marginRight="@dimen/paddingMin"
+        android:fontFamily="@font/roboto_bold" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/radiusNormal"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/colorPrimary">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timetable_now"
+            android:textSize="@dimen/textNormalMin"
+            android:textColor="@color/colorTextWhite"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="@dimen/paddingMin"/>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
