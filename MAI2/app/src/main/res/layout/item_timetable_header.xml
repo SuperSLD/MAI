@@ -15,6 +15,7 @@
         android:orientation="vertical" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardElevation="0dp"

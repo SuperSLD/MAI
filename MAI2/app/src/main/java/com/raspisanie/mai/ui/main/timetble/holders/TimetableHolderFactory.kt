@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.raspisanie.mai.R
 import com.raspisanie.mai.common.base.AbstractViewHolder
 
+@Suppress("UNCHECKED_CAST")
 class TimetableHolderFactory {
     companion object {
         const val TITLE_ITEM = 0
@@ -23,6 +24,10 @@ class TimetableHolderFactory {
                 )
                 LINE_ITEM -> return LineHolder(
                         LayoutInflater.from(parent.context).inflate(R.layout.item_timetable_line, parent, false)
+                )
+                END_WEEK_ITEM -> return EndWeekHolder(
+                        LayoutInflater.from(parent.context).inflate(R.layout.item_timetable_end_week, parent, false),
+                        data as (Int, Any?) -> Unit
                 )
             }
             return null

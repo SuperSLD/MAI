@@ -56,10 +56,17 @@ open class BaseFragment(private val layoutRes: Int) : MvpAppCompatFragment() {
                 tvTitle.text = getString(title)
             } else tvTitle.visibility = View.INVISIBLE
 
-            if (closeIcon != 0) showIcon(icClose, closeIcon)
-            if (firstIcon != 0) showIcon(icFirst, firstIcon)
-            if (secondIcon != 0) showIcon(icSecond, secondIcon)
+            if (closeIcon != 0) showToolbarIcon(btnClose, icClose, closeIcon)
+            if (firstIcon != 0) showToolbarIcon(btnFirst, icFirst, firstIcon)
+            if (secondIcon != 0) showToolbarIcon(btnSecond, icSecond, secondIcon)
         }
+    }
+
+    protected fun showToolbarIcon (button: View, imageView: ImageView, icon: Int): ImageView {
+
+        imageView.setImageResource(icon)
+        button.visibility = View.VISIBLE
+        return imageView
     }
 
     protected fun showIcon (imageView: ImageView, icon: Int): ImageView {

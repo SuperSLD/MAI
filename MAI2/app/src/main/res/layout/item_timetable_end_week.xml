@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="@dimen/paddingMid"
+    android:paddingLeft="@dimen/paddingMid"
+    android:paddingBottom="@dimen/paddingMin">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/colorBackground"
+        app:strokeColor="@color/colorBorder"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="@dimen/radiusNormal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingMax"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:srcCompat="@drawable/ic_next_week"/>
+            <TextView
+                android:layout_marginTop="@dimen/paddingMid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timetable_next_week_title"
+                android:textColor="@color/colorTextPrimary"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="@dimen/textNormalHint"
+                android:paddingRight="48dp"
+                android:paddingLeft="48dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/paddingMid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timetable_next_week_button"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="@dimen/textNormal"
+                android:paddingRight="48dp"
+                android:paddingLeft="48dp"
+                android:gravity="center"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

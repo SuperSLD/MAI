@@ -3,6 +3,7 @@ package com.raspisanie.mai.ui.main.timetble
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
 import com.raspisanie.mai.common.base.AbstractViewHolder
@@ -14,12 +15,16 @@ import com.raspisanie.mai.ui.main.timetble.holders.TitleHolder
 import kotlinx.android.synthetic.main.item_timetable_day_title.view.*
 import kotlinx.android.synthetic.main.item_timetable_day_title.view.tvDayName
 import kotlinx.android.synthetic.main.item_timetable_header.view.*
+import java.lang.UnsupportedOperationException
 import java.util.*
 
 
-class TimetableHeaderAdapter : RecyclerView.Adapter<AbstractViewHolder>() {
+class TimetableHeaderAdapter(
+        var onDayHeaderClick: (String) -> Unit
+) : RecyclerView.Adapter<AbstractViewHolder>() {
 
     private val list = mutableListOf<Any>()
+    private var selectedPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbstractViewHolder {
         return ItemHeaderHolder(
@@ -43,11 +48,32 @@ class TimetableHeaderAdapter : RecyclerView.Adapter<AbstractViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun selectItem(date: String) {
+        for (i in list.indices) {
+            val day = list[i] as DayHuman
+            if (day.date == date) {
+                selectedPosition = i
+            }
+        }
+        notifyDataSetChanged()
+    }
+
+    fun getItemPosition(date: String): Int {
+        for (i in list.indices) {
+            val day = list[i] as DayHuman
+            if (day.date == date) {
+                return i
+            }
+        }
+        return 0
+    }
+
     private inner class ItemHeaderHolder(itemView: View) : AbstractViewHolder(itemView) {
         private val dayNames = itemView.resources.getStringArray(R.array.timetable_days)
 
         override fun bind(data: Any?) {
             val day = data as DayHuman
+            addColor(list.indexOf(day) == selectedPosition)
             with(itemView) {
                 if (list.indexOf(day) == 0) {
                     lPadding.visibility = View.VISIBLE
@@ -62,6 +88,26 @@ class TimetableHeaderAdapter : RecyclerView.Adapter<AbstractViewHolder>() {
                     lPaddingEnd.visibility = View.VISIBLE
                 } else {
                     lPaddingEnd.visibility = View.GONE
+                }
+
+                cvMain.setOnClickListener {
+                    selectedPosition = list.indexOf(day)
+                    onDayHeaderClick(day.date)
+                    notifyDataSetChanged()
+                }
+            }
+        }
+
+        fun addColor(selected: Boolean) {
+            with(itemView) {
+                if (selected) {
+                    cvMain.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                    cvMain.strokeColor = ContextCompat.getColor(context, R.color.colorPrimary)
+                    tvDayName.setTextColor(ContextCompat.getColor(context, R.color.colorTextWhite))
+                } else {
+                    cvMain.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorBackground))
+                    cvMain.strokeColor = ContextCompat.getColor(context, R.color.colorBorder)
+                    tvDayName.setTextColor(ContextCompat.getColor(context, R.color.colorTextPrimary))
                 }
             }
         }

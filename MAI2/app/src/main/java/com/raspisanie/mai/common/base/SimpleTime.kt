@@ -1,5 +1,7 @@
 package pro.midev.iprofi.common.base
 
+import java.lang.Exception
+
 /**
  * Время в формате HH:MM
  */
@@ -13,9 +15,14 @@ class SimpleTime: Cloneable {
     }
 
     constructor(s: String) {
-        val mn = s.split(":")
-        h = Integer.parseInt(mn[0])
-        m = Integer.parseInt(mn[1])
+        try {
+            val mn = s.split(":")
+            h = Integer.parseInt(mn[0])
+            m = Integer.parseInt(mn[1])
+        } catch (ex: Exception) {
+            h = 0
+            m = 0
+        }
     }
 
     fun getH() = h
@@ -23,6 +30,7 @@ class SimpleTime: Cloneable {
 
     /**
      * Добавление минут
+     * @param m количество минут
      */
     fun addMin(m: Int): SimpleTime {
         this.h += m / 60
@@ -36,6 +44,7 @@ class SimpleTime: Cloneable {
 
     /**
      * Добавление часов
+     * @param h количество часов
      */
     fun addHour(h: Int): SimpleTime {
         this.h += h
@@ -45,6 +54,7 @@ class SimpleTime: Cloneable {
 
     /**
      * Возвращает true если дата до вводимой
+     * @param time Время для сравнения
      */
     fun before(time: SimpleTime): Boolean {
         return time.h > this.h || (time.h == this.h && time.m > this.m)
@@ -52,9 +62,10 @@ class SimpleTime: Cloneable {
 
     /**
      * Возвращает true если дата после вводимой
+     * @param time Время для сравнения
      */
     fun after(time: SimpleTime): Boolean {
-        return time.h <= this.h || (time.h == this.h && time.m < this.m)
+        return time.h <= this.h || (time.h == this.h && time.m <= this.m)
     }
 
     override fun toString(): String {
@@ -64,9 +75,9 @@ class SimpleTime: Cloneable {
     }
 
     override fun equals(other: Any?): Boolean {
-        if (other is SimpleTime) {
-            return this.h == other.h && this.m == other.m
-        } else return false
+        return if (other is SimpleTime) {
+            this.h == other.h && this.m == other.m
+        } else false
     }
 
     public override fun clone(): SimpleTime {
