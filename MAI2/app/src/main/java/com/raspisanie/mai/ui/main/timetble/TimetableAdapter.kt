@@ -1,14 +1,10 @@
 package com.raspisanie.mai.ui.main.timetble
 
-import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.raspisanie.mai.R
 import com.raspisanie.mai.common.base.AbstractViewHolder
 import com.raspisanie.mai.models.human.WeekHuman
 import com.raspisanie.mai.ui.main.timetble.holders.TimetableHolderFactory
-import timber.log.Timber
-import java.util.*
 
 
 class TimetableAdapter : RecyclerView.Adapter<AbstractViewHolder>() {
@@ -36,6 +32,12 @@ class TimetableAdapter : RecyclerView.Adapter<AbstractViewHolder>() {
         this.list.clear()
         for (day in data.days) {
             this.list.add(Pair(TimetableHolderFactory.TITLE_ITEM, day))
+            for (subject in day.subjects) {
+                this.list.add(Pair(TimetableHolderFactory.SUBJECT_ITEM, subject))
+            }
+            if (data.days.indexOf(day) != data.days.size - 1) {
+                this.list.add(Pair(TimetableHolderFactory.LINE_ITEM, null))
+            }
         }
         notifyDataSetChanged()
     }

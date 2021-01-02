@@ -9,6 +9,19 @@
         layout="@layout/layout_toolbar"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWeekHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/paddingMid"
+        android:layout_marginRight="@dimen/paddingMid"
+        android:layout_marginTop="@dimen/paddingMin"
+        android:background="@color/colorBorder"/>
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWeek"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

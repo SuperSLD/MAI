@@ -22,12 +22,12 @@
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4.01"
-        android:textSize="@dimen/textNormalHint"
-        android:textColor="@color/colorTextHint"
         android:layout_marginLeft="@dimen/paddingMin"
         android:layout_marginRight="@dimen/paddingMin"
-        android:fontFamily="@font/roboto_bold" />
+        android:fontFamily="@font/roboto_regular"
+        android:text="4.01"
+        android:textColor="@color/colorTextHint"
+        android:textSize="@dimen/textNormalHint" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvNow"

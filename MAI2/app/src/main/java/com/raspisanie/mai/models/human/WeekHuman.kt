@@ -13,11 +13,11 @@ data class WeekHuman(
 @Parcelize
 data class DayHuman(
         var date: String,
-        var subjects: MutableList<Subject>
+        var subjects: MutableList<SubjectHuman>
 ): Parcelable
 
 @Parcelize
-data class Subject(
+data class SubjectHuman(
         var name: String,
         var location: String,
         var teacher: String,

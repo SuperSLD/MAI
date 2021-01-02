@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/paddingMin"
+    android:paddingTop="@dimen/paddingMin">
+
+    <LinearLayout
+        android:id="@+id/lPadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/paddingMin"
+        android:orientation="vertical" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/colorBackground"
+        app:strokeColor="@color/colorBorder"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="@dimen/radiusNormal">
+                <TextView
+                    android:id="@+id/tvDayName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:textSize="@dimen/textNormal"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_margin="@dimen/paddingMin"
+                    android:textColor="@color/colorTextPrimary"
+                    android:text="Понедельник"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/lPaddingEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/paddingMid"
+        android:orientation="vertical" />
+
+</LinearLayout>
