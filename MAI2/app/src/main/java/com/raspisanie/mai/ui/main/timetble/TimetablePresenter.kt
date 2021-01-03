@@ -10,6 +10,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import org.koin.core.inject
 import com.raspisanie.mai.common.CiceroneHolder
 import com.raspisanie.mai.common.base.BasePresenter
+import com.raspisanie.mai.common.base.BottomSheetDialogController
+import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.controllers.BottomVisibilityController
 import com.raspisanie.mai.extesions.getAuthState
 import ru.terrakok.cicerone.Router
@@ -26,10 +28,15 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
         get() = navigationHolder.currentRouter
 
     private val bottomVisibilityController: BottomVisibilityController by inject()
+    private val bottomSheetDialogController: BottomSheetDialogController by inject()
 
     override fun attachView(view: TimetableView?) {
         super.attachView(view)
         bottomVisibilityController.show()
+    }
+
+    fun selectWeekDialog() {
+        bottomSheetDialogController.show(BottomSheetDialogType.SELECT_WEEK)
     }
 
     fun onDayHeaderClick(date: String) {

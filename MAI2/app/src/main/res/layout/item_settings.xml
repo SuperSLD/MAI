@@ -1,53 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <com.google.android.material.card.MaterialCardView
+    android:layout_height="wrap_content"
+    app:cardElevation="0dp">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="0dp">
+        android:foreground="?android:selectableItemBackground"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:padding="@dimen/paddingMid"
+            android:gravity="center_vertical">
+            <ImageView
+                android:id="@+id/icIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tint="@color/colorPrimarySecondary"
+                app:srcCompat="@drawable/ic_group"/>
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/paddingMin"
+                android:textSize="@dimen/textButton"
+                android:textColor="@color/colorTextPrimary"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/settings_select_group"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/paddingMid"
-                android:gravity="center_vertical">
+                android:layout_height="match_parent"
+                android:gravity="end|center_vertical">
                 <ImageView
-                    android:id="@+id/icIcon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:tint="@color/colorPrimarySecondary"
-                    app:srcCompat="@drawable/ic_group"/>
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/paddingMin"
-                    android:textSize="@dimen/textButton"
-                    android:textColor="@color/colorTextPrimary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/settings_select_group"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="end|center_vertical">
-                    <ImageView
-                        android:layout_width="8dp"
-                        android:layout_height="12dp"
-                        app:srcCompat="@drawable/ic_arrow"/>
-                </LinearLayout>
+                    android:layout_width="8dp"
+                    android:layout_height="12dp"
+                    app:srcCompat="@drawable/ic_arrow"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorBorder"/>
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorBorder"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
