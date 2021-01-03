@@ -37,6 +37,8 @@ class InfoPresenter : BasePresenter<MvpView>() {
         super.onFirstViewAttach()
     }
 
+    fun openCanteens() = router?.navigateTo(Screens.Canteens)
+
     fun back() {
         router?.exit()
     }

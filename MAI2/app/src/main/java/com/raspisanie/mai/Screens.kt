@@ -9,6 +9,7 @@ import com.raspisanie.mai.ui.main.exams.ExamsFragment
 import com.raspisanie.mai.ui.main.exams.FlowExamsFragment
 import com.raspisanie.mai.ui.main.info.FlowInfoFragment
 import com.raspisanie.mai.ui.main.info.InfoFragment
+import com.raspisanie.mai.ui.main.info.canteens.CanteensFragment
 import com.raspisanie.mai.ui.main.settings.FlowSettingsFragment
 import com.raspisanie.mai.ui.main.settings.SettingsFragment
 import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
@@ -57,6 +58,10 @@ object Screens {
 
     object Info: SupportAppScreen() {
         override fun getFragment(): Fragment? = InfoFragment()
+    }
+
+    object Canteens: SupportAppScreen() {
+        override fun getFragment(): Fragment? = CanteensFragment()
     }
 
     const val EXAMS_ROUTER = "EXAMS_ROUTER"

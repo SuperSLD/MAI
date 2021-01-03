@@ -47,7 +47,7 @@ val appModule = module {
         Realm.init(androidContext())
         val config = RealmConfiguration.Builder()
             .deleteRealmIfMigrationNeeded()
-            .name("profapp.db")
+            .name("mai_app.db")
             .build()
         Realm.getInstance(config)
     }

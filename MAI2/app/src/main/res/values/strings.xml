@@ -24,6 +24,8 @@
     <string name="info_button_students">Студенческие организации</string>
     <string name="info_button_creative">Творческие коллективы</string>
 
+    <!-- Canteens Fragment -->
+    <string name="canteens_title">Столовые и буфеты</string>
 
     <!-- Exam Fragment -->
     <string name="exams_title">Экзамены</string>
@@ -44,6 +46,8 @@
     </string-array>
     <string name="timetable_next_week_title">На этой неделе у вас больше нет пар.</string>
     <string name="timetable_next_week_button">Перейти к следующей</string>
+
+    <string name="timetable_dialog_previous_week">Предыдущая неделя</string>
 
     <!-- Settings Fragment -->
     <string name="settings_dark_theme">Темная тема</string>
