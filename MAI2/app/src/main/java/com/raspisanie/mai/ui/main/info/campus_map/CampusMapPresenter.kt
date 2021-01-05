@@ -1,4 +1,4 @@
-package com.raspisanie.mai.ui.main.info.canteens
+package com.raspisanie.mai.ui.main.info.campus_map
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
@@ -10,7 +10,7 @@ import com.raspisanie.mai.common.CiceroneHolder
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class CanteensPresenter : BasePresenter<MvpView>() {
+class CampusMapPresenter : BasePresenter<MvpView>() {
 
     private val navigationHolder: CiceroneHolder by inject()
     private val router: Router?

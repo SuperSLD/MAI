@@ -4,15 +4,8 @@
     android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/paddingMin"
+    android:paddingRight="@dimen/paddingMin"
     android:paddingTop="@dimen/paddingMin">
-
-    <LinearLayout
-        android:id="@+id/lPadding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/paddingMin"
-        android:orientation="vertical" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvMain"
@@ -34,12 +27,5 @@
                     android:textColor="@color/colorTextPrimary"
                     android:text="Понедельник"/>
     </com.google.android.material.card.MaterialCardView>
-
-    <LinearLayout
-        android:id="@+id/lPaddingEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/paddingMid"
-        android:orientation="vertical" />
 
 </LinearLayout>

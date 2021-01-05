@@ -37,6 +37,7 @@ class InfoPresenter : BasePresenter<MvpView>() {
         super.onFirstViewAttach()
     }
 
+    fun openCampusMap() = router?.navigateTo(Screens.CampusMap)
     fun openCanteens() = router?.navigateTo(Screens.Canteens)
 
     fun back() {

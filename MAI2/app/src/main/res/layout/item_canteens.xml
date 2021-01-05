@@ -1,22 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="0dp"
-    app:cardBackgroundColor="@color/colorBackground"
-    app:strokeColor="@color/colorBorder"
-    app:strokeWidth="1dp"
-    android:layout_marginRight="@dimen/paddingMid"
-    android:layout_marginLeft="@dimen/paddingMid"
-    android:layout_marginBottom="@dimen/paddingMin"
-    app:cardCornerRadius="@dimen/radiusNormal">
-    <LinearLayout
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/paddingMid">
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/colorBackground"
+        app:strokeColor="@color/colorBorder"
+        app:strokeWidth="1dp"
+        android:layout_marginRight="@dimen/paddingMid"
+        android:layout_marginLeft="@dimen/paddingMid"
+        android:layout_marginBottom="@dimen/paddingMin"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="@dimen/radiusNormal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/paddingMid"
+            android:paddingBottom="@dimen/paddingMid"
+            android:paddingRight="@dimen/paddingMid"
+            android:paddingTop="32dp">
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/timetable_now"
+                android:textSize="@dimen/textNormal"
+                android:textColor="@color/colorTextPrimary" />
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/paddingMin"
+                android:text="@string/timetable_now"
+                android:textSize="@dimen/textNormalMin"
+                android:textColor="@color/colorTextHint" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="@dimen/radiusNormal"
+        android:layout_marginLeft="40dp">
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/paddingMin"
+            android:text="@string/timetable_now"
+            android:gravity="center"
+            android:textSize="@dimen/textNormalHint"
+            android:textColor="@color/colorTextWhite" />
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>
+

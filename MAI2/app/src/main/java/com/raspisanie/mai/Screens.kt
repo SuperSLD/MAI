@@ -9,6 +9,7 @@ import com.raspisanie.mai.ui.main.exams.ExamsFragment
 import com.raspisanie.mai.ui.main.exams.FlowExamsFragment
 import com.raspisanie.mai.ui.main.info.FlowInfoFragment
 import com.raspisanie.mai.ui.main.info.InfoFragment
+import com.raspisanie.mai.ui.main.info.campus_map.CampusMapFragment
 import com.raspisanie.mai.ui.main.info.canteens.CanteensFragment
 import com.raspisanie.mai.ui.main.settings.FlowSettingsFragment
 import com.raspisanie.mai.ui.main.settings.SettingsFragment
@@ -58,6 +59,10 @@ object Screens {
 
     object Info: SupportAppScreen() {
         override fun getFragment(): Fragment? = InfoFragment()
+    }
+
+    object CampusMap: SupportAppScreen() {
+        override fun getFragment(): Fragment? = CampusMapFragment()
     }
 
     object Canteens: SupportAppScreen() {

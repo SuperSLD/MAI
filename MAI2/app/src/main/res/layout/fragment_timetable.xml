@@ -11,7 +11,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWeekHeader"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/paddingMid"
+        android:paddingRight="@dimen/paddingMin"
+        android:clipToPadding="false"/>
 
     <LinearLayout
         android:layout_width="match_parent"

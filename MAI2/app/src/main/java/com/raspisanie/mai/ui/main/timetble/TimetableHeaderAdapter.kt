@@ -75,20 +75,9 @@ class TimetableHeaderAdapter(
             val day = data as DayHuman
             addColor(list.indexOf(day) == selectedPosition)
             with(itemView) {
-                if (list.indexOf(day) == 0) {
-                    lPadding.visibility = View.VISIBLE
-                } else {
-                    lPadding.visibility = View.GONE
-                }
 
                 val calendar = day.date.parseCalendarByFormat("dd.MM.yyyy")
                 tvDayName.text = dayNames[calendar.get(Calendar.DAY_OF_WEEK) - 1]
-
-                if (list.indexOf(day) == list.size - 1) {
-                    lPaddingEnd.visibility = View.VISIBLE
-                } else {
-                    lPaddingEnd.visibility = View.GONE
-                }
 
                 cvMain.setOnClickListener {
                     selectedPosition = list.indexOf(day)

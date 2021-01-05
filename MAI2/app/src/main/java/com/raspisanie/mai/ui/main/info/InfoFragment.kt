@@ -17,6 +17,9 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), MvpView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        lMap.setOnClickListener {
+            presenter.openCampusMap()
+        }
         lCanteen.setOnClickListener {
             presenter.openCanteens()
         }
