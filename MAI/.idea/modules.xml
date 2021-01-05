@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MAI.MAI.iml" filepath="$PROJECT_DIR$/.idea/modules/MAI.MAI.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MAI.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MAI.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MAI.iml" filepath="$PROJECT_DIR$/.idea/modules/MAI.iml" />
     </modules>
   </component>
 </project>
