@@ -1,4 +1,4 @@
-package com.raspisanie.mai.ui.select_group.start
+package com.raspisanie.mai.ui.select_group.select_inst
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
@@ -10,7 +10,7 @@ import com.raspisanie.mai.common.CiceroneHolder
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class StartPresenter : BasePresenter<MvpView>() {
+class SelectInstPresenter : BasePresenter<MvpView>() {
 
     private val navigationHolder: CiceroneHolder by inject()
     private val bottomVisibilityController: BottomVisibilityController by inject()
@@ -23,8 +23,8 @@ class StartPresenter : BasePresenter<MvpView>() {
         bottomVisibilityController.hide()
     }
 
-    fun goSelectYear() {
-        router?.navigateTo(Screens.SelectYear)
+    fun next() {
+        router?.navigateTo(Screens.SelectGroup)
     }
 
     fun back() = router?.exit()

@@ -22,4 +22,3 @@ class CampusMapFragment : BaseFragment(R.layout.fragment_campus_map), MvpView {
         presenter.back()
     }
 }
-

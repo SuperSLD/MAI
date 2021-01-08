@@ -8,10 +8,20 @@
     <string name="timetable_navigation">Расписание</string>
     <string name="settings_navigation">Настройки</string>
 
-    <!-- Start Fragment -->
+    <!-- Start Fragment and Flow -->
     <string name="start_timetable">Расписание</string>
     <string name="start_description">Простматривайте свое расписание, узнавайте новости и находите интересующие вас события полностью офлайн. Найдите интересные вам увлечения.</string>
     <string name="start_button">Выбрать учебную группу</string>
+
+    <string name="select_year_title">Выберите свой курс</string>
+    <string name="select_year_hint">Ваш курс</string>
+    <string name="select_year_next">Продолжить</string>
+
+    <string name="select_inst_title">Выберите институт</string>
+    <string name="select_inst_hint">Ваш институт</string>
+    SelectInstFragment
+    <string name="select_group_title">Выберите свою группу</string>
+    <string name="select_group_hint">Ваша группа</string>
 
     <!-- Info Fragment -->
     <string name="info_title">МАИ</string>

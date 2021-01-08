@@ -16,6 +16,9 @@ import com.raspisanie.mai.ui.main.settings.SettingsFragment
 import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
 import com.raspisanie.mai.ui.main.timetble.TimetableFragment
 import com.raspisanie.mai.ui.select_group.FlowSelectGroupFragment
+import com.raspisanie.mai.ui.select_group.select_group.SelectGroupFragment
+import com.raspisanie.mai.ui.select_group.select_inst.SelectInstFragment
+import com.raspisanie.mai.ui.select_group.select_year.SelectYearFragment
 import com.raspisanie.mai.ui.select_group.start.StartFragment
 import com.raspisanie.mai.ui.splash.SplashFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -39,6 +42,18 @@ object Screens {
 
     object Start : SupportAppScreen() {
         override fun getFragment(): Fragment? = StartFragment()
+    }
+
+    object SelectYear : SupportAppScreen() {
+        override fun getFragment(): Fragment? = SelectYearFragment()
+    }
+
+    object SelectInst : SupportAppScreen() {
+        override fun getFragment(): Fragment? = SelectInstFragment()
+    }
+
+    object SelectGroup : SupportAppScreen() {
+        override fun getFragment(): Fragment? = SelectGroupFragment()
     }
 
     const val CONTAINER_ROUTER = "CONTAINER_ROUTER"
