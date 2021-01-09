@@ -8,6 +8,8 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:windowBackground">@color/colorBackground</item>
 
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
         <item name="colorOnSurface">@color/colorPrimary</item>
         <item name="colorSecondary">@color/colorPrimary</item>
 

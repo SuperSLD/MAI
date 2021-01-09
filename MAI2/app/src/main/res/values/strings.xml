@@ -19,7 +19,7 @@
 
     <string name="select_inst_title">Выберите институт</string>
     <string name="select_inst_hint">Ваш институт</string>
-    SelectInstFragment
+
     <string name="select_group_title">Выберите свою группу</string>
     <string name="select_group_hint">Ваша группа</string>
 
