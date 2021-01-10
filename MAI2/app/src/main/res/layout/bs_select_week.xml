@@ -14,20 +14,23 @@
         android:clipToPadding="false"
         android:layout_margin="@dimen/paddingMax"
         android:orientation="vertical"
-        app:cardBackgroundColor="@color/colorBackground"
         app:cardCornerRadius="@dimen/radiusNormal">
         <LinearLayout
+            android:padding="@dimen/paddingMid"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/colorBackground">
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
+                    android:padding="@dimen/paddingMin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@color/colorBackground"
+                    android:paddingRight="@dimen/paddingMid">
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -36,8 +39,79 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="bottom"
+                        android:textColor="@color/colorTextPrimary"
                         android:layout_marginLeft="@dimen/paddingMid"
-                        android:text="@string/timetable_dialog_previous_week"/>
+                        android:text="@string/timetable_dialog_previous_week"
+                        android:textSize="@dimen/textNormal"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:padding="@dimen/paddingMin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBackground"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/ic_calendar"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:textColor="@color/colorTextPrimary"
+                        android:layout_marginLeft="@dimen/paddingMid"
+                        android:text="@string/timetable_dialog_this_week_button"
+                        android:textSize="@dimen/textNormal"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:padding="@dimen/paddingMin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBackground"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/ic_next"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:textColor="@color/colorTextPrimary"
+                        android:layout_marginLeft="@dimen/paddingMid"
+                        android:text="@string/timetable_dialog_previous_week_button"
+                        android:textSize="@dimen/textNormal"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:padding="@dimen/paddingMin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBackground"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/ic_other"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:layout_marginLeft="@dimen/paddingMid"
+                        android:textColor="@color/colorTextPrimary"
+                        android:text="@string/timetable_dialog_other_week_button"
+                        android:textSize="@dimen/textNormal"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>

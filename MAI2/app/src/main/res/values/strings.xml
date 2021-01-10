@@ -58,6 +58,9 @@
     <string name="timetable_next_week_button">Перейти к следующей</string>
 
     <string name="timetable_dialog_previous_week">Предыдущая неделя</string>
+    <string name="timetable_dialog_this_week_button">Текущая неделя</string>
+    <string name="timetable_dialog_previous_week_button">Следующая неделя</string>
+    <string name="timetable_dialog_other_week_button">Другая неделя</string>
 
     <!-- Settings Fragment -->
     <string name="settings_dark_theme">Темная тема</string>
