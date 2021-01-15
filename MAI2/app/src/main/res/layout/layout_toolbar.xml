@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.appbar.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    app:elevation="0dp">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
+        android:theme="@style/ToolbarAccentNavigation"
         app:contentInsetStart="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="@dimen/paddingMid"
+            android:paddingTop="@dimen/paddingMin"
             android:paddingEnd="@dimen/paddingMid"
-            android:paddingStart="@dimen/paddingMid"
             android:paddingLeft="@dimen/paddingMax"
             android:paddingRight="@dimen/paddingMax">
 
@@ -29,22 +32,13 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btnClose"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
-                    android:visibility="invisible"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="16dp">
-                    <ImageView
-                        android:id="@+id/icClose"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        app:srcCompat="@drawable/ic_arrow_back"
-                        android:tint="@color/colorPrimarySecondary"
-                        android:layout_gravity="center"/>
-                </com.google.android.material.card.MaterialCardView>
-
+                <ImageButton
+                    android:id="@+id/icClose"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="?attr/actionBarItemBackground"
+                    app:srcCompat="@drawable/ic_arrow_back"
+                    android:visibility="invisible"/>
 
                 <TextView
                     android:id="@+id/tvTitle"
@@ -60,35 +54,21 @@
                     android:text="Title"
                     android:paddingLeft="@dimen/paddingMid" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btnFirst"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
-                    android:visibility="gone"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="16dp">
-                    <ImageView
-                        android:id="@+id/icFirst"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:tint="@color/colorPrimarySecondary"
-                        android:layout_gravity="center"/>
-                </com.google.android.material.card.MaterialCardView>
+                <ImageButton
+                    android:id="@+id/icFirst"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="?attr/actionBarItemBackground"
+                    app:srcCompat="@drawable/ic_calendar"
+                    android:visibility="gone"/>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btnSecond"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="16dp"
-                    android:visibility="gone" >
-                    <ImageView
-                        android:id="@+id/icSecond"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:tint="@color/colorPrimarySecondary"
-                        android:layout_gravity="center"/>
-                </com.google.android.material.card.MaterialCardView>
+                <ImageButton
+                    android:id="@+id/icSecond"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="?attr/actionBarItemBackground"
+                    app:srcCompat="@drawable/ic_calendar"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tvRightText"
@@ -96,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimarySecondary"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:visibility="gone" />
@@ -104,7 +84,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/paddingMid"
+                android:layout_marginTop="@dimen/paddingMin"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorBorder"/>
@@ -113,4 +93,4 @@
 
 
     </androidx.appcompat.widget.Toolbar>
-</LinearLayout>
+</com.google.android.material.appbar.AppBarLayout>

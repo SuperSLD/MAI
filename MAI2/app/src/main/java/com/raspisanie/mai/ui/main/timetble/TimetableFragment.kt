@@ -60,7 +60,7 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
         super.onActivityCreated(savedInstanceState)
 
         setTittleToolBar(include_toolbar, R.string.timetable_title_current, 0, R.drawable.ic_calendar, 0)
-        include_toolbar.btnFirst.setOnClickListener {
+        include_toolbar.icFirst.setOnClickListener {
             presenter.selectWeekDialog()
         }
 

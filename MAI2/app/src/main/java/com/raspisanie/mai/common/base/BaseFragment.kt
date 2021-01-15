@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
 import com.raspisanie.mai.extesions.addSystemTopPadding
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -56,16 +57,16 @@ open class BaseFragment(private val layoutRes: Int) : MvpAppCompatFragment() {
                 tvTitle.text = getString(title)
             } else tvTitle.visibility = View.INVISIBLE
 
-            if (closeIcon != 0) showToolbarIcon(btnClose, icClose, closeIcon)
-            if (firstIcon != 0) showToolbarIcon(btnFirst, icFirst, firstIcon)
-            if (secondIcon != 0) showToolbarIcon(btnSecond, icSecond, secondIcon)
+            if (closeIcon != 0) showIcon(icClose, closeIcon)
+            if (firstIcon != 0) showIcon(icFirst, firstIcon)
+            if (secondIcon != 0) showIcon(icSecond, secondIcon)
         }
     }
 
-    protected fun showToolbarIcon (button: View, imageView: ImageView, icon: Int): ImageView {
+    private fun showIcon (imageView: MaterialButton, icon: Int): MaterialButton {
 
-        imageView.setImageResource(icon)
-        button.visibility = View.VISIBLE
+        imageView.setIconResource(icon)
+        imageView.visibility = View.VISIBLE
         return imageView
     }
 

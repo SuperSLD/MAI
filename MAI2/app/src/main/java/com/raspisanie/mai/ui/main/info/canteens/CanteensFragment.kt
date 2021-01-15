@@ -23,7 +23,7 @@ class CanteensFragment : BaseFragment(R.layout.fragment_canteens), MvpView {
         super.onActivityCreated(savedInstanceState)
 
         setTittleToolBar(include_toolbar, R.string.canteens_title, R.drawable.ic_arrow_back, 0, 0)
-        include_toolbar.btnClose.setOnClickListener {
+        include_toolbar.icClose.setOnClickListener {
             onBackPressed()
         }
 
