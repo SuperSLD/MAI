@@ -17,6 +17,7 @@
             android:padding="@dimen/paddingMid"
             android:gravity="center_vertical">
             <ImageView
+                android:padding="4dp"
                 android:id="@+id/icIcon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
