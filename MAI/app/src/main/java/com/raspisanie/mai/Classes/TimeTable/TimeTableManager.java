@@ -116,7 +116,7 @@ public class TimeTableManager {
                                 .get(mSettings.getInt("group", -1)).getValue());
 
             s = s.split("<table class=\"table\" >")[1];
-            String[] weekList = s.split("</table><br>")[0].split("</a></td>");
+            String[] weekList = s.split("</table><br>")[0].split("</td>\n");
 
             weekListSize = weekList.length - 1;
             Logger.getLogger("mai_time_table").log(Level.INFO, "weekListSize = " + weekListSize);
@@ -124,22 +124,28 @@ public class TimeTableManager {
             //Составление списка недель.
             Realm realm = Realm.getDefaultInstance();
             weeks = new ArrayList<>();
+
+            String firstString = "";
+
             for (int i = 0; i < weekList.length - 1; i++) {
                 int n = Integer.parseInt(
                         weekList[i].split("<tr><td >")[1].split("</td><td>")[0]);
-                String data = weekList[i].split("\">")[1];
-                String getString = "education/schedule/detail.php" +
-                        weekList[i].split("\">")[0].split("href=\"")[1];
+                String data = Jsoup.parse(weekList[i].split("</td><td>")[1]).text();
+                if (firstString.length() < 3) {
+                    firstString = "education/schedule/detail.php" +
+                            weekList[i].split("\">")[0].split("href=\"")[1];
+                    firstString = firstString.split("week=")[0] + "week=";
+                }
                 Week week = new Week(n, data);
-                Logger.getLogger("mailog").log(Level.INFO, "номер недели - " + n + " / дата - " + data
-                        + " / get - " + getString);
+                Logger.getLogger("mailog").log(Level.INFO, "номер недели - " + (i+1) + " / дата - " + data
+                        + " / get - " + firstString + (i+1));
 
                 final int I = i + 1;
                 final int I2 = weekList.length - 1;
 
                 s = null;
                 while (s == null)
-                    s = url.get(getString);
+                    s = url.get(firstString + (i+1));
                 String[] dayList = s.split("<div class=\"sc-table-col sc-day-header");
                 //Составление списка дней.
                 for (int j = 1; j < dayList.length; j++) {
