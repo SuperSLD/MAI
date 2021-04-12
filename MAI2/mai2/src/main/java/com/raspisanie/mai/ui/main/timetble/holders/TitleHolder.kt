@@ -1,20 +1,25 @@
 package com.raspisanie.mai.ui.main.timetble.holders
 
+import android.annotation.SuppressLint
 import android.view.View
 import com.raspisanie.mai.R
-import com.raspisanie.mai.common.base.AbstractViewHolder
+import com.raspisanie.mai.extesions.fromFormatToFormat
 import com.raspisanie.mai.extesions.parseCalendarByFormat
-import com.raspisanie.mai.models.human.DayHuman
+import com.raspisanie.mai.models.local.DayLocal
 import kotlinx.android.synthetic.main.item_timetable_day_title.view.*
+import online.jutter.supersld.base.DFBaseHolder
+import online.jutter.supersld.base.HolderLayout
 import java.util.*
 
-class TitleHolder(itemView: View) : AbstractViewHolder(itemView) {
+@SuppressLint("NonConstantResourceId")
+@HolderLayout(layout = R.layout.item_timetable_day_title)
+class TitleHolder(itemView: View) : DFBaseHolder(itemView) {
     private val dayNames = itemView.resources.getStringArray(R.array.timetable_days)
 
     override fun bind(data: Any?) {
-        val day = data as DayHuman
+        val day = data as DayLocal
         with(itemView) {
-            val dateString = "${day.date.split(".")[0]}.${day.date.split(".")[1]}"
+            val dateString = day.date.split(" - ")[0].fromFormatToFormat("dd.MM.yyyy", "dd.MM")
             tvDate.text = dateString
 
             val calendar = day.date.parseCalendarByFormat("dd.MM.yyyy")

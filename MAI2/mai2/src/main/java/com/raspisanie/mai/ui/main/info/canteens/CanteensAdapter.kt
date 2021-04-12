@@ -6,19 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
 import com.raspisanie.mai.common.base.AbstractViewHolder
-import com.raspisanie.mai.models.human.CanteenHuman
-import com.raspisanie.mai.models.human.DayHuman
-import com.raspisanie.mai.models.human.WeekHuman
-import com.raspisanie.mai.ui.main.timetble.holders.TimetableHolderFactory
-import com.raspisanie.mai.ui.main.timetble.holders.TitleHolder
+import com.raspisanie.mai.models.local.CanteenLocal
 import kotlinx.android.synthetic.main.item_timetable_subject.view.*
 import kotlinx.android.synthetic.main.layout_toolbar.view.*
-import kotlin.time.seconds
 
 
 class CanteensAdapter : RecyclerView.Adapter<AbstractViewHolder>() {
 
-    private val list = mutableListOf<CanteenHuman>()
+    private val list = mutableListOf<CanteenLocal>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbstractViewHolder {
         return ItemHolder(
@@ -32,7 +27,7 @@ class CanteensAdapter : RecyclerView.Adapter<AbstractViewHolder>() {
 
     override fun getItemCount(): Int = list.size
 
-    fun addAll(list: MutableList<CanteenHuman>) {
+    fun addAll(list: MutableList<CanteenLocal>) {
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
@@ -41,7 +36,7 @@ class CanteensAdapter : RecyclerView.Adapter<AbstractViewHolder>() {
     inner class ItemHolder(itemView: View) : AbstractViewHolder(itemView) {
 
         override fun bind(data: Any?) {
-            val canteen = data as CanteenHuman
+            val canteen = data as CanteenLocal
             with(itemView) {
                 tvTitle.text = canteen.name
                 tvLocation.text = canteen.location

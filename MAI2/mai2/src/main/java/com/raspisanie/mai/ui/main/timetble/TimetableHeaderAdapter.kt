@@ -8,14 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
 import com.raspisanie.mai.common.base.AbstractViewHolder
 import com.raspisanie.mai.extesions.parseCalendarByFormat
-import com.raspisanie.mai.models.human.DayHuman
-import com.raspisanie.mai.models.human.WeekHuman
-import com.raspisanie.mai.ui.main.timetble.holders.TimetableHolderFactory
-import com.raspisanie.mai.ui.main.timetble.holders.TitleHolder
-import kotlinx.android.synthetic.main.item_timetable_day_title.view.*
+import com.raspisanie.mai.models.local.DayLocal
+import com.raspisanie.mai.models.local.WeekLocal
 import kotlinx.android.synthetic.main.item_timetable_day_title.view.tvDayName
 import kotlinx.android.synthetic.main.item_timetable_header.view.*
-import java.lang.UnsupportedOperationException
 import java.util.*
 
 
@@ -38,7 +34,7 @@ class TimetableHeaderAdapter(
 
     override fun getItemCount(): Int = list.size
 
-    fun addData(data: WeekHuman) {
+    fun addData(data: WeekLocal) {
         this.list.clear()
 
         for (day in data.days) {
@@ -50,7 +46,7 @@ class TimetableHeaderAdapter(
 
     fun selectItem(date: String) {
         for (i in list.indices) {
-            val day = list[i] as DayHuman
+            val day = list[i] as DayLocal
             if (day.date == date) {
                 selectedPosition = i
             }
@@ -60,7 +56,7 @@ class TimetableHeaderAdapter(
 
     fun getItemPosition(date: String): Int {
         for (i in list.indices) {
-            val day = list[i] as DayHuman
+            val day = list[i] as DayLocal
             if (day.date == date) {
                 return i
             }
@@ -72,7 +68,7 @@ class TimetableHeaderAdapter(
         private val dayNames = itemView.resources.getStringArray(R.array.timetable_days)
 
         override fun bind(data: Any?) {
-            val day = data as DayHuman
+            val day = data as DayLocal
             addColor(list.indexOf(day) == selectedPosition)
             with(itemView) {
 

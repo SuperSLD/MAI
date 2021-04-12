@@ -1,17 +1,16 @@
 package com.raspisanie.mai.ui.main.timetble.holders
 
+import android.annotation.SuppressLint
 import android.view.View
 import com.raspisanie.mai.R
-import com.raspisanie.mai.common.base.AbstractViewHolder
-import com.raspisanie.mai.extesions.parseCalendarByFormat
-import com.raspisanie.mai.models.human.DayHuman
-import kotlinx.android.synthetic.main.item_timetable_day_title.view.*
-import java.util.*
+import online.jutter.supersld.base.DFBaseHolder
+import online.jutter.supersld.base.HolderLayout
 
+@SuppressLint("NonConstantResourceId")
+@HolderLayout(layout = R.layout.item_timetable_end_week)
 class EndWeekHolder(
-        itemView: View,
-        var click: (Int, Any?) -> Unit
-) : AbstractViewHolder(itemView) {
+        itemView: View
+) : DFBaseHolder(itemView) {
 
     override fun bind(data: Any?) {
 

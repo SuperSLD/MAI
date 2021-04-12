@@ -7,7 +7,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.common.base.BaseFragment
 import com.raspisanie.mai.extesions.addSystemBottomPadding
-import com.raspisanie.mai.models.human.CanteenHuman
+import com.raspisanie.mai.models.local.CanteenLocal
 import kotlinx.android.synthetic.main.fragment_canteens.*
 import kotlinx.android.synthetic.main.fragment_timetable.include_toolbar
 import kotlinx.android.synthetic.main.layout_toolbar.view.*
@@ -36,40 +36,40 @@ class CanteensFragment : BaseFragment(R.layout.fragment_canteens), MvpView {
         }
     }
 
-    fun createList(): MutableList<CanteenHuman> {
+    fun createList(): MutableList<CanteenLocal> {
         //TODO Убрать как будет апи и взять список с сайта
         return mutableListOf(
-                CanteenHuman(
+                CanteenLocal(
                         name = "Столовая 1",
                         location = "Дубосековская 1 к2",
                         time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
                 ),
-                CanteenHuman(
+                CanteenLocal(
                         name = "Столовая 1",
                         location = "Дубосековская 1 к2",
                         time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
                 ),
-                CanteenHuman(
+                CanteenLocal(
                         name = "Столовая 1",
                         location = "Дубосековская 1 к2",
                         time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
                 ),
-                CanteenHuman(
+                CanteenLocal(
                         name = "Столовая 1",
                         location = "Дубосековская 1 к2",
                         time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
                 ),
-                CanteenHuman(
+                CanteenLocal(
                         name = "Столовая 1",
                         location = "Дубосековская 1 к2",
                         time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
                 ),
-                CanteenHuman(
+                CanteenLocal(
                         name = "Столовая 1",
                         location = "Дубосековская 1 к2",
                         time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
                 ),
-                CanteenHuman(
+                CanteenLocal(
                         name = "Столовая 1",
                         location = "Дубосековская 1 к2",
                         time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"

@@ -126,6 +126,7 @@ public class OtherDataManager {
      * @param context контекст LoadingInformationActivity.
      */
     public void loadInformation(Context context) {
+        /*
         URLSendRequest url;
         Realm realm = Realm.getDefaultInstance();
 
@@ -139,11 +140,11 @@ public class OtherDataManager {
         url = new URLSendRequest("https://mai.ru/", 50000);
         String s = null;
 
-            /*
-            Загрузка данных о спортивных секциях
-             */
+
+            //Загрузка данных о спортивных секциях
+
         while (s == null)
-            s = url.get("life/sport/sections.php");
+            s = url.get("life/common/campus/sport/");
 
         sportGroupObjects.clear();
         String[] korp = s.split("<th colspan=\"3\">");
@@ -186,9 +187,9 @@ public class OtherDataManager {
         }
         ((LoadInformationActivity) context).setProgressText("Загружаем другую инфрмацию о ВУЗе...\n1/" + COUNT);
 
-            /*
-            Загрузка данных о творческих колективах.
-             */
+
+            //Загрузка данных о творческих колективах.
+
         s = null;
         while (s == null)
             s = url.get("life/create/dkit/kollektivy-dkit.php");
@@ -220,9 +221,9 @@ public class OtherDataManager {
 
         ((LoadInformationActivity) context).setProgressText("Загружаем другую информацию о ВУЗе...\n2/" + COUNT);
 
-            /*
-            Загрузка данных о студенческих организациях
-            */
+
+            //Загрузка данных о студенческих организациях
+
         s = null;
         while (s == null)
             s = url.get("life/join/index.php");
@@ -257,9 +258,9 @@ public class OtherDataManager {
         }
         ((LoadInformationActivity) context).setProgressText("Загружаем другую инфрмацию о ВУЗе...\n3/" + COUNT);
 
-            /*
-            Загрузка данных о столовых
-            */
+
+            //Загрузка данных о столовых
+
         s = null;
         while (s == null)
             s = url.get("common/campus/cafeteria/");
@@ -294,9 +295,9 @@ public class OtherDataManager {
 
         ((LoadInformationActivity) context).setProgressText("Загружаем другую инфрмацию о ВУЗе...\n4/" + COUNT);
 
-             /*
-            Загрузка данных о библиотеках
-            */
+
+            //Загрузка данных о библиотеках
+
         s = null;
         while (s == null)
             s = url.get("common/campus/library/");
@@ -338,6 +339,7 @@ public class OtherDataManager {
         ((LoadInformationActivity) context).setProgressText("Загружаем другую инфрмацию о ВУЗе...\n5/" + COUNT);
 
         realm.close();
+        */
     }
 
     /**

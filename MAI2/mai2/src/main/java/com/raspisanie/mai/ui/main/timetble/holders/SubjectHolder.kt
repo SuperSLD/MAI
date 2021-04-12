@@ -1,19 +1,19 @@
 package com.raspisanie.mai.ui.main.timetble.holders
 
+import android.annotation.SuppressLint
 import android.view.View
 import com.raspisanie.mai.R
-import com.raspisanie.mai.common.base.AbstractViewHolder
-import com.raspisanie.mai.extesions.parseCalendarByFormat
-import com.raspisanie.mai.models.human.DayHuman
-import com.raspisanie.mai.models.human.SubjectHuman
-import kotlinx.android.synthetic.main.item_timetable_day_title.view.*
+import com.raspisanie.mai.models.local.SubjectLocal
 import kotlinx.android.synthetic.main.item_timetable_subject.view.*
-import java.util.*
+import online.jutter.supersld.base.DFBaseHolder
+import online.jutter.supersld.base.HolderLayout
 
-class SubjectHolder(itemView: View) : AbstractViewHolder(itemView) {
+@SuppressLint("NonConstantResourceId")
+@HolderLayout(layout = R.layout.item_timetable_subject)
+class SubjectHolder(itemView: View) : DFBaseHolder(itemView) {
 
     override fun bind(data: Any?) {
-        val subject = data as SubjectHuman
+        val subject = data as SubjectLocal
         with(itemView) {
             tvName.text = subject.name
             tvTime.text = subject.time

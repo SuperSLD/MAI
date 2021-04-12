@@ -14,6 +14,11 @@ import com.raspisanie.mai.R;
 
 import java.util.ArrayList;
 
+/**
+ * Отображение диаграммы с текстом в центре.
+ *
+ * @author Leonid Solyanoy (leonid.solyanoy@gmail.com)
+ */
 public class DiagramView extends View {
     private String centerText = "";
     private ArrayList<Float> data = null;

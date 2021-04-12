@@ -13,6 +13,7 @@ import com.raspisanie.mai.extesions.getIsDayTheme
 import com.raspisanie.mai.extesions.saveIsDayTheme
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_info.view.*
+import online.jutter.supersld.DifAdapter
 import timber.log.Timber
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings), MvpView {
