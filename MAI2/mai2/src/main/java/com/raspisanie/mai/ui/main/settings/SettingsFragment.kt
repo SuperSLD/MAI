@@ -1,4 +1,5 @@
 package com.raspisanie.mai.ui.main.settings
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -6,14 +7,12 @@ import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.R
-import com.raspisanie.mai.common.base.BaseFragment
-import com.raspisanie.mai.extesions.addSystemBottomPadding
-import com.raspisanie.mai.extesions.addSystemTopPadding
 import com.raspisanie.mai.extesions.getIsDayTheme
 import com.raspisanie.mai.extesions.saveIsDayTheme
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_info.view.*
-import online.jutter.supersld.DifAdapter
+import pro.midev.supersld.common.base.BaseFragment
+import pro.midev.supersld.extensions.addSystemTopPadding
 import timber.log.Timber
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings), MvpView {
@@ -21,6 +20,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), MvpView {
     @InjectPresenter
     lateinit var presenter: SettingsPresenter
 
+    @SuppressLint("SetTextI18n")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -46,7 +46,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), MvpView {
 
             setColorText(
                     ContextCompat.getColor(context, R.color.colorPrimary),
-                    ContextCompat.getColor(context, R.color.colorTextHint)
+                    ContextCompat.getColor(context, R.color.colorTextSecondary)
             )
 
             setData(
@@ -90,7 +90,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), MvpView {
             with(views[i]) {
                 Timber.d("title - ${titles[i]}")
                 this.tvName.text = titles[i]
-                showIcon(this.icIcon, icons[i])
+                this.icIcon.setImageDrawable(ContextCompat.getDrawable(context, icons[i]))
             }
         }
 

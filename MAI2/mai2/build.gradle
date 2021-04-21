@@ -96,4 +96,5 @@ dependencies {
     // мои модули
     implementation 'online.jutter.supersld:diffcycler:1.0.013'
     implementation 'online.jutter.supersld:jt_state_machine:1.0.002'
+    implementation 'online.jutter.supersld:midev_core:1.1.3'
 }

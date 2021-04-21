@@ -6,9 +6,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
-import com.raspisanie.mai.common.base.BaseFragment
-import com.raspisanie.mai.extesions.addSystemBottomPadding
 import kotlinx.android.synthetic.main.fragment_main_container.*
+import pro.midev.supersld.common.base.BaseFragment
+import pro.midev.supersld.extensions.addSystemBottomPadding
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import timber.log.Timber
 
@@ -112,7 +112,7 @@ class MainContainerFragment : BaseFragment(R.layout.fragment_main_container), Ma
     }
 
     override fun onBackPressed() {
-        currentTabFragment?.onBackPressed() ?: super.onBackPressed()
+        currentTabFragment?.onBackPressed()
     }
 
     companion object {

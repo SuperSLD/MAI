@@ -12,7 +12,7 @@
 
     <!-- Text -->
     <color name="colorTextPrimary">#FF000000</color>
-    <color name="colorTextHint">#909DA9</color>
+    <color name="colorTextSecondary">#909DA9</color>
     <color name="colorTextWhite">#FFFFFF</color>
 
     <!-- Navigation -->

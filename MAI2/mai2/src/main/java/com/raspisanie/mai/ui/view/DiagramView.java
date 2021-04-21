@@ -97,21 +97,17 @@ public class DiagramView extends View {
             //float lastAngle = -90;
             for (int i = 0; i < data.size(); i++) {
                 float angle = ((data.get(i)*360)/dataSum);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    paint.setColor(colors.get(i));
-                    canvas.drawArc(w/2 - h/2, 0, w/2 + h/2, h
-                            , lastAngle, angle, true, paint);
-                }
+                paint.setColor(colors.get(i));
+                canvas.drawArc(w/2 - h/2, 0, w/2 + h/2, h
+                        , lastAngle, angle, true, paint);
                 lastAngle += angle;
             }
             for (int i = 0; i < data.size(); i++) {
                 float angle = ((data.get(i)*360)/dataSum);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    paint.setColor(colors.get(i));
-                    canvas.drawCircle((float) (Math.cos(Math.toRadians(lastAngle + angle))*(h/2 - h/20)) + w/2,
-                            (float) (Math.sin(Math.toRadians(lastAngle + angle))*(h/2 - h/20)) + h/2,
-                            h / 20, paint);
-                }
+                paint.setColor(colors.get(i));
+                canvas.drawCircle((float) (Math.cos(Math.toRadians(lastAngle + angle))*(h/2 - h/20)) + w/2,
+                        (float) (Math.sin(Math.toRadians(lastAngle + angle))*(h/2 - h/20)) + h/2,
+                        h / 20, paint);
                 lastAngle += angle;
             }
         }

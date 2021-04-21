@@ -40,7 +40,7 @@
                 android:paddingTop="@dimen/paddingMin"
                 android:text="@string/timetable_now"
                 android:textSize="@dimen/textNormalMin"
-                android:textColor="@color/colorTextHint" />
+                android:textColor="@color/colorTextSecondary" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

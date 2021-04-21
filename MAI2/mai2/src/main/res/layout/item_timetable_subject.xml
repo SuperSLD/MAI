@@ -58,7 +58,7 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:minWidth="80dp"
-                    android:textColor="@color/colorTextHint"
+                    android:textColor="@color/colorTextSecondary"
                     android:textSize="@dimen/textNormalMin"
                     android:fontFamily="@font/roboto_regular"
                     android:text="13:00-14:30"/>
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:textColor="@color/colorTextHint"
+                    android:textColor="@color/colorTextSecondary"
                     android:textSize="@dimen/textNormalMin"
                     android:fontFamily="@font/roboto_regular"
                     android:text="13:00-14:30"/>

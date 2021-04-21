@@ -6,12 +6,13 @@
     <color name="colorPrimaryLite">#3EACFB</color>
     <color name="colorAccent">#A2D8FF</color>
     <color name="colorAccentLite">#A2D8FF</color>
+
     <color name="colorBackground">#121212</color>
     <color name="colorBackgroundSecondary">#272727</color>
 
     <!-- Text -->
     <color name="colorTextPrimary">#FFFFFF</color>
-    <color name="colorTextHint">#909DA9</color>
+    <color name="colorTextSecondary">#909DA9</color>
     <color name="colorTextWhite">#121212</color>
 
     <!-- Navigation -->

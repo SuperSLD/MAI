@@ -1,13 +1,12 @@
 package com.raspisanie.mai.ui.main
 
 import com.arellomobile.mvp.InjectViewState
-import com.raspisanie.mai.common.base.BasePresenter
 import com.raspisanie.mai.controllers.BottomVisibilityController
 import com.raspisanie.mai.controllers.ChangeBottomTabController
-import com.raspisanie.mai.ui.main.MainContainerView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.koin.core.inject
+import pro.midev.supersld.common.base.BasePresenter
 import timber.log.Timber
 
 @InjectViewState

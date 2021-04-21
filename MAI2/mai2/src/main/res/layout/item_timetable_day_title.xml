@@ -26,7 +26,7 @@
         android:layout_marginRight="@dimen/paddingMin"
         android:fontFamily="@font/roboto_regular"
         android:text="4.01"
-        android:textColor="@color/colorTextHint"
+        android:textColor="@color/colorTextSecondary"
         android:textSize="@dimen/textNormalHint" />
 
     <com.google.android.material.card.MaterialCardView

@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/textNormalMin"
                         android:text="@string/select_group_hint"
-                        android:textColor="@color/colorTextHint"
+                        android:textColor="@color/colorTextSecondary"
                         android:fontFamily="@font/roboto_regular"/>
                     <TextView
                         android:layout_width="match_parent"

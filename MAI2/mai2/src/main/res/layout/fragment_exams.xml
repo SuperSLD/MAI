@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <include
-        android:id="@+id/include_toolbar"
-        layout="@layout/layout_toolbar"/>
+    <com.raspisanie.mai.ui.view.ToolbarBigView
+        android:id="@+id/vToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"

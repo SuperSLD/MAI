@@ -1,6 +1,5 @@
 package com.raspisanie.mai
 
-
 import androidx.fragment.app.Fragment
 import com.raspisanie.mai.ui.global.FlowGlobalFragment
 import com.raspisanie.mai.ui.main.FlowMainFragment
@@ -17,14 +16,13 @@ import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
 import com.raspisanie.mai.ui.main.timetble.TimetableFragment
 import com.raspisanie.mai.ui.select_group.FlowSelectGroupFragment
 import com.raspisanie.mai.ui.select_group.select_group.SelectGroupFragment
-import com.raspisanie.mai.ui.select_group.select_inst.SelectInstFragment
-import com.raspisanie.mai.ui.select_group.select_year.SelectYearFragment
 import com.raspisanie.mai.ui.select_group.start.StartFragment
 import com.raspisanie.mai.ui.splash.SplashFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 object Screens {
-    const val APP_ROUTER = "APP_ROUTER"
+
+    /** Глобальный роутер */
 
     object FlowGlobal : SupportAppScreen() {
         override fun getFragment() = FlowGlobalFragment()
@@ -34,7 +32,7 @@ object Screens {
         override fun getFragment() = SplashFragment()
     }
 
-    const val SELECT_GROUP_ROUTER = "SELECT_GROUP_ROUTER"
+    /** Стартовый роутер */
 
     object FlowSelectGroup : SupportAppScreen() {
         override fun getFragment(): Fragment? = FlowSelectGroupFragment()
@@ -44,19 +42,11 @@ object Screens {
         override fun getFragment(): Fragment? = StartFragment()
     }
 
-    object SelectYear : SupportAppScreen() {
-        override fun getFragment(): Fragment? = SelectYearFragment()
-    }
-
-    object SelectInst : SupportAppScreen() {
-        override fun getFragment(): Fragment? = SelectInstFragment()
-    }
-
     object SelectGroup : SupportAppScreen() {
         override fun getFragment(): Fragment? = SelectGroupFragment()
     }
 
-    const val CONTAINER_ROUTER = "CONTAINER_ROUTER"
+    /** Контейнер роутер */
 
     object FlowMain : SupportAppScreen() {
         override fun getFragment() = FlowMainFragment()
@@ -66,7 +56,7 @@ object Screens {
         override fun getFragment() = MainContainerFragment.create()
     }
 
-    const val INFO_ROUTER = "INFO_ROUTER"
+    /** Инфо роутер */
 
     object FlowInfo : SupportAppScreen() {
         override fun getFragment(): Fragment? = FlowInfoFragment()
@@ -84,7 +74,7 @@ object Screens {
         override fun getFragment(): Fragment? = CanteensFragment()
     }
 
-    const val EXAMS_ROUTER = "EXAMS_ROUTER"
+    /** Экзаменационный роутер */
 
     object FlowExams : SupportAppScreen() {
         override fun getFragment(): Fragment? = FlowExamsFragment()
@@ -94,7 +84,7 @@ object Screens {
         override fun getFragment(): Fragment? = ExamsFragment()
     }
 
-    const val TIMETABLE_ROUTER = "TIMETABLE_ROUTER"
+    /** Расписание - роутер */
 
     object FlowTimetable : SupportAppScreen() {
         override fun getFragment(): Fragment? = FlowTimetableFragment()
@@ -104,7 +94,7 @@ object Screens {
         override fun getFragment(): Fragment? = TimetableFragment()
     }
 
-    const val SETTINGS_ROUTER = "SETTINGS_ROUTER"
+    /** Настройки - роутер */
 
     object FlowSettings : SupportAppScreen() {
         override fun getFragment(): Fragment? = FlowSettingsFragment()

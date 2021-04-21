@@ -6,30 +6,28 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
-import com.raspisanie.mai.common.base.AbstractViewHolder
 import com.raspisanie.mai.extesions.parseCalendarByFormat
 import com.raspisanie.mai.models.local.DayLocal
 import com.raspisanie.mai.models.local.WeekLocal
-import kotlinx.android.synthetic.main.item_timetable_day_title.view.tvDayName
 import kotlinx.android.synthetic.main.item_timetable_header.view.*
 import java.util.*
 
 
 class TimetableHeaderAdapter(
         var onDayHeaderClick: (String) -> Unit
-) : RecyclerView.Adapter<AbstractViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val list = mutableListOf<Any>()
     private var selectedPosition = 0
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbstractViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ItemHeaderHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.item_timetable_header, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: AbstractViewHolder, position: Int) {
-        holder.bind(list[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ItemHeaderHolder) holder.bind(list[position])
     }
 
     override fun getItemCount(): Int = list.size
@@ -64,10 +62,10 @@ class TimetableHeaderAdapter(
         return 0
     }
 
-    private inner class ItemHeaderHolder(itemView: View) : AbstractViewHolder(itemView) {
+    private inner class ItemHeaderHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val dayNames = itemView.resources.getStringArray(R.array.timetable_days)
 
-        override fun bind(data: Any?) {
+        fun bind(data: Any?) {
             val day = data as DayLocal
             addColor(list.indexOf(day) == selectedPosition)
             with(itemView) {

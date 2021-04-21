@@ -77,7 +77,7 @@
                 android:paddingRight="36dp"
                 android:paddingLeft="36dp"
                 android:text="@string/start_description"
-                android:textColor="@color/colorTextHint"
+                android:textColor="@color/colorTextSecondary"
                 android:textSize="@dimen/textNormalHint"
                 android:paddingTop="48dp"/>
 

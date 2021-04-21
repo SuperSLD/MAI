@@ -293,7 +293,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextHint"
+                    android:textColor="@color/colorTextSecondary"
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/settings_description_title"/>
                 <TextView
@@ -306,7 +306,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextHint"
+                    android:textColor="@color/colorTextSecondary"
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/settings_version_title"/>
                 <TextView
@@ -320,7 +320,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextHint"
+                    android:textColor="@color/colorTextSecondary"
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/settings_author_title"/>
                 <TextView

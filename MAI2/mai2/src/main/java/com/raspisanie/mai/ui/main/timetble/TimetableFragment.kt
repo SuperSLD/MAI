@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.common.base.BaseFragment
 import com.raspisanie.mai.models.local.DayLocal
 import com.raspisanie.mai.models.local.SubjectLocal
 import com.raspisanie.mai.models.local.WeekLocal
+import com.raspisanie.mai.ui.view.ToolbarBigView
 import kotlinx.android.synthetic.main.fragment_timetable.*
-import kotlinx.android.synthetic.main.layout_toolbar.view.*
+import pro.midev.supersld.common.base.BaseFragment
 
 /**
  * Страшный фрагмент, со сложной логикой.
@@ -62,10 +62,16 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
+        vToolbar.init(
+                title = R.string.timetable_title_current
+        )
+        /*
         setTittleToolBar(include_toolbar, R.string.timetable_title_current, 0, R.drawable.ic_calendar, 0)
         include_toolbar.icFirst.setOnClickListener {
             presenter.selectWeekDialog()
         }
+         */
 
         val week = initTimetable()
 

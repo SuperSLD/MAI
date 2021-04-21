@@ -5,12 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.common.base.BaseFragment
-import com.raspisanie.mai.extesions.addSystemBottomPadding
 import com.raspisanie.mai.models.local.CanteenLocal
 import kotlinx.android.synthetic.main.fragment_canteens.*
-import kotlinx.android.synthetic.main.fragment_timetable.include_toolbar
-import kotlinx.android.synthetic.main.layout_toolbar.view.*
+import kotlinx.android.synthetic.main.fragment_canteens.vToolbar
+import kotlinx.android.synthetic.main.fragment_exams.*
+import pro.midev.supersld.common.base.BaseFragment
+import pro.midev.supersld.extensions.addSystemBottomPadding
 
 class CanteensFragment : BaseFragment(R.layout.fragment_canteens), MvpView {
 
@@ -22,10 +22,10 @@ class CanteensFragment : BaseFragment(R.layout.fragment_canteens), MvpView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setTittleToolBar(include_toolbar, R.string.canteens_title, R.drawable.ic_arrow_back, 0, 0)
-        include_toolbar.icClose.setOnClickListener {
-            onBackPressed()
-        }
+        vToolbar.init(
+                title = R.string.canteens_title,
+                back = {onBackPressed()}
+        )
 
         adapter.addAll(createList())
 
@@ -36,7 +36,7 @@ class CanteensFragment : BaseFragment(R.layout.fragment_canteens), MvpView {
         }
     }
 
-    fun createList(): MutableList<CanteenLocal> {
+    private fun createList(): MutableList<CanteenLocal> {
         //TODO Убрать как будет апи и взять список с сайта
         return mutableListOf(
                 CanteenLocal(

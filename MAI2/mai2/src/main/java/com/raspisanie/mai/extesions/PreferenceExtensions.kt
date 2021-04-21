@@ -1,8 +1,7 @@
 package com.raspisanie.mai.extesions
 
 import android.content.Context
-import com.google.gson.Gson
-import pro.midev.iprofi.common.PreferenceHelper
+import pro.midev.supersld.common.PreferenceHelper
 
 const val IS_AUTH = "is_auth"
 const val IS_DAY_THEME = "is_day_theme"

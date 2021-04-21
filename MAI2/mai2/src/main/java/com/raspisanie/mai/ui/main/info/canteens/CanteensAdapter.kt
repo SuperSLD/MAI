@@ -5,24 +5,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
-import com.raspisanie.mai.common.base.AbstractViewHolder
 import com.raspisanie.mai.models.local.CanteenLocal
-import kotlinx.android.synthetic.main.item_timetable_subject.view.*
-import kotlinx.android.synthetic.main.layout_toolbar.view.*
+import kotlinx.android.synthetic.main.item_canteens.view.*
 
 
-class CanteensAdapter : RecyclerView.Adapter<AbstractViewHolder>() {
+class CanteensAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val list = mutableListOf<CanteenLocal>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbstractViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ItemHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.item_canteens, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: AbstractViewHolder, position: Int) {
-        holder.bind(list[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ItemHolder) holder.bind(list[position])
     }
 
     override fun getItemCount(): Int = list.size
@@ -33,9 +31,9 @@ class CanteensAdapter : RecyclerView.Adapter<AbstractViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class ItemHolder(itemView: View) : AbstractViewHolder(itemView) {
+    inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        override fun bind(data: Any?) {
+        fun bind(data: Any?) {
             val canteen = data as CanteenLocal
             with(itemView) {
                 tvTitle.text = canteen.name
