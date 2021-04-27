@@ -1,24 +1,33 @@
 package com.raspisanie.mai.ui.main.settings
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.os.Vibrator
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import com.arellomobile.mvp.MvpView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.getIsDayTheme
 import com.raspisanie.mai.extesions.saveIsDayTheme
+import com.raspisanie.mai.models.realm.GroupRealm
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_info.view.*
 import pro.midev.supersld.common.base.BaseFragment
 import pro.midev.supersld.extensions.addSystemTopPadding
 import timber.log.Timber
 
-class SettingsFragment : BaseFragment(R.layout.fragment_settings), MvpView {
+class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView {
 
     @InjectPresenter
     lateinit var presenter: SettingsPresenter
+
+    private val adapter by lazy { GroupsListAdapter(
+            presenter::select,
+            presenter::remove,
+            context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+    ) }
 
     @SuppressLint("SetTextI18n")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -59,30 +68,27 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), MvpView {
             )
         }
 
+        btnAdd.setOnClickListener {
+            presenter.addGroup()
+        }
+
         tvVersion.text = "${BuildConfig.VERSION_NAME} - ${BuildConfig.VERSION_CODE}"
+        with(rvGroups) {
+            adapter = this@SettingsFragment.adapter
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
-    fun setView() {
+    private fun setView() {
         val views = mutableListOf(
-                lChangeGroup, lReloadTimetable, lReloadOther, lEvents,
-                lSupport, lNews, lMai
+                lSupport, lMai
         )
         val titles = mutableListOf(
-                resources.getString(R.string.settings_select_group),
-                resources.getString(R.string.settings_reload_timetable),
-                resources.getString(R.string.settings_reload_other),
-                resources.getString(R.string.settings_events_restore),
                 resources.getString(R.string.settings_support),
-                resources.getString(R.string.settings_news),
                 resources.getString(R.string.settings_mai_link)
         )
         val icons = mutableListOf(
-                R.drawable.ic_group,
-                R.drawable.ic_update,
-                R.drawable.ic_update_info,
-                R.drawable.ic_events,
                 R.drawable.ic_support,
-                R.drawable.ic_news,
                 R.drawable.ic_site_link
         )
 
@@ -93,11 +99,24 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), MvpView {
                 this.icIcon.setImageDrawable(ContextCompat.getDrawable(context, icons[i]))
             }
         }
-
-        lNews.tvName.setTextColor(ContextCompat.getColor(context!!, R.color.colorPrimary))
     }
 
     override fun onBackPressed() {
         presenter.back()
+    }
+
+    override fun showCurrentGroup(group: GroupRealm) {
+        tvGroup.text = group.name
+        tvLocation.text = group.fac
+        tvSpec.text = group.level
+        tvYear.text = getString(R.string.select_group_level, group.course)
+    }
+
+    override fun showGroups(groups: MutableList<GroupRealm>) {
+        adapter.addAll(groups)
+    }
+
+    override fun removeGroup(group: GroupRealm) {
+        adapter.removeGroup(group)
     }
 }

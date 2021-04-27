@@ -5,6 +5,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.common.base.MvpBottomSheetDialogFragment
+import com.raspisanie.mai.ui.main.settings.confirm_dialog.ConfirmBSFragment
 import com.raspisanie.mai.ui.main.timetble.select_week_bs.SelectWeekBSFragment
 import pro.midev.supersld.common.base.FlowFragment
 import ru.terrakok.cicerone.commands.BackTo
@@ -39,6 +40,7 @@ class FlowGlobalFragment : FlowFragment(ROUTER), GlobalView {
     override fun showBottomSheet(type: BottomSheetDialogType, data: Any?) {
         val bottomSheet: MvpBottomSheetDialogFragment = when (type) {
             BottomSheetDialogType.SELECT_WEEK -> SelectWeekBSFragment()
+            BottomSheetDialogType.CONFIRM -> ConfirmBSFragment.create((data as Pair<*, *>).first as String, data.second as String)
         }
 
         bottomSheet.show(childFragmentManager, bottomSheet.tag)

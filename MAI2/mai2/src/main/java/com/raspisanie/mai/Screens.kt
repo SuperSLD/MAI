@@ -12,6 +12,7 @@ import com.raspisanie.mai.ui.main.info.campus_map.CampusMapFragment
 import com.raspisanie.mai.ui.main.info.canteens.CanteensFragment
 import com.raspisanie.mai.ui.main.settings.FlowSettingsFragment
 import com.raspisanie.mai.ui.main.settings.SettingsFragment
+import com.raspisanie.mai.ui.main.settings.add_group.AddGroupFragment
 import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
 import com.raspisanie.mai.ui.main.timetble.TimetableFragment
 import com.raspisanie.mai.ui.select_group.FlowSelectGroupFragment
@@ -102,5 +103,9 @@ object Screens {
 
     object Settings: SupportAppScreen() {
         override fun getFragment(): Fragment? = SettingsFragment()
+    }
+
+    object AddGroup: SupportAppScreen() {
+        override fun getFragment(): Fragment? = AddGroupFragment()
     }
 }

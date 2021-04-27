@@ -2,6 +2,10 @@
     <string name="app_name">MAI</string>
     <string name="app_v">2.0</string>
 
+    <!-- Системные штуки -->
+    <string name="errorLoading">Опс, при загрузке произошла ошибка</string>
+    <string name="errorLoadingText">Повторить</string>
+
     <!-- Navigation -->
     <string name="info_navigation">Инфо</string>
     <string name="exams_navigation">Экзамены</string>
@@ -13,15 +17,10 @@
     <string name="start_description">Простматривайте свое расписание, узнавайте новости и находите интересующие вас события полностью офлайн. Найдите интересные вам увлечения.</string>
     <string name="start_button">Выбрать учебную группу</string>
 
-    <string name="select_year_title">Выберите свой курс</string>
-    <string name="select_year_hint">Ваш курс</string>
-    <string name="select_year_next">Продолжить</string>
-
-    <string name="select_inst_title">Выберите институт</string>
-    <string name="select_inst_hint">Ваш институт</string>
-
     <string name="select_group_title">Выберите свою группу</string>
     <string name="select_group_hint">Ваша группа</string>
+    <string name="select_group_search">Ваша группа</string>
+    <string name="select_group_level">Курс %1$d</string>
 
     <!-- Info Fragment -->
     <string name="info_title">МАИ</string>
@@ -82,5 +81,12 @@
     <string name="settings_version_title">Версия и сборка:</string>
     <string name="settings_author_title">Автор:</string>
     <string name="settings_author">Соляной Леонид / Институт №1</string>
+
+    <string name="settings_group_list">Быстрое переключение</string>
+    <string name="settings_group_add_button">Добавить группу</string>
+    <string name="settings_group_add_title">Добавление группы</string>
+    <string name="settings_group_confirm_delete">Вы точно хотите удалить группу из быстрого доступа?</string>
+    <string name="settings_group_confirm_delete_accept">Удалить</string>
+    <string name="settings_group_confirm_delete_cancel">Отменить</string>
 
 </resources>

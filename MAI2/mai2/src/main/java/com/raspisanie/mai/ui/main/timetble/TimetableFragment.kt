@@ -1,16 +1,17 @@
 package com.raspisanie.mai.ui.main.timetble
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.models.local.DayLocal
-import com.raspisanie.mai.models.local.SubjectLocal
 import com.raspisanie.mai.models.local.WeekLocal
 import com.raspisanie.mai.ui.view.ToolbarBigView
 import kotlinx.android.synthetic.main.fragment_timetable.*
+import kotlinx.android.synthetic.main.layout_loading.*
 import pro.midev.supersld.common.base.BaseFragment
 
 /**
@@ -64,19 +65,13 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
 
 
         vToolbar.init(
-                title = R.string.timetable_title_current
+                title = R.string.timetable_title_current,
+                action = ToolbarBigView.ToolbarAction(
+                        stringId = R.string.timetable_dialog_other_week_button,
+                        iconId = R.drawable.ic_calendar_small,
+                        action = { presenter.selectWeekDialog() }
+                )
         )
-        /*
-        setTittleToolBar(include_toolbar, R.string.timetable_title_current, 0, R.drawable.ic_calendar, 0)
-        include_toolbar.icFirst.setOnClickListener {
-            presenter.selectWeekDialog()
-        }
-         */
-
-        val week = initTimetable()
-
-        adapter.addData(week)
-        headerAdapter.addData(week)
 
         with(rvWeek) {
             adapter = this@TimetableFragment.adapter
@@ -96,6 +91,36 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
         rvWeek.removeOnScrollListener(scrollDaysListener)
         scrollToDay(date)
         scrollToDayInWeek(date)
+    }
+
+    override fun shoWeek(week: WeekLocal?) {
+        if (week == null) {
+
+        } else {
+            adapter.addData(week)
+            headerAdapter.addData(week)
+        }
+    }
+
+    override fun showErrorLoading() {
+        vgMain.visibility = View.GONE
+        vgError.visibility = View.VISIBLE
+        loading.visibility = View.GONE
+        vToolbar.disableAction()
+        cvError.setOnClickListener {
+            presenter.loadSchedule()
+        }
+    }
+
+    override fun toggleLoading(show: Boolean) {
+        vgMain.visibility = if (show) View.GONE else View.VISIBLE
+        vgError.visibility = View.GONE
+        loading.visibility = if (show) View.VISIBLE else View.GONE
+        if (show) {
+            vToolbar.disableAction()
+        } else {
+            vToolbar.enableAction()
+        }
     }
 
     private fun scrollToDayInWeek(date: String) {
@@ -129,151 +154,6 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
         }
         smoothScroller.targetPosition = headerAdapter.getItemPosition(date)
         (rvWeekHeader.layoutManager as LinearLayoutManager).startSmoothScroll(smoothScroller)
-    }
-
-    private fun initTimetable(): WeekLocal {
-        //TODO Я не даун, это чисто для проверки верстки. Как буддет API уберу.
-        return WeekLocal(
-                number = 1,
-                date = "04.01.2021 - 10.01.2021",
-                days =  mutableListOf(
-                        DayLocal(
-                                date = "04.01.2021",
-                                subjects = mutableListOf(
-                                        SubjectLocal(
-                                                name = "Термех",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "9:00 - 10:30",
-                                                location = "LMS - Teams"
-                                        ),
-                                        SubjectLocal(
-                                                name = "Термех",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "10:45 - 12:15",
-                                                location = "LMS - Teams"
-                                        ),
-                                        SubjectLocal(
-                                                name = "Термех",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "13:00 - 14:30",
-                                                location = "LMS - Teams"
-                                        )
-                                )
-                        ),
-                        DayLocal(
-                                date = "05.01.2021",
-                                subjects = mutableListOf(
-                                        SubjectLocal(
-                                                name = "ВВИО(",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "9:00 - 10:30",
-                                                location = "LMS - Teams"
-                                        ),
-                                        SubjectLocal(
-                                                name = "Термех с очень длинным названием, таким чтоб разметка поехала",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "10:45 - 12:15",
-                                                location = "LMS - Teams"
-                                        ),
-                                        SubjectLocal(
-                                                name = "Введение в вариационные ичисления",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "13:00 - 14:30",
-                                                location = "LMS - Teams"
-                                        )
-                                )
-                        ),
-                        DayLocal(
-                                date = "06.01.2021",
-                                subjects = mutableListOf(
-                                        SubjectLocal(
-                                                name = "Численные методы",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "9:00 - 10:30",
-                                                location = "LMS - Teams"
-                                        )
-                                )
-                        ),
-                        DayLocal(
-                                date = "07.01.2021",
-                                subjects = mutableListOf(
-                                        SubjectLocal(
-                                                name = "Термех",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "9:00 - 10:30",
-                                                location = "LMS - Teams"
-                                        ),
-                                        SubjectLocal(
-                                                name = "Термех",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "10:45 - 12:15",
-                                                location = "LMS - Teams"
-                                        ),
-                                        SubjectLocal(
-                                                name = "Термех",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "13:00 - 14:30",
-                                                location = "LMS - Teams"
-                                        )
-                                )
-                        ),
-                        DayLocal(
-                                date = "08.01.2021",
-                                subjects = mutableListOf(
-                                        SubjectLocal(
-                                                name = "Термех",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "9:00 - 10:30",
-                                                location = "LMS - Teams"
-                                        ),
-                                        SubjectLocal(
-                                                name = "Термех",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "10:45 - 12:15",
-                                                location = "LMS - Teams"
-                                        ),
-                                        SubjectLocal(
-                                                name = "Термех",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "13:00 - 14:30",
-                                                location = "LMS - Teams"
-                                        )
-                                )
-                        ),
-                        DayLocal(
-                                date = "09.01.2021",
-                                subjects = mutableListOf(
-                                        SubjectLocal(
-                                                name = "Военная кафедра",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "9:00 - 10:30",
-                                                location = "LMS - Teams"
-                                        ),
-                                        SubjectLocal(
-                                                name = "Военная кафедра",
-                                                type = "пз",
-                                                teacher = "Сухов Егор Аркадьевич",
-                                                time = "10:45 - 12:15",
-                                                location = "LMS - Teams"
-                                        )
-                                )
-                        )
-                )
-        )
     }
 
     override fun onBackPressed() {

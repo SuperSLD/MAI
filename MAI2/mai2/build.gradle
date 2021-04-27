@@ -22,11 +22,11 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "SERVER_URL", '"http://jutter.online/mai_web/"'
+            buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai/api/"'
             versionNameSuffix "-debug"
         }
         release {
-            buildConfigField "String", "SERVER_URL", '"http://jutter.online/mai_web/"'
+            buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai/api/"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.release
@@ -96,5 +96,5 @@ dependencies {
     // мои модули
     implementation 'online.jutter.supersld:diffcycler:1.0.013'
     implementation 'online.jutter.supersld:jt_state_machine:1.0.002'
-    implementation 'online.jutter.supersld:midev_core:1.1.3'
+    implementation 'online.jutter.supersld:midev_core:1.1.4'
 }

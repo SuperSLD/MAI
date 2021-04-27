@@ -5,10 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.CanteenLocal
+import com.raspisanie.mai.models.realm.CanteenLocal
 import kotlinx.android.synthetic.main.fragment_canteens.*
 import kotlinx.android.synthetic.main.fragment_canteens.vToolbar
-import kotlinx.android.synthetic.main.fragment_exams.*
 import pro.midev.supersld.common.base.BaseFragment
 import pro.midev.supersld.extensions.addSystemBottomPadding
 

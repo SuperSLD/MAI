@@ -12,6 +12,8 @@ import org.koin.dsl.module
 import com.raspisanie.mai.server.Api
 import com.raspisanie.mai.server.ApiService
 import com.raspisanie.mai.controllers.ChangeBottomTabController
+import com.raspisanie.mai.controllers.ConfirmController
+import com.raspisanie.mai.server.TokenInterceptor
 import pro.midev.supersld.common.CiceroneHolder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,6 +25,7 @@ val appModule = module {
         OkHttpClient.Builder()
             .connectTimeout(40, TimeUnit.SECONDS)
             .readTimeout(40, TimeUnit.SECONDS)
+            .addInterceptor(TokenInterceptor(androidContext()))
             .build()
     }
 
@@ -66,5 +69,9 @@ val appModule = module {
 
     single {
         ChangeBottomTabController()
+    }
+
+    single {
+        ConfirmController()
     }
 }

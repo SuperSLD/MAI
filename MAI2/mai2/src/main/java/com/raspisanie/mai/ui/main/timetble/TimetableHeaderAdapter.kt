@@ -9,6 +9,8 @@ import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.parseCalendarByFormat
 import com.raspisanie.mai.models.local.DayLocal
 import com.raspisanie.mai.models.local.WeekLocal
+import com.raspisanie.mai.models.realm.DayRealm
+import com.raspisanie.mai.models.realm.WeekRealm
 import kotlinx.android.synthetic.main.item_timetable_header.view.*
 import java.util.*
 

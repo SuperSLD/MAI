@@ -1,4 +1,4 @@
-package com.raspisanie.mai.models.local
+package com.raspisanie.mai.models.realm
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

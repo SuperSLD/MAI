@@ -2,6 +2,8 @@ package com.raspisanie.mai.ui.main.timetble
 
 import com.raspisanie.mai.models.local.DayLocal
 import com.raspisanie.mai.models.local.WeekLocal
+import com.raspisanie.mai.models.realm.DayRealm
+import com.raspisanie.mai.models.realm.WeekRealm
 import com.raspisanie.mai.ui.main.timetble.holders.*
 import online.jutter.supersld.DifAdapter
 import online.jutter.supersld.base.DFBaseHolder

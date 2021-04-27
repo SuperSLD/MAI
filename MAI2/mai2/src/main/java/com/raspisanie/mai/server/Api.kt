@@ -1,24 +1,17 @@
 package com.raspisanie.mai.server
 
+import com.raspisanie.mai.models.DataWrapper
+import com.raspisanie.mai.models.server.GroupResponse
+import com.raspisanie.mai.models.server.WeekResponse
+import io.reactivex.rxjava3.core.Single
+import retrofit2.http.GET
+import retrofit2.http.Path
+
 
 interface Api {
+    @GET("groups/search/{name}")
+    fun getGroupList(@Path("name") name: String) : Single<DataWrapper<MutableList<GroupResponse>>>
 
-    /*
-      @Headers(
-        "Accept: application/json",
-        "Content-Type: application/json"
-    )
-    @GET("outcome/other")
-    fun getOtherOutcome(@Header("Authorization") token : String) : Single<DataWrapper<MutableList<ExpanseResponse>>>
-
-    //income/create/products
-    @Headers(
-        "Accept: application/json",
-        "Content-Type: application/json"
-    )
-    @POST("income/create/products")
-    fun createIncomeProducts(@Header("Authorization") token : String,
-                                 @Body addFinancesItemBody: AddFinancesItemBody) : Single<DataWrapper<Any>>
-
-     */
+    @GET("schedule/all/{id}")
+    fun getSchedule(@Path("id") id: String) : Single<DataWrapper<MutableList<WeekResponse>>>
 }

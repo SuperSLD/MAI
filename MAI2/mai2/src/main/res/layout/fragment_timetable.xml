@@ -9,25 +9,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvWeekHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/paddingMid"
-        android:paddingRight="@dimen/paddingMin"
-        android:clipToPadding="false"/>
-
     <LinearLayout
+        android:id="@+id/vgMain"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/paddingMid"
-        android:layout_marginRight="@dimen/paddingMid"
-        android:layout_marginTop="@dimen/paddingMin"
-        android:background="@color/colorBorder"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvWeekHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/paddingMid"
+            android:paddingRight="@dimen/paddingMin"
+            android:clipToPadding="false"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvWeek"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/paddingMid"
+            android:layout_marginRight="@dimen/paddingMid"
+            android:layout_marginTop="@dimen/paddingMin"
+            android:background="@color/colorBorder"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvWeek"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <include
+        layout="@layout/layout_loading"/>
 
 </LinearLayout>

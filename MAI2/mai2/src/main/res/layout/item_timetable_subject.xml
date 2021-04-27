@@ -40,13 +40,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingTop="4dp">
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:textSize="@dimen/textNormalHint"
                     android:fontFamily="@font/roboto_bold"
                     android:textColor="@color/colorTextPrimary"
@@ -55,9 +54,8 @@
                     android:id="@+id/tvTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="end"
-                    android:minWidth="80dp"
+                    android:layout_marginTop="8dp"
                     android:textColor="@color/colorTextSecondary"
                     android:textSize="@dimen/textNormalMin"
                     android:fontFamily="@font/roboto_regular"

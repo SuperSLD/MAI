@@ -7,10 +7,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import com.raspisanie.mai.R
-import kotlinx.android.synthetic.main.view_toolbar.view.*
 import kotlinx.android.synthetic.main.view_toolbar_big.view.*
-import kotlinx.android.synthetic.main.view_toolbar_big.view.TVtoolbar
-import kotlinx.android.synthetic.main.view_toolbar_big.view.TVtvTitle
 import pro.midev.supersld.extensions.addSystemTopPadding
 
 class ToolbarBigView  : RelativeLayout {
