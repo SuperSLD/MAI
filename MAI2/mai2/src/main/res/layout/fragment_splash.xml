@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:src="@drawable/icon_image"/>
+        android:src="@drawable/ic_app_icon"/>
     <LinearLayout
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"

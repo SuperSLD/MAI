@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
+import com.raspisanie.mai.controllers.SelectWeekController
 import com.raspisanie.mai.models.local.DayLocal
 import com.raspisanie.mai.models.local.WeekLocal
 import com.raspisanie.mai.ui.view.ToolbarBigView
@@ -93,12 +94,40 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
         scrollToDayInWeek(date)
     }
 
-    override fun shoWeek(week: WeekLocal?) {
+    override fun shoWeek(week: WeekLocal?, number: Int) {
         if (week == null) {
-
+            showEmpty(true)
         } else {
+            showEmpty(false)
             adapter.addData(week)
             headerAdapter.addData(week)
+
+            rvWeek.layoutManager?.scrollToPosition(0)
+            rvWeekHeader.layoutManager?.scrollToPosition(0)
+            if (number == SelectWeekController.THIS_WEEK) {
+                val currentDay = week.getCurrentDay()
+                if (currentDay == null) {
+                    rvWeek.layoutManager?.scrollToPosition(adapter.itemsSize() - 1)
+                    rvWeekHeader.layoutManager?.scrollToPosition(week.days.size - 1)
+                } else {
+                    rvWeek.layoutManager?.scrollToPosition(adapter.getItemPosition(currentDay.date))
+                    rvWeekHeader.layoutManager?.scrollToPosition(headerAdapter.getItemPosition(currentDay.date))
+                }
+            }
+        }
+    }
+
+    private fun showEmpty(show: Boolean) {
+        vgEmpty.visibility = if (show) View.VISIBLE else View.GONE
+        vgContent.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showTitle(week: Int) {
+        when(week) {
+            SelectWeekController.THIS_WEEK -> vToolbar.setTitle(R.string.timetable_dialog_this_week_button)
+            SelectWeekController.NEXT_WEEK -> vToolbar.setTitle(R.string.timetable_dialog_next_week_button)
+            SelectWeekController.PREVIOUS_WEEK -> vToolbar.setTitle(R.string.timetable_dialog_previous_week)
+            else -> vToolbar.setTitle(getString(R.string.timetable_dialog_other, week))
         }
     }
 

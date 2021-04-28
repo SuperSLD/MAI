@@ -5,6 +5,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.common.base.BottomSheetDialogController
 import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.controllers.BottomVisibilityController
+import com.raspisanie.mai.controllers.SelectWeekController
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.mappers.toRealm
 import com.raspisanie.mai.extesions.realm.clearScheduleForCurrentGroup
@@ -29,30 +30,49 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
     private val bottomVisibilityController: BottomVisibilityController by inject()
     private val bottomSheetDialogController: BottomSheetDialogController by inject()
     private val realm: Realm by inject()
-    private var currentSchedule: ScheduleLocal? = null
     private val service: ApiService by inject()
+    private val selectWeekController: SelectWeekController by inject()
+
+    private var currentSchedule: ScheduleLocal? = null
+    private var currentWeek = SelectWeekController.THIS_WEEK
 
     override fun attachView(view: TimetableView?) {
         super.attachView(view)
         bottomVisibilityController.show()
+    }
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        listenWeekNumber()
         loadFromRealm()
     }
 
+    /**
+     * Вызов диалога ваыбора недели.
+     */
     fun selectWeekDialog() {
-        bottomSheetDialogController.show(BottomSheetDialogType.SELECT_WEEK)
+        bottomSheetDialogController.show(BottomSheetDialogType.SELECT_WEEK, currentWeek)
     }
 
+    /**
+     * Загрузка расписания из реалма.
+     * Если расписание загружено то проверяется дата и если она
+     * не корректна то выполняется загрузка нового расписания
+     * иначе оно загружается из локального хранилища.
+     */
     private fun loadFromRealm() {
         val schedule = realm.getCurrentSchedule()
         if (schedule == null || schedule.lastUpdate != Calendar.getInstance().get(Calendar.DAY_OF_YEAR)) {
             loadSchedule()
         } else {
-            currentSchedule = schedule.toLocal()
-            viewState.shoWeek(currentSchedule?.getCurrentWeek())
+            showWeekByCurrent()
             Timber.d("load week from schedule: ${currentSchedule?.groupId}")
         }
     }
 
+    /**
+     * Загрузка с сервера.
+     */
     fun loadSchedule() {
         realm.getCurrentGroup()?.let { group ->
             service.getSchedule(group.id!!)
@@ -63,7 +83,11 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                     .doOnSubscribe { viewState.toggleLoading(true) }
                     .doOnError {
                         it.printStackTrace()
-                        viewState.showErrorLoading()
+                        if (realm.getCurrentSchedule() == null) {
+                            viewState.showErrorLoading()
+                        } else {
+                            showWeekByCurrent()
+                        }
                     }
                     .subscribe(
                             {
@@ -72,15 +96,31 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                                 realm.clearScheduleForCurrentGroup()
                                 realm.updateSchedule(scheduleRealm)
                                 currentSchedule = scheduleRealm.toLocal()
-                                viewState.shoWeek(currentSchedule?.getCurrentWeek())
+                                viewState.shoWeek(currentSchedule?.getCurrentWeek(), currentWeek)
                             },
                             {
                                 Timber.e(it)
-                                currentSchedule = realm.getCurrentSchedule()?.toLocal()
-                                viewState.shoWeek(currentSchedule?.getCurrentWeek())
+                                showWeekByCurrent()
                             }
                     ).connect()
         }
+    }
+
+    /**
+     * Загрузка расписания из реалма по выбранной неделе.
+     */
+    private fun showWeekByCurrent() {
+        currentSchedule = realm.getCurrentSchedule()?.toLocal()
+        viewState.shoWeek(
+                when(currentWeek) {
+                    SelectWeekController.THIS_WEEK -> currentSchedule?.getCurrentWeek()
+                    SelectWeekController.PREVIOUS_WEEK -> currentSchedule?.getPreviousWeek()
+                    SelectWeekController.NEXT_WEEK -> currentSchedule?.getNextWeek()
+                    else -> currentSchedule?.getWeek(currentWeek)
+                },
+                currentWeek
+        )
+        viewState.showTitle(currentWeek)
     }
 
     fun onDayHeaderClick(date: String) {
@@ -95,9 +135,37 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
     fun onDaysListItemClick(action: Int, data: Any?) {
         when(action) {
             GO_TO_NEXT_WEEK -> {
-
+                nextWeek()
             }
         }
+    }
+
+    /**
+     * скип недели на следующую.
+     * Если выбрана спеиальная неделя то идет поиск текушей,
+     * а затем прибавление номера.
+     */
+    private fun nextWeek() {
+        if (currentWeek < 0) {
+            currentWeek = currentSchedule?.getCurrentWeek()?.number!!
+        }
+        currentWeek++
+        showWeekByCurrent()
+    }
+
+    private fun listenWeekNumber() {
+        selectWeekController.state
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(
+                        {
+                            currentWeek = it
+                            showWeekByCurrent()
+                        },
+                        {
+                            Timber.e(it)
+                        }
+                ).connect()
     }
 
     fun back() {
@@ -106,8 +174,5 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
 
     companion object {
         const val GO_TO_NEXT_WEEK = 0
-        const val EVENT_DETAIL_OPEN = 1
-        const val EVENT_HIDE = 2
-        const val DAY_SUBJECT = 3
     }
 }

@@ -11,37 +11,45 @@
         android:layout_height="wrap_content"/>
 
     <LinearLayout
+        android:id="@+id/vgMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/paddingMax">
-        <ImageView
-            android:layout_width="280dp"
-            android:layout_height="280dp"
-            app:srcCompat="@drawable/ic_box"/>
-        <TextView
-            android:layout_marginTop="@dimen/paddingMid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/paddingMax"
-            android:paddingLeft="@dimen/paddingMax"
-            android:text="@string/exams_none_timetable"
-            android:gravity="center"
-            android:fontFamily="@font/roboto_regular"
-            android:textColor="@color/colorTextPrimary"
-            android:textSize="@dimen/textNormal"/>
-    </LinearLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
         <LinearLayout
+            android:id="@+id/vgContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvWeek"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        <LinearLayout
+            android:id="@+id/vgEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                app:srcCompat="@drawable/ic_box"/>
+            <TextView
+                android:layout_marginTop="@dimen/paddingMid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/paddingMax"
+                android:paddingLeft="@dimen/paddingMax"
+                android:text="@string/exams_none_timetable"
+                android:gravity="center"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="@dimen/textNormal"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

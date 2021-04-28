@@ -2,9 +2,6 @@ package com.raspisanie.mai.models.local
 
 import android.os.Parcelable
 import com.raspisanie.mai.extesions.parseCalendarByFormat
-import io.realm.RealmList
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -14,38 +11,23 @@ data class WeekLocal(
         var number: Int,
         var date: String,
         var days: MutableList<DayLocal>
-): Parcelable
-
-@Parcelize
-data class DayLocal(
-        var id: String,
-        var date: String,
-        var subjects: MutableList<SubjectLocal>
-): Parcelable
-
-@Parcelize
-data class SubjectLocal(
-        var id: String,
-        var name: String,
-        var room: RoomLocal,
-        var teacher: TeacherLocal,
-        var type: String,
-        var timeStart: String,
-        var timeEnd: String,
-        var link: String,
-        var number: String
-): Parcelable
-
-@Parcelize
-data class RoomLocal(
-        var id: String,
-        var name: String
-): Parcelable
-
-@Parcelize
-data class TeacherLocal(
-        var id: String,
-        var name: String
-): Parcelable
-
-
+): Parcelable {
+    /**
+     * поиск текущего дня недели, если он
+     * отсутствует то возвращается минимальная дата спереди.
+     */
+    fun getCurrentDay(): DayLocal? {
+        var minDate = Int.MAX_VALUE
+        var minIndex = -1
+        val current = Calendar.getInstance()
+        for (i in days.indices) {
+            val date = days[i].date.parseCalendarByFormat("dd.MM.yyyy")
+            if (date.get(Calendar.DAY_OF_YEAR) >= current.get(Calendar.DAY_OF_YEAR)
+                    && date.get(Calendar.DAY_OF_YEAR) - current.get(Calendar.DAY_OF_YEAR) < minDate) {
+                minDate = date.get(Calendar.DAY_OF_YEAR) - current.get(Calendar.DAY_OF_YEAR)
+                minIndex = i
+            }
+        }
+        return if (minIndex > 0) days[minIndex] else null
+    }
+}

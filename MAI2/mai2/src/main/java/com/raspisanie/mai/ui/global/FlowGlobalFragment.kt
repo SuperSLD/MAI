@@ -39,7 +39,7 @@ class FlowGlobalFragment : FlowFragment(ROUTER), GlobalView {
      */
     override fun showBottomSheet(type: BottomSheetDialogType, data: Any?) {
         val bottomSheet: MvpBottomSheetDialogFragment = when (type) {
-            BottomSheetDialogType.SELECT_WEEK -> SelectWeekBSFragment()
+            BottomSheetDialogType.SELECT_WEEK -> SelectWeekBSFragment.create(data as Int)
             BottomSheetDialogType.CONFIRM -> ConfirmBSFragment.create((data as Pair<*, *>).first as String, data.second as String)
         }
 

@@ -31,7 +31,7 @@ class TimetableAdapter(
                 END_WEEK_ITEM to EndWeekHolder::class.java
             )
         ).onEvent{ id, data ->
-
+            onItemClick(id, data)
         }
     }
 
@@ -68,7 +68,9 @@ class TimetableAdapter(
         return 0
     }
 
-    fun addData(data: WeekLocal) {
+    fun itemsSize() = list.size
+
+    fun addData(data: WeekLocal, last: Boolean = false) {
         this.list.clear()
         for (day in data.days) {
             this.list.add(Pair(TITLE_ITEM, day))
@@ -79,7 +81,7 @@ class TimetableAdapter(
                 this.list.add(Pair(LINE_ITEM, null))
             }
         }
-        this.list.add(Pair(END_WEEK_ITEM, null))
+        if (!last) this.list.add(Pair(END_WEEK_ITEM, null))
         notifyDataSetChanged()
     }
 }

@@ -40,6 +40,7 @@
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/tvNext"
                 android:layout_marginTop="@dimen/paddingMid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

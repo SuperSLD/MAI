@@ -10,6 +10,9 @@ data class ScheduleLocal(
         var groupId: String,
         var weeks: MutableList<WeekLocal>
 ): Parcelable {
+    /**
+     * Находим текущую неделю.
+     */
     fun getCurrentWeek() : WeekLocal? {
         //08.02.2021 - 14.02.2021
         val currentDate = Calendar.getInstance()
@@ -22,5 +25,55 @@ data class ScheduleLocal(
             }
         }
         return null
+    }
+
+    /**
+     * Находим следуюшую неделю.
+     */
+    fun getNextWeek(): WeekLocal? {
+        val current = getCurrentWeek()
+        return if (current != null) weeks.find { week -> week.number == current.number + 1 }
+        else null
+    }
+
+    /**
+     * Находим предыдущую неделю.
+     */
+    fun getPreviousWeek(): WeekLocal? {
+        val current = getCurrentWeek()
+        return if (current != null) weeks.find { week -> week.number == current.number - 1 }
+        else null
+    }
+
+    /**
+     * Просто поиск недели по номеру.
+     */
+    fun getWeek(number: Int): WeekLocal? {
+        return weeks.find { it.number == number }
+    }
+
+    /**
+     * Поиск экзаменов и создание объекта
+     * [WeekLocal] с днями в которых есть экзамены.
+     *
+     * @return список дней с экзаменами.
+     */
+    fun extractExams(): WeekLocal? {
+        val newWeek = WeekLocal(
+                id = "exams",
+                number = 0,
+                date = "00.00.0000 - 00.00.0000",
+                days = mutableListOf()
+        )
+        weeks.forEach {
+            for (day in it.days) {
+                var correct = false
+                for (subject in day.subjects) {
+                    if (subject.type == SubjectLocal.EXAM) correct = true
+                }
+                if (correct) newWeek.days.add(day)
+            }
+        }
+        return if (newWeek.days.size > 0) newWeek else null
     }
 }

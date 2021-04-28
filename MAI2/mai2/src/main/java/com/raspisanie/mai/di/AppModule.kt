@@ -13,6 +13,7 @@ import com.raspisanie.mai.server.Api
 import com.raspisanie.mai.server.ApiService
 import com.raspisanie.mai.controllers.ChangeBottomTabController
 import com.raspisanie.mai.controllers.ConfirmController
+import com.raspisanie.mai.controllers.SelectWeekController
 import com.raspisanie.mai.server.TokenInterceptor
 import pro.midev.supersld.common.CiceroneHolder
 import retrofit2.Retrofit
@@ -73,5 +74,9 @@ val appModule = module {
 
     single {
         ConfirmController()
+    }
+
+    single {
+        SelectWeekController()
     }
 }

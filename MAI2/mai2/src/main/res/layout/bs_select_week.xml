@@ -20,6 +20,7 @@
             android:orientation="vertical"
             android:background="@color/colorBackground">
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnPrevious"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -44,6 +45,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnThis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -67,6 +69,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnNext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -85,11 +88,12 @@
                         android:gravity="bottom"
                         android:textColor="@color/colorTextPrimary"
                         android:layout_marginLeft="@dimen/paddingMid"
-                        android:text="@string/timetable_dialog_previous_week_button"
+                        android:text="@string/timetable_dialog_next_week_button"
                         android:textSize="@dimen/textNormal"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnOther"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout

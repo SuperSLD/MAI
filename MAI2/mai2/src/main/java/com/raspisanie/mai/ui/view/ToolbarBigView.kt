@@ -74,6 +74,22 @@ class ToolbarBigView  : RelativeLayout {
     }
 
     /**
+     * Замена заголовка у тулбара.
+     * @param stringId
+     */
+    fun setTitle(stringId: Int) {
+        TVtvTitle.text = context.getString(stringId)
+    }
+
+    /**
+     * Замена заголовка у тулбара.
+     * @param string
+     */
+    fun setTitle(string: String) {
+        TVtvTitle.text = string
+    }
+
+    /**
      * Кнопка в конце тулбара.
      */
     data class ToolbarAction(

@@ -31,13 +31,12 @@ class SubjectHolder(itemView: View) : DFBaseHolder(itemView) {
             tvLocation.text = subject.room.name
             tvType.text = subject.type
 
-            /*
             val current = Calendar.getInstance()
             val start = subject.timeStart.parseCalendarByFormat("HH:mm")
             val end = subject.timeEnd.parseCalendarByFormat("HH:mm")
 
             (this as MaterialCardView).strokeColor = if (current.after(start) && current.before(end))
-                selected else unselected*/
+                selected else unselected
         }
     }
 }

@@ -10,5 +10,8 @@ interface TimetableView: BaseView {
     fun selectDay(date: String)
 
     @StateStrategyType(SkipStrategy::class)
-    fun shoWeek(week: WeekLocal?)
+    fun shoWeek(week: WeekLocal?, number: Int)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun showTitle(week: Int)
 }
