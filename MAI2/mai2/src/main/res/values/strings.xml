@@ -60,8 +60,9 @@
     <string name="timetable_dialog_this_week_button">Текущая неделя</string>
     <string name="timetable_dialog_next_week_button">Следующая неделя</string>
     <string name="timetable_dialog_other_week_button">Другая неделя</string>
-    <string name="timetable_dialog_other">Неделя %1$d</string>
+    <string name="timetable_week_other">Неделя %1$d</string>
     <string name="timetable_empty">На эту неделю расписания нет, мы ничего не нашли</string>
+    <string name="timetable_select_week_number_title">Другая неделя</string>
 
     <!-- Settings Fragment -->
     <string name="settings_dark_theme">Темная тема</string>

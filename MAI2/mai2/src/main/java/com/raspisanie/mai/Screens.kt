@@ -15,6 +15,7 @@ import com.raspisanie.mai.ui.main.settings.SettingsFragment
 import com.raspisanie.mai.ui.main.settings.add_group.AddGroupFragment
 import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
 import com.raspisanie.mai.ui.main.timetble.TimetableFragment
+import com.raspisanie.mai.ui.main.timetble.select_number.SelectNumberFragment
 import com.raspisanie.mai.ui.select_group.FlowSelectGroupFragment
 import com.raspisanie.mai.ui.select_group.select_group.SelectGroupFragment
 import com.raspisanie.mai.ui.select_group.start.StartFragment
@@ -93,6 +94,10 @@ object Screens {
 
     object TimeTable: SupportAppScreen() {
         override fun getFragment(): Fragment? = TimetableFragment()
+    }
+
+    data class SelectNumber(val number: Int): SupportAppScreen() {
+        override fun getFragment(): Fragment? = SelectNumberFragment.create(number)
     }
 
     /** Настройки - роутер */

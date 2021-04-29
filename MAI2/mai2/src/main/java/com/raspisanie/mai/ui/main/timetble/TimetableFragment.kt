@@ -127,7 +127,7 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
             SelectWeekController.THIS_WEEK -> vToolbar.setTitle(R.string.timetable_dialog_this_week_button)
             SelectWeekController.NEXT_WEEK -> vToolbar.setTitle(R.string.timetable_dialog_next_week_button)
             SelectWeekController.PREVIOUS_WEEK -> vToolbar.setTitle(R.string.timetable_dialog_previous_week)
-            else -> vToolbar.setTitle(getString(R.string.timetable_dialog_other, week))
+            else -> vToolbar.setTitle(getString(R.string.timetable_week_other, week))
         }
     }
 

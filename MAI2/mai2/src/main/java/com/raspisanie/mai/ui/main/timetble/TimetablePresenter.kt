@@ -2,6 +2,7 @@ package com.raspisanie.mai.ui.main.timetble
 
 import android.content.Context
 import com.arellomobile.mvp.InjectViewState
+import com.raspisanie.mai.Screens
 import com.raspisanie.mai.common.base.BottomSheetDialogController
 import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.controllers.BottomVisibilityController
@@ -159,8 +160,12 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                         {
-                            currentWeek = it
-                            showWeekByCurrent()
+                            if (it != SelectWeekController.OTHER_WEEK) {
+                                currentWeek = it
+                                showWeekByCurrent()
+                            } else {
+                                router?.navigateTo(Screens.SelectNumber(currentSchedule?.getCurrentWeek()?.number!!))
+                            }
                         },
                         {
                             Timber.e(it)

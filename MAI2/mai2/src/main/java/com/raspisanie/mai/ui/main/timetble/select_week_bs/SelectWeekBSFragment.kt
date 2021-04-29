@@ -37,7 +37,10 @@ class SelectWeekBSFragment : MvpBottomSheetDialogFragment(R.layout.bs_select_wee
             presenter.select(SelectWeekController.THIS_WEEK)
             dismiss()
         }
-
+        btnOther.setOnClickListener {
+            presenter.select(SelectWeekController.OTHER_WEEK)
+            dismiss()
+        }
     }
 
     companion object {
