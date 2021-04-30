@@ -1,5 +1,8 @@
 package com.raspisanie.mai.extesions
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -13,6 +16,11 @@ fun Vibrator.shortVibration() {
     } else {
         vibrate(100)
     }
+}
+
+fun Context.openWebLink(link: String) {
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+    startActivity(intent)
 }
 
 /**

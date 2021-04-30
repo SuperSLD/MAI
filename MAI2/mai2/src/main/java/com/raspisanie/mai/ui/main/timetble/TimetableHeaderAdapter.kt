@@ -64,6 +64,19 @@ class TimetableHeaderAdapter(
         return 0
     }
 
+    /**
+     * Выбирвем элемент из списка,
+     * чтобы он подсвечивался другим цветом.
+     *
+     * @param position новая позиция.
+     */
+    fun selectPosition(position: Int) {
+        val lastPosition = selectedPosition
+        selectedPosition = position
+        notifyItemChanged(lastPosition)
+        notifyItemChanged(position)
+    }
+
     private inner class ItemHeaderHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val dayNames = itemView.resources.getStringArray(R.array.timetable_days)
 

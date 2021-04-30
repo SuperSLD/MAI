@@ -109,6 +109,7 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
                 if (currentDay == null) {
                     rvWeek.layoutManager?.scrollToPosition(adapter.itemsSize() - 1)
                     rvWeekHeader.layoutManager?.scrollToPosition(week.days.size - 1)
+                    headerAdapter.selectPosition(week.days.size - 1)
                 } else {
                     rvWeek.layoutManager?.scrollToPosition(adapter.getItemPosition(currentDay.date))
                     rvWeekHeader.layoutManager?.scrollToPosition(headerAdapter.getItemPosition(currentDay.date))

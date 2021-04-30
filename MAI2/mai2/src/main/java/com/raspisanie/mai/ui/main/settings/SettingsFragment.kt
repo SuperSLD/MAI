@@ -10,6 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.getIsDayTheme
+import com.raspisanie.mai.extesions.openWebLink
 import com.raspisanie.mai.extesions.saveIsDayTheme
 import com.raspisanie.mai.models.realm.GroupRealm
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -102,6 +103,10 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
 
         lSupport.setOnClickListener {
             presenter.sendFeedback()
+        }
+
+        lMai.setOnClickListener {
+            context?.openWebLink("https://mai.ru")
         }
     }
 
