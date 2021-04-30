@@ -7,9 +7,6 @@
         <item name="colorAccent">@color/colorPrimarySecondary</item>
         <item name="android:windowBackground">@color/colorBackground</item>
 
-        <item name="colorOnSurface">@color/colorPrimary</item>
-        <item name="colorSecondary">@color/colorPrimary</item>
-
         <!-- Shape -->
 
         <!-- Components Style -->

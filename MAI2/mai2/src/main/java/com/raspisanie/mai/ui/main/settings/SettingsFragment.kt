@@ -99,6 +99,10 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
                 this.icIcon.setImageDrawable(ContextCompat.getDrawable(context, icons[i]))
             }
         }
+
+        lSupport.setOnClickListener {
+            presenter.sendFeedback()
+        }
     }
 
     override fun onBackPressed() {

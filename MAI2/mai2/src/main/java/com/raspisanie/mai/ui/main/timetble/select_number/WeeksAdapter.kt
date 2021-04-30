@@ -72,7 +72,7 @@ class WeeksAdapter(
             }
         }
 
-        fun changeColor(selected: Boolean) {
+        private fun changeColor(selected: Boolean) {
             with(itemView) {
                 tvName.setTextColor(if (selected) white else black)
                 tvDate.setTextColor(if (selected) white else secondary)

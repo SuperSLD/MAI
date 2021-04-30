@@ -13,6 +13,7 @@ import com.raspisanie.mai.ui.main.info.canteens.CanteensFragment
 import com.raspisanie.mai.ui.main.settings.FlowSettingsFragment
 import com.raspisanie.mai.ui.main.settings.SettingsFragment
 import com.raspisanie.mai.ui.main.settings.add_group.AddGroupFragment
+import com.raspisanie.mai.ui.main.settings.send_feedback.SendFeedbackFragment
 import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
 import com.raspisanie.mai.ui.main.timetble.TimetableFragment
 import com.raspisanie.mai.ui.main.timetble.select_number.SelectNumberFragment
@@ -112,5 +113,9 @@ object Screens {
 
     object AddGroup: SupportAppScreen() {
         override fun getFragment(): Fragment? = AddGroupFragment()
+    }
+
+    object Feedback: SupportAppScreen() {
+        override fun getFragment(): Fragment? = SendFeedbackFragment()
     }
 }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.raspisanie.mai.ui.view.ToolbarView
+        android:id="@+id/vToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/nested">
+        <LinearLayout
+            android:id="@+id/vgMain"
+            android:padding="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorBackground">
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorTextPrimary"
+                android:text="@string/settings_feedback_title"
+                android:textSize="18sp"
+                android:layout_marginBottom="24dp"/>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/BorderEditText"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
+                android:hint="@string/settings_feedback_email"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/BorderEditText"
+                android:maxLines="1"
+                android:hint="@string/settings_feedback_name"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMessage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/BorderEditText"
+                android:minLines="4"
+                android:hint="@string/settings_feedback_message"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/colorBackground"
+                    app:strokeColor="@color/colorPrimarySecondary"
+                    app:strokeWidth="1dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="8dp">
+                    <TextView
+                        android:id="@+id/tvAction"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/settings_group_confirm_delete_cancel"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:background="@color/colorBackground"
+                        android:fontFamily="@font/roboto_bold"/>
+                </com.google.android.material.card.MaterialCardView>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSend"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/ButtonSolid"
+                    android:textColor="@color/colorTextWhite"
+                    android:text="@string/settings_feedback_send"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        layout="@layout/layout_loading"/>
+
+</LinearLayout>

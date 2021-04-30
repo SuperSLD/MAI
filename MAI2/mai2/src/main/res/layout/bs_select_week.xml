@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:cardCornerRadius="0dp">
         <LinearLayout
             android:padding="@dimen/paddingMid"
             android:layout_width="match_parent"

@@ -2,7 +2,7 @@ package com.raspisanie.mai.di
 
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.common.base.BottomSheetDialogController
-import com.raspisanie.mai.controllers.BottomVisibilityController
+import com.raspisanie.mai.controllers.*
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -11,9 +11,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import com.raspisanie.mai.server.Api
 import com.raspisanie.mai.server.ApiService
-import com.raspisanie.mai.controllers.ChangeBottomTabController
-import com.raspisanie.mai.controllers.ConfirmController
-import com.raspisanie.mai.controllers.SelectWeekController
 import com.raspisanie.mai.server.TokenInterceptor
 import pro.midev.supersld.common.CiceroneHolder
 import retrofit2.Retrofit
@@ -78,5 +75,9 @@ val appModule = module {
 
     single {
         SelectWeekController()
+    }
+
+    single {
+        ShowToastController()
     }
 }

@@ -32,6 +32,8 @@
     <color name="colorBorder">#E1E1E1</color>
 
     <!-- Other -->
+    <color name="colorAlertRed">#FF6645</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 

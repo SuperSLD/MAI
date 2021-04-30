@@ -5,6 +5,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.common.base.MvpBottomSheetDialogFragment
+import com.raspisanie.mai.common.enums.ToastType
+import com.raspisanie.mai.extesions.showToast
 import com.raspisanie.mai.ui.main.settings.confirm_dialog.ConfirmBSFragment
 import com.raspisanie.mai.ui.main.timetble.select_week_bs.SelectWeekBSFragment
 import pro.midev.supersld.common.base.FlowFragment
@@ -44,5 +46,12 @@ class FlowGlobalFragment : FlowFragment(ROUTER), GlobalView {
         }
 
         bottomSheet.show(childFragmentManager, bottomSheet.tag)
+    }
+
+    /**
+     * Отображение тоста.
+     */
+    override fun showToast(toastType: ToastType, message: String) {
+        context?.showToast(toastType, message)
     }
 }

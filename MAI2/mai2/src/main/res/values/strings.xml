@@ -91,5 +91,10 @@
     <string name="settings_group_confirm_delete">Вы точно хотите удалить группу из быстрого доступа?</string>
     <string name="settings_group_confirm_delete_accept">Удалить</string>
     <string name="settings_group_confirm_delete_cancel">Отменить</string>
-
+    <string name="settings_feedback_title">Сообщите нам об ошибке и помогите сделать приложеие еще лучше!</string>
+    <string name="settings_feedback_email">Введите почту для обратной связи</string>
+    <string name="settings_feedback_name">Как к вам обращаться?</string>
+    <string name="settings_feedback_message">Опишите проблемму с которой вы столкнулись</string>
+    <string name="settings_feedback_send">Отправить</string>
+    <string name="settings_feedback_toolbar">Поддержка</string>
 </resources>

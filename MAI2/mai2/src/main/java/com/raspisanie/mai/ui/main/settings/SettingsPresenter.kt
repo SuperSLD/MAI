@@ -80,6 +80,8 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
         viewState.showGroups(realm.getAllGroup())
     }
 
+    fun sendFeedback() = router?.navigateTo(Screens.Feedback)
+
     fun addGroup() = router?.navigateTo(Screens.AddGroup)
 
     fun back() {
