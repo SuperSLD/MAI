@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <com.raspisanie.mai.ui.view.ProgressColoredBar
+    <com.raspisanie.mai.ui.view.JTProgressBarColored
         android:layout_width="150dp"
         android:layout_height="150dp"/>
 

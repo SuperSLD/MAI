@@ -20,6 +20,7 @@
 
     <!-- Gradient -->
     <color name="colorGradientTop">#C7ACFF</color>
+    <color name="colorGradientTopSecondary">#EA91FF</color>
 
     <!-- Button -->
     <color name="colorButtonDisabled">#C8C7CC</color>

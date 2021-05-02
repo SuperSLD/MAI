@@ -170,7 +170,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.raspisanie.mai.ui.view.DiagramView
+            <online.juter.supersld.view.JTDiagram
                 android:id="@+id/diagramView"
                 android:layout_marginTop="@dimen/paddingMax"
                 android:layout_width="match_parent"

@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone">
-        <ProgressBar
+        <com.raspisanie.mai.ui.view.JTProgressBarColored
             android:layout_width="50dp"
             android:layout_height="50dp"/>
     </LinearLayout>

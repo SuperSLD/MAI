@@ -28,7 +28,7 @@ class FlowGlobalFragment : FlowFragment(ROUTER), GlobalView {
             navigator.applyCommands(
                 arrayOf(
                     BackTo(null),
-                    Replace(Screens.CampusMap)
+                    Replace(Screens.Splash)
                 )
             )
         }

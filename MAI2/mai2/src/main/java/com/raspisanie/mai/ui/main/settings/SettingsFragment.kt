@@ -67,6 +67,8 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
                             ContextCompat.getColor(context, R.color.colorDiagram1)
                     )
             )
+            refresh()
+            setOnClickListener { refresh() }
         }
 
         btnAdd.setOnClickListener {
