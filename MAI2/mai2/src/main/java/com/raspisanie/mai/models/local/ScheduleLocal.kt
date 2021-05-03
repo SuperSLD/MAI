@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.raspisanie.mai.extesions.parseCalendarByFormat
 import com.raspisanie.mai.extesions.setDayEnd
 import com.raspisanie.mai.extesions.setDayStart
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -13,23 +14,31 @@ data class ScheduleLocal(
         var size: Int,
         var weeks: MutableList<WeekLocal>
 ): Parcelable {
+    @IgnoredOnParcel
+    private var currentWeek: WeekLocal? = null
+
     /**
-     * Находим текущую неделю.
+     * Находим текущую неделю и сохраняет ее,
+     * ну очень уж больно было вызывать этот метод
+     * зная что он пробегает по всему расписанию и ищет
+     * текущую неделю.
      */
     fun getCurrentWeek() : WeekLocal? {
-        //08.02.2021 - 14.02.2021
-        val currentDate = Calendar.getInstance()
-        weeks.forEach {
-            val splitDate = it.date.split(" - ")
-            val timeStart = splitDate[0].parseCalendarByFormat("dd.MM.yyyy")
-            val timeEnd = splitDate[1].parseCalendarByFormat("dd.MM.yyyy")
-            timeStart.setDayStart()
-            timeEnd.setDayEnd()
-            if (currentDate.after(timeStart) && currentDate.before(timeEnd)) {
-                return it
+        if (currentWeek == null) {
+            val currentDate = Calendar.getInstance()
+            weeks.forEach {
+                val splitDate = it.date.split(" - ")
+                val timeStart = splitDate[0].parseCalendarByFormat("dd.MM.yyyy")
+                val timeEnd = splitDate[1].parseCalendarByFormat("dd.MM.yyyy")
+                timeStart.setDayStart()
+                timeEnd.setDayEnd()
+                if (currentDate.after(timeStart) && currentDate.before(timeEnd)) {
+                    currentWeek = it
+                    return it
+                }
             }
-        }
-        return null
+            return null
+        } else return currentWeek
     }
 
     /**
