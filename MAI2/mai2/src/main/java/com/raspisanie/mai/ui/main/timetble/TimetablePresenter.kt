@@ -164,7 +164,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                                 currentWeek = it
                                 showWeekByCurrent()
                             } else {
-                                router?.navigateTo(Screens.SelectNumber(currentSchedule?.getCurrentWeek()?.number!!))
+                                router?.navigateTo(Screens.SelectNumber(currentSchedule?.getCurrentWeek()?.number))
                             }
                         },
                         {

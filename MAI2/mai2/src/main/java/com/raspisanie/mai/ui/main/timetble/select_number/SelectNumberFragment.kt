@@ -61,12 +61,12 @@ class SelectNumberFragment : BaseFragment(R.layout.fragment_select_number), Sele
         const val ARG_NUMBER = "arg_number"
 
         fun create(
-                number: Int
+                number: Int?
         ): SelectNumberFragment {
             val fragment = SelectNumberFragment()
 
             val args = Bundle()
-            args.putInt(ARG_NUMBER, number)
+            args.putInt(ARG_NUMBER, number ?: -1)
             fragment.arguments = args
 
             return fragment

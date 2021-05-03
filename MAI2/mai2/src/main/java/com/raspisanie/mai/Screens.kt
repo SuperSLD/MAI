@@ -97,7 +97,7 @@ object Screens {
         override fun getFragment(): Fragment? = TimetableFragment()
     }
 
-    data class SelectNumber(val number: Int): SupportAppScreen() {
+    data class SelectNumber(val number: Int?): SupportAppScreen() {
         override fun getFragment(): Fragment? = SelectNumberFragment.create(number)
     }
 

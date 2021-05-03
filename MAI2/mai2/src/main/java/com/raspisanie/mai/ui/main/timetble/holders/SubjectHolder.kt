@@ -28,6 +28,7 @@ class SubjectHolder(itemView: View) : DFBaseHolder(itemView) {
             tvName.text = subject.name
             tvTime.text = "${subject.timeStart} - ${subject.timeEnd}"
             tvTeacher.text = subject.teacher.name
+            tvTeacher.visibility = if(subject.teacher.name.isEmpty()) View.GONE else View.VISIBLE
             tvLocation.text = subject.room.name
             tvType.text = subject.type
 
