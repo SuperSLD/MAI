@@ -2,6 +2,8 @@ package com.raspisanie.mai.models.local
 
 import android.os.Parcelable
 import com.raspisanie.mai.extesions.parseCalendarByFormat
+import com.raspisanie.mai.extesions.setDayEnd
+import com.raspisanie.mai.extesions.setDayStart
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -20,6 +22,8 @@ data class ScheduleLocal(
             val splitDate = it.date.split(" - ")
             val timeStart = splitDate[0].parseCalendarByFormat("dd.MM.yyyy")
             val timeEnd = splitDate[1].parseCalendarByFormat("dd.MM.yyyy")
+            timeStart.setDayStart()
+            timeEnd.setDayEnd()
             if (currentDate.after(timeStart) && currentDate.before(timeEnd)) {
                 return it
             }

@@ -36,3 +36,25 @@ fun String.fromFormatToFormat(from: String, to: String): String {
         val calendar = this.parseCalendarByFormat(from)
         return SimpleDateFormat(to).format(calendar.time)
 }
+
+/**
+ * Устанавливает время в календаре на начало дня.
+ */
+fun Calendar.setDayStart(): Calendar {
+        this.set(Calendar.HOUR_OF_DAY, 0)
+        this.set(Calendar.MINUTE, 0)
+        this.set(Calendar.SECOND, 0)
+        this.set(Calendar.MILLISECOND, 0)
+        return this
+}
+
+/**
+ * Устанавливает время в календаре на конец дня.
+ */
+fun Calendar.setDayEnd(): Calendar {
+        this.set(Calendar.HOUR_OF_DAY, 23)
+        this.set(Calendar.MINUTE, 59)
+        this.set(Calendar.SECOND, 59)
+        this.set(Calendar.MILLISECOND, 999)
+        return this
+}
