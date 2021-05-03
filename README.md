@@ -6,10 +6,14 @@
 ---
 
 **Автор:**
-+ [Соляной Леонид](https://vk.com/seks_simvo1)
++ [Соляной Леонид](https://vk.com/kotlin_top)
 
 ---
 
 **Страница в Google Play:** https://play.google.com/store/apps/details?id=com.raspisanie.mai
 
-![](https://sun9-12.userapi.com/c855124/v855124142/1b40c2/ShiSsZX9SkQ.jpg)
+![](https://github.com/SuperSLD/MAI/blob/master/images/Start.png?raw=true)
+
+Мы рады любой помощи, если желаете присоедениться к команде можете писать мне в вк.
+
+![](https://github.com/SuperSLD/MAI/blob/master/images/DarkThemePromoSmal.png?raw=true)
