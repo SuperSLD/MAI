@@ -1,15 +1,14 @@
 package com.raspisanie.mai.models.realm
 
-import android.os.Parcelable
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
-import kotlinx.android.parcel.Parcelize
 
 open class ScheduleRealm(
         @PrimaryKey
         var groupId: String? = null,
         var weeks: RealmList<WeekRealm>? = RealmList(),
+        var size: Int = 0,
         var lastUpdate: Int? = null
 ): RealmObject()
 

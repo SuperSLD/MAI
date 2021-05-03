@@ -33,6 +33,18 @@ fun <T : RealmObject> List<T>.toRealmList(): RealmList<T> {
 }
 
 /**
+ * Получение первых нескольких элементов списка.
+ * @param count количество элементов.
+ */
+fun <T> MutableList<T>.firstItems(count: Int): MutableList<T> {
+    val result = mutableListOf<T>()
+    for (i in 0 until (if (count > this.size) this.size else count)) {
+        result.add(this[i])
+    }
+    return result
+}
+
+/**
  * Получение UUID строки.
  */
 fun getUUID(): String {

@@ -26,11 +26,11 @@ data class WeekLocal(
         for (i in days.indices) {
             val date = days[i].date.parseCalendarByFormat("dd.MM.yyyy")
             if (date.get(Calendar.DAY_OF_YEAR) >= current.get(Calendar.DAY_OF_YEAR)
-                    && date.get(Calendar.DAY_OF_YEAR) - current.get(Calendar.DAY_OF_YEAR) < minDate) {
+                    && date.get(Calendar.DAY_OF_YEAR) - current.get(Calendar.DAY_OF_YEAR) <= minDate) {
                 minDate = date.get(Calendar.DAY_OF_YEAR) - current.get(Calendar.DAY_OF_YEAR)
                 minIndex = i
             }
         }
-        return if (minIndex > 0) days[minIndex] else null
+        return if (minIndex >= 0) days[minIndex] else null
     }
 }

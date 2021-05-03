@@ -175,101 +175,13 @@
                 android:layout_marginTop="@dimen/paddingMax"
                 android:layout_width="match_parent"
                 android:layout_height="196dp"/>
-            <LinearLayout
-                android:layout_marginTop="@dimen/paddingMax"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSchedules"
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="@dimen/paddingMax"
-                android:paddingLeft="@dimen/paddingMax"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        app:srcCompat="@drawable/ic_ellipse"
-                        android:tint="@color/colorPrimary"
-                        tools:ignore="UseAppTint" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/paddingMin"
-                        android:textSize="@dimen/textButton"
-                        android:textColor="@color/colorTextPrimary"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/settings_select_group"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="end"
-                        android:layout_marginLeft="@dimen/paddingMin"
-                        android:textSize="@dimen/textButton"
-                        android:textColor="@color/colorPrimary"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="40KB"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="@dimen/paddingMid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        app:srcCompat="@drawable/ic_ellipse"
-                        app:tint="@color/colorDiagram2" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/paddingMin"
-                        android:textSize="@dimen/textButton"
-                        android:textColor="@color/colorTextPrimary"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/settings_select_group"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="end"
-                        android:layout_marginLeft="@dimen/paddingMin"
-                        android:textSize="@dimen/textButton"
-                        android:textColor="@color/colorPrimary"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="40KB"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="@dimen/paddingMid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        app:srcCompat="@drawable/ic_ellipse"
-                        app:tint="@color/colorDiagram1" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/paddingMin"
-                        android:textSize="@dimen/textButton"
-                        android:textColor="@color/colorTextPrimary"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/settings_select_group"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="end"
-                        android:layout_marginLeft="@dimen/paddingMin"
-                        android:textSize="@dimen/textButton"
-                        android:textColor="@color/colorPrimary"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="40KB"/>
-                </LinearLayout>
-            </LinearLayout>
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="8dp"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

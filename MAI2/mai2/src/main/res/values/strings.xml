@@ -77,7 +77,7 @@
     <string name="settings_mai_link">Перейти на сайт МАИ</string>
 
     <string name="settings_diagram_text">Устройство</string>
-    <string name="settings_diagram_kb">KB</string>
+    <string name="settings_diagram_kb">%1$d KB</string>
     <string name="settings_app_id">ID устройства:</string>
     <string name="settings_description_title">Информация о приложении:</string>
     <string name="settings_description">Неофициальное приложение МАИ, написанное студентом для студентов, чтоб облегчить доступ к расписанию и другой информации. Вся информация загружается один раз и потом доступна без доступа в интернет.</string>

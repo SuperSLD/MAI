@@ -1,5 +1,6 @@
 package com.raspisanie.mai.extesions.mappers
 
+import com.google.gson.Gson
 import com.raspisanie.mai.extesions.getUUID
 import com.raspisanie.mai.extesions.toRealmList
 import com.raspisanie.mai.models.local.*
@@ -71,12 +72,16 @@ fun WeekRealm.toLocal() = WeekLocal(
 fun MutableList<WeekResponse>.toRealm(groupId: String) = ScheduleRealm(
         groupId = groupId,
         weeks = this.map { it.toRealm() }.toRealmList(),
-        lastUpdate = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
+        lastUpdate = Calendar.getInstance().get(Calendar.DAY_OF_YEAR),
+        size = Gson().toJson(this).toByteArray(Charsets.UTF_8).size/1024
 )
 
 fun RealmList<WeekRealm>.toLocalWeeks() = this.map { it.toLocal() }.toMutableList()
 
 fun ScheduleRealm.toLocal() = ScheduleLocal(
         groupId = groupId!!,
-        weeks = weeks?.toLocalWeeks()!!
+        weeks = weeks?.toLocalWeeks()!!,
+        size = size
 )
+
+fun MutableList<ScheduleRealm>.toLocal() = this.map { it.toLocal() }.toMutableList()

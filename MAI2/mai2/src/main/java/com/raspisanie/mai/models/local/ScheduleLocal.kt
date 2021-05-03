@@ -10,6 +10,7 @@ import java.util.*
 @Parcelize
 data class ScheduleLocal(
         var groupId: String,
+        var size: Int,
         var weeks: MutableList<WeekLocal>
 ): Parcelable {
     /**

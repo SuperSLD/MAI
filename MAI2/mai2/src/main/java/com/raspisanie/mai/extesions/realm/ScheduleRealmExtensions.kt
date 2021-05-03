@@ -17,6 +17,10 @@ fun Realm.getCurrentSchedule(): ScheduleRealm? {
             .findFirst()
 }
 
+fun Realm.getAllSchedules(): MutableList<ScheduleRealm> {
+    return where(ScheduleRealm::class.java).findAll()
+}
+
 fun Realm.clearScheduleForCurrentGroup() {
     executeTransaction {
         getCurrentSchedule()?.deleteFromRealm()

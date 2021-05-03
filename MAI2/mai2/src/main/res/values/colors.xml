@@ -26,8 +26,15 @@
     <color name="colorButtonDisabled">#C8C7CC</color>
 
     <!-- Diagram -->
-    <color name="colorDiagram2">#ACD7FF</color>
-    <color name="colorDiagram1">#2579C6</color>
+    <color name="colorDiagram1">#ACD7FF</color>
+    <color name="colorDiagram2">#2579C6</color>
+    <color name="colorDiagram3">#C7ACFF</color>
+    <color name="colorDiagram4">#8C72FF</color>
+    <color name="colorDiagram5">#EA91FF</color>
+    <color name="colorDiagram6">#075093</color>
+    <color name="colorDiagram7">#6163C5</color>
+    <color name="colorDiagram8">#EC73CA</color>
+
 
     <!-- Border -->
     <color name="colorBorder">#E1E1E1</color>

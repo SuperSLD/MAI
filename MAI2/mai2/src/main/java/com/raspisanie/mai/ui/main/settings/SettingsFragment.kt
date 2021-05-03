@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.R
+import com.raspisanie.mai.extesions.firstItems
 import com.raspisanie.mai.extesions.getIsDayTheme
 import com.raspisanie.mai.extesions.openWebLink
 import com.raspisanie.mai.extesions.saveIsDayTheme
+import com.raspisanie.mai.models.local.ScheduleLocal
 import com.raspisanie.mai.models.realm.GroupRealm
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_info.view.*
@@ -24,11 +26,26 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
     @InjectPresenter
     lateinit var presenter: SettingsPresenter
 
+    private val colors by lazy { arrayListOf(
+            ContextCompat.getColor(context!!, R.color.colorPrimary),
+            ContextCompat.getColor(context!!, R.color.colorDiagram1),
+            ContextCompat.getColor(context!!, R.color.colorDiagram2),
+            ContextCompat.getColor(context!!, R.color.colorDiagram3),
+            ContextCompat.getColor(context!!, R.color.colorDiagram4),
+            ContextCompat.getColor(context!!, R.color.colorDiagram5),
+            ContextCompat.getColor(context!!, R.color.colorDiagram6),
+            ContextCompat.getColor(context!!, R.color.colorDiagram7),
+            ContextCompat.getColor(context!!, R.color.colorDiagram8)
+        )
+    }
+
     private val adapter by lazy { GroupsListAdapter(
             presenter::select,
             presenter::remove,
             context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     ) }
+
+    private val adapterSchedule by lazy { ScheduleListAdapter(colors) }
 
     @SuppressLint("SetTextI18n")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -48,27 +65,8 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
-        }
-
-        with(diagramView) {
-            setCenterText(resources.getString(R.string.settings_diagram_text))
-            setCenterSubText("421 ${resources.getString(R.string.settings_diagram_kb)}")
-
-            setColorText(
-                    ContextCompat.getColor(context, R.color.colorPrimary),
-                    ContextCompat.getColor(context, R.color.colorTextSecondary)
-            )
-
-            setData(
-                    arrayListOf(34f, 54f, 10f),
-                    arrayListOf(
-                            ContextCompat.getColor(context, R.color.colorPrimary),
-                            ContextCompat.getColor(context, R.color.colorDiagram2),
-                            ContextCompat.getColor(context, R.color.colorDiagram1)
-                    )
-            )
-            refresh()
-            setOnClickListener { refresh() }
+            activity?.window?.setWindowAnimations(R.style.WindowAnimationTransition)
+            activity?.recreate()
         }
 
         btnAdd.setOnClickListener {
@@ -78,6 +76,11 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
         tvVersion.text = "${BuildConfig.VERSION_NAME} - ${BuildConfig.VERSION_CODE}"
         with(rvGroups) {
             adapter = this@SettingsFragment.adapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
+        with(rvSchedules) {
+            adapter = this@SettingsFragment.adapterSchedule
             layoutManager = LinearLayoutManager(context)
         }
     }
@@ -114,6 +117,34 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
 
     override fun onBackPressed() {
         presenter.back()
+    }
+
+    /**
+     * Составляем инфу для диаграммы.
+     * Достаточно тяжелый процесс.
+     *
+     * todo нужно проверить все вызываемые методы,
+     *      и доделаьб в них кэширование.
+     */
+    override fun showScheduleInfo(list: MutableList<ScheduleLocal>, groups: MutableList<GroupRealm>) {
+        val firstItems = list.firstItems(colors.size)
+        with(diagramView) {
+            setCenterText(resources.getString(R.string.settings_diagram_text))
+            setCenterSubText(resources.getString(R.string.settings_diagram_kb, list.sumBy { it.size }))
+
+            setColorText(
+                    ContextCompat.getColor(context, R.color.colorPrimary),
+                    ContextCompat.getColor(context, R.color.colorTextSecondary)
+            )
+
+            setData(
+                    firstItems.map { it.size.toFloat() }.toMutableList(),
+                    colors
+            )
+            refresh()
+            setOnClickListener { refresh() }
+        }
+        adapterSchedule.addAll(firstItems, groups)
     }
 
     override fun showCurrentGroup(group: GroupRealm) {

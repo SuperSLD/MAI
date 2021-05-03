@@ -6,6 +6,7 @@ import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.mappers.toRealm
 import com.raspisanie.mai.models.server.*
 import junit.framework.Assert
+import junit.framework.Assert.assertEquals
 import online.jutter.supersld.JTStateMachine
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,7 +18,7 @@ class WeekTest {
     fun goToState() {
         val weekResponse = WeekResponse(
                 number = 1,
-                date = "09.03.2021",
+                date = "09.03.2021 - 16.03.2021",
                 days = mutableListOf(
                         DayResponse(
                                 id = getUUID(),
@@ -104,5 +105,7 @@ class WeekTest {
 
         val weekRealm = weekResponse.toRealm()
         val weekLocal = weekRealm.toLocal()
+
+        //assertEquals(0, stateMachine.getCurrentState())
     }
 }

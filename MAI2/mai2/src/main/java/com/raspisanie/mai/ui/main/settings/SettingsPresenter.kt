@@ -8,9 +8,8 @@ import com.raspisanie.mai.common.base.BottomSheetDialogController
 import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.controllers.BottomVisibilityController
 import com.raspisanie.mai.controllers.ConfirmController
-import com.raspisanie.mai.extesions.realm.getAllGroup
-import com.raspisanie.mai.extesions.realm.getCurrentGroup
-import com.raspisanie.mai.extesions.realm.updateGroup
+import com.raspisanie.mai.extesions.mappers.toLocal
+import com.raspisanie.mai.extesions.realm.*
 import com.raspisanie.mai.models.realm.GroupRealm
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -36,6 +35,7 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
         bottomVisibilityController.show()
         showCurrentGroup()
         showGroupsList()
+        showScheduleInfo()
         listenConfirm()
     }
 
@@ -59,6 +59,10 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
         realm.getCurrentGroup()?.let { viewState.showCurrentGroup(it) }
     }
 
+    private fun showScheduleInfo() {
+        viewState.showScheduleInfo(realm.getAllSchedules().toLocal(), realm.getAllGroup())
+    }
+
     private fun listenConfirm() {
         confirmController.state
                 .observeOn(AndroidSchedulers.mainThread())
@@ -68,6 +72,7 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
                             if (confirm) {
                                 lastDeletedGroup?.let { it -> viewState.removeGroup(it) }
                                 lastDeletedGroup = null
+                                showScheduleInfo()
                             }
                         },
                         {
