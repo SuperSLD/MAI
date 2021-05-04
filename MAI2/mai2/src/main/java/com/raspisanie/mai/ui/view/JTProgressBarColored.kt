@@ -6,6 +6,12 @@ import androidx.core.content.ContextCompat
 import com.raspisanie.mai.R
 import online.juter.supersld.view.JTProgressBar
 
+/**
+ * Переопределяем [JTProgressBar], чтобы изменить
+ * дефолтные цвета которые выставляются при инициализации.
+ *
+ * Это избавит от необходимочти переопределять цвета при кажлом вызове.
+ */
 class JTProgressBarColored : JTProgressBar {
     constructor(context: Context) : super(context)
 

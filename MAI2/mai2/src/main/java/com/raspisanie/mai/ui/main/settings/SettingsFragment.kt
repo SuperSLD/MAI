@@ -1,4 +1,5 @@
 package com.raspisanie.mai.ui.main.settings
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
@@ -21,7 +22,13 @@ import pro.midev.supersld.common.base.BaseFragment
 import pro.midev.supersld.extensions.addSystemTopPadding
 import timber.log.Timber
 
+
 class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView {
+
+    companion object {
+        const val RESTORE_POSITION = "arg_restore_position"
+        const val SAVED_POSITION = "arg_saved_position"
+    }
 
     @InjectPresenter
     lateinit var presenter: SettingsPresenter
@@ -51,13 +58,19 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        if (savedInstanceState?.getBoolean(RESTORE_POSITION) != null
+                && savedInstanceState.getBoolean(RESTORE_POSITION)) {
+            savedInstanceState.putBoolean(RESTORE_POSITION, false)
+            nested.scrollY = savedInstanceState.getInt(SAVED_POSITION)
+        }
+
+
         scrollingContent.addSystemTopPadding()
         scrollingContent.addSystemTopPadding()
 
         setView()
 
         swEnabled.isChecked = !context?.getIsDayTheme()!!
-
         swEnabled.setOnCheckedChangeListener { _, checked ->
             context?.saveIsDayTheme(!checked)
             if (!checked) {
@@ -65,8 +78,10 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
-            activity?.window?.setWindowAnimations(R.style.WindowAnimationTransition)
+
             activity?.recreate()
+            savedInstanceState?.putBoolean(RESTORE_POSITION, true)
+            savedInstanceState?.putInt(SAVED_POSITION, nested.scrollY)
         }
 
         btnAdd.setOnClickListener {
