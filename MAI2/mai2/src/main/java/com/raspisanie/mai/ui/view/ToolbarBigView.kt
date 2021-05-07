@@ -65,9 +65,9 @@ class ToolbarBigView  : RelativeLayout {
      * Включение боковой кнопки.
      */
     fun enableAction() {
-        TV_actionTitle.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+        TV_actionTitle.setTextColor(ContextCompat.getColor(context, R.color.colorPrimarySecondary))
         TV_actionImage.setColorFilter(
-                ContextCompat.getColor(context, R.color.colorAccent),
+                ContextCompat.getColor(context, R.color.colorPrimarySecondary),
                 PorterDuff.Mode.SRC_IN
         )
         TV_action.setOnClickListener { action!!.action() }

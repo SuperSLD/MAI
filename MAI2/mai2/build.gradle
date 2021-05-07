@@ -97,5 +97,5 @@ dependencies {
     implementation 'online.jutter.supersld:diffcycler:1.0.013'
     implementation 'online.jutter.supersld:jt_state_machine:1.0.002'
     implementation 'online.jutter.supersld:midev_core:1.1.4'
-    implementation 'online.jutter.supersld:jutter_ui_kit:1.2.0'
+    implementation 'online.jutter.supersld:jutter_ui_kit:1.2.2'
 }

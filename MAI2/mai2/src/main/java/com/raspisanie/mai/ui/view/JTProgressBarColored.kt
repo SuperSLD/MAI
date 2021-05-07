@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
 import com.raspisanie.mai.R
-import online.juter.supersld.view.JTProgressBar
+import online.juter.supersld.view.data.JTProgressBar
 
 /**
  * Переопределяем [JTProgressBar], чтобы изменить

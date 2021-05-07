@@ -51,7 +51,7 @@
                             android:id="@+id/TV_actionImage"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:tint="@color/colorAccent"
+                            android:tint="@color/colorPrimarySecondary"
                             tools:ignore="UseAppTint" />
                         <TextView
                             android:id="@+id/TV_actionTitle"
@@ -59,7 +59,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="13sp"
                             android:fontFamily="@font/roboto_regular"
-                            android:textColor="@color/colorAccent"/>
+                            android:textColor="@color/colorPrimarySecondary"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

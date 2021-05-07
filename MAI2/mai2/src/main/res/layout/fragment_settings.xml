@@ -171,7 +171,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <online.juter.supersld.view.JTDiagram
+            <online.juter.supersld.view.data.JTDiagram
                 android:id="@+id/diagramView"
                 android:layout_marginTop="@dimen/paddingMax"
                 android:layout_width="match_parent"
