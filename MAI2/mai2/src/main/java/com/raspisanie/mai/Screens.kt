@@ -10,6 +10,10 @@ import com.raspisanie.mai.ui.main.info.FlowInfoFragment
 import com.raspisanie.mai.ui.main.info.InfoFragment
 import com.raspisanie.mai.ui.main.info.campus_map.CampusMapFragment
 import com.raspisanie.mai.ui.main.info.canteens.CanteensFragment
+import com.raspisanie.mai.ui.main.info.creative.CreativeFragment
+import com.raspisanie.mai.ui.main.info.library.LibraryFragment
+import com.raspisanie.mai.ui.main.info.sport.SportFragment
+import com.raspisanie.mai.ui.main.info.students.StudentsFragment
 import com.raspisanie.mai.ui.main.settings.FlowSettingsFragment
 import com.raspisanie.mai.ui.main.settings.SettingsFragment
 import com.raspisanie.mai.ui.main.settings.add_group.AddGroupFragment
@@ -75,6 +79,22 @@ object Screens {
 
     object Canteens: SupportAppScreen() {
         override fun getFragment(): Fragment? = CanteensFragment()
+    }
+
+    object Library: SupportAppScreen() {
+        override fun getFragment(): Fragment? = LibraryFragment()
+    }
+
+    object Sport: SupportAppScreen() {
+        override fun getFragment(): Fragment? = SportFragment()
+    }
+
+    object Students: SupportAppScreen() {
+        override fun getFragment(): Fragment? = StudentsFragment()
+    }
+
+    object Creative: SupportAppScreen() {
+        override fun getFragment(): Fragment? = CreativeFragment()
     }
 
     /** Экзаменационный роутер */
