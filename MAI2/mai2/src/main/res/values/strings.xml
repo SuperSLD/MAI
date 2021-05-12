@@ -97,4 +97,7 @@
     <string name="settings_feedback_message">Опишите проблемму с которой вы столкнулись</string>
     <string name="settings_feedback_send">Отправить</string>
     <string name="settings_feedback_toolbar">Поддержка</string>
+    <string name="settings_feedback_success_text">Ваше обращение принято в обработку, и мы постраемся ответить на него как можно скорее</string>
+    <string name="settings_feedback_success_button">Хорошо!</string>
+    <string name="settings_info_students_text">Адрес:</string>
 </resources>

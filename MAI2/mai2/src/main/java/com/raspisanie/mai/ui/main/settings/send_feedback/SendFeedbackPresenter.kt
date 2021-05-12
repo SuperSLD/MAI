@@ -3,6 +3,7 @@ package com.raspisanie.mai.ui.main.settings.send_feedback
 import android.content.Context
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.R
+import com.raspisanie.mai.Screens
 import com.raspisanie.mai.common.enums.ToastType
 import com.raspisanie.mai.controllers.ShowToastController
 import com.raspisanie.mai.models.server.FeedbackBody
@@ -40,7 +41,7 @@ class SendFeedbackPresenter : BasePresenter<SendFeedbackView>() {
                     Timber.e(it)
                 }
                 .doOnSuccess {
-                    back()
+                    router?.replaceScreen(Screens.Success)
                 }
                 .subscribe()
                 .connect()
