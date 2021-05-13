@@ -23,6 +23,18 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), MvpView {
         lCanteen.setOnClickListener {
             presenter.openCanteens()
         }
+        lLibrary.setOnClickListener {
+            presenter.openLibrary()
+        }
+        lSport.setOnClickListener {
+            presenter.openSport()
+        }
+        lStudents.setOnClickListener {
+            presenter.openStudents()
+        }
+        lCreative.setOnClickListener {
+            presenter.openCreative()
+        }
 
         setView()
     }

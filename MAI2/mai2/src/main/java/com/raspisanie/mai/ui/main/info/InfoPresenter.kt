@@ -21,6 +21,10 @@ class InfoPresenter : BasePresenter<MvpView>() {
 
     fun openCampusMap() = router?.navigateTo(Screens.CampusMap)
     fun openCanteens() = router?.navigateTo(Screens.Canteens)
+    fun openLibrary() = router?.navigateTo(Screens.Library)
+    fun openSport() = router?.navigateTo(Screens.Sport)
+    fun openStudents() = router?.navigateTo(Screens.Students)
+    fun openCreative() = router?.navigateTo(Screens.Creative)
 
     fun back() {
         router?.exit()

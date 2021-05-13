@@ -10,10 +10,15 @@ import com.raspisanie.mai.ui.main.info.FlowInfoFragment
 import com.raspisanie.mai.ui.main.info.InfoFragment
 import com.raspisanie.mai.ui.main.info.campus_map.CampusMapFragment
 import com.raspisanie.mai.ui.main.info.canteens.CanteensFragment
+import com.raspisanie.mai.ui.main.info.creative.CreativeFragment
+import com.raspisanie.mai.ui.main.info.library.LibraryFragment
+import com.raspisanie.mai.ui.main.info.sport.SportFragment
+import com.raspisanie.mai.ui.main.info.students.StudentsFragment
 import com.raspisanie.mai.ui.main.settings.FlowSettingsFragment
 import com.raspisanie.mai.ui.main.settings.SettingsFragment
 import com.raspisanie.mai.ui.main.settings.add_group.AddGroupFragment
 import com.raspisanie.mai.ui.main.settings.send_feedback.SendFeedbackFragment
+import com.raspisanie.mai.ui.main.settings.send_feedback.success.SuccessFragment
 import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
 import com.raspisanie.mai.ui.main.timetble.TimetableFragment
 import com.raspisanie.mai.ui.main.timetble.select_number.SelectNumberFragment
@@ -77,6 +82,22 @@ object Screens {
         override fun getFragment(): Fragment? = CanteensFragment()
     }
 
+    object Library: SupportAppScreen() {
+        override fun getFragment(): Fragment? = LibraryFragment()
+    }
+
+    object Sport: SupportAppScreen() {
+        override fun getFragment(): Fragment? = SportFragment()
+    }
+
+    object Students: SupportAppScreen() {
+        override fun getFragment(): Fragment? = StudentsFragment()
+    }
+
+    object Creative: SupportAppScreen() {
+        override fun getFragment(): Fragment? = CreativeFragment()
+    }
+
     /** Экзаменационный роутер */
 
     object FlowExams : SupportAppScreen() {
@@ -117,5 +138,9 @@ object Screens {
 
     object Feedback: SupportAppScreen() {
         override fun getFragment(): Fragment? = SendFeedbackFragment()
+    }
+
+    object Success: SupportAppScreen() {
+        override fun getFragment(): Fragment? = SuccessFragment()
     }
 }
