@@ -111,6 +111,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
      * Загрузка расписания из реалма по выбранной неделе.
      */
     private fun showWeekByCurrent() {
+        viewState.toggleLoading(false)
         currentSchedule = realm.getCurrentSchedule()?.toLocal()
         viewState.shoWeek(
                 when(currentWeek) {
