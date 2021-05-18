@@ -45,6 +45,14 @@ fun <T> MutableList<T>.firstItems(count: Int): MutableList<T> {
 }
 
 /**
+ * Duplicate any model for test.
+ * @param count - size new list
+ */
+fun <T> T.toList(count: Int): MutableList<T> = mutableListOf<T>().apply {
+    for (i in 0 until count) this.add(this@toList)
+}
+
+/**
  * Получение UUID строки.
  */
 fun getUUID(): String {

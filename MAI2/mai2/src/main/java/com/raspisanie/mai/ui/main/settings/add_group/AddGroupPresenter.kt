@@ -12,6 +12,7 @@ import com.raspisanie.mai.extesions.saveAuthState
 import com.raspisanie.mai.models.realm.GroupRealm
 import com.raspisanie.mai.server.ApiService
 import com.raspisanie.mai.ui.select_group.select_group.SelectGroupView
+import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.realm.Realm
@@ -33,9 +34,15 @@ class AddGroupPresenter : BasePresenter<SelectGroupView>() {
         bottomVisibilityController.hide()
     }
 
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        YandexMetrica.reportEvent("OpenAddGroup")
+    }
+
     fun select(group: GroupRealm) {
         if (realm.getCurrentGroup()?.id != group.id) {
             group.selected = false
+            YandexMetrica.reportEvent("AddGroupSuccess")
             realm.updateGroup(group)
         }
         back()

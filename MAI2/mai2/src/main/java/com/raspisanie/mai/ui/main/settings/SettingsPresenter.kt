@@ -11,6 +11,7 @@ import com.raspisanie.mai.controllers.ConfirmController
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.realm.*
 import com.raspisanie.mai.models.realm.GroupRealm
+import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.realm.Realm
@@ -30,6 +31,11 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     private val confirmController: ConfirmController by inject()
     private val bottomSheetDialogController: BottomSheetDialogController by inject()
 
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        YandexMetrica.reportEvent("OpenSettings")
+    }
+
     override fun attachView(view: SettingsView?) {
         super.attachView(view)
         bottomVisibilityController.show()
@@ -40,6 +46,7 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     }
 
     fun select(group: GroupRealm) {
+        YandexMetrica.reportEvent("SelectGroupInSettings")
         Timber.d(group.id)
         showCurrentGroup()
     }

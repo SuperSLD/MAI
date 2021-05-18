@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
+import com.yandex.metrica.YandexMetrica
 import kotlinx.android.synthetic.main.fragment_feedback.*
 import kotlinx.android.synthetic.main.layout_loading.*
 import pro.midev.supersld.common.base.BaseFragment
@@ -29,6 +30,7 @@ class SendFeedbackFragment : BaseFragment(R.layout.fragment_feedback), SendFeedb
             override fun afterTextChanged(s: Editable?) {}
         }
         btnSend.setOnClickListener {
+            YandexMetrica.reportEvent("SendFeedbackClick")
             presenter.sendFeedback(
                     name = etName.text.toString(),
                     email = etEmail.text.toString(),
@@ -37,6 +39,7 @@ class SendFeedbackFragment : BaseFragment(R.layout.fragment_feedback), SendFeedb
         }
 
         btnCancel.setOnClickListener {
+            YandexMetrica.reportEvent("SendFeedbackCancel")
             presenter.back()
         }
 
@@ -48,11 +51,13 @@ class SendFeedbackFragment : BaseFragment(R.layout.fragment_feedback), SendFeedb
     }
 
     override fun onBackPressed() {
+        YandexMetrica.reportEvent("SendFeedbackCancel")
         presenter.back()
     }
 
     private fun checkData() {
-        btnSend.isEnabled = etEmail.text.isNotEmpty() && etMessage.text.toString().isNotEmpty() && etName.text.isNotEmpty()
+        val valid = etEmail.text.isNotEmpty() && etMessage.text.toString().isNotEmpty() && etName.text.isNotEmpty()
+        btnSend.isEnabled = valid
     }
 
     override fun showErrorLoading() {}

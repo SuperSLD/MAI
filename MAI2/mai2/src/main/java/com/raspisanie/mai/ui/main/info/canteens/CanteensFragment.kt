@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
+import com.raspisanie.mai.extesions.toList
 import com.raspisanie.mai.models.realm.CanteenLocal
 import kotlinx.android.synthetic.main.fragment_canteens.*
 import kotlinx.android.synthetic.main.fragment_canteens.vToolbar
@@ -37,43 +38,11 @@ class CanteensFragment : BaseFragment(R.layout.fragment_canteens), MvpView {
 
     private fun createList(): MutableList<CanteenLocal> {
         //TODO Убрать как будет апи и взять список с сайта
-        return mutableListOf(
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                )
-        )
+        return CanteenLocal(
+                name = "Столовая 1",
+                location = "Дубосековская 1 к2",
+                time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
+        ).toList(9999)
     }
 
     override fun onBackPressed() {
