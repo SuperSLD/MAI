@@ -101,6 +101,9 @@ dependencies {
     implementation 'online.jutter.supersld:midev_core:1.1.4'
     implementation 'online.jutter.supersld:jutter_ui_kit:1.2.2'
 
+    // фото со скролом
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
     // Yandex метрика
     implementation 'com.yandex.android:mobmetricalib:3.20.1'
 }

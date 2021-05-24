@@ -39,6 +39,8 @@ class CanteensAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 tvTitle.text = canteen.name
                 tvLocation.text = canteen.location
                 tvTime.text = canteen.time
+
+                tvTitle.requestLayout()
             }
         }
     }

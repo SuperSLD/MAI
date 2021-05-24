@@ -12,11 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.raspisanie.mai.Activity.LibraryActivity;
-import com.raspisanie.mai.Activity.CreativGroupActivity;
-import com.raspisanie.mai.Activity.CanteenActivity;
-import com.raspisanie.mai.Activity.SportGroupActivity;
-import com.raspisanie.mai.Activity.StudOrgActivity;
+import com.raspisanie.mai.Activity.*;
 
 import com.raspisanie.mai.R;
 
@@ -43,10 +39,10 @@ public class InformationFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_information, null);
 
-        /*view.findViewById(R.id.button0).setOnClickListener(v -> {
+        view.findViewById(R.id.button0).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), CampusMapActivity.class);
             startActivity(intent);
-        });*/
+        });
         view.findViewById(R.id.button1).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getBaseContext(), CanteenActivity.class);
             startActivity(intent);

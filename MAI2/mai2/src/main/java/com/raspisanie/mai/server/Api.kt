@@ -1,6 +1,7 @@
 package com.raspisanie.mai.server
 
 import com.raspisanie.mai.models.DataWrapper
+import com.raspisanie.mai.models.server.CanteenResponse
 import com.raspisanie.mai.models.server.FeedbackBody
 import com.raspisanie.mai.models.server.GroupResponse
 import com.raspisanie.mai.models.server.WeekResponse
@@ -20,4 +21,7 @@ interface Api {
 
     @POST("feedback/send")
     fun sendFeedback(@Body body: FeedbackBody) : Single<DataWrapper<Any?>>
+
+    @GET("canteens/all")
+    fun getCanteens() : Single<DataWrapper<MutableList<CanteenResponse>>>
 }
