@@ -16,6 +16,7 @@ import com.raspisanie.mai.extesions.realm.updateSchedule
 import com.raspisanie.mai.models.local.ScheduleLocal
 import com.raspisanie.mai.models.realm.ScheduleRealm
 import com.raspisanie.mai.server.ApiService
+import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.realm.Realm
@@ -46,6 +47,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
         super.onFirstViewAttach()
         listenWeekNumber()
         loadFromRealm()
+        YandexMetrica.reportEvent("OpenTimetable")
     }
 
     /**
@@ -111,6 +113,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
      * Загрузка расписания из реалма по выбранной неделе.
      */
     private fun showWeekByCurrent() {
+        viewState.toggleLoading(false)
         currentSchedule = realm.getCurrentSchedule()?.toLocal()
         viewState.shoWeek(
                 when(currentWeek) {
@@ -147,6 +150,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
      * а затем прибавление номера.
      */
     private fun nextWeek() {
+        YandexMetrica.reportEvent("ClickNextWeek")
         if (currentWeek < 0) {
             currentWeek = currentSchedule?.getCurrentWeek()?.number!!
         }

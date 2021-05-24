@@ -3,7 +3,10 @@ package com.raspisanie.mai
 import androidx.appcompat.app.AppCompatDelegate
 import com.raspisanie.mai.di.appModule
 import com.raspisanie.mai.extesions.getIsDayTheme
+import com.yandex.metrica.YandexMetrica
+import com.yandex.metrica.YandexMetricaConfig
 import pro.midev.supersld.AppBase
+
 
 class App : AppBase(appModule = appModule) {
     override fun onCreate() {
@@ -15,5 +18,15 @@ class App : AppBase(appModule = appModule) {
                     AppCompatDelegate.MODE_NIGHT_YES
                 }
         )
+        initYandex()
+    }
+
+    private fun initYandex() {
+        // Creating an extended library configuration.
+        val config = YandexMetricaConfig.newConfigBuilder(BuildConfig.YANDEX_KEY).build()
+        // Initializing the AppMetrica SDK.
+        YandexMetrica.activate(applicationContext, config)
+        // Automatic tracking of user activity.
+        YandexMetrica.enableActivityAutoTracking(this)
     }
 }

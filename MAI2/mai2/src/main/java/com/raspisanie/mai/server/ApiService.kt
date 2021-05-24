@@ -9,4 +9,6 @@ class ApiService(private var api: Api) {
     fun getSchedule(id: String) = api.getSchedule(id)
 
     fun sendFeedback(body: FeedbackBody) = api.sendFeedback(body)
+
+    fun getCanteens() = api.getCanteens()
 }

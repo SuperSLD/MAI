@@ -15,4 +15,7 @@
         android:paddingTop="@dimen/paddingMid"
         android:clipToPadding="false"/>
 
+    <include
+        layout="@layout/layout_loading"/>
+
 </LinearLayout>

@@ -8,6 +8,7 @@ import com.raspisanie.mai.common.enums.ToastType
 import com.raspisanie.mai.controllers.ShowToastController
 import com.raspisanie.mai.models.server.FeedbackBody
 import com.raspisanie.mai.server.ApiService
+import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.koin.core.inject
@@ -20,6 +21,11 @@ class SendFeedbackPresenter : BasePresenter<SendFeedbackView>() {
     private val showToastController: ShowToastController by inject()
     private val service: ApiService by inject()
     private val context: Context by inject()
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        YandexMetrica.reportEvent("OpenSendFeedback")
+    }
 
     fun sendFeedback(
             name: String,

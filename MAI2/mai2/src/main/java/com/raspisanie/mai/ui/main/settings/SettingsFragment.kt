@@ -16,6 +16,7 @@ import com.raspisanie.mai.extesions.openWebLink
 import com.raspisanie.mai.extesions.saveIsDayTheme
 import com.raspisanie.mai.models.local.ScheduleLocal
 import com.raspisanie.mai.models.realm.GroupRealm
+import com.yandex.metrica.YandexMetrica
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_info.view.*
 import pro.midev.supersld.common.base.BaseFragment
@@ -78,6 +79,8 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
+
+            YandexMetrica.reportEvent("ChangeTheme")
 
             activity?.recreate()
             savedInstanceState?.putBoolean(RESTORE_POSITION, true)
@@ -157,7 +160,10 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
                     colors
             )
             refresh()
-            setOnClickListener { refresh() }
+            setOnClickListener {
+                YandexMetrica.reportEvent("ClickOnDiagram")
+                refresh()
+            }
         }
         adapterSchedule.addAll(firstItems, groups)
     }

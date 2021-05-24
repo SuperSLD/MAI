@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
-    <com.raspisanie.mai.ui.view.JTProgressBarColored
-        android:id="@+id/loader"
-        android:layout_width="150dp"
-        android:layout_height="150dp"/>
+    <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/vPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/map"
+            android:padding="24dp"/>
 
-</LinearLayout>
+    <FrameLayout
+            android:id="@+id/vgButtonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardElevation="16dp"
+                app:cardCornerRadius="25dp"
+                android:layout_margin="16dp">
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:layout_gravity="center"
+                    app:tint="@color/colorPrimarySecondary"/>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+
+</FrameLayout>

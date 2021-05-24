@@ -6,6 +6,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import kotlinx.android.synthetic.main.fragment_campus_map.*
 import pro.midev.supersld.common.base.BaseFragment
+import pro.midev.supersld.extensions.addSystemTopAndBottomPadding
+import pro.midev.supersld.extensions.addSystemTopPadding
 
 class CampusMapFragment : BaseFragment(R.layout.fragment_campus_map), MvpView {
 
@@ -14,7 +16,10 @@ class CampusMapFragment : BaseFragment(R.layout.fragment_campus_map), MvpView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        loader.setWidthPart(0.03f)
+
+        cvBack.setOnClickListener { onBackPressed() }
+        vgButtonContainer.addSystemTopPadding()
+        vPhoto.addSystemTopAndBottomPadding()
     }
 
     override fun onBackPressed() {

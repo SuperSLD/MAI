@@ -6,6 +6,7 @@ import com.raspisanie.mai.controllers.BottomVisibilityController
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.realm.getCurrentSchedule
 import com.raspisanie.mai.ui.main.timetble.TimetablePresenter
+import com.yandex.metrica.YandexMetrica
 import io.realm.Realm
 import org.koin.core.inject
 import pro.midev.supersld.common.base.BasePresenter
@@ -20,6 +21,11 @@ class ExamsPresenter : BasePresenter<ExamsView>() {
         super.attachView(view)
         bottomVisibilityController.show()
         viewState.showExams(realm.getCurrentSchedule()?.toLocal()?.extractExams())
+    }
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        YandexMetrica.reportEvent("OpenExams")
     }
 
     /**

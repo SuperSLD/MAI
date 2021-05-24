@@ -13,6 +13,7 @@ import com.raspisanie.mai.extesions.realm.updateGroup
 import com.raspisanie.mai.extesions.saveAuthState
 import com.raspisanie.mai.models.realm.GroupRealm
 import com.raspisanie.mai.server.ApiService
+import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.realm.Realm
@@ -38,9 +39,11 @@ class SelectNumberPresenter(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.showList(realm.getCurrentSchedule()?.toLocal()?.weeks)
+        YandexMetrica.reportEvent("OpenSelectWeekNumber")
     }
 
     fun select(number: Int) {
+        YandexMetrica.reportEvent("ClickWeekNumber")
         selectWeekController.select(number)
         back()
     }

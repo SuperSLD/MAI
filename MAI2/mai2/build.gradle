@@ -23,10 +23,12 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai/api/"'
+            buildConfigField "String", "YANDEX_KEY", '"4c1a84e2-8cff-4897-933c-ac72f3d1b6de"'
             versionNameSuffix "-debug"
         }
         release {
             buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai/api/"'
+            buildConfigField "String", "YANDEX_KEY", '"4c1a84e2-8cff-4897-933c-ac72f3d1b6de"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.release
@@ -98,4 +100,10 @@ dependencies {
     implementation 'online.jutter.supersld:jt_state_machine:1.0.002'
     implementation 'online.jutter.supersld:midev_core:1.1.4'
     implementation 'online.jutter.supersld:jutter_ui_kit:1.2.2'
+
+    // фото со скролом
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    // Yandex метрика
+    implementation 'com.yandex.android:mobmetricalib:3.20.1'
 }

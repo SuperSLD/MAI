@@ -6,6 +6,7 @@ import com.raspisanie.mai.Screens
 import com.raspisanie.mai.extesions.getAuthState
 import com.raspisanie.mai.extesions.realm.getCurrentGroup
 import com.raspisanie.mai.extesions.saveAuthState
+import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -22,6 +23,7 @@ class SplashPresenter : BasePresenter<MvpView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        YandexMetrica.reportEvent("OpenApp")
         start()
     }
 

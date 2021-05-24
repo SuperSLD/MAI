@@ -1,17 +1,22 @@
 package com.raspisanie.mai.ui.main.info.canteens
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
+import com.raspisanie.mai.extesions.toList
 import com.raspisanie.mai.models.realm.CanteenLocal
+import com.yandex.metrica.impl.ob.V
+import com.yandex.metrica.impl.ob.Vi
 import kotlinx.android.synthetic.main.fragment_canteens.*
 import kotlinx.android.synthetic.main.fragment_canteens.vToolbar
+import kotlinx.android.synthetic.main.layout_loading.*
 import pro.midev.supersld.common.base.BaseFragment
 import pro.midev.supersld.extensions.addSystemBottomPadding
 
-class CanteensFragment : BaseFragment(R.layout.fragment_canteens), MvpView {
+class CanteensFragment : BaseFragment(R.layout.fragment_canteens), CanteensView {
 
     @InjectPresenter
     lateinit var presenter: CanteensPresenter
@@ -26,8 +31,6 @@ class CanteensFragment : BaseFragment(R.layout.fragment_canteens), MvpView {
                 back = {onBackPressed()}
         )
 
-        adapter.addAll(createList())
-
         with(rvCanteens) {
             addSystemBottomPadding()
             adapter = this@CanteensFragment.adapter
@@ -35,48 +38,26 @@ class CanteensFragment : BaseFragment(R.layout.fragment_canteens), MvpView {
         }
     }
 
-    private fun createList(): MutableList<CanteenLocal> {
-        //TODO Убрать как будет апи и взять список с сайта
-        return mutableListOf(
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                ),
-                CanteenLocal(
-                        name = "Столовая 1",
-                        location = "Дубосековская 1 к2",
-                        time = "Пн-Пт 12:00-16:00 Сб 7:00-23:45"
-                )
-        )
-    }
-
     override fun onBackPressed() {
         presenter.back()
+    }
+
+    override fun showList(mutableList: MutableList<CanteenLocal>) {
+        adapter.addAll(mutableList)
+    }
+
+    override fun showErrorLoading() {
+        vgError.visibility = View.VISIBLE
+        loading.visibility = View.GONE
+        rvCanteens.visibility = View.GONE
+        cvError.setOnClickListener {
+            presenter.loadList()
+        }
+    }
+
+    override fun toggleLoading(show: Boolean) {
+        vgError.visibility = View.GONE
+        loading.visibility = if (show) View.VISIBLE else View.GONE
+        rvCanteens.visibility = if (show) View.GONE else View.VISIBLE
     }
 }
