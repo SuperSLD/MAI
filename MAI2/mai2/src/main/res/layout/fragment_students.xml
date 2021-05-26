@@ -10,106 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:cardElevation="0dp"
-            android:layout_marginStart="34dp"
-            app:cardBackgroundColor="@color/colorPrimary">
-            app:strokeColor="@color/colorBorder"
-            app:strokeWidth="1dp"
-            app:cardCornerRadius="8px"
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_people_alt_24px_1"
-                />
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            app:cardElevation="0dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="34dp"
-            app:strokeColor="@color/colorBorder"
-            app:strokeWidth="1dp"
-            app:cardCornerRadius="8px"
-            >
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:padding="18dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/colorTextPrimary"
-            android:text="Волонтерский центр"
-            android:textSize="18sp"
-            android:layout_marginBottom="3dp"
-            />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/colorPrimary"
-                android:text="+7 916 372-71-35"
-                android:textSize="16sp"
-                />
-        </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-
-    </LinearLayout>
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="0dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginTop="11dp"
-        app:strokeColor="@color/colorBorder"
-        app:strokeWidth="1dp"
-        app:cardCornerRadius="8px">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:padding="18dp"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/colorTextSecondary"
-                android:text="@string/settings_info_students_text"
-                android:textSize="14sp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/colorTextPrimary"
-                android:text="Волоколамское ш., д. 4, корп. 20 (Гук зона А), комн.219"
-                android:textSize="14sp"
-                />
-        </LinearLayout>>
-    </com.google.android.material.card.MaterialCardView>
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCanteens"
+        android:id="@+id/rvStudents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="@dimen/paddingMid"
         android:clipToPadding="false"/>
-
+    <include
+        layout="@layout/layout_loading"/>
 </LinearLayout>

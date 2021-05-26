@@ -8,8 +8,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.toList
 import com.raspisanie.mai.models.realm.CanteenLocal
-import com.yandex.metrica.impl.ob.V
-import com.yandex.metrica.impl.ob.Vi
 import kotlinx.android.synthetic.main.fragment_canteens.*
 import kotlinx.android.synthetic.main.fragment_canteens.vToolbar
 import kotlinx.android.synthetic.main.layout_loading.*
