@@ -1,10 +1,7 @@
 package com.raspisanie.mai.server
 
 import com.raspisanie.mai.models.DataWrapper
-import com.raspisanie.mai.models.server.CanteenResponse
-import com.raspisanie.mai.models.server.FeedbackBody
-import com.raspisanie.mai.models.server.GroupResponse
-import com.raspisanie.mai.models.server.WeekResponse
+import com.raspisanie.mai.models.server.*
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -24,4 +21,7 @@ interface Api {
 
     @GET("canteens/all")
     fun getCanteens() : Single<DataWrapper<MutableList<CanteenResponse>>>
+
+    @GET("studorg/all")
+    fun getStudents() : Single<DataWrapper<MutableList<StudentOrganizationResponse>>>
 }

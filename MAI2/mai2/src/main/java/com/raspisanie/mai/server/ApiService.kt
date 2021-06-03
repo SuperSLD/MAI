@@ -11,4 +11,6 @@ class ApiService(private var api: Api) {
     fun sendFeedback(body: FeedbackBody) = api.sendFeedback(body)
 
     fun getCanteens() = api.getCanteens()
+
+    fun getStudents() = api.getStudents()
 }
