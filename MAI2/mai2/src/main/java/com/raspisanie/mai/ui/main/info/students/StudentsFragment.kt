@@ -9,11 +9,6 @@ import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.models.local.StudentOrganizationLocal
-import com.raspisanie.mai.models.realm.CanteenLocal
-import kotlinx.android.synthetic.main.fragment_campus_map.*
-import kotlinx.android.synthetic.main.fragment_canteens.*
-import kotlinx.android.synthetic.main.fragment_library.*
-import kotlinx.android.synthetic.main.fragment_library.rvCanteens
 import kotlinx.android.synthetic.main.fragment_library.vToolbar
 import kotlinx.android.synthetic.main.fragment_students.*
 import kotlinx.android.synthetic.main.layout_loading.*

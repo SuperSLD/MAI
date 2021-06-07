@@ -27,4 +27,10 @@ interface Api {
 
     @GET("sport/all")
     fun getSport() : Single<DataWrapper<MutableList<SportResponse>>>
+
+    @GET("library/all")
+    fun getLibrary() : Single<DataWrapper<MutableList<LibraryResponse>>>
+
+    @GET("creative/all")
+    fun getCreative() : Single<DataWrapper<MutableList<CreativeResponse>>>
 }
