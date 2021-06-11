@@ -5,6 +5,7 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.inputmethod.EditorInfo
 
@@ -107,5 +108,12 @@ class SearchLineView : androidx.appcompat.widget.AppCompatEditText {
      */
     fun setHintString(hint: String) {
         this.hintString = hint
+    }
+
+    override fun onKeyPreIme(keyCode: Int, event: KeyEvent?): Boolean {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            clearFocus()
+        }
+        return super.onKeyPreIme(keyCode, event)
     }
 }
