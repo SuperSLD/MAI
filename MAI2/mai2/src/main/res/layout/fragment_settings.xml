@@ -269,14 +269,20 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextSecondary"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="@string/settings_author_title"/>
+                    android:text="@string/settings_author_title"
+                    android:layout_marginBottom="8dp"
+                />
                 <TextView
+                    android:id="@+id/tvTeam1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="@string/settings_author1"/>
+                    android:text="@string/settings_author1"
+                    android:layout_marginBottom="8dp"
+                />
                 <TextView
+                        android:id="@+id/tvTeam2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimary"

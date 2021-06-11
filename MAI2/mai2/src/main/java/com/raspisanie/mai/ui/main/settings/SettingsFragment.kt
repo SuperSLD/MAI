@@ -101,6 +101,9 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             adapter = this@SettingsFragment.adapterSchedule
             layoutManager = LinearLayoutManager(context)
         }
+
+        tvTeam1.setOnClickListener { requireContext().openWebLink("https://vk.com/leonsolya") }
+        tvTeam2.setOnClickListener { requireContext().openWebLink("https://vk.com/galya.zhmykhova") }
     }
 
     private fun setView() {
