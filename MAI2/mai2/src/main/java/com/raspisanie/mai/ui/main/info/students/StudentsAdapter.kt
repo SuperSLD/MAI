@@ -1,5 +1,7 @@
 package com.raspisanie.mai.ui.main.info.students
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,11 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
 import com.raspisanie.mai.models.local.StudentOrganizationLocal
 import com.raspisanie.mai.models.realm.CanteenLocal
+import com.yandex.metrica.impl.ob.Un
 import kotlinx.android.synthetic.main.item_canteens.view.*
 import kotlinx.android.synthetic.main.item_stud.view.*
 
 
-class StudentsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class StudentsAdapter(
+    private val callPhone:(String) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val list = mutableListOf<StudentOrganizationLocal>()
 
@@ -41,6 +46,10 @@ class StudentsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 tvName.text = students.name
                 tvContact.text = students.contact
                 tvAddress.text = students.address
+
+                tvContact.setOnClickListener {
+                    callPhone(students.contact)
+                }
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.raspisanie.mai.ui.main.info.students
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,11 +9,6 @@ import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.models.local.StudentOrganizationLocal
-import com.raspisanie.mai.models.realm.CanteenLocal
-import kotlinx.android.synthetic.main.fragment_campus_map.*
-import kotlinx.android.synthetic.main.fragment_canteens.*
-import kotlinx.android.synthetic.main.fragment_library.*
-import kotlinx.android.synthetic.main.fragment_library.rvCanteens
 import kotlinx.android.synthetic.main.fragment_library.vToolbar
 import kotlinx.android.synthetic.main.fragment_students.*
 import kotlinx.android.synthetic.main.layout_loading.*
@@ -23,7 +20,7 @@ class StudentsFragment : BaseFragment(R.layout.fragment_students), StudentsView 
     @InjectPresenter
     lateinit var presenter: StudentsPresenter
 
-    private val adapter by lazy {StudentsAdapter()}
+    private val adapter by lazy {StudentsAdapter(this::callPhone)}
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -45,6 +42,13 @@ class StudentsFragment : BaseFragment(R.layout.fragment_students), StudentsView 
     }
     override fun showList(mutableList: MutableList<StudentOrganizationLocal>) {
         adapter.addAll(mutableList)
+    }
+
+    private fun callPhone(phone: String) {
+        val uri = "tel:" + phone.trim()
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse(uri)
+        startActivity(intent)
     }
 
     override fun showErrorLoading() {

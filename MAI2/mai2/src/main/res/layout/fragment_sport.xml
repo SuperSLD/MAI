@@ -9,10 +9,13 @@
         android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCanteens"
+        android:id="@+id/rvSport"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="@dimen/paddingMid"
         android:clipToPadding="false"/>
+
+    <include
+            layout="@layout/layout_loading"/>
 
 </LinearLayout>

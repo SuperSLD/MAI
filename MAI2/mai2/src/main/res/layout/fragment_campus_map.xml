@@ -9,8 +9,7 @@
             android:id="@+id/vPhoto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/map"
-            android:padding="24dp"/>
+            android:src="@drawable/map"/>
 
     <FrameLayout
             android:id="@+id/vgButtonContainer"

@@ -13,4 +13,12 @@ class ApiService(private var api: Api) {
     fun getCanteens() = api.getCanteens()
 
     fun getStudents() = api.getStudents()
+
+    fun getDevList() = api.getDevList()
+
+    fun getSport() = api.getSport()
+
+    fun getLibrary() = api.getLibrary()
+
+    fun getCreative() = api.getCreative()
 }
