@@ -272,22 +272,19 @@
                     android:text="@string/settings_author_title"
                     android:layout_marginBottom="8dp"
                 />
-                <TextView
-                    android:id="@+id/tvTeam1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/settings_author1"
-                    android:layout_marginBottom="8dp"
-                />
-                <TextView
-                        android:id="@+id/tvTeam2"
+                <com.raspisanie.mai.ui.view.JTProgressBarColored
+                        android:id="@+id/vLoader"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="16dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvDevs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/settings_author2"/>
+                        android:nestedScrollingEnabled="false"/>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

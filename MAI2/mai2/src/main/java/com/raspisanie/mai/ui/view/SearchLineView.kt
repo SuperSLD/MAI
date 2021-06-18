@@ -9,10 +9,10 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.inputmethod.EditorInfo
 
-@SuppressLint("ClickableViewAccessibility")
 /**
  * Линия поиска.
  */
+@SuppressLint("ClickableViewAccessibility")
 class SearchLineView : androidx.appcompat.widget.AppCompatEditText {
 
     private var clearIcon = -1

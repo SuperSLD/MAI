@@ -9,8 +9,10 @@ import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.controllers.BottomVisibilityController
 import com.raspisanie.mai.controllers.ConfirmController
 import com.raspisanie.mai.extesions.mappers.toLocal
+import com.raspisanie.mai.extesions.mappers.toRealm
 import com.raspisanie.mai.extesions.realm.*
 import com.raspisanie.mai.models.realm.GroupRealm
+import com.raspisanie.mai.server.ApiService
 import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -26,6 +28,7 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     private val bottomVisibilityController: BottomVisibilityController by inject()
     private val realm: Realm by inject()
     private val context: Context by inject()
+    private val service: ApiService by inject()
 
     private var lastDeletedGroup: GroupRealm? = null
     private val confirmController: ConfirmController by inject()
@@ -34,6 +37,7 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         YandexMetrica.reportEvent("OpenSettings")
+        showDevs()
     }
 
     override fun attachView(view: SettingsView?) {
@@ -90,6 +94,38 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
 
     private fun showGroupsList() {
         viewState.showGroups(realm.getAllGroup())
+    }
+
+    private fun showDevs() {
+        val devs = realm.getAllDevs()
+        if (devs.size == 0) {
+            viewState.toggleLoading(true)
+        }
+        viewState.showDevList(devs)
+        getDevList()
+    }
+
+    private fun getDevList() {
+        service.getDevList()
+            .map { if (it.success) it.data else error(it.message.toString()) }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .doOnSubscribe {  }
+            .doOnError {
+                it.printStackTrace()
+                viewState.toggleLoading(false)
+            }
+            .subscribe(
+                {
+                    val realmList = it!!.toRealm()
+                    realm.addAllDevs(realmList)
+                    viewState.toggleLoading(false)
+                    viewState.showDevList(realmList.toLocal())
+                },
+                {
+                    Timber.e(it)
+                }
+            ).connect()
     }
 
     fun sendFeedback() = router?.navigateTo(Screens.Feedback)

@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.R
-import com.raspisanie.mai.extesions.firstItems
-import com.raspisanie.mai.extesions.getIsDayTheme
-import com.raspisanie.mai.extesions.openWebLink
-import com.raspisanie.mai.extesions.saveIsDayTheme
+import com.raspisanie.mai.extesions.*
+import com.raspisanie.mai.models.local.DevLocal
 import com.raspisanie.mai.models.local.ScheduleLocal
 import com.raspisanie.mai.models.realm.GroupRealm
 import com.yandex.metrica.YandexMetrica
@@ -51,6 +49,10 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             presenter::select,
             presenter::remove,
             context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+    ) }
+
+    private val adapterDev by lazy { DevListAdapter(
+        this::openLink
     ) }
 
     private val adapterSchedule by lazy { ScheduleListAdapter(colors) }
@@ -102,8 +104,10 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             layoutManager = LinearLayoutManager(context)
         }
 
-        tvTeam1.setOnClickListener { requireContext().openWebLink("https://vk.com/leonsolya") }
-        tvTeam2.setOnClickListener { requireContext().openWebLink("https://vk.com/galya.zhmykhova") }
+        with(rvDevs) {
+            adapter = this@SettingsFragment.adapterDev
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
     private fun setView() {
@@ -140,6 +144,10 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
         presenter.back()
     }
 
+    fun openLink(link: String) {
+        requireContext().openWebLink(link)
+    }
+
     /**
      * Составляем инфу для диаграммы.
      * Достаточно тяжелый процесс.
@@ -169,6 +177,15 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             }
         }
         adapterSchedule.addAll(firstItems, groups)
+    }
+
+    override fun showDevList(list: MutableList<DevLocal>) {
+        adapterDev.addAll(list)
+    }
+
+    override fun toggleLoading(show: Boolean) {
+        vLoader.show(show)
+        rvDevs.show(!show)
     }
 
     override fun showCurrentGroup(group: GroupRealm) {

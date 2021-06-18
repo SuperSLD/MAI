@@ -25,6 +25,9 @@ interface Api {
     @GET("studorg/all")
     fun getStudents() : Single<DataWrapper<MutableList<StudentOrganizationResponse>>>
 
+    @GET("developers/all")
+    fun getDevList() : Single<DataWrapper<MutableList<DevResponse>>>
+
     @GET("sport/all")
     fun getSport() : Single<DataWrapper<MutableList<SportResponse>>>
 
