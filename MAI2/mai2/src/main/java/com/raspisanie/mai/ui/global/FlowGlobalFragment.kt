@@ -7,6 +7,7 @@ import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.common.base.MvpBottomSheetDialogFragment
 import com.raspisanie.mai.common.enums.ToastType
 import com.raspisanie.mai.extesions.showToast
+import com.raspisanie.mai.models.local.SelectWeekData
 import com.raspisanie.mai.ui.main.settings.confirm_dialog.ConfirmBSFragment
 import com.raspisanie.mai.ui.main.timetble.select_week_bs.SelectWeekBSFragment
 import pro.midev.supersld.common.base.FlowFragment
@@ -41,7 +42,10 @@ class FlowGlobalFragment : FlowFragment(ROUTER), GlobalView {
      */
     override fun showBottomSheet(type: BottomSheetDialogType, data: Any?) {
         val bottomSheet: MvpBottomSheetDialogFragment = when (type) {
-            BottomSheetDialogType.SELECT_WEEK -> SelectWeekBSFragment.create(data as Int)
+            BottomSheetDialogType.SELECT_WEEK -> {
+                val selectWeekData = data as SelectWeekData
+                SelectWeekBSFragment.create(selectWeekData.num, selectWeekData.empty)
+            }
             BottomSheetDialogType.CONFIRM -> ConfirmBSFragment.create((data as Pair<*, *>).first as String, data.second as String)
         }
 
@@ -52,6 +56,6 @@ class FlowGlobalFragment : FlowFragment(ROUTER), GlobalView {
      * Отображение тоста.
      */
     override fun showToast(toastType: ToastType, message: String) {
-        context?.showToast(toastType, message)
+        context?.showToast(0, message)
     }
 }

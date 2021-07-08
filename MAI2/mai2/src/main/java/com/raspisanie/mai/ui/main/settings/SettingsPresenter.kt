@@ -11,6 +11,7 @@ import com.raspisanie.mai.controllers.ConfirmController
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.mappers.toRealm
 import com.raspisanie.mai.extesions.realm.*
+import com.raspisanie.mai.extesions.showToast
 import com.raspisanie.mai.models.realm.GroupRealm
 import com.raspisanie.mai.server.ApiService
 import com.yandex.metrica.YandexMetrica
@@ -52,6 +53,7 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     fun select(group: GroupRealm) {
         YandexMetrica.reportEvent("SelectGroupInSettings")
         Timber.d(group.id)
+        context.showToast(R.drawable.ic_people_toast, context.getString(R.string.settings_change_group))
         showCurrentGroup()
     }
 
@@ -81,6 +83,7 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
                 .subscribe(
                         { confirm ->
                             if (confirm) {
+                                context.showToast(R.drawable.ic_close_toast, context.getString(R.string.settings_remove_group))
                                 lastDeletedGroup?.let { it -> viewState.removeGroup(it) }
                                 lastDeletedGroup = null
                                 showScheduleInfo()

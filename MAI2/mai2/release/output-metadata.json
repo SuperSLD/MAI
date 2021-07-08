@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.raspisanie.mai",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 11021,
+      "versionName": "2.0.1",
+      "enabled": true,
+      "outputFile": "mai2-release.apk"
+    }
+  ]
+}

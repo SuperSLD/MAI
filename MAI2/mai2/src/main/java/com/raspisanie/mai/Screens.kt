@@ -12,6 +12,7 @@ import com.raspisanie.mai.ui.main.info.campus_map.CampusMapFragment
 import com.raspisanie.mai.ui.main.info.canteens.CanteensFragment
 import com.raspisanie.mai.ui.main.info.creative.CreativeFragment
 import com.raspisanie.mai.ui.main.info.library.LibraryFragment
+import com.raspisanie.mai.ui.main.info.news.NewsFragment
 import com.raspisanie.mai.ui.main.info.sport.SportFragment
 import com.raspisanie.mai.ui.main.info.students.StudentsFragment
 import com.raspisanie.mai.ui.main.settings.FlowSettingsFragment
@@ -21,6 +22,7 @@ import com.raspisanie.mai.ui.main.settings.send_feedback.SendFeedbackFragment
 import com.raspisanie.mai.ui.main.settings.send_feedback.success.SuccessFragment
 import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
 import com.raspisanie.mai.ui.main.timetble.TimetableFragment
+import com.raspisanie.mai.ui.main.timetble.new_group.NewGroupFragment
 import com.raspisanie.mai.ui.main.timetble.select_number.SelectNumberFragment
 import com.raspisanie.mai.ui.select_group.FlowSelectGroupFragment
 import com.raspisanie.mai.ui.select_group.select_group.SelectGroupFragment
@@ -43,15 +45,15 @@ object Screens {
     /** Стартовый роутер */
 
     object FlowSelectGroup : SupportAppScreen() {
-        override fun getFragment(): Fragment? = FlowSelectGroupFragment()
+        override fun getFragment(): Fragment = FlowSelectGroupFragment()
     }
 
     object Start : SupportAppScreen() {
-        override fun getFragment(): Fragment? = StartFragment()
+        override fun getFragment(): Fragment = StartFragment()
     }
 
     object SelectGroup : SupportAppScreen() {
-        override fun getFragment(): Fragment? = SelectGroupFragment()
+        override fun getFragment(): Fragment = SelectGroupFragment()
     }
 
     /** Контейнер роутер */
@@ -67,80 +69,88 @@ object Screens {
     /** Инфо роутер */
 
     object FlowInfo : SupportAppScreen() {
-        override fun getFragment(): Fragment? = FlowInfoFragment()
+        override fun getFragment(): Fragment = FlowInfoFragment()
     }
 
     object Info: SupportAppScreen() {
-        override fun getFragment(): Fragment? = InfoFragment()
+        override fun getFragment(): Fragment = InfoFragment()
     }
 
     object CampusMap: SupportAppScreen() {
-        override fun getFragment(): Fragment? = CampusMapFragment()
+        override fun getFragment(): Fragment = CampusMapFragment()
     }
 
     object Canteens: SupportAppScreen() {
-        override fun getFragment(): Fragment? = CanteensFragment()
+        override fun getFragment(): Fragment = CanteensFragment()
     }
 
     object Library: SupportAppScreen() {
-        override fun getFragment(): Fragment? = LibraryFragment()
+        override fun getFragment(): Fragment = LibraryFragment()
     }
 
     object Sport: SupportAppScreen() {
-        override fun getFragment(): Fragment? = SportFragment()
+        override fun getFragment(): Fragment = SportFragment()
     }
 
     object Students: SupportAppScreen() {
-        override fun getFragment(): Fragment? = StudentsFragment()
+        override fun getFragment(): Fragment = StudentsFragment()
     }
 
     object Creative: SupportAppScreen() {
-        override fun getFragment(): Fragment? = CreativeFragment()
+        override fun getFragment(): Fragment = CreativeFragment()
+    }
+
+    object News: SupportAppScreen() {
+        override fun getFragment(): Fragment = NewsFragment()
     }
 
     /** Экзаменационный роутер */
 
     object FlowExams : SupportAppScreen() {
-        override fun getFragment(): Fragment? = FlowExamsFragment()
+        override fun getFragment(): Fragment = FlowExamsFragment()
     }
 
     object Exams: SupportAppScreen() {
-        override fun getFragment(): Fragment? = ExamsFragment()
+        override fun getFragment(): Fragment = ExamsFragment()
     }
 
     /** Расписание - роутер */
 
     object FlowTimetable : SupportAppScreen() {
-        override fun getFragment(): Fragment? = FlowTimetableFragment()
+        override fun getFragment(): Fragment = FlowTimetableFragment()
     }
 
     object TimeTable: SupportAppScreen() {
-        override fun getFragment(): Fragment? = TimetableFragment()
+        override fun getFragment(): Fragment = TimetableFragment()
     }
 
     data class SelectNumber(val number: Int?): SupportAppScreen() {
-        override fun getFragment(): Fragment? = SelectNumberFragment.create(number)
+        override fun getFragment(): Fragment = SelectNumberFragment.create(number)
+    }
+
+    object NewGroup: SupportAppScreen() {
+        override fun getFragment(): Fragment = NewGroupFragment()
     }
 
     /** Настройки - роутер */
 
     object FlowSettings : SupportAppScreen() {
-        override fun getFragment(): Fragment? = FlowSettingsFragment()
+        override fun getFragment(): Fragment = FlowSettingsFragment()
     }
 
     object Settings: SupportAppScreen() {
-        override fun getFragment(): Fragment? = SettingsFragment()
+        override fun getFragment(): Fragment = SettingsFragment()
     }
 
     object AddGroup: SupportAppScreen() {
-        override fun getFragment(): Fragment? = AddGroupFragment()
+        override fun getFragment(): Fragment = AddGroupFragment()
     }
 
     object Feedback: SupportAppScreen() {
-        override fun getFragment(): Fragment? = SendFeedbackFragment()
+        override fun getFragment(): Fragment = SendFeedbackFragment()
     }
 
     object Success: SupportAppScreen() {
-        override fun getFragment(): Fragment? = SuccessFragment()
+        override fun getFragment(): Fragment = SuccessFragment()
     }
 }

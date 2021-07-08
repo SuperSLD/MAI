@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/paddingMin"
     app:cardElevation="0dp"
@@ -15,23 +15,45 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:foreground="?android:selectableItemBackground"
+        android:gravity="center_vertical"
         android:padding="@dimen/paddingMid">
         <ImageView
-            android:id="@+id/icIcon"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:tint="@color/colorPrimarySecondary"
-            app:srcCompat="@drawable/ic_map"/>
+                android:id="@+id/icIcon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                app:srcCompat="@drawable/ic_map"
+                app:tint="@color/colorPrimarySecondary"/>
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:fontFamily="@font/roboto_bold"
-            android:paddingLeft="@dimen/paddingMid"
+            android:paddingStart="@dimen/paddingMid"
+            android:layout_weight="1"
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/textNormal"
             android:text="@string/info_button_map"/>
+
+        <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvNotification"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/colorNotification"
+        >
+            <TextView
+                    android:id="@+id/tvNotification"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/roboto_bold"
+                    tools:ignore="SmallSp"/>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

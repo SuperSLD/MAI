@@ -36,4 +36,10 @@ interface Api {
 
     @GET("creative/all")
     fun getCreative() : Single<DataWrapper<MutableList<CreativeResponse>>>
+
+    @GET("notification/all/{date}")
+    fun getNotifications(@Path("date") date: String) : Single<DataWrapper<NotificationsResponse>>
+
+    @GET("news/all")
+    fun getNews() : Single<DataWrapper<MutableList<NewsResponse>>>
 }

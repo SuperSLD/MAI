@@ -25,7 +25,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_people_alt_24px_1"
+                app:srcCompat="@drawable/ic_people_alt_24px_1"
                 />
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView

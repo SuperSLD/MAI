@@ -1,8 +1,5 @@
 package com.raspisanie.mai.ui
 
-import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
@@ -12,8 +9,8 @@ import pro.midev.supersld.ActivityBase
 
 class AppActivity : ActivityBase() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
         window?.setWindowAnimations(R.style.WindowAnimationTransition)
     }
 

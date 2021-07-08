@@ -22,11 +22,8 @@ class App : AppBase(appModule = appModule) {
     }
 
     private fun initYandex() {
-        // Creating an extended library configuration.
         val config = YandexMetricaConfig.newConfigBuilder(BuildConfig.YANDEX_KEY).build()
-        // Initializing the AppMetrica SDK.
         YandexMetrica.activate(applicationContext, config)
-        // Automatic tracking of user activity.
         YandexMetrica.enableActivityAutoTracking(this)
     }
 }

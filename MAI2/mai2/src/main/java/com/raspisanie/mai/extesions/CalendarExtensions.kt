@@ -26,8 +26,8 @@ fun String.parseCalendarByFormat(format: String): Calendar {
 /**
  * Перевод строки с датой из одного формата в другой.
  *
- * @param from вормат даты в текущей строке.
- * @param to вормат ожидаемой даты в строке.
+ * @param from формат даты в текущей строке.
+ * @param to формат ожидаемой даты в строке.
  *
  * @author Solyanoy Leonid (solyanoy.leonid@gmail.com)
  */
@@ -35,6 +35,18 @@ fun String.parseCalendarByFormat(format: String): Calendar {
 fun String.fromFormatToFormat(from: String, to: String): String {
         val calendar = this.parseCalendarByFormat(from)
         return SimpleDateFormat(to).format(calendar.time)
+}
+
+/**
+ * Перевод календаря в строку с определенным форматом.
+ *
+ * @param format формат ожидаемой даты в строке.
+ *
+ * @author Solyanoy Leonid (solyanoy.leonid@gmail.com)
+ */
+@SuppressLint("SimpleDateFormat")
+fun Calendar.toFormat(format: String): String {
+        return SimpleDateFormat(format).format(this.time)
 }
 
 /**

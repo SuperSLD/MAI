@@ -9,11 +9,13 @@
 
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorBackgroundSecondary">#FFFFFF</color>
+    <color name="colorBackgroundDark">#DBE1E4</color>
 
     <!-- Text -->
     <color name="colorTextPrimary">#333333</color>
     <color name="colorTextSecondary">#909DA9</color>
     <color name="colorTextWhite">#FFFFFF</color>
+    <color name="colorTextToastWhite">#FFFFFF</color>
 
     <!-- Navigation -->
     <color name="colorBottomNavigation">#ABBBCC</color>
@@ -35,12 +37,17 @@
     <color name="colorDiagram7">#6163C5</color>
     <color name="colorDiagram8">#EC73CA</color>
 
+    <!-- Toast -->
+    <color name="colorToastBack">#CC000000</color>
 
     <!-- Border -->
     <color name="colorBorder">#E1E1E1</color>
 
     <!-- Other -->
     <color name="colorAlertRed">#FF6645</color>
+
+    <!-- Notification -->
+    <color name="colorNotification">#DA5B45</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

@@ -19,6 +19,13 @@ class SelectWeekBSFragment : MvpBottomSheetDialogFragment(R.layout.bs_select_wee
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val empty = arguments?.getBoolean(ARG_NONE_WEEK)!!
+        if (empty) {
+            btnPrevious.visibility = View.GONE
+            btnNext.visibility = View.GONE
+            btnThis.visibility = View.GONE
+        }
+
         when(arguments?.getInt(ARG_WEEK)!!) {
             SelectWeekController.PREVIOUS_WEEK -> btnPrevious.visibility = View.GONE
             SelectWeekController.NEXT_WEEK -> btnNext.visibility = View.GONE
@@ -45,14 +52,17 @@ class SelectWeekBSFragment : MvpBottomSheetDialogFragment(R.layout.bs_select_wee
 
     companion object {
         const val ARG_WEEK = "arg_week"
+        const val ARG_NONE_WEEK = "arg_none_week"
 
         fun create(
-                weekNumber: Int
+                weekNumber: Int,
+                noneWeek: Boolean
         ): SelectWeekBSFragment {
             val fragment = SelectWeekBSFragment()
 
             val args = Bundle()
             args.putInt(ARG_WEEK, weekNumber)
+            args.putBoolean(ARG_NONE_WEEK, noneWeek)
             fragment.arguments = args
 
             return fragment

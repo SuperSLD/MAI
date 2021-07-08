@@ -80,4 +80,8 @@ val appModule = module {
     single {
         ShowToastController()
     }
+
+    single {
+        NotificationController()
+    }
 }

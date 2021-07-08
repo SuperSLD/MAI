@@ -1,15 +1,18 @@
 package com.raspisanie.mai.ui.main.info
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
+import com.raspisanie.mai.models.local.NotificationsLocal
+import com.yandex.metrica.impl.ob.V
 import kotlinx.android.synthetic.main.fragment_info.*
 import kotlinx.android.synthetic.main.item_info.view.*
 import pro.midev.supersld.common.base.BaseFragment
 import timber.log.Timber
 
-class InfoFragment : BaseFragment(R.layout.fragment_info), MvpView {
+class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
 
     @InjectPresenter
     lateinit var presenter: InfoPresenter
@@ -17,6 +20,9 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), MvpView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        lNews.setOnClickListener {
+            presenter.openNews()
+        }
         lMap.setOnClickListener {
             presenter.openCampusMap()
         }
@@ -41,10 +47,12 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), MvpView {
 
     private fun setView() {
         val views = mutableListOf(
+                lNews,
                 lMap, lCanteen, lLibrary,
                 lSport, lStudents, lCreative
         )
         val titles = mutableListOf(
+                resources.getString(R.string.info_button_news),
                 resources.getString(R.string.info_button_map),
                 resources.getString(R.string.info_button_canteen),
                 resources.getString(R.string.info_button_library),
@@ -53,6 +61,7 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), MvpView {
                 resources.getString(R.string.info_button_creative)
         )
         val icons = mutableListOf(
+                R.drawable.ic_news,
                 R.drawable.ic_map,
                 R.drawable.ic_canteen,
                 R.drawable.ic_library,
@@ -72,5 +81,12 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), MvpView {
 
     override fun onBackPressed() {
         presenter.back()
+    }
+
+    override fun showNotifications(notifications: NotificationsLocal) {
+        with(lNews) {
+            cvNotification.visibility = if (notifications.getNewsCount() > 0) View.VISIBLE else View.GONE
+            tvNotification.text = notifications.getNewsCount().toString()
+        }
     }
 }

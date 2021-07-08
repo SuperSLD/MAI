@@ -6,6 +6,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
+import com.raspisanie.mai.models.local.NotificationsLocal
 import kotlinx.android.synthetic.main.fragment_main_container.*
 import pro.midev.supersld.common.base.BaseFragment
 import pro.midev.supersld.extensions.addSystemBottomPadding
@@ -31,7 +32,6 @@ class MainContainerFragment : BaseFragment(R.layout.fragment_main_container), Ma
         }
 
         with(bottomNavigation) {
-
             accentColor =
                     androidx.core.content.ContextCompat.getColor(context, R.color.colorPrimarySecondary)
             inactiveColor =
@@ -70,6 +70,13 @@ class MainContainerFragment : BaseFragment(R.layout.fragment_main_container), Ma
 
             Timber.d("selected tab ${arguments?.getInt(ARG_POSITION)!!}")
         }
+    }
+
+    override fun showNotifications(notifications: NotificationsLocal) {
+        bottomNavigation.setNotification(
+            if (notifications.getNewsCount() > 0) "+${notifications.getNewsCount()}" else "",
+            0
+        )
     }
 
     private fun selectTab(tab: SupportAppScreen) {

@@ -21,4 +21,8 @@ class ApiService(private var api: Api) {
     fun getLibrary() = api.getLibrary()
 
     fun getCreative() = api.getCreative()
+
+    fun getNotifications(date: String) = api.getNotifications(date)
+
+    fun getNews() = api.getNews()
 }

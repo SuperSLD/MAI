@@ -1,7 +1,6 @@
 package com.raspisanie.mai.extesions.realm
 
-import com.raspisanie.mai.models.realm.GroupRealm
-import com.raspisanie.mai.models.realm.ScheduleRealm
+import com.raspisanie.mai.models.realm.*
 import io.realm.Realm
 import java.security.acl.Group
 
@@ -31,4 +30,17 @@ fun Realm.removeSchedule(group: GroupRealm) {
     where(ScheduleRealm::class.java)
             .equalTo("groupId", group.id)
             .findFirst()?.deleteFromRealm()
+}
+
+fun Realm.removeData() {
+    executeTransaction {
+        it.delete(GroupRealm::class.java)
+
+        it.delete(TeacherRealm::class.java)
+        it.delete(RoomRealm::class.java)
+        it.delete(SubjectRealm::class.java)
+        it.delete(DayRealm::class.java)
+        it.delete(WeekRealm::class.java)
+        it.delete(ScheduleRealm::class.java)
+    }
 }

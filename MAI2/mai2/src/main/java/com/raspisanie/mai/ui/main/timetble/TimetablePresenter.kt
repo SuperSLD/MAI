@@ -2,20 +2,25 @@ package com.raspisanie.mai.ui.main.timetble
 
 import android.content.Context
 import com.arellomobile.mvp.InjectViewState
+import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
+import com.raspisanie.mai.common.TestDate
 import com.raspisanie.mai.common.base.BottomSheetDialogController
 import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.controllers.BottomVisibilityController
 import com.raspisanie.mai.controllers.SelectWeekController
+import com.raspisanie.mai.extesions.getSemester
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.mappers.toRealm
-import com.raspisanie.mai.extesions.realm.clearScheduleForCurrentGroup
-import com.raspisanie.mai.extesions.realm.getCurrentGroup
-import com.raspisanie.mai.extesions.realm.getCurrentSchedule
-import com.raspisanie.mai.extesions.realm.updateSchedule
+import com.raspisanie.mai.extesions.realm.*
+import com.raspisanie.mai.extesions.saveAuthState
+import com.raspisanie.mai.extesions.saveSemester
+import com.raspisanie.mai.extesions.showToast
 import com.raspisanie.mai.models.local.ScheduleLocal
+import com.raspisanie.mai.models.local.SelectWeekData
 import com.raspisanie.mai.models.realm.ScheduleRealm
 import com.raspisanie.mai.server.ApiService
+import com.raspisanie.mai.ui.main.timetble.new_group.NewGroupFragment
 import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -34,6 +39,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
     private val realm: Realm by inject()
     private val service: ApiService by inject()
     private val selectWeekController: SelectWeekController by inject()
+    private val context: Context by inject()
 
     private var currentSchedule: ScheduleLocal? = null
     private var currentWeek = SelectWeekController.THIS_WEEK
@@ -54,7 +60,13 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
      * Вызов диалога ваыбора недели.
      */
     fun selectWeekDialog() {
-        bottomSheetDialogController.show(BottomSheetDialogType.SELECT_WEEK, currentWeek)
+        bottomSheetDialogController.show(
+            BottomSheetDialogType.SELECT_WEEK,
+            SelectWeekData(
+                currentWeek,
+                currentSchedule?.getCurrentWeek() == null
+            )
+        )
     }
 
     /**
@@ -86,6 +98,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                     .doOnSubscribe { viewState.toggleLoading(true) }
                     .doOnError {
                         it.printStackTrace()
+                        context.showToast(R.drawable.ic_report_gmailerrorred, context.getString(R.string.timetable_error), true)
                         if (realm.getCurrentSchedule() == null) {
                             viewState.showErrorLoading()
                         } else {
@@ -99,7 +112,24 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                                 realm.clearScheduleForCurrentGroup()
                                 realm.updateSchedule(scheduleRealm)
                                 currentSchedule = scheduleRealm.toLocal()
-                                viewState.shoWeek(currentSchedule?.getCurrentWeek(), currentWeek)
+
+                                /*
+                                Проверка на сброс группы.
+                                По каким правилам меняется название группы не
+                                понятно, по этому что делать и по этому просто
+                                просим человека выбрать группу еще раз.
+                                Разве это сложно сделать один раз в год?
+                                 */
+                                val lastSem = context.getSemester()
+                                val sem = TestDate.getScheduleSemester(currentSchedule!!, lastSem)
+                                context.saveSemester(sem)
+                                if (lastSem == TestDate.SECOND && sem == TestDate.FIRST) {
+                                    removeAndOpenNewGroup()
+                                } else {
+                                    //ничего интересного, просто проходим дальше
+                                    context.showToast(R.drawable.ic_done_all, context.getString(R.string.timetable_success))
+                                    viewState.shoWeek(currentSchedule?.getCurrentWeek(), currentWeek)
+                                }
                             },
                             {
                                 Timber.e(it)
@@ -107,6 +137,16 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                             }
                     ).connect()
         }
+    }
+
+    /**
+     * Удаляем все и показываем красивый экран
+     * c уведомлением о начале нового учебного года.
+     */
+    private fun removeAndOpenNewGroup() {
+        realm.removeData()
+        context.saveAuthState(false)
+        router?.replaceScreen(Screens.NewGroup)
     }
 
     /**

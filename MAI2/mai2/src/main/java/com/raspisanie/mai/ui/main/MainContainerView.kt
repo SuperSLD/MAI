@@ -4,6 +4,7 @@ import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import com.raspisanie.mai.models.local.NotificationsLocal
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 interface MainContainerView : MvpView {
@@ -16,4 +17,7 @@ interface MainContainerView : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun initBottomNavigation()
+
+    @StateStrategyType(SkipStrategy::class)
+    fun showNotifications(notifications: NotificationsLocal)
 }

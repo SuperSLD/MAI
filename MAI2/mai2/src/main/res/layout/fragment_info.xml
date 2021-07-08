@@ -33,6 +33,17 @@
                 android:orientation="vertical"
                 android:padding="@dimen/paddingMax">
                 <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/info_app_title"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="@dimen/textTitle"
+                        android:layout_marginBottom="@dimen/paddingMid"/>
+                <include
+                        android:id="@+id/lNews"
+                        layout="@layout/item_info"/>
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/info_campus_title"

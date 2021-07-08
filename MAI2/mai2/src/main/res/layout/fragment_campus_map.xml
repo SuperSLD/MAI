@@ -9,7 +9,7 @@
             android:id="@+id/vPhoto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/map"/>
+            app:srcCompat="@drawable/map"/>
 
     <FrameLayout
             android:id="@+id/vgButtonContainer"
@@ -25,7 +25,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_arrow_back"
+                    app:srcCompat="@drawable/ic_arrow_back"
                     android:layout_gravity="center"
                     app:tint="@color/colorPrimarySecondary"/>
         </com.google.android.material.card.MaterialCardView>
