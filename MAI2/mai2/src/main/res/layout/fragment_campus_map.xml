@@ -9,7 +9,7 @@
             android:id="@+id/vPhoto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/map"/>
+            app:srcCompat="@drawable/ic_campus_map"/>
 
     <FrameLayout
             android:id="@+id/vgButtonContainer"

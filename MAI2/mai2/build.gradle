@@ -20,6 +20,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
     buildTypes {
         debug {
             buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai/api/"'
