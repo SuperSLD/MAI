@@ -69,7 +69,7 @@
                 android:textSize="@dimen/textNormalMin"
                 android:fontFamily="@font/roboto_regular"
                 android:layout_marginTop="@dimen/paddingMin"
-                android:textColor="@color/colorTextPrimary"
+                android:textColor="@color/colorPrimary"
                 android:text="Кондратьева Людмила Александровна"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                     android:layout_weight="4"
                     android:textSize="@dimen/textNormalMin"
                     android:fontFamily="@font/roboto_regular"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorTextPrimary"
                     android:text="LMS - Teams"/>
                 <TextView
                     android:id="@+id/tvType"

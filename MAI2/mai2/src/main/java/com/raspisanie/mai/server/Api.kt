@@ -42,4 +42,10 @@ interface Api {
 
     @GET("news/all")
     fun getNews() : Single<DataWrapper<MutableList<NewsResponse>>>
+
+    @GET("schedule/searchLector/{name}")
+    fun getSearchLector(@Path("name") name: String) : Single<DataWrapper<MutableList<TeacherResponse>>>
+
+    @GET("schedule/lector/{id}")
+    fun getLectorSchedule(@Path("id") id: String) : Single<DataWrapper<MutableList<WeekResponse>>>
 }

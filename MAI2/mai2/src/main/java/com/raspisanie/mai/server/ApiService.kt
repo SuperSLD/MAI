@@ -25,4 +25,8 @@ class ApiService(private var api: Api) {
     fun getNotifications(date: String) = api.getNotifications(date)
 
     fun getNews() = api.getNews()
+
+    fun getSearchLector(name: String) = api.getSearchLector(name)
+
+    fun getLectorSchedule(id: String) = api.getLectorSchedule(id)
 }

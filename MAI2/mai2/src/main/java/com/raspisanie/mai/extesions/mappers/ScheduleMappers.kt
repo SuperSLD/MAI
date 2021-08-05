@@ -14,6 +14,7 @@ fun RoomRealm.toLocal() = RoomLocal(id = id ?: "---", name = name ?: "---")
 
 fun TeacherResponse.toRealm() = TeacherRealm(id = id, name = name)
 fun TeacherRealm.toLocal() = TeacherLocal(id = id ?: "---", name = name ?: "---")
+fun TeacherResponse.toLocal() = TeacherLocal(id = id, name = name)
 
 
 fun SubjectResponse.toRealm() = SubjectRealm(
@@ -27,7 +28,7 @@ fun SubjectResponse.toRealm() = SubjectRealm(
         timeEnd = timeEnd,
         number = number
 )
-fun SubjectRealm.toLocal() = SubjectLocal(
+fun SubjectRealm.toLocal(date: String) = SubjectLocal(
         id = id ?: "0",
         name = name ?: "---",
         room = room?.toLocal()!!,
@@ -36,11 +37,12 @@ fun SubjectRealm.toLocal() = SubjectLocal(
         link = link ?: "---",
         timeStart = timeStart ?: "---",
         timeEnd = timeEnd ?: "---",
-        number = number ?: "?"
+        number = number ?: "?",
+        date = date
 )
 
 fun MutableList<SubjectResponse>.toRealmSubject() = this.map { it.toRealm() }.toRealmList()
-fun RealmList<SubjectRealm>.toLocalSubjects() = this.map { it.toLocal() }.toMutableList()
+fun RealmList<SubjectRealm>.toLocalSubjects(date: String) = this.map { it.toLocal(date) }.toMutableList()
 
 fun DayResponse.toRealm() = DayRealm(
         id = id,
@@ -50,7 +52,7 @@ fun DayResponse.toRealm() = DayRealm(
 fun DayRealm.toLocal() = DayLocal(
         id = id ?: "0",
         date = date ?: "00.00.0000",
-        subjects = subjects?.toLocalSubjects()!!
+        subjects = subjects?.toLocalSubjects(date ?: "")!!
 )
 
 fun MutableList<DayResponse>.toRealm() = this.map { it.toRealm() }.toRealmList()

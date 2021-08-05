@@ -34,6 +34,7 @@ class InfoPresenter : BasePresenter<InfoView>() {
     }
 
     fun openNews() = router?.navigateTo(Screens.News)
+    fun openLectors() = router?.navigateTo(Screens.SearchLector)
     fun openCampusMap() = router?.navigateTo(Screens.CampusMap)
     fun openCanteens() = router?.navigateTo(Screens.Canteens)
     fun openLibrary() = router?.navigateTo(Screens.Library)

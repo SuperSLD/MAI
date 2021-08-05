@@ -26,7 +26,8 @@ data class SubjectLocal(
         var timeStart: String,
         var timeEnd: String,
         var link: String,
-        var number: String
+        var number: String,
+        var date: String
 ): Parcelable {
     companion object {
         const val PZ = "ПЗ"

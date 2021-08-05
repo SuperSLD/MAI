@@ -75,10 +75,11 @@ class ToolbarSearchView  : RelativeLayout {
      */
     fun initSearch(
             default: () -> Unit,
-            search: (String) -> Unit
+            search: (String) -> Unit,
+            placeholder: String? = null
     ) {
         with(TV_search) {
-            setHintString(context.getString(R.string.select_group_search))
+            setHintString(placeholder ?: context.getString(R.string.select_group_search))
             setClearIcon(R.drawable.ic_clear_line)
             onDefault { default() }
             onSearch { search(it) }

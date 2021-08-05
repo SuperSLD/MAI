@@ -18,6 +18,7 @@ import com.raspisanie.mai.extesions.saveSemester
 import com.raspisanie.mai.extesions.showToast
 import com.raspisanie.mai.models.local.ScheduleLocal
 import com.raspisanie.mai.models.local.SelectWeekData
+import com.raspisanie.mai.models.local.SubjectLocal
 import com.raspisanie.mai.models.realm.ScheduleRealm
 import com.raspisanie.mai.server.ApiService
 import com.raspisanie.mai.ui.main.timetble.new_group.NewGroupFragment
@@ -181,6 +182,10 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
             GO_TO_NEXT_WEEK -> {
                 nextWeek()
             }
+            OPEN_LECTOR_SCHEDULE -> {
+                val subject = data as SubjectLocal
+                router?.navigateTo(Screens.LectorSchedule(subject.teacher, subject.date))
+            }
         }
     }
 
@@ -223,5 +228,6 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
 
     companion object {
         const val GO_TO_NEXT_WEEK = 0
+        const val OPEN_LECTOR_SCHEDULE = 1
     }
 }

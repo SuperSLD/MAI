@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+      android:paddingRight="@dimen/paddingMid"
+      android:paddingLeft="@dimen/paddingMid"
+      android:paddingBottom="@dimen/paddingMin">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textSize="20sp"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_marginBottom="16dp"
+            android:text="@string/info_lector_schedule_header"/>
+
+    <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textSize="24sp"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginBottom="16dp"
+            android:text="@string/info_lector_schedule_header"/>
+
+    <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textSize="20sp"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_marginBottom="8dp"
+            android:text="@string/info_lector_schedule_header_bottom"/>
+
+</LinearLayout>

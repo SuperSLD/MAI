@@ -90,4 +90,20 @@ data class ScheduleLocal(
         }
         return if (newWeek.days.size > 0) newWeek else null
     }
+
+    /**
+     * Поиск дня по дате.
+     *
+     * @param date дата
+     */
+    fun findDay(date: String) : DayLocal? {
+        for (week in weeks) {
+            for (day in week.days) {
+                if (day.date == date) {
+                    return day
+                }
+            }
+        }
+        return null
+    }
 }

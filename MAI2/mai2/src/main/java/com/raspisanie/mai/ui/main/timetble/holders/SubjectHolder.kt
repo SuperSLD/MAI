@@ -8,6 +8,7 @@ import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.parseCalendarByFormat
 import com.raspisanie.mai.models.local.SubjectLocal
 import com.raspisanie.mai.models.realm.SubjectRealm
+import com.raspisanie.mai.ui.main.timetble.TimetablePresenter
 import kotlinx.android.synthetic.main.item_timetable_subject.view.*
 import online.jutter.supersld.base.DFBaseHolder
 import online.jutter.supersld.base.HolderLayout
@@ -29,6 +30,9 @@ class SubjectHolder(itemView: View) : DFBaseHolder(itemView) {
             tvTime.text = "${subject.timeStart} - ${subject.timeEnd}"
             tvTeacher.text = subject.teacher.name
             tvTeacher.visibility = if(subject.teacher.name.isEmpty()) View.GONE else View.VISIBLE
+            tvTeacher.setOnClickListener {
+                makeEvent(TimetablePresenter.OPEN_LECTOR_SCHEDULE, subject)
+            }
             tvLocation.text = subject.room.name
             tvType.text = subject.type
 

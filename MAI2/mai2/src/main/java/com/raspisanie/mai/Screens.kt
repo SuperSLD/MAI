@@ -1,6 +1,7 @@
 package com.raspisanie.mai
 
 import androidx.fragment.app.Fragment
+import com.raspisanie.mai.models.local.TeacherLocal
 import com.raspisanie.mai.ui.global.FlowGlobalFragment
 import com.raspisanie.mai.ui.main.FlowMainFragment
 import com.raspisanie.mai.ui.main.MainContainerFragment
@@ -13,6 +14,9 @@ import com.raspisanie.mai.ui.main.info.canteens.CanteensFragment
 import com.raspisanie.mai.ui.main.info.creative.CreativeFragment
 import com.raspisanie.mai.ui.main.info.library.LibraryFragment
 import com.raspisanie.mai.ui.main.info.news.NewsFragment
+import com.raspisanie.mai.ui.main.info.search_lector.SearchLectorFragment
+import com.raspisanie.mai.ui.main.info.search_lector.lector_schedule.LectorScheduleFragment
+import com.raspisanie.mai.ui.main.info.search_lector.lector_schedule.calendar.CalendarFragment
 import com.raspisanie.mai.ui.main.info.sport.SportFragment
 import com.raspisanie.mai.ui.main.info.students.StudentsFragment
 import com.raspisanie.mai.ui.main.settings.FlowSettingsFragment
@@ -102,6 +106,18 @@ object Screens {
 
     object News: SupportAppScreen() {
         override fun getFragment(): Fragment = NewsFragment()
+    }
+
+    object SearchLector: SupportAppScreen() {
+        override fun getFragment(): Fragment = SearchLectorFragment()
+    }
+
+    data class LectorSchedule(val lector: TeacherLocal, val date: String = ""): SupportAppScreen() {
+        override fun getFragment(): Fragment = LectorScheduleFragment.create(lector, date)
+    }
+
+    data class Calendar(val start: String, val end: String): SupportAppScreen() {
+        override fun getFragment(): Fragment = CalendarFragment.create(start, end)
     }
 
     /** Экзаменационный роутер */

@@ -23,6 +23,9 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
         lNews.setOnClickListener {
             presenter.openNews()
         }
+        lLectors.setOnClickListener {
+            presenter.openLectors()
+        }
         lMap.setOnClickListener {
             presenter.openCampusMap()
         }
@@ -47,12 +50,13 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
 
     private fun setView() {
         val views = mutableListOf(
-                lNews,
+                lNews, lLectors,
                 lMap, lCanteen, lLibrary,
                 lSport, lStudents, lCreative
         )
         val titles = mutableListOf(
                 resources.getString(R.string.info_button_news),
+                getString(R.string.info_button_lectors),
                 resources.getString(R.string.info_button_map),
                 resources.getString(R.string.info_button_canteen),
                 resources.getString(R.string.info_button_library),
@@ -62,6 +66,7 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
         )
         val icons = mutableListOf(
                 R.drawable.ic_news,
+                R.drawable.ic_calendar,
                 R.drawable.ic_map,
                 R.drawable.ic_canteen,
                 R.drawable.ic_library,

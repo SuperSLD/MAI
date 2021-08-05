@@ -84,4 +84,8 @@ val appModule = module {
     single {
         NotificationController()
     }
+
+    single {
+        SelectDateController()
+    }
 }

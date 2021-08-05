@@ -28,12 +28,23 @@
     <string name="info_button_news">Новости приложения</string>
     <string name="info_campus_title">Кампус</string>
     <string name="info_life_title">Жизнь</string>
+    <string name="info_button_lectors">Расписание преподавателей</string>
     <string name="info_button_map">Схема кампуса</string>
     <string name="info_button_canteen">Столовые и буфеты</string>
     <string name="info_button_library">Библиотеки</string>
     <string name="info_button_sport">Спортивные секции</string>
     <string name="info_button_students">Студенческие организации</string>
     <string name="info_button_creative">Творческие коллективы</string>
+
+    <string name="info_search_lector_title">Поиск преподавателя</string>
+    <string name="info_search_lector_placeholder">Имя, фамилия или отчество</string>
+    <string name="info_lector_schedule_empty">%1$s у выбранного преподавателя нет занятий.</string>
+    <string name="info_lector_schedule_today">Сегодня</string>
+    <string name="info_lector_schedule_header">Ниже показаны пары которое мы нашли для преподавателя</string>
+    <string name="info_lector_schedule_header_bottom">на %1$s</string>
+    <string name="info_lector_schedule_button">Посмотреть другие дни</string>
+    <string name="info_lector_schedule_calendar">Выбор даты</string>
+
 
     <!-- Canteens Fragment -->
     <string name="canteens_title">Столовые и буфеты</string>
