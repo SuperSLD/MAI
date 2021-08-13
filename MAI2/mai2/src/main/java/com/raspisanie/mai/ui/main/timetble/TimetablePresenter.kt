@@ -92,18 +92,26 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
     fun loadSchedule() {
         realm.getCurrentGroup()?.let { group ->
             service.getSchedule(group.id!!)
-                    .map { if (it.success) it.data else error(it.message.toString()) }
+                    .map { if (it.success) it.data else { error(it.message.toString()) } }
                     .map { it!! }
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .doOnSubscribe { viewState.toggleLoading(true) }
                     .doOnError {
                         it.printStackTrace()
-                        context.showToast(R.drawable.ic_report_gmailerrorred, context.getString(R.string.timetable_error), true)
-                        if (realm.getCurrentSchedule() == null) {
-                            viewState.showErrorLoading()
+                        if (it.message.toString() == "schedule not found") {
+                            removeAndOpenNewGroup()
                         } else {
-                            showWeekByCurrent()
+                            context.showToast(
+                                R.drawable.ic_report_gmailerrorred,
+                                context.getString(R.string.timetable_error),
+                                true
+                            )
+                            if (realm.getCurrentSchedule() == null) {
+                                viewState.showErrorLoading()
+                            } else {
+                                showWeekByCurrent()
+                            }
                         }
                     }
                     .subscribe(
@@ -114,23 +122,9 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                                 realm.updateSchedule(scheduleRealm)
                                 currentSchedule = scheduleRealm.toLocal()
 
-                                /*
-                                Проверка на сброс группы.
-                                По каким правилам меняется название группы не
-                                понятно, по этому что делать и по этому просто
-                                просим человека выбрать группу еще раз.
-                                Разве это сложно сделать один раз в год?
-                                 */
-                                val lastSem = context.getSemester()
-                                val sem = TestDate.getScheduleSemester(currentSchedule!!, lastSem)
-                                context.saveSemester(sem)
-                                if (lastSem == TestDate.SECOND && sem == TestDate.FIRST) {
-                                    removeAndOpenNewGroup()
-                                } else {
-                                    //ничего интересного, просто проходим дальше
-                                    context.showToast(R.drawable.ic_done_all, context.getString(R.string.timetable_success))
-                                    viewState.shoWeek(currentSchedule?.getCurrentWeek(), currentWeek)
-                                }
+
+                                context.showToast(R.drawable.ic_done_all, context.getString(R.string.timetable_success))
+                                viewState.shoWeek(currentSchedule?.getCurrentWeek(), currentWeek)
                             },
                             {
                                 Timber.e(it)
