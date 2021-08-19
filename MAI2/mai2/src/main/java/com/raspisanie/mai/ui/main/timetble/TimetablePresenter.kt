@@ -122,9 +122,23 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                                 realm.updateSchedule(scheduleRealm)
                                 currentSchedule = scheduleRealm.toLocal()
 
-
-                                context.showToast(R.drawable.ic_done_all, context.getString(R.string.timetable_success))
-                                viewState.shoWeek(currentSchedule?.getCurrentWeek(), currentWeek)
+                                /*
+                                Проверка на сброс группы.
+                                По каким правилам меняется название группы не
+                                понятно, по этому что делать и по этому просто
+                                просим человека выбрать группу еще раз.
+                                Разве это сложно сделать один раз в год?
+                                 */
+                                val lastSem = context.getSemester()
+                                val sem = TestDate.getScheduleSemester(currentSchedule!!, lastSem)
+                                context.saveSemester(sem)
+                                if (lastSem == TestDate.SECOND && sem == TestDate.FIRST) {
+                                    removeAndOpenNewGroup()
+                                } else {
+                                    //ничего интересного, просто проходим дальше
+                                    context.showToast(R.drawable.ic_done_all, context.getString(R.string.timetable_success))
+                                    viewState.shoWeek(currentSchedule?.getCurrentWeek(), currentWeek)
+                                }
                             },
                             {
                                 Timber.e(it)
