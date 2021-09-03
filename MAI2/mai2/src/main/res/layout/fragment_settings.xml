@@ -30,48 +30,76 @@
                     android:padding="@dimen/paddingMax"
                     android:background="@drawable/background_gradient"
                     android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tvGroup"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorTextWhite"
-                        android:textSize="@dimen/textTitle"
-                        android:fontFamily="@font/roboto_bold"
-                        android:layout_marginBottom="@dimen/paddingMin"
-                        android:text="M10-209C-19"/>
-                    <TextView
-                        android:id="@+id/tvLocation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorTextWhite"
-                        android:textSize="@dimen/textNormalHint"
-                        android:layout_marginBottom="@dimen/paddingMin"
-                        android:text="Институт №1"/>
-                    <TextView
-                        android:id="@+id/tvSpec"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorTextWhite"
-                        android:textSize="@dimen/textNormalHint"
-                        android:layout_marginBottom="@dimen/paddingMin"
-                        android:text="2 курс"/>
-                    <TextView
-                        android:id="@+id/tvYear"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorTextWhite"
-                        android:textSize="@dimen/textNormalHint"
-                        android:text="2 курс"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorTextWhite"
-                        android:textSize="@dimen/textNormalHint"
-                        android:gravity="end"
-                        android:text="@string/settings_info_card"/>
+                    <LinearLayout
+                            android:id="@+id/vgGroupInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                    >
+                        <TextView
+                                android:id="@+id/tvGroup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorTextWhite"
+                                android:textSize="@dimen/textTitle"
+                                android:fontFamily="@font/roboto_bold"
+                                android:layout_marginBottom="@dimen/paddingMin"
+                                android:text="M10-209C-19"/>
+                        <TextView
+                                android:id="@+id/tvLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorTextWhite"
+                                android:textSize="@dimen/textNormalHint"
+                                android:layout_marginBottom="@dimen/paddingMin"
+                                android:text="Институт №1"/>
+                        <TextView
+                                android:id="@+id/tvSpec"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorTextWhite"
+                                android:textSize="@dimen/textNormalHint"
+                                android:layout_marginBottom="@dimen/paddingMin"
+                                android:text="2 курс"/>
+                        <TextView
+                                android:id="@+id/tvYear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorTextWhite"
+                                android:textSize="@dimen/textNormalHint"
+                                android:text="2 курс"/>
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorTextWhite"
+                                android:textSize="@dimen/textNormalHint"
+                                android:gravity="end"
+                                android:text="@string/settings_info_card"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:id="@+id/vgGroupEmpty"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="24dp"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="14dp"
+                                android:src="@drawable/ic_group_info_empty"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#96FFFFFF"
+                                android:textSize="24sp"
+                                android:gravity="center"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/settings_info_card_empty"/>
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,27 +116,13 @@
                 android:nestedScrollingEnabled="false"
                 android:layout_marginBottom="8dp"/>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/btnAdd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="0dp"
-                app:cardBackgroundColor="@color/colorBackground"
-                app:strokeColor="@color/colorPrimarySecondary"
-                app:strokeWidth="1dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginBottom="16sp">
-                <TextView
-                    android:layout_gravity="center"
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/ButtonEmpty"
                     android:text="@string/settings_group_add_button"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_bold"/>
-            </com.google.android.material.card.MaterialCardView>
+                    android:layout_marginBottom="16sp"/>
 
             <View
                 android:layout_width="match_parent"
@@ -192,44 +206,6 @@
             <include
                 android:id="@+id/lSupport"
                 layout="@layout/item_settings"/>
-
-            <!--<com.google.android.material.card.MaterialCardView
-                    android:layout_marginTop="@dimen/paddingMid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="@dimen/radiusBig">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/paddingMax"
-                        android:background="@drawable/background_gradient"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorTextWhite"
-                            android:textSize="@dimen/textNormalHint"
-                            android:layout_marginBottom="@dimen/paddingMin"
-                            android:text="@string/settings_app_id"/>
-                        <TextView
-                            android:id="@+id/tvId"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorTextWhite"
-                            android:textSize="12sp"
-                            android:gravity="center"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="123e4567-e89b-12d3-a456-426655440000"/>
-                    </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/paddingMid"
-                android:layout_marginBottom="@dimen/paddingMid"
-                android:background="@color/colorBorder"/>-->
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -8,4 +8,7 @@ import com.raspisanie.mai.models.local.WeekLocal
 interface ExamsView : MvpView {
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showExams(week: WeekLocal?)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showEmptyGroups()
 }

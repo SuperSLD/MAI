@@ -16,6 +16,7 @@
     <string name="start_timetable">Расписание</string>
     <string name="start_description">Простматривайте свое расписание, узнавайте новости и находите интересующие вас события полностью офлайн. Найдите интересные вам увлечения.</string>
     <string name="start_button">Выбрать учебную группу</string>
+    <string name="start_skip">Пропустить</string>
 
     <string name="select_group_title">Выберите свою группу</string>
     <string name="select_group_hint">Ваша группа</string>
@@ -52,6 +53,8 @@
     <!-- Exam Fragment -->
     <string name="exams_title">Экзамены</string>
     <string name="exams_none_timetable">Расписание ваших экзаменов отсутствует</string>
+    <string name="exams_select_group">Чтобы посмотреть расписание сессии, необходимо выбрать свою группу</string>
+    <string name="exams_select_group_btn">Выбрать группу</string>
 
     <!-- Timetable Fragment -->
     <string name="timetable_title_current">Текущая неделя</string>
@@ -79,10 +82,14 @@
     <string name="timetable_error">При загрузке произошла ошибка, показана офлайн версия</string>
     <string name="timetable_success">Расписание обновилось и будет доступно офлайн!</string>
     <string name="timetable_new_sem">Пришло новое расписание на начало учебного года! Название вашей группы могло измениться, по этому пожалуйста выберите её еще раз.</string>
+    <string name="timetable_select_group">Чтобы увидеть расписание, нужно выбрать свою учебную группу</string>
+    <string name="timetable_group">Выбранная группа:</string>
+
 
     <!-- Settings Fragment -->
     <string name="settings_dark_theme">Темная тема</string>
     <string name="settings_info_card">ваши данные</string>
+    <string name="settings_info_card_empty">Группа не выбрана</string>
 
     <string name="settings_select_group">Выбрать другую группу</string>
     <string name="settings_reload_timetable">Перезагрзить расписание</string>
@@ -96,7 +103,7 @@
     <string name="settings_diagram_kb">%1$d KB</string>
     <string name="settings_app_id">ID устройства:</string>
     <string name="settings_description_title">Информация о приложении:</string>
-    <string name="settings_description">Неофициальное приложение МАИ, написанное студентом для студентов, чтоб облегчить доступ к расписанию и другой информации. Вся информация загружается один раз и потом доступна без доступа в интернет.</string>
+    <string name="settings_description">Приложение МАИ, созданное, чтоб облегчить доступ к расписанию и другой информации. Все расписание загружается один раз и потом доступна без доступа в интернет.</string>
     <string name="settings_version_title">Версия и сборка:</string>
     <string name="settings_author_title">Наша команда:</string>
     <string name="settings_author1">Соляной Леонид / МАИ</string>

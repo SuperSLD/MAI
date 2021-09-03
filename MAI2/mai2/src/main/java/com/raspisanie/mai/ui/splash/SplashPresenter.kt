@@ -35,7 +35,7 @@ class SplashPresenter : BasePresenter<MvpView>() {
             .subscribe(
                 {
                     //if (false) {
-                    if (context.getAuthState() && realm.getCurrentGroup() != null) {
+                    if (context.getAuthState()) {
                        router?.newRootScreen(Screens.FlowMain)
                     } else {
                         realm.executeTransaction {

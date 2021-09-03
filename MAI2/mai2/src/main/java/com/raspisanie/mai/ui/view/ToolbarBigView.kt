@@ -26,7 +26,6 @@ class ToolbarBigView  : RelativeLayout {
 
     init {
         View.inflate(context, R.layout.view_toolbar_big, this)
-        TVtoolbar.addSystemTopPadding()
     }
 
     /**
@@ -34,7 +33,8 @@ class ToolbarBigView  : RelativeLayout {
      */
     fun init(
         title: Int,
-        action: ToolbarAction? = null
+        action: ToolbarAction? = null,
+        padding: Boolean = true
     ) {
         TVtvTitle.text = context.getString(title)
 
@@ -47,6 +47,8 @@ class ToolbarBigView  : RelativeLayout {
             TV_actionTitle.text = context.getString(action.stringId)
             TV_actionImage.setImageDrawable(ContextCompat.getDrawable(context, action.iconId))
         }
+
+        if (padding) TVtoolbar.addSystemTopPadding()
     }
 
     /**

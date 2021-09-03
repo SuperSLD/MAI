@@ -2,18 +2,30 @@ package com.raspisanie.mai.ui.main.timetble
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.google.android.material.appbar.AppBarLayout
 import com.raspisanie.mai.R
 import com.raspisanie.mai.controllers.SelectWeekController
 import com.raspisanie.mai.models.local.DayLocal
 import com.raspisanie.mai.models.local.WeekLocal
+import com.raspisanie.mai.models.realm.GroupRealm
 import com.raspisanie.mai.ui.view.ToolbarBigView
+import com.yandex.metrica.impl.ob.V
+import com.yandex.metrica.impl.ob.Vi
 import kotlinx.android.synthetic.main.fragment_timetable.*
+import kotlinx.android.synthetic.main.fragment_timetable.rvWeek
+import kotlinx.android.synthetic.main.fragment_timetable.vToolbar
+import kotlinx.android.synthetic.main.fragment_timetable.vgContent
+import kotlinx.android.synthetic.main.fragment_timetable.vgEmpty
+import kotlinx.android.synthetic.main.fragment_timetable.vgMain
+import kotlinx.android.synthetic.main.fragment_timetable.vgSelectGroup
 import kotlinx.android.synthetic.main.layout_loading.*
 import pro.midev.supersld.common.base.BaseFragment
+import pro.midev.supersld.extensions.addSystemTopPadding
 
 /**
  * Страшный фрагмент, со сложной логикой.
@@ -64,6 +76,7 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        coordinator.addSystemTopPadding()
 
         vToolbar.init(
                 title = R.string.timetable_title_current,
@@ -71,7 +84,8 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
                         stringId = R.string.timetable_dialog_other_week_button,
                         iconId = R.drawable.ic_calendar_small,
                         action = { presenter.selectWeekDialog() }
-                )
+                ),
+                padding = false
         )
 
         with(rvWeek) {
@@ -84,6 +98,10 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
             adapter = this@TimetableFragment.headerAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)
+        }
+
+        btnSelectGroup.setOnClickListener {
+            presenter.goToSettings()
         }
     }
 
@@ -115,12 +133,14 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
                     rvWeekHeader.layoutManager?.scrollToPosition(headerAdapter.getItemPosition(currentDay.date))
                 }
             }
+            enableAppbar()
         }
     }
 
     private fun showEmpty(show: Boolean) {
         vgEmpty.visibility = if (show) View.VISIBLE else View.GONE
         vgContent.visibility = if (show) View.GONE else View.VISIBLE
+        openAndDisableAppbar()
     }
 
     override fun showTitle(week: Int) {
@@ -140,7 +160,10 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
         cvError.setOnClickListener {
             presenter.loadSchedule()
         }
+        openAndDisableAppbar()
     }
+
+
 
     override fun toggleLoading(show: Boolean) {
         vgMain.visibility = if (show) View.GONE else View.VISIBLE
@@ -172,6 +195,24 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
         (rvWeek.layoutManager as LinearLayoutManager).startSmoothScroll(smoothScroller)
     }
 
+    override fun showEmptyGroups() {
+        vgEmpty.visibility = View.GONE
+        vgContent.visibility = View.GONE
+        vgSelectGroup.visibility = View.VISIBLE
+        openAndDisableAppbar()
+    }
+
+    override fun showGroup(group: GroupRealm?) {
+        if (group == null) {
+            tvGroupTitle.visibility = View.GONE
+            tvGroupTitle.visibility = View.GONE
+        } else {
+            tvGroupTitle.visibility = View.VISIBLE
+            tvGroupTitle.visibility = View.VISIBLE
+            tvGroup.text = group.name
+        }
+    }
+
     private fun scrollToDay(date: String) {
         val smoothScroller = object : LinearSmoothScroller(context) {
             override fun getHorizontalSnapPreference(): Int {
@@ -184,6 +225,41 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
         }
         smoothScroller.targetPosition = headerAdapter.getItemPosition(date)
         (rvWeekHeader.layoutManager as LinearLayoutManager).startSmoothScroll(smoothScroller)
+    }
+
+    /**
+     * Открываем аппбар и не даем
+     * его закрыть, если нет контента для
+     * скрола.
+     * Ш
+     */
+    private fun openAndDisableAppbar() {
+        appbar.setExpanded(true)
+        val params = appbar.layoutParams as CoordinatorLayout.LayoutParams
+        if (params.behavior == null)
+            params.behavior = AppBarLayout.Behavior()
+        val behaviour = params.behavior as AppBarLayout.Behavior
+        behaviour.setDragCallback(object : AppBarLayout.Behavior.DragCallback() {
+            override fun canDrag(appBarLayout: AppBarLayout): Boolean {
+                return false
+            }
+        })
+    }
+
+    /**
+     * Включение аппабра.
+     * (разрешаем его скролить)
+     */
+    private fun enableAppbar() {
+        val params = appbar.layoutParams as CoordinatorLayout.LayoutParams
+        if (params.behavior == null)
+            params.behavior = AppBarLayout.Behavior()
+        val behaviour = params.behavior as AppBarLayout.Behavior
+        behaviour.setDragCallback(object : AppBarLayout.Behavior.DragCallback() {
+            override fun canDrag(appBarLayout: AppBarLayout): Boolean {
+                return true
+            }
+        })
     }
 
     override fun onBackPressed() {

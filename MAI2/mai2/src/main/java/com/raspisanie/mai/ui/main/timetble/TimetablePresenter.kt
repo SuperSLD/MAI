@@ -8,6 +8,7 @@ import com.raspisanie.mai.common.TestDate
 import com.raspisanie.mai.common.base.BottomSheetDialogController
 import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.controllers.BottomVisibilityController
+import com.raspisanie.mai.controllers.ChangeBottomTabController
 import com.raspisanie.mai.controllers.SelectWeekController
 import com.raspisanie.mai.extesions.getSemester
 import com.raspisanie.mai.extesions.mappers.toLocal
@@ -29,6 +30,7 @@ import io.realm.Realm
 import org.koin.core.inject
 import pro.midev.supersld.common.base.BasePresenter
 import ru.terrakok.cicerone.Router
+import ru.terrakok.cicerone.android.support.SupportAppScreen
 import timber.log.Timber
 import java.util.*
 
@@ -37,6 +39,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
 
     private val bottomVisibilityController: BottomVisibilityController by inject()
     private val bottomSheetDialogController: BottomSheetDialogController by inject()
+    private val changeBottomTabController: ChangeBottomTabController by inject()
     private val realm: Realm by inject()
     private val service: ApiService by inject()
     private val selectWeekController: SelectWeekController by inject()
@@ -54,6 +57,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
         super.onFirstViewAttach()
         listenWeekNumber()
         loadFromRealm()
+        viewState.showGroup(realm.getCurrentGroup())
         YandexMetrica.reportEvent("OpenTimetable")
     }
 
@@ -77,12 +81,16 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
      * иначе оно загружается из локального хранилища.
      */
     private fun loadFromRealm() {
-        val schedule = realm.getCurrentSchedule()
-        if (schedule == null || schedule.lastUpdate != Calendar.getInstance().get(Calendar.DAY_OF_YEAR)) {
-            loadSchedule()
+        if (realm.getAllGroup().isNotEmpty() && realm.getCurrentGroup() != null) {
+            val schedule = realm.getCurrentSchedule()
+            if (schedule == null || schedule.lastUpdate != Calendar.getInstance().get(Calendar.DAY_OF_YEAR)) {
+                loadSchedule()
+            } else {
+                showWeekByCurrent()
+                Timber.d("load week from schedule: ${currentSchedule?.groupId}")
+            }
         } else {
-            showWeekByCurrent()
-            Timber.d("load week from schedule: ${currentSchedule?.groupId}")
+            viewState.showEmptyGroups()
         }
     }
 
@@ -209,6 +217,13 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
         }
         currentWeek++
         showWeekByCurrent()
+    }
+
+    /**
+     * Переход к настройкам.
+     */
+    fun goToSettings() {
+        changeBottomTabController.changeMainScreen(Screens.FlowSettings)
     }
 
     private fun listenWeekNumber() {

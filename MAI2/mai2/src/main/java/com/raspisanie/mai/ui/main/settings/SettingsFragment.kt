@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Vibrator
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.raspisanie.mai.models.local.DevLocal
 import com.raspisanie.mai.models.local.ScheduleLocal
 import com.raspisanie.mai.models.realm.GroupRealm
 import com.yandex.metrica.YandexMetrica
+import com.yandex.metrica.impl.ob.V
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_info.view.*
 import pro.midev.supersld.common.base.BaseFragment
@@ -188,11 +190,22 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
         rvDevs.show(!show)
     }
 
-    override fun showCurrentGroup(group: GroupRealm) {
-        tvGroup.text = group.name
-        tvLocation.text = group.fac
-        tvSpec.text = group.level
-        tvYear.text = getString(R.string.select_group_level, group.course)
+    /**
+     * Показываем группу пользователя,
+     * если она не выбрана то показываем текст с иконкой.
+     */
+    override fun showCurrentGroup(group: GroupRealm?) {
+        if (group != null) {
+            vgGroupEmpty.visibility = View.GONE
+            vgGroupInfo.visibility = View.VISIBLE
+            tvGroup.text = group.name
+            tvLocation.text = group.fac
+            tvSpec.text = group.level
+            tvYear.text = getString(R.string.select_group_level, group.course)
+        } else {
+            vgGroupEmpty.visibility = View.VISIBLE
+            vgGroupInfo.visibility = View.GONE
+        }
     }
 
     override fun showGroups(groups: MutableList<GroupRealm>) {

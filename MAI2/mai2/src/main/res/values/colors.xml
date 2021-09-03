@@ -9,7 +9,7 @@
 
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorBackgroundSecondary">#FFFFFF</color>
-    <color name="colorBackgroundDark">#DBE1E4</color>
+    <color name="colorBackgroundDark">#F9FBFC</color>
 
     <!-- Text -->
     <color name="colorTextPrimary">#333333</color>

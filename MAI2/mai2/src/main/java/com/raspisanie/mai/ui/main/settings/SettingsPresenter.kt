@@ -69,7 +69,7 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     }
 
     private fun showCurrentGroup() {
-        realm.getCurrentGroup()?.let { viewState.showCurrentGroup(it) }
+        viewState.showCurrentGroup(realm.getCurrentGroup())
     }
 
     private fun showScheduleInfo() {

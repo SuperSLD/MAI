@@ -91,6 +91,15 @@
                 android:layout_marginEnd="36dp"
                 android:text="@string/start_button"/>
 
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSkip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="36dp"
+                    style="@style/ButtonEmpty"
+                    android:text="@string/start_skip"/>
         </LinearLayout>
     </FrameLayout>
 

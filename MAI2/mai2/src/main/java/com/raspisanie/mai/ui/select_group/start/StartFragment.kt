@@ -19,6 +19,10 @@ class StartFragment : BaseFragment(R.layout.fragment_start), MvpView {
         btnNext.setOnClickListener {
             presenter.goSelectYear()
         }
+
+        btnSkip.setOnClickListener {
+            presenter.skip()
+        }
     }
 
     override fun onBackPressed() {

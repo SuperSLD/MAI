@@ -11,7 +11,7 @@ import com.raspisanie.mai.models.realm.GroupRealm
 
 interface SettingsView : MvpView {
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showCurrentGroup(group: GroupRealm)
+    fun showCurrentGroup(group: GroupRealm?)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showGroups(groups: MutableList<GroupRealm>)

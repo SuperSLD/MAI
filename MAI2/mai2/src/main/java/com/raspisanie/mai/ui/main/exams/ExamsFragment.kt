@@ -7,6 +7,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.models.local.WeekLocal
 import com.raspisanie.mai.ui.main.timetble.TimetableAdapter
+import com.yandex.metrica.impl.ob.V
 import kotlinx.android.synthetic.main.fragment_exams.*
 import pro.midev.supersld.common.base.BaseFragment
 
@@ -29,6 +30,10 @@ class ExamsFragment : BaseFragment(R.layout.fragment_exams), ExamsView {
             adapter = this@ExamsFragment.adapter
             layoutManager = LinearLayoutManager(context)
         }
+
+        btnSelectGroup.setOnClickListener {
+            presenter.goToSettings()
+        }
     }
 
     override fun showExams(week: WeekLocal?) {
@@ -38,6 +43,12 @@ class ExamsFragment : BaseFragment(R.layout.fragment_exams), ExamsView {
             showEmpty(false)
             adapter.addData(week, true)
         }
+    }
+
+    override fun showEmptyGroups() {
+        vgEmpty.visibility = View.GONE
+        vgContent.visibility = View.GONE
+        vgSelectGroup.visibility = View.VISIBLE
     }
 
     private fun showEmpty(show: Boolean) {
