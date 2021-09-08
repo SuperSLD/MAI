@@ -3,12 +3,13 @@ package com.raspisanie.mai.extesions
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
+import android.os.Build
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.raspisanie.mai.R
 
@@ -34,7 +35,11 @@ fun Context.showToast(iconId: Int, message: String = "", isLong: Boolean = false
     val ivIcon = view.findViewById<ImageView>(R.id.ivIcon)
 
     tvMessage.text = message
-    ivIcon.setImageDrawable(ContextCompat.getDrawable(this, iconId))
+    if (Build.VERSION.SDK_INT > 24) {
+        ivIcon.setImageDrawable(ContextCompat.getDrawable(this, iconId))
+    } else {
+        ivIcon.visibility = View.GONE
+    }
 
     val toast = Toast(this)
     toast.setGravity(Gravity.BOTTOM, 0, 80.px)
