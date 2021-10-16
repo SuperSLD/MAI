@@ -202,6 +202,9 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                 val subject = data as SubjectLocal
                 router?.navigateTo(Screens.LectorSchedule(subject.teacher, subject.date))
             }
+            OPEN_ONLINE -> {
+                viewState.openOnlineLink(data as String)
+            }
         }
     }
 
@@ -252,5 +255,6 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
     companion object {
         const val GO_TO_NEXT_WEEK = 0
         const val OPEN_LECTOR_SCHEDULE = 1
+        const val OPEN_ONLINE = 2
     }
 }

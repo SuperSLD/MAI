@@ -46,6 +46,7 @@ class LectorScheduleFragment : BaseFragment(R.layout.fragment_lector_schedule), 
     }
 
     override fun showSchedule(day: DayLocal) {
+        day.subjects.forEach { it.link = "" }
         adapter.addData(
             arguments?.getParcelable(ARG_LECTOR)!!,
             day

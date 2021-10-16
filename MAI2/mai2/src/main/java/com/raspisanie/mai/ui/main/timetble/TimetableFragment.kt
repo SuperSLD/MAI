@@ -10,6 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.google.android.material.appbar.AppBarLayout
 import com.raspisanie.mai.R
 import com.raspisanie.mai.controllers.SelectWeekController
+import com.raspisanie.mai.extesions.openWebLink
 import com.raspisanie.mai.models.local.DayLocal
 import com.raspisanie.mai.models.local.WeekLocal
 import com.raspisanie.mai.models.realm.GroupRealm
@@ -200,6 +201,10 @@ class TimetableFragment : BaseFragment(R.layout.fragment_timetable), TimetableVi
         vgContent.visibility = View.GONE
         vgSelectGroup.visibility = View.VISIBLE
         openAndDisableAppbar()
+    }
+
+    override fun openOnlineLink(link: String) {
+        requireContext().openWebLink(link)
     }
 
     override fun showGroup(group: GroupRealm?) {

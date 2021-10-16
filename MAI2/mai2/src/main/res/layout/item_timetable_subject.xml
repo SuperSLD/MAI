@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvSubject"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -13,89 +14,120 @@
     android:layout_marginBottom="@dimen/paddingMin"
     app:cardCornerRadius="@dimen/radiusNormal">
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/paddingMid">
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            app:cardBackgroundColor="@color/colorPrimary"
-            app:cardCornerRadius="17dp"
-            app:cardElevation="0dp">
-            <TextView
-                android:id="@+id/tvLessonNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorTextWhite"
-                android:textSize="@dimen/textNormalHint"
-                android:layout_gravity="center"
-                android:text="1"/>
-        </com.google.android.material.card.MaterialCardView>
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="@dimen/paddingMin">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="4dp">
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/textNormalHint"
-                    android:fontFamily="@font/roboto_bold"
-                    android:textColor="@color/colorTextPrimary"
-                    android:text="Физическая культура"/>
-                <TextView
-                    android:id="@+id/tvTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/colorTextSecondary"
-                    android:textSize="@dimen/textNormalMin"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="13:00-14:30"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvTeacher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:textSize="@dimen/textNormalMin"
-                android:fontFamily="@font/roboto_regular"
-                android:layout_marginTop="@dimen/paddingMin"
-                android:textColor="@color/colorPrimary"
-                android:text="Кондратьева Людмила Александровна"/>
-            <LinearLayout
+    >
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="@dimen/paddingMin">
+                android:padding="@dimen/paddingMid"
+                android:clipToPadding="false"
+        >
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardCornerRadius="17dp"
+                    app:cardElevation="0dp">
                 <TextView
-                    android:id="@+id/tvLocation"
-                    android:layout_width="wrap_content"
+                        android:id="@+id/tvLessonNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorTextWhite"
+                        android:textSize="@dimen/textNormalHint"
+                        android:layout_gravity="center"
+                        android:text="1"/>
+            </com.google.android.material.card.MaterialCardView>
+            <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:textSize="@dimen/textNormalMin"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textColor="@color/colorTextPrimary"
-                    android:text="LMS - Teams"/>
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/paddingMin">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="4dp">
+                    <TextView
+                            android:id="@+id/tvName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/textNormalHint"
+                            android:fontFamily="@font/roboto_bold"
+                            android:textColor="@color/colorTextPrimary"
+                            android:text="Физическая культура"/>
+                    <TextView
+                            android:id="@+id/tvTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="@dimen/textNormalMin"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="13:00-14:30"/>
+                </LinearLayout>
                 <TextView
-                    android:id="@+id/tvType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:textColor="@color/colorTextSecondary"
-                    android:textSize="@dimen/textNormalMin"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="13:00-14:30"/>
+                        android:id="@+id/tvTeacher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:textSize="@dimen/textNormalMin"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_marginTop="@dimen/paddingMin"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Кондратьева Людмила Александровна"/>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/paddingMin">
+                    <TextView
+                            android:id="@+id/tvLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:textSize="@dimen/textNormalMin"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textColor="@color/colorTextPrimary"
+                            android:text="LMS - Teams"/>
+                    <TextView
+                            android:id="@+id/tvType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="@dimen/textNormalMin"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="13:00-14:30"/>
+                </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/vgOnlineLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary"
+                android:padding="16dp"
+                android:layout_gravity="center_vertical"
+        >
+            <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_launch"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/colorTextWhite"
+                    android:layout_marginStart="18dp"
+                    android:text="@string/timetable_online_link"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

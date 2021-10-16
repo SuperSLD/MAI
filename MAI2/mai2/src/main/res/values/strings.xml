@@ -84,6 +84,7 @@
     <string name="timetable_new_sem">Пришло новое расписание на начало учебного года! Название вашей группы могло измениться, по этому пожалуйста выберите её еще раз.</string>
     <string name="timetable_select_group">Чтобы увидеть расписание, нужно выбрать свою учебную группу</string>
     <string name="timetable_group">Выбранная группа:</string>
+    <string name="timetable_online_link">Перейти к онлайн занятию</string>
 
 
     <!-- Settings Fragment -->
@@ -115,10 +116,10 @@
     <string name="settings_group_confirm_delete">Вы точно хотите удалить группу из быстрого доступа?</string>
     <string name="settings_group_confirm_delete_accept">Удалить</string>
     <string name="settings_group_confirm_delete_cancel">Отменить</string>
-    <string name="settings_feedback_title">Сообщите нам об ошибке и помогите сделать приложеие лучше для вас!</string>
+    <string name="settings_feedback_title">Сообщите нам об ошибке и помогите сделать приложение лучше для вас!</string>
     <string name="settings_feedback_email">Введите почту для обратной связи</string>
     <string name="settings_feedback_name">Как к вам обращаться?</string>
-    <string name="settings_feedback_message">Опишите проблемму с которой вы столкнулись</string>
+    <string name="settings_feedback_message">Опишите проблему с которой вы столкнулись</string>
     <string name="settings_feedback_send">Отправить</string>
     <string name="settings_feedback_toolbar">Поддержка</string>
     <string name="settings_feedback_success_text">Ваше обращение принято в обработку, и мы постраемся ответить на него как можно скорее</string>

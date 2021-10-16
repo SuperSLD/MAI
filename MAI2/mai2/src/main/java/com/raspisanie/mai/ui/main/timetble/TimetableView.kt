@@ -21,6 +21,9 @@ interface TimetableView: BaseView {
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showEmptyGroups()
 
+    @StateStrategyType(SkipStrategy::class)
+    fun openOnlineLink(link: String)
+
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showGroup(group: GroupRealm?)
 }
