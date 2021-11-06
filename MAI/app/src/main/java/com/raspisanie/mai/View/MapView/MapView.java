@@ -8,12 +8,13 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
-
 import com.raspisanie.mai.R;
 import com.raspisanie.mai.View.MapView.Classes.Map;
 import com.raspisanie.mai.View.MapView.Classes.Road;
 import com.raspisanie.mai.View.MapView.Classes.Structure;
 
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -21,31 +22,9 @@ import java.nio.FloatBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
-
 import static android.opengl.GLES10.glActiveTexture;
 import static android.opengl.GLES10.glBindTexture;
-import static android.opengl.GLES11.glTexCoordPointer;
-import static android.opengl.GLES11.glVertexPointer;
-import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
-import static android.opengl.GLES20.GL_FLOAT;
-import static android.opengl.GLES20.GL_FRAGMENT_SHADER;
-import static android.opengl.GLES20.GL_LINES;
-import static android.opengl.GLES20.GL_TRIANGLES;
-import static android.opengl.GLES20.GL_VERTEX_SHADER;
-import static android.opengl.GLES20.glClear;
-import static android.opengl.GLES20.glClearColor;
-import static android.opengl.GLES20.glDrawArrays;
-import static android.opengl.GLES20.glEnableVertexAttribArray;
-import static android.opengl.GLES20.glGetAttribLocation;
-import static android.opengl.GLES20.glGetUniformLocation;
-import static android.opengl.GLES20.glLineWidth;
-import static android.opengl.GLES20.glUniform1f;
-import static android.opengl.GLES20.glUniform4f;
-import static android.opengl.GLES20.glUseProgram;
-import static android.opengl.GLES20.glVertexAttribPointer;
-import static android.opengl.GLES20.glViewport;
+import static android.opengl.GLES20.*;
 
 /**
  * @author Леонид Соляной (solyanoy.leonid@gmail.com)
@@ -191,7 +170,7 @@ public class MapView extends GLSurfaceView {
 
             int startIndex = 0;
             glUniform4f(uColorLocation, 197/255f, 239/255f, 199/255f, 1f);
-            glDrawArrays(GL_TRIANGLES, 0, map.getGrassCount());
+            glDrawArrays(GL_TRIANGLES, startIndex, map.getGrassCount());
             startIndex += map.getGrassCount();
 
             for (int i = 0; i < 4; i++) {

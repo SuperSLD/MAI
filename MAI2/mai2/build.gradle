@@ -110,4 +110,6 @@ dependencies {
 
     // Yandex метрика
     implementation 'com.yandex.android:mobmetricalib:3.20.1'
+
+    implementation project(":juttermap")
 }

@@ -5,6 +5,7 @@ import com.raspisanie.mai.di.appModule
 import com.raspisanie.mai.extesions.getIsDayTheme
 import com.yandex.metrica.YandexMetrica
 import com.yandex.metrica.YandexMetricaConfig
+import pro.midev.juttermap.JTMapView
 import pro.midev.supersld.AppBase
 
 
@@ -19,6 +20,11 @@ class App : AppBase(appModule = appModule) {
                 }
         )
         initYandex()
+        initMapKit()
+    }
+
+    private fun initMapKit() {
+        JTMapView.setApiKey("d00e4c93-2c89-499b-9831-8fd0ff153f23")
     }
 
     private fun initYandex() {

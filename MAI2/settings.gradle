@@ -1,2 +1,3 @@
+include ':juttermap'
 include ':mai2'
 rootProject.name = "MAI2"

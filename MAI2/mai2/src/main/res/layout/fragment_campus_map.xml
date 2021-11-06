@@ -5,11 +5,10 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <com.github.chrisbanes.photoview.PhotoView
-            android:id="@+id/vPhoto"
+    <pro.midev.juttermap.JTMapView
+            android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_campus_map"/>
+            android:layout_height="match_parent"/>
 
     <FrameLayout
             android:id="@+id/vgButtonContainer"
