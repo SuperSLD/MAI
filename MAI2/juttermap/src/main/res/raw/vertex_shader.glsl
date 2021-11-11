@@ -10,7 +10,7 @@ void main() {
 
     //преобразование кординат
     float posX = a_Position.x * k + uCenterX;
-    float posY = a_Position.y * uWindowK * -k - uCenterY;
+    float posY = a_Position.y * -k - uCenterY;// * uWindowK * -k - uCenterY;
     float posZ = a_Position.z;
     float posW = a_Position.w;
 

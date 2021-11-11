@@ -32,6 +32,6 @@ class JTStartGeometry (
             abs(size.first.longitude - size.second.longitude)
         )
         val v = 2
-        return ((0.8f*v)/s).toFloat()
+        return ((v)/s).toFloat()
     }
 }

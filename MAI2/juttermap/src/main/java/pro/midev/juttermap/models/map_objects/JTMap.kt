@@ -48,7 +48,7 @@ class JTMap(json: JsonElement) {
      * тотображения по слоям.
      */
     fun getVertexData() : FloatArray {
-        val array = mutableListOf(1f, 0f, 4634.73184495556f, -799.4267958912493f,  -1f, 0f)//mutableListOf<Float>()
+        val array = mutableListOf(1f, 0f, 55.81238f, 21.731160512890003f,  -1f, 0f)//mutableListOf<Float>()
         for (layer in layers) {
             val layerObjects = mObjects.filter { it.getType() == layer }
             layerObjects.forEach { obj ->

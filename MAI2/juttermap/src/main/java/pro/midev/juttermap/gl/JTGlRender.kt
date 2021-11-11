@@ -3,6 +3,9 @@ package pro.midev.juttermap.gl
 import android.graphics.Color
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import pro.midev.juttermap.JTMapView
 import pro.midev.juttermap.R
 import pro.midev.juttermap.common.JTColorData
@@ -122,8 +125,18 @@ class JTGlRender(
         GLES20.glVertexAttribPointer(mAPositionLocation, 2, GLES20.GL_FLOAT, false, 0, mVertexData)
         GLES20.glEnableVertexAttribArray(mAPositionLocation)
 
-        var startIndex = 0
-        GLES20.glUniform4f(mUColorLocation, 0 / 255f, 0 / 255f, 0 / 255f, 1f)
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, startIndex, mVertices.size)
+        drawTriangle(0, 3, mColorData.buildingColors[1])
+        drawTriangle(3, mVertices.size, mColorData.buildingColors[0])
+    }
+
+    /**
+     * Отрисовка массива треугольников, с определенным цветом.
+     * @param from начальный индекс
+     * @param to конечный индекс
+     * @param color цвет треугольников
+     */
+    private fun drawTriangle(from: Int, to: Int, color: Int) {
+        GLES20.glUniform4f(mUColorLocation, color.red / 255f, color.green / 255f, color.blue / 255f, 1f)
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, from, to)
     }
 }

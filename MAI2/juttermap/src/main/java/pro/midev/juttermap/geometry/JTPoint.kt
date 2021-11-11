@@ -29,10 +29,9 @@ class JTPoint : Cloneable {
         // (широта B, долгота L, высота H = 0)
         val B = jsonObject["lat"].asDouble
         val L = jsonObject["lon"].asDouble
-        val H = 875
 
-        this.latitude  = (N(B) - H) * cos(B) * cos(L)
-        this.longitude = (N(B) - H) * cos(B) * sin(L)
+        this.latitude  = B //(N(B) - H) * cos(B) * cos(L)
+        this.longitude = L * 0.57947 //(N(B) - H) * cos(B) * sin(L)
     }
 
     /**

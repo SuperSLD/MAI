@@ -70,9 +70,9 @@ class JTMapView : GLSurfaceView {
     private val mMapLoadCallback = object : JTMapCallback {
         override fun onLoad(map: JTMap) {
             val startGeo = JTStartGeometry(map)
-            mZoom = 1f//startGeo.getStartZoom()
-            mCenterX = 0f//startGeo.getStartPosition().latitude.toFloat() * mZoom
-            mCenterY = 0f//startGeo.getStartPosition().longitude.toFloat() * mZoom
+            mZoom = startGeo.getStartZoom()
+            mCenterX = -startGeo.getStartPosition().latitude.toFloat() * mZoom
+            mCenterY = -startGeo.getStartPosition().longitude.toFloat() * mZoom
             this@JTMapView.mMap = map
             mRender?.mapLoaded()
             mLoading = false
