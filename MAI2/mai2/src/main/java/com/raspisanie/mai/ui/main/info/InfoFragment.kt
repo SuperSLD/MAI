@@ -20,6 +20,9 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        lAdv.setOnClickListener {
+            presenter.openAdvList()
+        }
         lNews.setOnClickListener {
             presenter.openNews()
         }
@@ -50,11 +53,12 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
 
     private fun setView() {
         val views = mutableListOf(
-                lNews, lLectors,
+                lAdv, lNews, lLectors,
                 lMap, lCanteen, lLibrary,
                 lSport, lStudents, lCreative
         )
         val titles = mutableListOf(
+                resources.getString(R.string.info_button_adv),
                 resources.getString(R.string.info_button_news),
                 getString(R.string.info_button_lectors),
                 resources.getString(R.string.info_button_map),
@@ -65,6 +69,7 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
                 resources.getString(R.string.info_button_creative)
         )
         val icons = mutableListOf(
+                R.drawable.ic_adv,
                 R.drawable.ic_news,
                 R.drawable.ic_calendar,
                 R.drawable.ic_map,

@@ -3,10 +3,7 @@ package com.raspisanie.mai.server
 import com.raspisanie.mai.models.DataWrapper
 import com.raspisanie.mai.models.server.*
 import io.reactivex.rxjava3.core.Single
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 
 interface Api {
@@ -18,6 +15,12 @@ interface Api {
 
     @POST("feedback/send")
     fun sendFeedback(@Body body: FeedbackBody) : Single<DataWrapper<Any?>>
+
+    @GET("advertisements/get")
+    fun getAdvPage(
+        @Query("limit") limit: Int,
+        @Query("skip") skip: Int
+    ) : Single<DataWrapper<MutableList<AdvResponse>>>
 
     @GET("canteens/all")
     fun getCanteens() : Single<DataWrapper<MutableList<CanteenResponse>>>
@@ -48,4 +51,7 @@ interface Api {
 
     @GET("schedule/lector/{id}")
     fun getLectorSchedule(@Path("id") id: String) : Single<DataWrapper<MutableList<WeekResponse>>>
+
+    @POST("advertisements/add")
+    fun createAdv(@Body body: AdvCreateBody) : Single<DataWrapper<Any?>>
 }

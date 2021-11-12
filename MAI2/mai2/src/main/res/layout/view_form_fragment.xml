@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:id="@+id/TVvgContainer"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    >
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+        >
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+            >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/btnNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text=""
+                    style="@style/ButtonSolid"
+                    android:drawablePadding="8dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/btnPrevious"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text=""
+                    style="@style/ButtonEmpty"
+                    android:drawablePadding="8dp"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
