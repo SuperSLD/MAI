@@ -9,6 +9,9 @@ import com.raspisanie.mai.ui.main.exams.ExamsFragment
 import com.raspisanie.mai.ui.main.exams.FlowExamsFragment
 import com.raspisanie.mai.ui.main.info.FlowInfoFragment
 import com.raspisanie.mai.ui.main.info.InfoFragment
+import com.raspisanie.mai.ui.main.info.adv_list.AdvFragment
+import com.raspisanie.mai.ui.main.info.adv_list.add_adv.AddAdvFragment
+import com.raspisanie.mai.ui.main.info.adv_list.create_adv_success.CreateAdvSuccessFragment
 import com.raspisanie.mai.ui.main.info.campus_map.CampusMapFragment
 import com.raspisanie.mai.ui.main.info.canteens.CanteensFragment
 import com.raspisanie.mai.ui.main.info.creative.CreativeFragment
@@ -118,6 +121,18 @@ object Screens {
 
     data class Calendar(val start: String, val end: String): SupportAppScreen() {
         override fun getFragment(): Fragment = CalendarFragment.create(start, end)
+    }
+    
+    object AdvList: SupportAppScreen() {
+        override fun getFragment(): Fragment = AdvFragment()
+    }
+
+    object AddAdv: SupportAppScreen() {
+        override fun getFragment(): Fragment = AddAdvFragment()
+    }
+
+    object CreateAdvSuccess: SupportAppScreen() {
+        override fun getFragment(): Fragment = CreateAdvSuccessFragment()
     }
 
     /** Экзаменационный роутер */

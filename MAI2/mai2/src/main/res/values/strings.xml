@@ -26,6 +26,7 @@
     <!-- Info Fragment -->
     <string name="info_title">МАИ</string>
     <string name="info_app_title">Интересное</string>
+    <string name="info_button_adv">Доска объявлений</string>
     <string name="info_button_news">Новости приложения</string>
     <string name="info_campus_title">Кампус</string>
     <string name="info_life_title">Жизнь</string>
@@ -46,6 +47,15 @@
     <string name="info_lector_schedule_button">Посмотреть другие дни</string>
     <string name="info_lector_schedule_calendar">Выбор даты</string>
 
+    <string name="adv_title">Объявления</string>
+    <string name="adv_create_button">Добавить объявление</string>
+    <string name="adv_create_load_error">При загрузке произошла ошибка</string>
+    <string name="adv_create_reload">Повторить</string>
+    <string name="adv_contacts">Способы связи:</string>
+
+    <string name="adv_add_title">Создание объявления</string>
+    <string name="adv_create_success_message">Ваше объявление успешно отправлено! В ближайшее время мы его рассмотрим и опубликуем.</string>
+    <string name="adv_create_success_subtext">Если оно будет нарушать какие-то правила, то мы об этом сообщим по оставленным контактам.</string>
 
     <!-- Canteens Fragment -->
     <string name="canteens_title">Столовые и буфеты</string>
@@ -127,4 +137,5 @@
     <string name="settings_info_students_text">Адрес:</string>
     <string name="settings_change_group">Выбранна новая группа</string>
     <string name="settings_remove_group">Группа удалена из быстрого доступа</string>
+    <string name="form_file_mandatory">Обязательный файл</string>
 </resources>

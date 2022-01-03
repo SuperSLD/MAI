@@ -1,5 +1,6 @@
 package com.raspisanie.mai.server
 
+import com.raspisanie.mai.models.server.AdvCreateBody
 import com.raspisanie.mai.models.server.FeedbackBody
 import com.raspisanie.mai.server.Api
 
@@ -9,6 +10,8 @@ class ApiService(private var api: Api) {
     fun getSchedule(id: String) = api.getSchedule(id)
 
     fun sendFeedback(body: FeedbackBody) = api.sendFeedback(body)
+
+    fun getAdvPage(limit: Int, skip: Int) = api.getAdvPage(limit, skip)
 
     fun getCanteens() = api.getCanteens()
 
@@ -29,4 +32,6 @@ class ApiService(private var api: Api) {
     fun getSearchLector(name: String) = api.getSearchLector(name)
 
     fun getLectorSchedule(id: String) = api.getLectorSchedule(id)
+
+    fun createAdv(body: AdvCreateBody) = api.createAdv(body)
 }

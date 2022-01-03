@@ -10,6 +10,7 @@
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorBackgroundSecondary">#FFFFFF</color>
     <color name="colorBackgroundDark">#F9FBFC</color>
+    <color name="colorBackgroundDarkSecondary">#F1F1F1</color>
 
     <!-- Text -->
     <color name="colorTextPrimary">#333333</color>

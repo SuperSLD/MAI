@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape_grey_border"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp"
+>
+    <TextView
+            android:id="@+id/tvHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/colorTextSecondary"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center"/>
+    <com.raspisanie.mai.ui.view.form.ClearedEditText
+            android:id="@+id/etInputLine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:gravity="top"
+            android:inputType="textEmailAddress"
+            android:hint="@string/settings_feedback_email"
+            android:textColor="@color/colorTextPrimary"
+            android:textColorHint="@color/colorTextSecondary"
+            android:fontFamily="@font/roboto_regular"
+            android:background="@null"
+    />
+    <!--
+    <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="hintTextColor">@color/colorTextSecondary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:inputType">text</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:background">@drawable/shape_edit_text_stroke</item>
+    -->
+
+</LinearLayout>
