@@ -1,8 +1,6 @@
 package com.raspisanie.mai.ui.main.info.adv_list.add_adv
 
 import android.content.Context
-import android.text.InputType.TYPE_CLASS_TEXT
-import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
