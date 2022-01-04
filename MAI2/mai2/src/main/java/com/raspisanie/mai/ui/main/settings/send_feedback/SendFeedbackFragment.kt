@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
+import com.raspisanie.mai.extesions.createFormParams
 import com.yandex.metrica.YandexMetrica
 import kotlinx.android.synthetic.main.fragment_adv_add.*
 import kotlinx.android.synthetic.main.fragment_feedback.*
@@ -30,7 +31,8 @@ class SendFeedbackFragment : BaseFragment(R.layout.fragment_feedback), SendFeedb
         with(vForm) {
             init(
                 form = presenter.createForm(),
-                childFragmentManager = childFragmentManager
+                childFragmentManager = childFragmentManager,
+                context.createFormParams()
             )
             onFinish(presenter::sendFeedback)
         }

@@ -1,23 +1,22 @@
 package com.raspisanie.mai.ui.main.info.adv_list.add_adv
 
 import android.content.Context
-import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 import android.text.InputType.TYPE_CLASS_TEXT
+import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.controllers.BottomVisibilityController
 import com.raspisanie.mai.extesions.mappers.toAdsCreateBody
-import com.raspisanie.mai.extesions.mappers.toLocall
 import com.raspisanie.mai.extesions.showToast
 import com.raspisanie.mai.server.ApiService
-import com.raspisanie.mai.ui.view.form.Form
-import com.raspisanie.mai.ui.view.form.FormPage
-import com.raspisanie.mai.ui.view.form.lines.TextInputLine
-import com.raspisanie.mai.ui.view.form.lines.TextLine
 import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import online.juter.supersld.view.input.form.JTForm
+import online.juter.supersld.view.input.form.JTFormPage
+import online.juter.supersld.view.input.form.lines.TextInputLine
+import online.juter.supersld.view.input.form.lines.TextLine
 import org.koin.core.inject
 import pro.midev.supersld.common.base.BasePresenter
 import timber.log.Timber
@@ -39,26 +38,26 @@ class AddAdvPresenter : BasePresenter<AddAdvView>() {
         YandexMetrica.reportEvent("OpenAdvCreate")
     }
 
-    fun createForm() = Form(
+    fun createForm() = JTForm(
         pages = mutableListOf(
-            FormPage(
+            JTFormPage(
                 lines = mutableListOf(
                     TextLine("Для начала необходимо указать свое имя и фамилию, чтоб все, кто смотрит на объявление, знали к кому обращаться"),
-                    TextInputLine("name", "name", "Имя", mandatory = true),
-                    TextInputLine("lastname", "lastname", "Фамилия", mandatory = true)
+                    TextInputLine("name", "Имя", mandatory = true),
+                    TextInputLine("lastname",  "Фамилия", mandatory = true)
                 ),
                 buttonText = "Далее"
             ),
-            FormPage(
+            JTFormPage(
                 lines = mutableListOf(
                     TextLine("Напишите текст для вашего объявления. После отправки мы его проверим и допустим в общую ленту"),
-                    TextInputLine("text", "text", "Текст объявления",
-                        mandatory = true, inputType = TYPE_CLASS_TEXT or TYPE_TEXT_FLAG_MULTI_LINE, minLines = 6
+                    TextInputLine("text", "Текст объявления",
+                        mandatory = true, inputType = TextInputLine.TEXT_MULTILINE, minLines = 6
                     )
                 ),
                 buttonText = "Далее"
             ),
-            FormPage(
+            JTFormPage(
                 lines = mutableListOf(
                     TextLine("Отлично! Остался последний шаг! Вам нужно указать как с вами можно связаться"),
                     TextLine("Вы можете заполнить несколько ссылкок или только одну"),
@@ -74,7 +73,7 @@ class AddAdvPresenter : BasePresenter<AddAdvView>() {
     )
 
 
-    fun sendForm(form: Form) {
+    fun sendForm(form: JTForm) {
         service.createAdv(form.toAdsCreateBody())
             .map { if (it.success) 0 else error(it.message.toString()) }
             .observeOn(AndroidSchedulers.mainThread())

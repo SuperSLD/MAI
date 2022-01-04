@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.raspisanie.mai.ui.view.form.FormView
+    <online.juter.supersld.view.input.form.JTFormView
             android:id="@+id/vForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
