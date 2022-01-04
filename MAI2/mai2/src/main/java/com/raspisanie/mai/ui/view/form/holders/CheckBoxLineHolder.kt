@@ -3,22 +3,21 @@ package com.raspisanie.mai.ui.view.form.holders
 import android.annotation.SuppressLint
 import android.view.View
 import com.raspisanie.mai.R
-import online.jutter.supersld.base.DFBaseHolder
-import online.jutter.supersld.base.HolderLayout
 import com.raspisanie.mai.ui.view.form.lines.CheckBoxLine
 import kotlinx.android.synthetic.main.item_line_check_box.view.*
+import online.jutter.diffadapter2.base.DFBaseHolder
+import online.jutter.diffadapter2.base.HolderLayout
 
 @SuppressLint("NonConstantResourceId")
 @HolderLayout(layout = R.layout.item_line_check_box)
-class CheckBoxLineHolder(itemView: View) : DFBaseHolder(itemView) {
+class CheckBoxLineHolder(itemView: View) : DFBaseHolder<CheckBoxLine>(itemView) {
     @SuppressLint("SetTextI18n")
-    override fun bind(data: Any?) {
-        val flag = data as CheckBoxLine
+    override fun bind(item: CheckBoxLine) {
         with(itemView) {
-            cbFlag.text = flag.text + if(flag.mandatory) "*" else ""
-            cbFlag.isChecked = flag.checked
+            cbFlag.text = item.text + if(item.mandatory) "*" else ""
+            cbFlag.isChecked = item.checked
             cbFlag.setOnCheckedChangeListener { _, isChecked ->
-                flag.checked = isChecked
+                item.checked = isChecked
             }
         }
     }
