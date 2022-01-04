@@ -6,21 +6,20 @@ import com.raspisanie.mai.R
 import com.raspisanie.mai.models.local.SportSectionLocal
 import com.raspisanie.mai.ui.main.info.sport.SportAdapter
 import kotlinx.android.synthetic.main.item_sport_section.view.*
-import online.jutter.supersld.base.DFBaseHolder
-import online.jutter.supersld.base.HolderLayout
+import online.jutter.diffadapter2.base.DFBaseHolder
+import online.jutter.diffadapter2.base.HolderLayout
 
 @SuppressLint("NonConstantResourceId")
 @HolderLayout(layout = R.layout.item_sport_section)
-class SportSectionHolder(itemView: View) : DFBaseHolder(itemView) {
-    override fun bind(data: Any?) {
-        val section = data as SportSectionLocal
+class SportSectionHolder(itemView: View) : DFBaseHolder<SportSectionLocal>(itemView) {
+    override fun bind(item: SportSectionLocal) {
         with(itemView) {
-            tvName.text = section.name
-            tvContactName.text = section.contactName
-            tvContact.text = section.contact
+            tvName.text = item.name
+            tvContactName.text = item.contactName
+            tvContact.text = item.contact
 
             btnPhone.setOnClickListener {
-                makeEvent(SportAdapter.PHONE_ACTION, section.contact)
+                makeEvent(SportAdapter.PHONE_ACTION, item.contact)
             }
         }
     }

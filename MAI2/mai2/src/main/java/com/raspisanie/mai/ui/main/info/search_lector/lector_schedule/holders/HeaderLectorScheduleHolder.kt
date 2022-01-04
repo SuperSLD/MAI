@@ -5,25 +5,22 @@ import android.view.View
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.getString
 import kotlinx.android.synthetic.main.item_lector_schedule_header.view.*
-import online.jutter.supersld.base.DFBaseHolder
-import online.jutter.supersld.base.HolderLayout
+import online.jutter.diffadapter2.base.DFBaseHolder
+import online.jutter.diffadapter2.base.HolderLayout
 import java.util.*
-import kotlin.collections.HashMap
 
-@Suppress("UNCHECKED_CAST")
 @SuppressLint("NonConstantResourceId")
 @HolderLayout(layout = R.layout.item_lector_schedule_header)
 class HeaderLectorScheduleHolder(
         itemView: View
-) : DFBaseHolder(itemView) {
-    override fun bind(data: Any?) {
-        val hashMap = data as HashMap<String, String>
+) : DFBaseHolder<HashMap<String, String>>(itemView) {
+    override fun bind(item: HashMap<String, String>) {
         with(itemView) {
-            tvName.text = hashMap["name"]
+            tvName.text = item["name"]
             tvDate.text =
                 context.getString(
                     R.string.info_lector_schedule_header_bottom,
-                    if (hashMap["date"] == "") getString(R.string.info_lector_schedule_today).toLowerCase(Locale.ROOT) else hashMap["date"]
+                    if (item["date"] == "") getString(R.string.info_lector_schedule_today).toLowerCase(Locale.ROOT) else item["date"]
                 )
         }
     }

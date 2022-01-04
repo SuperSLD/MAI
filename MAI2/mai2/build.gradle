@@ -100,10 +100,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // мои модули
-    implementation 'online.jutter.supersld:diffcycler:1.1.8'
-    implementation 'online.jutter.supersld:jt_state_machine:1.0.002'
+    implementation 'online.jutter.supersld:diffadapter:2.0.0'
     implementation 'online.jutter.supersld:midev_core:1.1.8'
-    implementation 'online.jutter.supersld:jutter_ui_kit:1.2.10'
+    implementation 'online.jutter.supersld:jutter_ui_kit:1.4.7'
 
     // фото со скролом
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'

@@ -3,53 +3,50 @@ package com.raspisanie.mai.ui.view.form.holders
 import android.annotation.SuppressLint
 import android.view.View
 import com.raspisanie.mai.R
-import online.jutter.supersld.base.DFBaseHolder
-import online.jutter.supersld.base.HolderLayout
-import org.koin.core.KoinComponent
 import com.raspisanie.mai.ui.view.form.FormLinesAdapter
 import com.raspisanie.mai.ui.view.form.lines.FileLine
-import com.yandex.metrica.impl.ob.V
 import kotlinx.android.synthetic.main.item_line_file.view.*
-import java.lang.IllegalArgumentException
+import online.jutter.diffadapter2.base.DFBaseHolder
+import online.jutter.diffadapter2.base.HolderLayout
+import org.koin.core.KoinComponent
 
 @SuppressLint("NonConstantResourceId")
 @HolderLayout(layout = R.layout.item_line_file)
-class FileLineHolder(itemView: View) : DFBaseHolder(itemView), KoinComponent {
-    override fun bind(data: Any?) {
-        val file = data as FileLine
+class FileLineHolder(itemView: View) : DFBaseHolder<FileLine>(itemView), KoinComponent {
+    override fun bind(item: FileLine) {
         val fileLoader = (getAdapter() as FormLinesAdapter).fileLoader ?: throw IllegalArgumentException("fileLoader is null for FileLine")
         with(itemView) {
-            toggleLoading(file.loading, file)
-            tvFile.text = file.fileName
-            tvFile.text = file.name
+            toggleLoading(item.loading, item)
+            tvFile.text = item.fileName
+            tvFile.text = item.name
 
-            tvRed.visibility = if (file.mandatory) View.VISIBLE else View.GONE
+            tvRed.visibility = if (item.mandatory) View.VISIBLE else View.GONE
 
             setOnClickListener {
-                fileLoader.pickFile(file.id, file.name)
+                fileLoader.pickFile(item.id, item.name)
             }
 
-            if (file.data == null) {
+            if (item.data == null) {
                 icFileDone.visibility = View.GONE
             } else {
                 tvCount.visibility = View.GONE
             }
 
-            fileLoader.onLoadChangeState(file.id) {
-                toggleLoading(it, file)
-                file.loading = it
+            fileLoader.onLoadChangeState(item.id) {
+                toggleLoading(it, item)
+                item.loading = it
             }
 
-            fileLoader.onFinishLoading(file.id) { name, guid ->
-                file.data = guid
-                file.fileName = name
+            fileLoader.onFinishLoading(item.id) { name, guid ->
+                item.data = guid
+                item.fileName = name
                 //tvFile.text = file.fileName
                 tvCount.visibility = View.GONE
                 icFileDone.visibility = View.VISIBLE
-                toggleLoading(false, file)
+                toggleLoading(false, item)
             }
 
-            tvCount.text = file.position.toString()
+            tvCount.text = item.position.toString()
         }
     }
 

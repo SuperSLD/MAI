@@ -3,29 +3,27 @@ package com.raspisanie.mai.ui.view.form.holders
 import android.annotation.SuppressLint
 import android.view.View
 import com.raspisanie.mai.R
-import kotlinx.android.synthetic.main.view_form.view.tvName
-import online.jutter.supersld.base.DFBaseHolder
-import online.jutter.supersld.base.HolderLayout
 import com.raspisanie.mai.ui.view.form.FormLinesAdapter
 import com.raspisanie.mai.ui.view.form.lines.SelectorLine
 import com.raspisanie.mai.ui.view.form.selector_bs.SelectorBSFragment
 import kotlinx.android.synthetic.main.item_line_selector.view.*
+import online.jutter.diffadapter2.base.DFBaseHolder
+import online.jutter.diffadapter2.base.HolderLayout
 
 @SuppressLint("NonConstantResourceId")
 @HolderLayout(layout = R.layout.item_line_selector)
-class SelectorLineHolder(itemView: View) : DFBaseHolder(itemView) {
+class SelectorLineHolder(itemView: View) : DFBaseHolder<SelectorLine>(itemView) {
     @SuppressLint("SetTextI18n")
-    override fun bind(data: Any?) {
-        val selector = data as SelectorLine
+    override fun bind(item: SelectorLine) {
         with(itemView) {
-            tvName.text = selector.title + if(selector.mandatory) "*" else ""
-            tvSelected.text = selectedString(selector, this)
+            tvName.text = item.title + if(item.mandatory) "*" else ""
+            tvSelected.text = selectedString(item, this)
 
             cvSelector.setOnClickListener {
-                val dialog = SelectorBSFragment.create(selector.title, selector.list)
+                val dialog = SelectorBSFragment.create(item.title, item.list)
                 dialog.onSelect {
-                    selector.setSelected(it.id)
-                    tvSelected.text = selectedString(selector, this)
+                    item.setSelected(it.id)
+                    tvSelected.text = selectedString(item, this)
                 }
                 dialog.show(
                     (getAdapter() as FormLinesAdapter).childFragmentManager,

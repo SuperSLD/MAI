@@ -1,28 +1,20 @@
 package com.raspisanie.mai.ui.main.info.adv_list
 
 import com.raspisanie.mai.models.local.*
-import com.raspisanie.mai.models.realm.DayRealm
-import com.raspisanie.mai.models.realm.WeekRealm
-import com.raspisanie.mai.models.server.LibraryResponse
 import com.raspisanie.mai.ui.main.info.adv_list.holders.AdvAddHolder
 import com.raspisanie.mai.ui.main.info.adv_list.holders.AdvHolder
 import com.raspisanie.mai.ui.main.info.adv_list.holders.AdvLoadingErrorHolder
 import com.raspisanie.mai.ui.main.info.adv_list.holders.AdvLoadingHolder
-import com.raspisanie.mai.ui.main.info.library.holders.LibraryCorpusHolder
-import com.raspisanie.mai.ui.main.info.library.holders.LibrarySectionHolder
-import com.raspisanie.mai.ui.main.info.sport.holders.SportCorpusHolder
-import com.raspisanie.mai.ui.main.info.sport.holders.SportSectionHolder
-import com.raspisanie.mai.ui.main.timetble.holders.*
-import online.jutter.supersld.DifAdapter
-import online.jutter.supersld.base.DFBaseHolder
-import online.jutter.supersld.base.HolderFactory
+import online.jutter.diffadapter2.DiffAdapter
+import online.jutter.diffadapter2.base.DFBaseHolder
+import online.jutter.diffadapter2.base.HolderFactory
 
 
 class AdvListAdapter(
     private val reload:()->Unit,
     private val openLink:(String)->Unit,
     private val addAdv:()->Unit
-) : DifAdapter() {
+) : DiffAdapter() {
 
     companion object {
         const val ADD_ADV_ITEM = 1001
@@ -38,8 +30,7 @@ class AdvListAdapter(
     private var hasMore = true
     private var errorLoading = false
 
-    override fun initFactory(): HolderFactory {
-        return HolderFactory(hashMapOf(
+    override fun initFactory() = HolderFactory(hashMapOf(
                 ADD_ADV_ITEM to AdvAddHolder::class.java,
                 LOADING_ITEM to AdvLoadingHolder::class.java,
                 ERROR_LOADING_ITEM to AdvLoadingErrorHolder::class.java,
@@ -52,26 +43,22 @@ class AdvListAdapter(
                 ADD_ADV_EVENT -> addAdv()
             }
         }
-    }
 
-    /**
-     * Пара (INT, ANY) -> (Тип для фабрики, Данные которые обрабатывает холдер данного типа)
-     */
-    private val list = mutableListOf<Pair<Int, Any?>>()
+
     fun hasMore() = hasMore && !errorLoading
     init {
-        list.add(Pair(ADD_ADV_ITEM, null))
+        getList().add(Pair(ADD_ADV_ITEM, 0))
     }
 
-    override fun onBindViewHolder(holder: DFBaseHolder, position: Int) {
-        holder.bind(if (list.size > position) list[position].second else null)
+    override fun onBindViewHolder(holder: DFBaseHolder<Any>, position: Int) {
+        holder.pubBind(if (getList().size > position) getList()[position].second else 0)
     }
 
-    override fun getItemCount(): Int = if (hasMore) list.size + 1 else list.size
+    override fun getItemCount(): Int = if (hasMore) getList().size + 1 else getList().size
 
     override fun getItemViewType(position: Int): Int {
-        return if (position < list.size) {
-            list[position].first
+        return if (position < getList().size) {
+            getList()[position].first
         } else {
             if (errorLoading) ERROR_LOADING_ITEM else LOADING_ITEM
         }
@@ -79,7 +66,7 @@ class AdvListAdapter(
 
     fun listSize() : Int {
         var count = 0
-        list.forEach {
+        getList().forEach {
             if (it.first == ADV_ITEM) count++
         }
         return count
@@ -87,7 +74,7 @@ class AdvListAdapter(
 
     fun addData(data: MutableList<AdvLocal>, hasMore: Boolean) {
         this.hasMore = hasMore
-        list.addAll(data.map { Pair(ADV_ITEM, it) })
+        getList().addAll(data.map { Pair(ADV_ITEM, it) })
         notifyDataSetChanged()
     }
 
