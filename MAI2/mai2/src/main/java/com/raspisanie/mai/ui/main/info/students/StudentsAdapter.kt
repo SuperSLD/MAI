@@ -1,16 +1,11 @@
 package com.raspisanie.mai.ui.main.info.students
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
 import com.raspisanie.mai.models.local.StudentOrganizationLocal
-import com.raspisanie.mai.models.realm.CanteenLocal
-import com.yandex.metrica.impl.ob.Un
-import kotlinx.android.synthetic.main.item_canteens.view.*
 import kotlinx.android.synthetic.main.item_stud.view.*
 
 
