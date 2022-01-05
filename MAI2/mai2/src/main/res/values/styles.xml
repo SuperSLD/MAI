@@ -4,7 +4,6 @@
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#FFFFFF</item>
         <item name="colorAccent">@color/colorPrimarySecondary</item>
-        <item name="android:windowBackground">@color/colorBackground</item>
 
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="android:windowIsTranslucent">true</item>

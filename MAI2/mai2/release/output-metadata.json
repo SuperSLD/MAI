@@ -11,8 +11,8 @@
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 11032,
-      "versionName": "2.3.1",
+      "versionCode": 11035,
+      "versionName": "2.4.5",
       "enabled": true,
       "outputFile": "mai2-release.apk"
     }
