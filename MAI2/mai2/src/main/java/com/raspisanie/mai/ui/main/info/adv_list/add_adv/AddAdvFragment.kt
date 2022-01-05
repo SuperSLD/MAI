@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
+import com.raspisanie.mai.extesions.createFormParams
 import kotlinx.android.synthetic.main.fragment_adv_add.*
 import kotlinx.android.synthetic.main.fragment_canteens.vToolbar
 import kotlinx.android.synthetic.main.fragment_library.*
 import kotlinx.android.synthetic.main.layout_loading.*
 import pro.midev.supersld.common.base.BaseFragment
+import pro.midev.supersld.extensions.addSystemBottomPadding
 
 class AddAdvFragment : BaseFragment(R.layout.fragment_adv_add), AddAdvView {
 
@@ -28,9 +30,11 @@ class AddAdvFragment : BaseFragment(R.layout.fragment_adv_add), AddAdvView {
         with(vForm) {
             init(
                 form = presenter.createForm(),
-                childFragmentManager = childFragmentManager
+                childFragmentManager = childFragmentManager,
+                context.createFormParams()
             )
             onFinish(presenter::sendForm)
+            addSystemBottomPadding()
         }
     }
 

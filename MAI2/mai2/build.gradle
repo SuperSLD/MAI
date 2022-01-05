@@ -102,7 +102,7 @@ dependencies {
     // мои модули
     implementation 'online.jutter.supersld:diffadapter:2.0.0'
     implementation 'online.jutter.supersld:midev_core:1.1.8'
-    implementation 'online.jutter.supersld:jutter_ui_kit:1.4.7'
+    implementation 'online.jutter.supersld:jutter_ui_kit:1.4.9'
 
     // фото со скролом
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'

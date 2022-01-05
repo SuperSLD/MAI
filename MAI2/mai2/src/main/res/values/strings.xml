@@ -138,4 +138,5 @@
     <string name="settings_change_group">Выбранна новая группа</string>
     <string name="settings_remove_group">Группа удалена из быстрого доступа</string>
     <string name="form_file_mandatory">Обязательный файл</string>
+    <string name="jutter">Jutter</string>
 </resources>
