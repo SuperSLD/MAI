@@ -63,15 +63,15 @@ class SendFeedbackPresenter : BasePresenter<SendFeedbackView>() {
             JTFormPage(
                 lines = mutableListOf(
                     TextLine("Укажите ваши контактные данные для того, чтобы мы смогли с вами связаться в случае, если понадобится дополнительная информация для решения проблеммы"),
-                    TextInputLine("name", "name", "Как к вам обращаться?", mandatory = true),
-                    TextInputLine("email", "email", "Ваш E-mail", mandatory = true)
+                    TextInputLine("name", "Как к вам обращаться?", mandatory = true),
+                    TextInputLine("email", "Ваш E-mail", mandatory = true)
                 ),
                 buttonText = "Далее"
             ),
             JTFormPage(
                 lines = mutableListOf(
                     TextLine("Опишите вашу проблему как можно подробнее, тогда мы сможем ее решить"),
-                    TextInputLine("message", "messafe", "Информация о проблемме",
+                    TextInputLine("message", "Информация о проблемме",
                         mandatory = true, inputType = TextInputLine.TEXT_MULTILINE, minLines = 6
                     )
                 ),

@@ -13,6 +13,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import online.juter.supersld.view.input.form.JTForm
 import online.juter.supersld.view.input.form.JTFormPage
+import online.juter.supersld.view.input.form.lines.SolidTextLine
 import online.juter.supersld.view.input.form.lines.TextInputLine
 import online.juter.supersld.view.input.form.lines.TextLine
 import org.koin.core.inject
@@ -44,7 +45,7 @@ class AddAdvPresenter : BasePresenter<AddAdvView>() {
                     TextInputLine("name", "Имя", mandatory = true),
                     TextInputLine("lastname",  "Фамилия", mandatory = true)
                 ),
-                buttonText = "Далее"
+                buttonText = "Перейти к описанию"
             ),
             JTFormPage(
                 lines = mutableListOf(
@@ -53,16 +54,16 @@ class AddAdvPresenter : BasePresenter<AddAdvView>() {
                         mandatory = true, inputType = TextInputLine.TEXT_MULTILINE, minLines = 6
                     )
                 ),
-                buttonText = "Далее"
+                buttonText = "Указать ссылки"
             ),
             JTFormPage(
                 lines = mutableListOf(
                     TextLine("Отлично! Остался последний шаг! Вам нужно указать как с вами можно связаться"),
                     TextLine("Вы можете заполнить несколько ссылкок или только одну"),
-                    TextInputLine("vk", "vk", "Ссылка на страницу вк или на группу", mandatory = false),
-                    TextInputLine("tg", "tg", "Ссылка на ваш телеграмм, канал или чат", mandatory = false),
-                    TextInputLine("other", "other", "Ссылка на любой другой ресурс", mandatory = false),
-                    TextLine("Важно понимать, что ссылки разделены именно так из за иконок, и если их перемешать, то вы просто запутаете пользователя")
+                    TextInputLine("vk", "Ссылка на страницу вк или на группу", mandatory = false),
+                    TextInputLine("tg", "Ссылка на ваш телеграмм, канал или чат", mandatory = false),
+                    TextInputLine("other", "Ссылка на любой другой ресурс", mandatory = false),
+                    SolidTextLine("Важно понимать, что ссылки разделены именно так из за иконок, и если их перемешать, то вы просто запутаете пользователя"),
                 ),
                 buttonText = "Далее"
             )

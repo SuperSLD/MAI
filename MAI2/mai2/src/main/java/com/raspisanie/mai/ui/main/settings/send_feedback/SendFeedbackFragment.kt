@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_feedback.vForm
 import kotlinx.android.synthetic.main.fragment_feedback.vToolbar
 import kotlinx.android.synthetic.main.layout_loading.*
 import pro.midev.supersld.common.base.BaseFragment
+import pro.midev.supersld.extensions.addSystemBottomPadding
 
 class SendFeedbackFragment : BaseFragment(R.layout.fragment_feedback), SendFeedbackView {
 
@@ -35,6 +36,7 @@ class SendFeedbackFragment : BaseFragment(R.layout.fragment_feedback), SendFeedb
                 context.createFormParams()
             )
             onFinish(presenter::sendFeedback)
+            addSystemBottomPadding()
         }
     }
 
