@@ -108,5 +108,5 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     // Yandex метрика
-    implementation 'com.yandex.android:mobmetricalib:3.20.1'
+    implementation 'com.yandex.android:mobmetricalib:4.1.1'
 }
