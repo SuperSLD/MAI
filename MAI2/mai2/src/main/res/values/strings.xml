@@ -2,6 +2,9 @@
     <string name="app_name">MAI</string>
     <string name="app_v">2.0</string>
 
+    <!-- VK SDK -->
+    <integer name="com_vk_sdk_AppId">8045644</integer>
+
     <!-- Системные штуки -->
     <string name="errorLoading">Опс, при загрузке произошла ошибка</string>
     <string name="errorLoadingText">Повторить</string>
@@ -137,6 +140,18 @@
     <string name="settings_info_students_text">Адрес:</string>
     <string name="settings_change_group">Выбранна новая группа</string>
     <string name="settings_remove_group">Группа удалена из быстрого доступа</string>
+
+    <string name="settings_vk_more">Подробнее</string>
+    <string name="settings_vk_text">Авторизуйся через ВКонтакте для доступа ко всем функциям</string>
+    <string name="settings_vk_more_title">Что даст авторизация через ВКонтакте?</string>
+    <string name="settings_vk_more_adv">Создавать объявления будет немного проще</string>
+    <string name="settings_vk_more_chat">Чат с поддержкой </string>
+    <string name="settings_vk_more_feature">Новые фичи, которые мы готовим</string>
+    <string name="settings_vk_more_in">Войти</string>
+    <string name="settings_vk_more_back">Назад</string>
+    <string name="settings_vk_more_auth_not_finished">Авторищация не завершена</string>
+
+    <!-- Другое -->
     <string name="form_file_mandatory">Обязательный файл</string>
     <string name="jutter">Jutter</string>
 </resources>

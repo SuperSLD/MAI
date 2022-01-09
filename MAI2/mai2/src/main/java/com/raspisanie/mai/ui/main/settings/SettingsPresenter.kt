@@ -20,7 +20,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import io.realm.Realm
 import org.koin.core.inject
 import pro.midev.supersld.common.base.BasePresenter
-import ru.terrakok.cicerone.Screen
 import timber.log.Timber
 
 @InjectViewState
@@ -134,6 +133,8 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     fun sendFeedback() = router?.navigateTo(Screens.Feedback)
 
     fun addGroup() = router?.navigateTo(Screens.AddGroup)
+
+    fun vkMore() = router?.navigateTo(Screens.VkMore)
 
     fun back() {
         router?.exit()

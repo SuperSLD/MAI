@@ -35,15 +35,15 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
     lateinit var presenter: SettingsPresenter
 
     private val colors by lazy { arrayListOf(
-            ContextCompat.getColor(context!!, R.color.colorPrimary),
-            ContextCompat.getColor(context!!, R.color.colorDiagram1),
-            ContextCompat.getColor(context!!, R.color.colorDiagram2),
-            ContextCompat.getColor(context!!, R.color.colorDiagram3),
-            ContextCompat.getColor(context!!, R.color.colorDiagram4),
-            ContextCompat.getColor(context!!, R.color.colorDiagram5),
-            ContextCompat.getColor(context!!, R.color.colorDiagram6),
-            ContextCompat.getColor(context!!, R.color.colorDiagram7),
-            ContextCompat.getColor(context!!, R.color.colorDiagram8)
+            ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram1),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram2),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram3),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram4),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram5),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram6),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram7),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram8)
         )
     }
 
@@ -110,6 +110,22 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             adapter = this@SettingsFragment.adapterDev
             layoutManager = LinearLayoutManager(context)
         }
+
+        btnVkMore.setOnClickListener {
+            presenter.vkMore()
+        }
+
+        showVkData()
+    }
+
+    private fun showVkData() {
+        if (requireContext().getVkAuth() != null) {
+            vgVkIsAuth.visibility = View.VISIBLE
+            vgVkNotAuth.visibility = View.GONE
+        } else {
+            vgVkIsAuth.visibility = View.GONE
+            vgVkNotAuth.visibility = View.VISIBLE
+        }
     }
 
     private fun setView() {
@@ -146,7 +162,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
         presenter.back()
     }
 
-    fun openLink(link: String) {
+    private fun openLink(link: String) {
         requireContext().openWebLink(link)
     }
 

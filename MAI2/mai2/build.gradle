@@ -109,4 +109,8 @@ dependencies {
 
     // Yandex метрика
     implementation 'com.yandex.android:mobmetricalib:4.1.1'
+
+    // VK Authorisation
+    implementation 'com.vk:android-sdk-core:3.3.0'
+    implementation 'com.vk:android-sdk-api:3.3.0'
 }

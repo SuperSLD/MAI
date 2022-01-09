@@ -27,6 +27,7 @@ import com.raspisanie.mai.ui.main.settings.SettingsFragment
 import com.raspisanie.mai.ui.main.settings.add_group.AddGroupFragment
 import com.raspisanie.mai.ui.main.settings.send_feedback.SendFeedbackFragment
 import com.raspisanie.mai.ui.main.settings.send_feedback.success.SuccessFragment
+import com.raspisanie.mai.ui.main.settings.vk.VkMoreFragment
 import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
 import com.raspisanie.mai.ui.main.timetble.TimetableFragment
 import com.raspisanie.mai.ui.main.timetble.new_group.NewGroupFragment
@@ -183,5 +184,9 @@ object Screens {
 
     object Success: SupportAppScreen() {
         override fun getFragment(): Fragment = SuccessFragment()
+    }
+
+    object VkMore: SupportAppScreen() {
+        override fun getFragment(): Fragment = VkMoreFragment()
     }
 }

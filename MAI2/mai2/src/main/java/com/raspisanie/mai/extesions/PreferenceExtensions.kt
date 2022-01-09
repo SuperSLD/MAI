@@ -12,6 +12,7 @@ const val IS_AUTH = "is_auth"
 const val IS_DAY_THEME = "is_day_theme"
 const val SEMESTER = "semester"
 const val NOTIFICATIONS = "notifications"
+const val IS_VK_AUTH = "is_vk_auth"
 
 fun Context.saveAuthState(isAuth: Boolean) {
     PreferenceHelper.customPrefs(this, MAI_PREFS).edit().putBoolean(IS_AUTH, isAuth).apply()
@@ -49,4 +50,12 @@ fun Context.getNotifications(): NotificationsLocal {
         lastUpdate = Calendar.getInstance().toFormat("dd.MM.yyyy_HH:mm"),
         counts = hashMapOf()
     )
+}
+
+fun Context.setVkAuth(token: String?) {
+    PreferenceHelper.customPrefs(this, MAI_PREFS).edit().putString(IS_VK_AUTH, token).apply()
+}
+
+fun Context.getVkAuth(): String? {
+    return PreferenceHelper.customPrefs(this, MAI_PREFS).getString(IS_VK_AUTH, null)
 }
