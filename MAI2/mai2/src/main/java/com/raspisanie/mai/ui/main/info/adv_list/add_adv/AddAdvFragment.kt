@@ -5,6 +5,7 @@ import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.createFormParams
+import com.raspisanie.mai.extesions.showToast
 import kotlinx.android.synthetic.main.fragment_adv_add.*
 import kotlinx.android.synthetic.main.fragment_canteens.vToolbar
 import kotlinx.android.synthetic.main.fragment_library.*
@@ -34,6 +35,9 @@ class AddAdvFragment : BaseFragment(R.layout.fragment_adv_add), AddAdvView {
                 context.createFormParams()
             )
             onFinish(presenter::sendForm)
+            onToast {
+                context.showToast(R.drawable.ic_close_toast, it)
+            }
             addSystemBottomPadding()
         }
     }
