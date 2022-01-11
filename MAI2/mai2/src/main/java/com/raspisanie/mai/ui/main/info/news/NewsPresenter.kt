@@ -2,18 +2,13 @@ package com.raspisanie.mai.ui.main.info.news
 
 import android.content.Context
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpView
 import com.raspisanie.mai.controllers.BottomVisibilityController
 import com.raspisanie.mai.controllers.NotificationController
 import com.raspisanie.mai.extesions.getNotifications
 import com.raspisanie.mai.extesions.mappers.toLocal
-import com.raspisanie.mai.extesions.mappers.toLocall
-import com.raspisanie.mai.extesions.mappers.toRealm
-import com.raspisanie.mai.extesions.realm.addNews
-import com.raspisanie.mai.extesions.realm.getNews
 import com.raspisanie.mai.extesions.saveNotifications
-import com.raspisanie.mai.extesions.toRealmList
 import com.raspisanie.mai.server.ApiService
+import com.raspisanie.mai.ui.main.info.news.NewsPagingParams.PAGE_SIZE
 import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -39,46 +34,45 @@ class NewsPresenter : BasePresenter<NewsView>() {
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         YandexMetrica.reportEvent("OpenNews")
-        loadList()
+        //loadList(0)
     }
 
-    fun loadList() {
-        service.getNews()
+    fun loadList(skip: Int) {
+        service.getNews(PAGE_SIZE, skip)
             .map { if (it.success) it.data else error(it.message.toString()) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .doOnSubscribe { viewState.toggleLoading(true) }
             .doOnError {
                 it.printStackTrace()
-                val news = realm.getNews()
-                if (news.size == 0) {
-                    viewState.showErrorLoading()
-                } else {
-                    viewState.toggleLoading(false)
-                    viewState.showList(news)
-                }
+                viewState.showErrorLoading()
             }
             .subscribe(
                 {
-                    /*
-                    Если загрузка прошла успешно пользователь
-                    смог увидеть новые новости и можно скрыть
-                    счетчик уведомлений.
-                     */
-                    val notifications = context.getNotifications()
-                    notifications.setNewsCount(0)
-                    context.saveNotifications(notifications)
-                    notificationController.show(notifications)
+                    hideNotifications()
 
-                    val news = it!!.map { i -> i.toRealm() }.toRealmList()
-                    viewState.toggleLoading(false)
-                    realm.addNews(news)
-                    viewState.showList(news.map { n->n.toLocal() }.toMutableList())
+                    viewState.showList(it!!.map { n->n.toLocal() }.toMutableList())
                 },
                 {
                     Timber.e(it)
                 }
             ).connect()
     }
+
+    /**
+     * Если загрузка прошла успешно пользователь
+     * смог увидеть новые новости и можно скрыть
+     * счетчик уведомлений.
+     */
+    private fun hideNotifications() {
+        val notifications = context.getNotifications()
+        notifications.setNewsCount(0)
+        context.saveNotifications(notifications)
+        notificationController.show(notifications)
+    }
+
     fun back() = router?.exit()
+}
+
+object NewsPagingParams {
+    const val PAGE_SIZE = 20
 }

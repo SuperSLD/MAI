@@ -26,7 +26,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai/api/"'
+            buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai_v2/api/"'
             buildConfigField "String", "YANDEX_KEY", '"4c1a84e2-8cff-4897-933c-ac72f3d1b6de"'
             versionNameSuffix "-debug"
         }

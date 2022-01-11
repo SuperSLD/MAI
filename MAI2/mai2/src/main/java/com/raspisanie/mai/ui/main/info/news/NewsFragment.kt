@@ -1,43 +1,47 @@
 package com.raspisanie.mai.ui.main.info.news
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.MvpView
+import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.CreativeLocal
-import com.raspisanie.mai.models.local.LibraryLocal
 import com.raspisanie.mai.models.local.NewsLocal
-import com.raspisanie.mai.ui.main.info.library.LibraryAdapter
-import kotlinx.android.synthetic.main.fragment_campus_map.*
-import kotlinx.android.synthetic.main.fragment_creative.*
-import kotlinx.android.synthetic.main.fragment_library.*
 import kotlinx.android.synthetic.main.fragment_library.vToolbar
-import kotlinx.android.synthetic.main.layout_loading.*
+import kotlinx.android.synthetic.main.fragment_news.*
 import pro.midev.supersld.common.base.BaseFragment
 import pro.midev.supersld.extensions.addSystemBottomPadding
 
-class NewsFragment : BaseFragment(R.layout.fragment_creative), NewsView {
+class NewsFragment : BaseFragment(R.layout.fragment_news), NewsView {
 
     @InjectPresenter
     lateinit var presenter: NewsPresenter
-    private val adapter by lazy { NewsAdapter() }
+    private val adapter by lazy { NewsListAdapter(this::tryLoadList) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        vToolbar.init(
-            title = R.string.info_button_news,
-            back = {onBackPressed()}
-        )
+        with(vToolbar) {
+            hideDivider()
+            init(
+                title = R.string.info_button_news,
+                back = { onBackPressed() }
+            )
+        }
 
-        with(rvCreative){
+        with(rvNews){
             addSystemBottomPadding()
             adapter = this@NewsFragment.adapter
             layoutManager = LinearLayoutManager(context)
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val lm = layoutManager as LinearLayoutManager
+                    val adp = this@NewsFragment.adapter
+                    if (lm.findLastCompletelyVisibleItemPosition() == adp.listSize() && adp.hasMore()) {
+                        presenter.loadList(adp.listSize())
+                    }
+                }
+            })
         }
     }
 
@@ -46,21 +50,16 @@ class NewsFragment : BaseFragment(R.layout.fragment_creative), NewsView {
     }
 
     override fun showList(mutableList: MutableList<NewsLocal>) {
-        adapter.addAll(mutableList)
+        adapter.addData(mutableList, mutableList.size >= NewsPagingParams.PAGE_SIZE)
     }
 
     override fun showErrorLoading() {
-        vgError.visibility = View.VISIBLE
-        loading.visibility = View.GONE
-        rvCreative.visibility = View.GONE
-        cvError.setOnClickListener {
-            presenter.loadList()
-        }
+        adapter.toggleError(true)
     }
 
-    override fun toggleLoading(show: Boolean) {
-        vgError.visibility = View.GONE
-        loading.visibility = if (show) View.VISIBLE else View.GONE
-        rvCreative.visibility = if (show) View.GONE else View.VISIBLE
+    private fun tryLoadList() {
+        presenter.loadList(adapter.listSize())
     }
+
+    override fun toggleLoading(show: Boolean) {}
 }
