@@ -74,4 +74,6 @@ class AdvFragment : BaseFragment(R.layout.fragment_adv_list), AdvView {
     }
 
     override fun toggleLoading(show: Boolean) {}
+
+
 }

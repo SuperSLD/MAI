@@ -41,10 +41,10 @@
                         android:textSize="@dimen/textTitle"
                         android:layout_marginBottom="@dimen/paddingMid"/>
                 <include
-                        android:id="@+id/lAdv"
+                        android:id="@+id/lNews"
                         layout="@layout/item_info"/>
                 <include
-                        android:id="@+id/lNews"
+                        android:id="@+id/lAdv"
                         layout="@layout/item_info"/>
                 <include
                         android:id="@+id/lLectors"

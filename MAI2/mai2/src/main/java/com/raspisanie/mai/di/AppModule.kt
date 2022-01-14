@@ -11,8 +11,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import com.raspisanie.mai.server.Api
 import com.raspisanie.mai.server.ApiService
-import com.raspisanie.mai.server.TokenInterceptor
-import pro.midev.supersld.common.CiceroneHolder
+import com.raspisanie.mai.server.HeadersInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -23,7 +22,7 @@ val appModule = module {
         OkHttpClient.Builder()
             .connectTimeout(40, TimeUnit.SECONDS)
             .readTimeout(40, TimeUnit.SECONDS)
-            .addInterceptor(TokenInterceptor(androidContext()))
+            .addInterceptor(HeadersInterceptor(androidContext()))
             .build()
     }
 

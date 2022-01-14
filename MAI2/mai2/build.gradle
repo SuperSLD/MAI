@@ -12,8 +12,8 @@ android {
         applicationId "com.raspisanie.mai"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 11035
-        versionName "2.4.5"
+        versionCode 11037
+        versionName "2.4.6"
 
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -26,12 +26,12 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai/api/"'
+            buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai_v2/api/"'
             buildConfigField "String", "YANDEX_KEY", '"4c1a84e2-8cff-4897-933c-ac72f3d1b6de"'
             versionNameSuffix "-debug"
         }
         release {
-            buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai/api/"'
+            buildConfigField "String", "SERVER_URL", '"https://jutter.online/mai_v2/api/"'
             buildConfigField "String", "YANDEX_KEY", '"4c1a84e2-8cff-4897-933c-ac72f3d1b6de"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

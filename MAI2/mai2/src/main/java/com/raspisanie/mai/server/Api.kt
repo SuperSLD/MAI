@@ -43,8 +43,11 @@ interface Api {
     @GET("notification/all/{date}")
     fun getNotifications(@Path("date") date: String) : Single<DataWrapper<NotificationsResponse>>
 
-    @GET("news/all")
-    fun getNews() : Single<DataWrapper<MutableList<NewsResponse>>>
+    @GET("news/get")
+    fun getNews(
+        @Query("limit") limit: Int,
+        @Query("skip") skip: Int
+    ) : Single<DataWrapper<MutableList<NewsResponse>>>
 
     @GET("schedule/searchLector/{name}")
     fun getSearchLector(@Path("name") name: String) : Single<DataWrapper<MutableList<TeacherResponse>>>
