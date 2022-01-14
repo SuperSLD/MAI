@@ -8,4 +8,5 @@ data class NewsLocal(
     val warning: Boolean,
     val createdAt: String,
     val image: String?,
+    val imageDark: String?,
 )

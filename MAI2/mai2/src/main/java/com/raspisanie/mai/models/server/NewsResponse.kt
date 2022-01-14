@@ -8,4 +8,5 @@ data class NewsResponse(
     val warning: Boolean,
     val createdAt: String,
     val image: String?,
+    val imageDark: String?,
 )
