@@ -9,4 +9,7 @@ data class NewsResponse(
     val createdAt: String,
     val image: String?,
     val imageDark: String?,
+    val likes: Int,
+    val views: Int,
+    val like: Boolean,
 )

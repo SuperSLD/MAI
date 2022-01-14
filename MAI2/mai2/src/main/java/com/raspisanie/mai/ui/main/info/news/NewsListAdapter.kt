@@ -1,11 +1,12 @@
 package com.raspisanie.mai.ui.main.info.news
 
 import com.raspisanie.mai.models.local.*
-import com.raspisanie.mai.ui.main.info.adv_list.holders.AdvAddHolder
-import com.raspisanie.mai.ui.main.info.adv_list.holders.AdvHolder
-import com.raspisanie.mai.ui.main.info.adv_list.holders.AdvLoadingErrorHolder
-import com.raspisanie.mai.ui.main.info.adv_list.holders.AdvLoadingHolder
+import com.raspisanie.mai.ui.main.info.reused.holders.PostLoadingErrorHolder
+import com.raspisanie.mai.ui.main.info.reused.holders.PostLoadingHolder
 import com.raspisanie.mai.ui.main.info.news.holders.NewsHolder
+import com.raspisanie.mai.ui.main.info.reused.holders.PostInfoHolder
+import com.raspisanie.mai.ui.main.info.reused.holders.PostInfoHolder.Companion.LIKE_CLICK_EVENT
+import com.raspisanie.mai.ui.main.info.reused.holders.PostLoadingErrorHolder.Companion.RELOAD_EVENT
 import online.jutter.diffadapter2.DiffAdapter
 import online.jutter.diffadapter2.base.DFBaseHolder
 import online.jutter.diffadapter2.base.HolderFactory
@@ -13,27 +14,29 @@ import online.jutter.diffadapter2.base.HolderFactory
 
 class NewsListAdapter(
     private val reload:()->Unit,
+    private val like: (String)->Unit,
 ) : DiffAdapter() {
 
     companion object {
         const val NEWS_ITEM = 1002
         const val LOADING_ITEM = 1003
         const val ERROR_LOADING_ITEM = 1004
-
-        const val RELOAD_EVENT = 2003
+        const val NEWS_INFO_ITEM = 1005
     }
 
     private var hasMore = true
     private var errorLoading = false
 
     override fun initFactory() = HolderFactory(hashMapOf(
-                LOADING_ITEM to AdvLoadingHolder::class.java,
-                ERROR_LOADING_ITEM to AdvLoadingErrorHolder::class.java,
+                LOADING_ITEM to PostLoadingHolder::class.java,
+                ERROR_LOADING_ITEM to PostLoadingErrorHolder::class.java,
                 NEWS_ITEM to NewsHolder::class.java,
+                NEWS_INFO_ITEM to PostInfoHolder::class.java,
             )
         ).onEvent { id, data ->
             when(id) {
                 RELOAD_EVENT -> reload()
+                LIKE_CLICK_EVENT -> like(data as String)
             }
         }
 
@@ -64,12 +67,30 @@ class NewsListAdapter(
 
     fun addData(data: MutableList<NewsLocal>, hasMore: Boolean) {
         this.hasMore = hasMore
-        getList().addAll(data.map { Pair(NEWS_ITEM, it) })
+        val list = getList()
+        data.forEach { news ->
+            list.add(Pair(NEWS_ITEM, news))
+            list.add(Pair(NEWS_INFO_ITEM, news))
+        }
         notifyDataSetChanged()
     }
 
     fun toggleError(error: Boolean) {
         this.errorLoading = error
         notifyItemChanged(itemCount - 1)
+    }
+
+    fun updateLike(id: String) {
+        val list = getList()
+        list.forEachIndexed { index, item ->
+            if (item.first == NEWS_INFO_ITEM) {
+                val news = item.second as NewsLocal
+                if (news.id == id) {
+                    news.likeCount++
+                    news.isLike = true
+                    notifyItemChanged(index)
+                }
+            }
+        }
     }
 }

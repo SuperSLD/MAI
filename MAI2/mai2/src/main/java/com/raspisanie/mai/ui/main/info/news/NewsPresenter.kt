@@ -25,7 +25,6 @@ class NewsPresenter : BasePresenter<NewsView>() {
     private val bottomVisibilityController: BottomVisibilityController by inject()
     private val service: ApiService by inject()
     private val context: Context by inject()
-    private val realm: Realm by inject()
     private val notificationController: NotificationController by inject()
 
     override fun attachView(view: NewsView?) {
@@ -54,6 +53,30 @@ class NewsPresenter : BasePresenter<NewsView>() {
                     hideNotifications()
 
                     viewState.showList(it!!.map { n->n.toLocal() }.toMutableList())
+                },
+                {
+                    Timber.e(it)
+                }
+            ).connect()
+    }
+
+    fun like(id: String) {
+        service.likeNews(id)
+            .map { if (it.success) it.data else error(it.message.toString()) }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .doOnError {
+                it.printStackTrace()
+                viewState.showErrorLoading()
+                context.showToast(R.drawable.ic_close_toast, it.message.toString())
+            }
+            .subscribe(
+                {
+                    context.showToast(
+                        R.drawable.ic_like_toast,
+                        context.getString(if (it!!) R.string.like_success else R.string.like_error)
+                    )
+                    if (it) viewState.updateLike(id)
                 },
                 {
                     Timber.e(it)

@@ -140,5 +140,9 @@
 
     <string name="form_file_mandatory">Обязательный файл</string>
 
+    <string name="like_success">Вы поставили лайк, спасибо за активность!</string>
+    <string name="like_error">Вы уже поставили лайк</string>
+
+
     <string name="jutter">Jutter</string>
 </resources>

@@ -13,4 +13,7 @@ fun NewsResponse.toLocal() = NewsLocal(
     createdAt = createdAt,
     image = image,
     imageDark = imageDark,
+    likeCount = likes,
+    viewCount = views,
+    isLike = like,
 )

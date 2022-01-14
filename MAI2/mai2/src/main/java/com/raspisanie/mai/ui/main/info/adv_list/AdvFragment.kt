@@ -21,7 +21,8 @@ class AdvFragment : BaseFragment(R.layout.fragment_adv_list), AdvView {
     private val adapter by lazy { AdvListAdapter(
         this::tryLoadList,
         this::openLink,
-        presenter::addAdv
+        presenter::addAdv,
+        presenter::like
     ) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -63,6 +64,10 @@ class AdvFragment : BaseFragment(R.layout.fragment_adv_list), AdvView {
     override fun addList(list: MutableList<AdvLocal>) {
         adapter.toggleError(false)
         adapter.addData(list, list.size >= PAGE_SIZE)
+    }
+
+    override fun updateLike(id: String) {
+        adapter.updateLike(id)
     }
 
     override fun showErrorLoading() {

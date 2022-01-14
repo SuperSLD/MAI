@@ -9,5 +9,15 @@ data class AdvLocal(
     val vk: String,
     val tg: String,
     val other: String,
-    val createdAt: String
-)
+    val createdAt: String,
+    var likeCount: Int,
+    var isLike: Boolean,
+    val viewCount: Int,
+) : PostLocal {
+
+    override fun getRecordId() = id
+    override fun getLikes() = likeCount
+    override fun isLiked() = isLike
+    override fun getViews() = viewCount
+    override fun getDate() = ""
+}

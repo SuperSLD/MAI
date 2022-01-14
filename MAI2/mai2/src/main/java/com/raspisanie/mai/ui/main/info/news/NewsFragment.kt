@@ -15,7 +15,7 @@ class NewsFragment : BaseFragment(R.layout.fragment_news), NewsView {
 
     @InjectPresenter
     lateinit var presenter: NewsPresenter
-    private val adapter by lazy { NewsListAdapter(this::tryLoadList) }
+    private val adapter by lazy { NewsListAdapter(this::tryLoadList, presenter::like) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -51,6 +51,10 @@ class NewsFragment : BaseFragment(R.layout.fragment_news), NewsView {
 
     override fun showList(mutableList: MutableList<NewsLocal>) {
         adapter.addData(mutableList, mutableList.size >= NewsPagingParams.PAGE_SIZE)
+    }
+
+    override fun updateLike(id: String) {
+        adapter.updateLike(id)
     }
 
     override fun showErrorLoading() {

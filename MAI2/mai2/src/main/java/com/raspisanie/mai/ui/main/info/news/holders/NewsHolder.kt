@@ -26,7 +26,6 @@ class NewsHolder(itemView: View) : DFBaseHolder<NewsLocal>(itemView) {
             tvTitle.text = "${item.title} "
             tvAuthor.text = item.author
             tvText.text = item.text
-            tvDate.text = item.createdAt.split(".")[0].fromFormatToFormat("yyyy-MM-dd HH:mm:ss", "HH:mm dd.MM.yyyy")
             ivWarning.visibility = if (item.warning) View.VISIBLE else View.GONE
 
             ivImage.visibility = if (item.image.isNullOrEmpty()) View.GONE else View.VISIBLE

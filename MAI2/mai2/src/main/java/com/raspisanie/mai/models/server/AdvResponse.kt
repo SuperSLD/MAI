@@ -9,5 +9,8 @@ data class AdvResponse(
     val vk: String,
     val tg: String,
     val other: String,
-    val createdAt: String
+    val createdAt: String,
+    val likes: Int,
+    val views: Int,
+    val like: Boolean,
 )
