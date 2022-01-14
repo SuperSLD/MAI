@@ -2,11 +2,13 @@ package com.raspisanie.mai.ui.main.info.news
 
 import android.content.Context
 import com.arellomobile.mvp.InjectViewState
+import com.raspisanie.mai.R
 import com.raspisanie.mai.controllers.BottomVisibilityController
 import com.raspisanie.mai.controllers.NotificationController
 import com.raspisanie.mai.extesions.getNotifications
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.saveNotifications
+import com.raspisanie.mai.extesions.showToast
 import com.raspisanie.mai.server.ApiService
 import com.raspisanie.mai.ui.main.info.news.NewsPagingParams.PAGE_SIZE
 import com.yandex.metrica.YandexMetrica
@@ -45,6 +47,7 @@ class NewsPresenter : BasePresenter<NewsView>() {
             .doOnError {
                 it.printStackTrace()
                 viewState.showErrorLoading()
+                context.showToast(R.drawable.ic_close_toast, it.message.toString())
             }
             .subscribe(
                 {
