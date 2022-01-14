@@ -10,5 +10,6 @@ fun NewsResponse.toLocal() = NewsLocal(
     author = author,
     text = text,
     warning = warning,
-    createdAt = createdAt
+    createdAt = createdAt,
+    image = image,
 )

@@ -2,6 +2,7 @@ package com.raspisanie.mai.ui.main.info.news.holders
 
 import android.annotation.SuppressLint
 import android.view.View
+import com.bumptech.glide.Glide
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.fromFormatToFormat
 import com.raspisanie.mai.models.local.AdvLocal
@@ -26,6 +27,11 @@ class NewsHolder(itemView: View) : DFBaseHolder<NewsLocal>(itemView) {
             tvText.text = item.text
             tvDate.text = item.createdAt.split(".")[0].fromFormatToFormat("yyyy-MM-dd HH:mm:ss", "HH:mm dd.MM.yyyy")
             ivWarning.visibility = if (item.warning) View.VISIBLE else View.GONE
+
+            ivImage.visibility = if (item.image.isNullOrEmpty()) View.GONE else View.VISIBLE
+            Glide.with(context)
+                .load(item.image)
+                .into(ivImage)
         }
     }
 }
