@@ -10,4 +10,7 @@ import com.raspisanie.mai.models.realm.CanteenLocal
 interface AdvView : BaseView {
     @StateStrategyType(SkipStrategy::class)
     fun addList(list: MutableList<AdvLocal>)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun updateLike(id: String)
 }

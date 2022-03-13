@@ -14,7 +14,10 @@ fun AdvResponse.toLocal() = AdvLocal(
     tg = tg,
     vk = vk,
     other = other,
-    createdAt = createdAt
+    createdAt = createdAt,
+    likeCount = likes,
+    viewCount = views,
+    isLike = like,
 )
 
 fun JTForm.toAdsCreateBody(): AdvCreateBody {

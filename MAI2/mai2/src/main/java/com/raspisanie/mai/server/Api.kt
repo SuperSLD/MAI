@@ -49,6 +49,12 @@ interface Api {
         @Query("skip") skip: Int
     ) : Single<DataWrapper<MutableList<NewsResponse>>>
 
+    @GET("news/like/{id}")
+    fun likeNews(@Path("id") id: String) : Single<DataWrapper<Boolean?>>
+
+    @GET("advertisements/like/{id}")
+    fun likeAdv(@Path("id") id: String) : Single<DataWrapper<Boolean?>>
+
     @GET("schedule/searchLector/{name}")
     fun getSearchLector(@Path("name") name: String) : Single<DataWrapper<MutableList<TeacherResponse>>>
 

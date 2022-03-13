@@ -119,6 +119,7 @@
     <string name="settings_author_title">Наша команда:</string>
     <string name="settings_author1">Соляной Леонид / МАИ</string>
     <string name="settings_author2">Галина Асеева / МИРЭА</string>
+    <string name="settings_device_id_description">Ваш идентификатор в нашей системе</string>
 
     <string name="settings_group_list">Быстрое переключение</string>
     <string name="settings_group_add_button">Добавить группу</string>
@@ -139,6 +140,10 @@
     <string name="settings_remove_group">Группа удалена из быстрого доступа</string>
 
     <string name="form_file_mandatory">Обязательный файл</string>
+
+    <string name="like_success">Вы поставили лайк, спасибо за активность!</string>
+    <string name="like_error">Вы уже поставили лайк</string>
+
 
     <string name="jutter">Jutter</string>
 </resources>

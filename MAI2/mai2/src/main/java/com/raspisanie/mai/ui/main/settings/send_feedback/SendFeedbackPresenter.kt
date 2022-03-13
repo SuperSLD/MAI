@@ -78,7 +78,7 @@ class SendFeedbackPresenter : BasePresenter<SendFeedbackView>() {
                 buttonText = "Далее"
             )
         ),
-        finishText = "Отправть сообщение"
+        finishText = "Отправить сообщение"
     )
 
     fun back() = router?.exit()

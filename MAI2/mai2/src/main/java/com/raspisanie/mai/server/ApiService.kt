@@ -2,7 +2,6 @@ package com.raspisanie.mai.server
 
 import com.raspisanie.mai.models.server.AdvCreateBody
 import com.raspisanie.mai.models.server.FeedbackBody
-import com.raspisanie.mai.server.Api
 
 class ApiService(private var api: Api) {
     fun getGroupList(name: String) = api.getGroupList(name)
@@ -28,6 +27,11 @@ class ApiService(private var api: Api) {
     fun getNotifications(date: String) = api.getNotifications(date)
 
     fun getNews(limit: Int, skip: Int) = api.getNews(limit, skip)
+
+    fun likeNews(id: String) = api.likeNews(id)
+
+    fun likeAdv(id: String) = api.likeAdv(id)
+
 
     fun getSearchLector(name: String) = api.getSearchLector(name)
 

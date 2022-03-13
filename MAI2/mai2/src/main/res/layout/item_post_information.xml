@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical"
+        android:paddingBottom="16dp"
+>
+    <TextView
+            android:id="@+id/tvLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextSecondary"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/ic_unliked"
+            android:drawablePadding="8dp"
+            tools:text="435"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="16dp"
+    />
+    <TextView
+            android:id="@+id/tvViews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextSecondary"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/ic_views"
+            android:drawablePadding="8dp"
+            tools:text="435"
+            android:gravity="center_vertical"
+    />
+    <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextSecondary"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="14sp"
+            android:gravity="end"
+    />
+
+</LinearLayout>
+

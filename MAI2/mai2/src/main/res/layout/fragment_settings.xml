@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:clipToPadding="false"
             android:gravity="center">
 
             <com.google.android.material.card.MaterialCardView
@@ -197,6 +198,38 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 android:layout_marginBottom="8dp"/>
+        <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="8dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardBackgroundColor="@color/colorBackgroundSecondary">
+            <LinearLayout
+                    android:id="@+id/vgVkNotAuth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+            >
+                <TextView
+                        android:id="@+id/tvDeviceId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="00000000000"
+                        android:textSize="24sp"
+                        android:textColor="@color/colorPrimary"
+                />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_device_id_description"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorTextPrimary"
+                />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
