@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Vibrator
+import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -35,15 +36,15 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
     lateinit var presenter: SettingsPresenter
 
     private val colors by lazy { arrayListOf(
-            ContextCompat.getColor(context!!, R.color.colorPrimary),
-            ContextCompat.getColor(context!!, R.color.colorDiagram1),
-            ContextCompat.getColor(context!!, R.color.colorDiagram2),
-            ContextCompat.getColor(context!!, R.color.colorDiagram3),
-            ContextCompat.getColor(context!!, R.color.colorDiagram4),
-            ContextCompat.getColor(context!!, R.color.colorDiagram5),
-            ContextCompat.getColor(context!!, R.color.colorDiagram6),
-            ContextCompat.getColor(context!!, R.color.colorDiagram7),
-            ContextCompat.getColor(context!!, R.color.colorDiagram8)
+            ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram1),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram2),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram3),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram4),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram5),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram6),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram7),
+            ContextCompat.getColor(requireContext(), R.color.colorDiagram8)
         )
     }
 
@@ -59,7 +60,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
 
     private val adapterSchedule by lazy { ScheduleListAdapter(colors) }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "HardwareIds")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -69,6 +70,8 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             nested.scrollY = savedInstanceState.getInt(SAVED_POSITION)
         }
 
+        val deviceId = Settings.Secure.getString(requireContext().applicationContext.contentResolver, Settings.Secure.ANDROID_ID)
+        tvDeviceId.text = deviceId
 
         scrollingContent.addSystemTopPadding()
         scrollingContent.addSystemTopPadding()
