@@ -1,7 +1,7 @@
 # MAI
 Неофициальное приложение **МАИ** под **android**, написанное студентом для студентов.
 
-![](https://img.shields.io/github/stars/SuperSLD/MAI.svg)
+![](https://img.shields.io/github/stars/SuperSLD/MAI.svg) ![](https://img.shields.io/github/release/SuperSLD/MAI.svg)
 
 ---
 
