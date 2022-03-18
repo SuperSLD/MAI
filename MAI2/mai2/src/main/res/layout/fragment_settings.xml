@@ -227,6 +227,7 @@
                         android:text="@string/settings_device_id_description"
                         android:textSize="16sp"
                         android:textColor="@color/colorTextPrimary"
+                        android:gravity="center"
                 />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
