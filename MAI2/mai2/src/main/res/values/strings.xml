@@ -37,6 +37,7 @@
     <string name="info_button_sport">Спортивные секции</string>
     <string name="info_button_students">Студенческие организации</string>
     <string name="info_button_creative">Творческие коллективы</string>
+    <string name="info_alert_message">Если вы заметили ошибку в информации, которая размещена в этом разделе, то пишите в поддержку, и мы все исправим. </string>
 
     <string name="info_search_lector_title">Поиск преподавателя</string>
     <string name="info_search_lector_placeholder">Имя, фамилия или отчество</string>
