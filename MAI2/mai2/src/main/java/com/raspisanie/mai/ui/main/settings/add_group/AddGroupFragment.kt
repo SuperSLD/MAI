@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.realm.GroupRealm
+import com.raspisanie.mai.data.db.models.GroupRealm
 import com.raspisanie.mai.ui.select_group.select_group.GroupsAdapter
 import com.raspisanie.mai.ui.select_group.select_group.SelectGroupView
 import kotlinx.android.synthetic.main.fragment_select_group.*

@@ -5,8 +5,8 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleTagStrategy
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.raspisanie.mai.common.base.BaseView
-import com.raspisanie.mai.models.local.WeekLocal
-import com.raspisanie.mai.models.realm.GroupRealm
+import com.raspisanie.mai.domain.models.WeekLocal
+import com.raspisanie.mai.data.db.models.GroupRealm
 
 interface TimetableView: BaseView {
     @StateStrategyType(AddToEndSingleTagStrategy::class)

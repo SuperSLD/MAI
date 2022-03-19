@@ -13,11 +13,10 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.*
-import com.raspisanie.mai.models.local.DevLocal
-import com.raspisanie.mai.models.local.ScheduleLocal
-import com.raspisanie.mai.models.realm.GroupRealm
+import com.raspisanie.mai.domain.models.DevLocal
+import com.raspisanie.mai.domain.models.ScheduleLocal
+import com.raspisanie.mai.data.db.models.GroupRealm
 import com.yandex.metrica.YandexMetrica
-import com.yandex.metrica.impl.ob.V
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_info.view.*
 import pro.midev.supersld.common.base.BaseFragment

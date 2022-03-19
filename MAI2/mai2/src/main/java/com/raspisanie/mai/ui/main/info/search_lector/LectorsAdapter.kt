@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.TeacherLocal
+import com.raspisanie.mai.domain.models.TeacherLocal
 import kotlinx.android.synthetic.main.item_timetable_subject.view.tvName
 
 

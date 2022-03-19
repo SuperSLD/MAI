@@ -1,7 +1,7 @@
 package com.raspisanie.mai
 
 import androidx.fragment.app.Fragment
-import com.raspisanie.mai.models.local.TeacherLocal
+import com.raspisanie.mai.domain.models.TeacherLocal
 import com.raspisanie.mai.ui.global.FlowGlobalFragment
 import com.raspisanie.mai.ui.main.FlowMainFragment
 import com.raspisanie.mai.ui.main.MainContainerFragment

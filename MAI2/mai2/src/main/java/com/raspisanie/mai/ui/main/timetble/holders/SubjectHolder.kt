@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.SubjectLocal
+import com.raspisanie.mai.domain.models.SubjectLocal
 import com.raspisanie.mai.ui.main.timetble.TimetablePresenter
 import kotlinx.android.synthetic.main.item_timetable_subject.view.*
 import online.jutter.diffadapter2.base.DFBaseHolder

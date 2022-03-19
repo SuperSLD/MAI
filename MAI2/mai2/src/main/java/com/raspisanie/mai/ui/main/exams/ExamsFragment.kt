@@ -2,12 +2,10 @@ package com.raspisanie.mai.ui.main.exams
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.WeekLocal
+import com.raspisanie.mai.domain.models.WeekLocal
 import com.raspisanie.mai.ui.main.timetble.TimetableAdapter
-import com.yandex.metrica.impl.ob.V
 import kotlinx.android.synthetic.main.fragment_exams.*
 import pro.midev.supersld.common.base.BaseFragment
 

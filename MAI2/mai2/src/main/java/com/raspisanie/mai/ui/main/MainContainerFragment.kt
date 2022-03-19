@@ -6,7 +6,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
-import com.raspisanie.mai.models.local.NotificationsLocal
+import com.raspisanie.mai.domain.models.NotificationsLocal
 import kotlinx.android.synthetic.main.fragment_main_container.*
 import pro.midev.supersld.common.base.BaseFragment
 import pro.midev.supersld.extensions.addSystemBottomPadding

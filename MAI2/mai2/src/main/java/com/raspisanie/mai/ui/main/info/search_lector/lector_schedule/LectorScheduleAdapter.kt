@@ -1,7 +1,7 @@
 package com.raspisanie.mai.ui.main.info.search_lector.lector_schedule
 
-import com.raspisanie.mai.models.local.DayLocal
-import com.raspisanie.mai.models.local.TeacherLocal
+import com.raspisanie.mai.domain.models.DayLocal
+import com.raspisanie.mai.domain.models.TeacherLocal
 import com.raspisanie.mai.ui.main.info.search_lector.lector_schedule.holders.ButtonHolder
 import com.raspisanie.mai.ui.main.info.search_lector.lector_schedule.holders.EmptyScheduleHolder
 import com.raspisanie.mai.ui.main.info.search_lector.lector_schedule.holders.HeaderLectorScheduleHolder

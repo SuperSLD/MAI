@@ -2,7 +2,7 @@ package com.raspisanie.mai.ui.global
 
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.common.base.BottomSheetDialogController
-import com.raspisanie.mai.controllers.ShowToastController
+import com.raspisanie.mai.domain.controllers.ShowToastController
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.koin.core.inject

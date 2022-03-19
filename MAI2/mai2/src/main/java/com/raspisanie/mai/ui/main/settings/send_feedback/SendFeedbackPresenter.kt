@@ -1,15 +1,14 @@
 package com.raspisanie.mai.ui.main.settings.send_feedback
 
 import android.content.Context
-import android.text.InputType
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.common.enums.ToastType
-import com.raspisanie.mai.controllers.BottomVisibilityController
-import com.raspisanie.mai.controllers.ShowToastController
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.ShowToastController
 import com.raspisanie.mai.extesions.mappers.toFeedbackBody
-import com.raspisanie.mai.server.ApiService
+import com.raspisanie.mai.data.net.retrofit.ApiService
 import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers

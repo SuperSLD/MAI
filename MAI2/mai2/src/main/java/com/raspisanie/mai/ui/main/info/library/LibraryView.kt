@@ -3,9 +3,7 @@ package com.raspisanie.mai.ui.main.info.library
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.raspisanie.mai.common.base.BaseView
-import com.raspisanie.mai.models.local.LibraryLocal
-import com.raspisanie.mai.models.local.StudentOrganizationLocal
-import com.raspisanie.mai.models.realm.CanteenLocal
+import com.raspisanie.mai.domain.models.LibraryLocal
 
 interface LibraryView : BaseView {
     @StateStrategyType(AddToEndSingleStrategy::class)

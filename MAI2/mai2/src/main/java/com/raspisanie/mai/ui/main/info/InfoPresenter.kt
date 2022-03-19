@@ -2,10 +2,9 @@ package com.raspisanie.mai.ui.main.info
 
 import android.content.Context
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpView
 import com.raspisanie.mai.Screens
-import com.raspisanie.mai.controllers.BottomVisibilityController
-import com.raspisanie.mai.controllers.NotificationController
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.NotificationController
 import com.raspisanie.mai.extesions.getNotifications
 import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

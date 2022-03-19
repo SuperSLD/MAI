@@ -2,7 +2,7 @@ package com.raspisanie.mai.ui.main.info.campus_map
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
-import com.raspisanie.mai.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.yandex.metrica.YandexMetrica
 import org.koin.core.inject
 import pro.midev.supersld.common.base.BasePresenter

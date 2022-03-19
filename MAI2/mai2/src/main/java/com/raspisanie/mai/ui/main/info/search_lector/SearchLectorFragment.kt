@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.TeacherLocal
+import com.raspisanie.mai.domain.models.TeacherLocal
 import kotlinx.android.synthetic.main.fragment_search_lector.*
 import kotlinx.android.synthetic.main.fragment_select_group.vToolbar
 import kotlinx.android.synthetic.main.fragment_select_group.vgEmpty

@@ -4,10 +4,9 @@ import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
-import com.raspisanie.mai.common.base.BaseView
-import com.raspisanie.mai.models.local.DevLocal
-import com.raspisanie.mai.models.local.ScheduleLocal
-import com.raspisanie.mai.models.realm.GroupRealm
+import com.raspisanie.mai.domain.models.DevLocal
+import com.raspisanie.mai.domain.models.ScheduleLocal
+import com.raspisanie.mai.data.db.models.GroupRealm
 
 interface SettingsView : MvpView {
     @StateStrategyType(AddToEndSingleStrategy::class)

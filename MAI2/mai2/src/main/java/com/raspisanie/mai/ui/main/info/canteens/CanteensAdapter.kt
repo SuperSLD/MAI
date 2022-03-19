@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.realm.CanteenLocal
+import com.raspisanie.mai.data.db.models.CanteenLocal
 import kotlinx.android.synthetic.main.item_canteens.view.*
 
 

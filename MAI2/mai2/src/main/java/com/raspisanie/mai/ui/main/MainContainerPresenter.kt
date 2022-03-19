@@ -2,19 +2,11 @@ package com.raspisanie.mai.ui.main
 
 import android.content.Context
 import com.arellomobile.mvp.InjectViewState
-import com.raspisanie.mai.R
-import com.raspisanie.mai.common.TestDate
-import com.raspisanie.mai.controllers.BottomVisibilityController
-import com.raspisanie.mai.controllers.ChangeBottomTabController
-import com.raspisanie.mai.controllers.NotificationController
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.ChangeBottomTabController
+import com.raspisanie.mai.domain.controllers.NotificationController
 import com.raspisanie.mai.extesions.*
-import com.raspisanie.mai.extesions.mappers.toLocal
-import com.raspisanie.mai.extesions.mappers.toRealm
-import com.raspisanie.mai.extesions.realm.clearScheduleForCurrentGroup
-import com.raspisanie.mai.extesions.realm.getCurrentGroup
-import com.raspisanie.mai.extesions.realm.getCurrentSchedule
-import com.raspisanie.mai.extesions.realm.updateSchedule
-import com.raspisanie.mai.server.ApiService
+import com.raspisanie.mai.data.net.retrofit.ApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.koin.core.inject

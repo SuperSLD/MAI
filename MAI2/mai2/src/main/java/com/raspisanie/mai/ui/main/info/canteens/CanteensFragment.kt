@@ -3,11 +3,9 @@ package com.raspisanie.mai.ui.main.info.canteens
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.extesions.toList
-import com.raspisanie.mai.models.realm.CanteenLocal
+import com.raspisanie.mai.data.db.models.CanteenLocal
 import kotlinx.android.synthetic.main.fragment_canteens.*
 import kotlinx.android.synthetic.main.fragment_canteens.vToolbar
 import kotlinx.android.synthetic.main.layout_loading.*

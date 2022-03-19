@@ -4,10 +4,10 @@ import android.content.Context
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
-import com.raspisanie.mai.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.showToast
-import com.raspisanie.mai.server.ApiService
+import com.raspisanie.mai.data.net.retrofit.ApiService
 import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers

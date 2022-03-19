@@ -1,20 +1,13 @@
 package com.raspisanie.mai.ui.main.info.library
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.LibraryLocal
-import com.raspisanie.mai.models.local.SportLocal
-import com.raspisanie.mai.ui.main.info.sport.SportAdapter
-import kotlinx.android.synthetic.main.fragment_campus_map.*
+import com.raspisanie.mai.domain.models.LibraryLocal
 import kotlinx.android.synthetic.main.fragment_library.*
 import kotlinx.android.synthetic.main.fragment_library.vToolbar
-import kotlinx.android.synthetic.main.fragment_sport.*
 import kotlinx.android.synthetic.main.layout_loading.*
 import pro.midev.supersld.common.base.BaseFragment
 import pro.midev.supersld.extensions.addSystemBottomPadding

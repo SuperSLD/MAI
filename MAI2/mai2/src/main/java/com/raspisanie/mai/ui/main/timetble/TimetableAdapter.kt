@@ -1,7 +1,7 @@
 package com.raspisanie.mai.ui.main.timetble
 
-import com.raspisanie.mai.models.local.DayLocal
-import com.raspisanie.mai.models.local.WeekLocal
+import com.raspisanie.mai.domain.models.DayLocal
+import com.raspisanie.mai.domain.models.WeekLocal
 import com.raspisanie.mai.ui.main.timetble.holders.*
 import online.jutter.diffadapter2.DiffAdapter
 import online.jutter.diffadapter2.base.HolderFactory

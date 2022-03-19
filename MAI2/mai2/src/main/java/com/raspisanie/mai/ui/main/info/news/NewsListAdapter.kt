@@ -1,6 +1,6 @@
 package com.raspisanie.mai.ui.main.info.news
 
-import com.raspisanie.mai.models.local.*
+import com.raspisanie.mai.domain.models.NewsLocal
 import com.raspisanie.mai.ui.main.info.reused.holders.PostLoadingErrorHolder
 import com.raspisanie.mai.ui.main.info.reused.holders.PostLoadingHolder
 import com.raspisanie.mai.ui.main.info.news.holders.NewsHolder

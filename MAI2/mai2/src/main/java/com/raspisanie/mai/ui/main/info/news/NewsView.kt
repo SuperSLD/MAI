@@ -4,8 +4,7 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.raspisanie.mai.common.base.BaseView
-import com.raspisanie.mai.models.local.NewsLocal
-import com.raspisanie.mai.models.realm.CanteenLocal
+import com.raspisanie.mai.domain.models.NewsLocal
 
 interface NewsView : BaseView {
     @StateStrategyType(AddToEndSingleStrategy::class)

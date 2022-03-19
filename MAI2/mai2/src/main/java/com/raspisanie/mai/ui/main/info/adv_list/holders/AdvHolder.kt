@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.fromFormatToFormat
-import com.raspisanie.mai.models.local.AdvLocal
+import com.raspisanie.mai.domain.models.AdvLocal
 import com.raspisanie.mai.ui.main.info.adv_list.AdvListAdapter.Companion.OPEN_LINK_EVENT
 import kotlinx.android.synthetic.main.item_adv_holder.view.*
 import online.jutter.diffadapter2.base.DFBaseHolder

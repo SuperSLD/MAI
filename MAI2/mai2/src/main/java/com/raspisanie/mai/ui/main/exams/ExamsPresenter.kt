@@ -1,21 +1,19 @@
 package com.raspisanie.mai.ui.main.exams
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpView
 import com.raspisanie.mai.Screens
-import com.raspisanie.mai.controllers.BottomVisibilityController
-import com.raspisanie.mai.controllers.ChangeBottomTabController
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.ChangeBottomTabController
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.realm.getAllGroup
 import com.raspisanie.mai.extesions.realm.getCurrentGroup
 import com.raspisanie.mai.extesions.realm.getCurrentSchedule
-import com.raspisanie.mai.models.local.SubjectLocal
+import com.raspisanie.mai.domain.models.SubjectLocal
 import com.raspisanie.mai.ui.main.timetble.TimetablePresenter
 import com.yandex.metrica.YandexMetrica
 import io.realm.Realm
 import org.koin.core.inject
 import pro.midev.supersld.common.base.BasePresenter
-import javax.security.auth.Subject
 
 @InjectViewState
 class ExamsPresenter : BasePresenter<ExamsView>() {

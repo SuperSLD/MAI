@@ -7,10 +7,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.parseCalendarByFormat
-import com.raspisanie.mai.models.local.DayLocal
-import com.raspisanie.mai.models.local.WeekLocal
-import com.raspisanie.mai.models.realm.DayRealm
-import com.raspisanie.mai.models.realm.WeekRealm
+import com.raspisanie.mai.domain.models.DayLocal
+import com.raspisanie.mai.domain.models.WeekLocal
 import kotlinx.android.synthetic.main.item_timetable_header.view.*
 import java.util.*
 

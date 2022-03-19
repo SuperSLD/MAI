@@ -4,12 +4,11 @@ import android.content.Context
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
 import com.raspisanie.mai.Screens
-import com.raspisanie.mai.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.extesions.saveAuthState
 import com.yandex.metrica.YandexMetrica
 import org.koin.core.inject
 import pro.midev.supersld.common.base.BasePresenter
-import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class StartPresenter : BasePresenter<MvpView>() {

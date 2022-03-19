@@ -1,13 +1,10 @@
 package com.raspisanie.mai
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.raspisanie.mai.data.net.models.*
 import com.raspisanie.mai.extesions.getUUID
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.mappers.toRealm
-import com.raspisanie.mai.models.server.*
-import junit.framework.Assert
-import junit.framework.Assert.assertEquals
-import online.jutter.supersld.JTStateMachine
 import org.junit.Test
 import org.junit.runner.RunWith
 

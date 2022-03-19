@@ -8,7 +8,7 @@ import com.yandex.metrica.YandexMetricaConfig
 import pro.midev.supersld.AppBase
 
 
-class App : AppBase(appModule = appModule) {
+class App : AppBase(appModule = appModule()) {
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(

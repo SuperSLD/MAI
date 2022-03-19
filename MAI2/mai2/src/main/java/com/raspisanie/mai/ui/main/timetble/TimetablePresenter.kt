@@ -7,9 +7,9 @@ import com.raspisanie.mai.Screens
 import com.raspisanie.mai.common.TestDate
 import com.raspisanie.mai.common.base.BottomSheetDialogController
 import com.raspisanie.mai.common.enums.BottomSheetDialogType
-import com.raspisanie.mai.controllers.BottomVisibilityController
-import com.raspisanie.mai.controllers.ChangeBottomTabController
-import com.raspisanie.mai.controllers.SelectWeekController
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.ChangeBottomTabController
+import com.raspisanie.mai.domain.controllers.SelectWeekController
 import com.raspisanie.mai.extesions.getSemester
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.mappers.toRealm
@@ -17,20 +17,16 @@ import com.raspisanie.mai.extesions.realm.*
 import com.raspisanie.mai.extesions.saveAuthState
 import com.raspisanie.mai.extesions.saveSemester
 import com.raspisanie.mai.extesions.showToast
-import com.raspisanie.mai.models.local.ScheduleLocal
-import com.raspisanie.mai.models.local.SelectWeekData
-import com.raspisanie.mai.models.local.SubjectLocal
-import com.raspisanie.mai.models.realm.ScheduleRealm
-import com.raspisanie.mai.server.ApiService
-import com.raspisanie.mai.ui.main.timetble.new_group.NewGroupFragment
+import com.raspisanie.mai.domain.models.ScheduleLocal
+import com.raspisanie.mai.domain.models.SelectWeekData
+import com.raspisanie.mai.domain.models.SubjectLocal
+import com.raspisanie.mai.data.net.retrofit.ApiService
 import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.realm.Realm
 import org.koin.core.inject
 import pro.midev.supersld.common.base.BasePresenter
-import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.android.support.SupportAppScreen
 import timber.log.Timber
 import java.util.*
 
