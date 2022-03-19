@@ -37,6 +37,7 @@ class AddAdvPresenter : BasePresenter<AddAdvView>() {
         YandexMetrica.reportEvent("OpenAdvCreate")
     }
 
+    // создаем форму
     fun createForm() = JTForm(
         pages = mutableListOf(
             JTFormPage(
