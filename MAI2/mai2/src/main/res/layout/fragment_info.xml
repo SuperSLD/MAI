@@ -90,6 +90,10 @@
                     android:id="@+id/lCreative"
                     layout="@layout/item_info"/>
 
+                <include
+                    android:id="@+id/lInfoMessage"
+                    layout="@layout/item_alert_info_card"
+                    />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
