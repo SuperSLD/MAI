@@ -5,10 +5,10 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
-import com.raspisanie.mai.extesions.saveAuthState
+import com.raspisanie.mai.common.extesions.saveAuthState
 import com.yandex.metrica.YandexMetrica
+import online.jutter.supersld.common.base.BasePresenter
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
 
 @InjectViewState
 class StartPresenter : BasePresenter<MvpView>() {

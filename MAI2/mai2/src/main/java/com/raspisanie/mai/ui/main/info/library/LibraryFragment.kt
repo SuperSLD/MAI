@@ -7,10 +7,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.domain.models.LibraryLocal
 import kotlinx.android.synthetic.main.fragment_library.*
-import kotlinx.android.synthetic.main.fragment_library.vToolbar
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class LibraryFragment : BaseFragment(R.layout.fragment_library), LibraryView {
 
@@ -19,9 +18,8 @@ class LibraryFragment : BaseFragment(R.layout.fragment_library), LibraryView {
 
     private val adapter by lazy { LibraryAdapter() }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         vToolbar.init(
             title = R.string.info_button_library,
             back = {onBackPressed()}

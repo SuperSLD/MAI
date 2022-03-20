@@ -1,11 +1,9 @@
 package com.raspisanie.mai.domain.controllers
 
-import com.jakewharton.rxrelay3.PublishRelay
-import io.reactivex.rxjava3.core.Observable
+import online.jutter.supersld.common.datacontrol.PublishDataController
 
 class SelectDateController {
-    private val stateRelay = PublishRelay.create<String>()
 
-    val state: Observable<String> = stateRelay
-    fun select(date: String) = stateRelay.accept(date)
+    val state = PublishDataController<String>()
+    fun select(date: String) = state.emit(date)
 }

@@ -1,4 +1,4 @@
-package com.raspisanie.mai.extesions.mappers
+package com.raspisanie.mai.domain.mappers
 
 import com.google.gson.Gson
 import com.raspisanie.mai.data.db.models.*
@@ -10,6 +10,7 @@ import io.realm.RealmList
 import java.util.*
 
 fun RoomResponse.toRealm() = RoomRealm(id = id, name = name)
+fun RoomResponse.toLocal() = RoomLocal(id = id, name = name)
 fun RoomRealm.toLocal() = RoomLocal(id = id ?: "---", name = name ?: "---")
 
 fun TeacherResponse.toRealm() = TeacherRealm(id = id, name = name)
@@ -28,6 +29,7 @@ fun SubjectResponse.toRealm() = SubjectRealm(
         timeEnd = timeEnd,
         number = number
 )
+
 fun SubjectRealm.toLocal(date: String) = SubjectLocal(
         id = id ?: "0",
         name = name ?: "---",
@@ -49,6 +51,7 @@ fun DayResponse.toRealm() = DayRealm(
         date = date,
         subjects = subjects.toRealmSubject()
 )
+
 fun DayRealm.toLocal() = DayLocal(
         id = id ?: "0",
         date = date ?: "00.00.0000",
@@ -64,6 +67,7 @@ fun WeekResponse.toRealm() = WeekRealm(
         date = date,
         days = days.toRealm()
 )
+
 fun WeekRealm.toLocal() = WeekLocal(
         id = id ?: getUUID(),
         number = number ?: 0,

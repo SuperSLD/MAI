@@ -3,8 +3,6 @@ package com.raspisanie.mai
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.raspisanie.mai.data.net.models.*
 import com.raspisanie.mai.extesions.getUUID
-import com.raspisanie.mai.extesions.mappers.toLocal
-import com.raspisanie.mai.extesions.mappers.toRealm
 import org.junit.Test
 import org.junit.runner.RunWith
 

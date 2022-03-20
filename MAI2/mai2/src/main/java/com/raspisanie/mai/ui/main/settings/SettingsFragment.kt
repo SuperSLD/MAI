@@ -12,15 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.R
-import com.raspisanie.mai.extesions.*
+import com.raspisanie.mai.common.extesions.getIsDayTheme
+import com.raspisanie.mai.common.extesions.saveIsDayTheme
+import com.raspisanie.mai.data.db.models.GroupRealm
 import com.raspisanie.mai.domain.models.DevLocal
 import com.raspisanie.mai.domain.models.ScheduleLocal
-import com.raspisanie.mai.data.db.models.GroupRealm
+import com.raspisanie.mai.extesions.*
 import com.yandex.metrica.YandexMetrica
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_info.view.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemTopPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemTopPadding
 import timber.log.Timber
 
 

@@ -11,8 +11,8 @@ import com.raspisanie.mai.domain.models.SportLocal
 import kotlinx.android.synthetic.main.fragment_library.vToolbar
 import kotlinx.android.synthetic.main.fragment_sport.*
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class SportFragment : BaseFragment(R.layout.fragment_sport), SportView {
 
@@ -21,8 +21,8 @@ class SportFragment : BaseFragment(R.layout.fragment_sport), SportView {
 
     private val adapter by lazy { SportAdapter(this::onListClick) }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         vToolbar.init(
             title = R.string.info_button_sport,

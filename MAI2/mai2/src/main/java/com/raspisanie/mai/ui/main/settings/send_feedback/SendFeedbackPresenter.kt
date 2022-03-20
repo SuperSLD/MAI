@@ -7,26 +7,25 @@ import com.raspisanie.mai.Screens
 import com.raspisanie.mai.common.enums.ToastType
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.controllers.ShowToastController
-import com.raspisanie.mai.extesions.mappers.toFeedbackBody
-import com.raspisanie.mai.data.net.retrofit.ApiService
+import com.raspisanie.mai.domain.usecases.main.SendFeedbackUseCase
 import com.yandex.metrica.YandexMetrica
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineExceptionHandler
 import online.juter.supersld.view.input.form.JTForm
 import online.juter.supersld.view.input.form.JTFormPage
 import online.juter.supersld.view.input.form.lines.TextInputLine
 import online.juter.supersld.view.input.form.lines.TextLine
+import online.jutter.supersld.common.base.BasePresenter
+import online.jutter.supersld.extensions.launchUI
+import online.jutter.supersld.extensions.withIO
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
-import timber.log.Timber
 
 @InjectViewState
 class SendFeedbackPresenter : BasePresenter<SendFeedbackView>() {
 
     private val showToastController: ShowToastController by inject()
-    private val service: ApiService by inject()
     private val context: Context by inject()
     private val bottomVisibilityController: BottomVisibilityController by inject()
+    private val sendFeedbackUseCase: SendFeedbackUseCase by inject()
 
     override fun attachView(view: SendFeedbackView?) {
         super.attachView(view)
@@ -40,21 +39,13 @@ class SendFeedbackPresenter : BasePresenter<SendFeedbackView>() {
     }
 
     fun sendFeedback(form: JTForm) {
-        service.sendFeedback(form.toFeedbackBody())
-                .map { if (it.success) 0 else error(it.message.toString()) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe { viewState.toggleLoading(true) }
-                .doOnError {
-                    viewState.toggleLoading(false)
-                    showToastController.show(ToastType.ERROR, context.getString(R.string.errorLoading))
-                    Timber.e(it)
-                }
-                .doOnSuccess {
-                    router?.replaceScreen(Screens.Success)
-                }
-                .subscribe()
-                .connect()
+        launchUI(CoroutineExceptionHandler { _, _ ->
+            viewState.toggleLoading(false)
+            showToastController.show(ToastType.ERROR, context.getString(R.string.errorLoading))
+        }) {
+            withIO { sendFeedbackUseCase(form) }
+            router?.replaceScreen(Screens.Success)
+        }
     }
 
     fun createForm() = JTForm(

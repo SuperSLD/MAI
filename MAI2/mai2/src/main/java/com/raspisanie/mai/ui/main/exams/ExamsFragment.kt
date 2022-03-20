@@ -7,7 +7,7 @@ import com.raspisanie.mai.R
 import com.raspisanie.mai.domain.models.WeekLocal
 import com.raspisanie.mai.ui.main.timetble.TimetableAdapter
 import kotlinx.android.synthetic.main.fragment_exams.*
-import pro.midev.supersld.common.base.BaseFragment
+import online.jutter.supersld.common.base.BaseFragment
 
 class ExamsFragment : BaseFragment(R.layout.fragment_exams), ExamsView {
 

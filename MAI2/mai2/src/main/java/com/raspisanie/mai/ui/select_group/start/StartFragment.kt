@@ -6,15 +6,15 @@ import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import kotlinx.android.synthetic.main.fragment_start.*
-import pro.midev.supersld.common.base.BaseFragment
+import online.jutter.supersld.common.base.BaseFragment
 
 class StartFragment : BaseFragment(R.layout.fragment_start), MvpView {
 
     @InjectPresenter
     lateinit var presenter: StartPresenter
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         btnNext.setOnClickListener {
             presenter.goSelectYear()

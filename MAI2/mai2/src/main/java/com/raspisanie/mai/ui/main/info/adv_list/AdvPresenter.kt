@@ -5,22 +5,24 @@ import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
-import com.raspisanie.mai.extesions.mappers.toLocal
+import com.raspisanie.mai.domain.usecases.information.adv.LoadAdvUseCase
+import com.raspisanie.mai.domain.usecases.information.adv.SetLikeAdvUseCase
 import com.raspisanie.mai.extesions.showToast
-import com.raspisanie.mai.data.net.retrofit.ApiService
+import com.raspisanie.mai.ui.main.info.adv_list.AdvPagingParams.PAGE_SIZE
 import com.yandex.metrica.YandexMetrica
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineExceptionHandler
+import online.jutter.supersld.common.base.BasePresenter
+import online.jutter.supersld.extensions.launchUI
+import online.jutter.supersld.extensions.withIO
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
-import timber.log.Timber
 
 @InjectViewState
 class AdvPresenter : BasePresenter<AdvView>() {
 
     private val bottomVisibilityController: BottomVisibilityController by inject()
-    private val service: ApiService by inject()
     private val context: Context by inject()
+    private val loadAdvUseCase: LoadAdvUseCase by inject()
+    private val setLikeAdvUseCase: SetLikeAdvUseCase by inject()
 
     override fun attachView(view: AdvView?) {
         super.attachView(view)
@@ -34,47 +36,28 @@ class AdvPresenter : BasePresenter<AdvView>() {
     }
 
     fun loadList(skip: Int) {
-        service.getAdvPage(AdvPagingParams.PAGE_SIZE, skip)
-            .map { if (it.success) it.data else error(it.message.toString()) }
-            .map { it!!.toLocal() }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .doOnError {
-                it.printStackTrace()
-                viewState.showErrorLoading()
-            }
-            .subscribe(
-                {
-                    viewState.addList(it)
-                },
-                {
-                    Timber.e(it)
-                }
-            ).connect()
+        launchUI(CoroutineExceptionHandler { _, thr ->
+            viewState.showErrorLoading()
+            context.showToast(R.drawable.ic_close_toast, thr.message.toString())
+        }) {
+            viewState.toggleLoading(true)
+            val list = withIO { loadAdvUseCase(PAGE_SIZE, skip) }
+            viewState.toggleLoading(false)
+            viewState.addList(list)
+        }
     }
 
     fun like(id: String) {
-        service.likeAdv(id)
-            .map { if (it.success) it.data else error(it.message.toString()) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .doOnError {
-                it.printStackTrace()
-                viewState.showErrorLoading()
-                context.showToast(R.drawable.ic_close_toast, it.message.toString())
-            }
-            .subscribe(
-                {
-                    context.showToast(
-                        R.drawable.ic_like_toast,
-                        context.getString(if (it!!) R.string.like_success else R.string.like_error)
-                    )
-                    if (it) viewState.updateLike(id)
-                },
-                {
-                    Timber.e(it)
-                }
-            ).connect()
+        launchUI(CoroutineExceptionHandler { _, thr ->
+            context.showToast(R.drawable.ic_close_toast, thr.message.toString())
+        }) {
+            val isLiked = withIO { setLikeAdvUseCase(id) }
+            context.showToast(
+                R.drawable.ic_like_toast,
+                context.getString(if (isLiked) R.string.like_success else R.string.like_error)
+            )
+            if (isLiked) viewState.updateLike(id)
+        }
     }
 
     fun addAdv() {

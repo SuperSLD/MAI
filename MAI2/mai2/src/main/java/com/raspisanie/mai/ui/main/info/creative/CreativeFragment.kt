@@ -11,8 +11,8 @@ import com.raspisanie.mai.domain.models.CreativeLocal
 import kotlinx.android.synthetic.main.fragment_creative.*
 import kotlinx.android.synthetic.main.fragment_library.vToolbar
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class CreativeFragment : BaseFragment(R.layout.fragment_creative), CreativeView {
 
@@ -20,8 +20,8 @@ class CreativeFragment : BaseFragment(R.layout.fragment_creative), CreativeView 
     lateinit var presenter: CreativePresenter
     private val adapter by lazy { CreativeAdapter(this::callPhone) }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         vToolbar.init(
             title = R.string.info_button_creative,

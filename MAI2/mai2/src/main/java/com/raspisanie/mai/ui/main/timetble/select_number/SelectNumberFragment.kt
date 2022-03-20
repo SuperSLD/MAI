@@ -7,8 +7,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.domain.models.WeekLocal
 import kotlinx.android.synthetic.main.fragment_select_number.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class SelectNumberFragment : BaseFragment(R.layout.fragment_select_number), SelectNumberView {
 

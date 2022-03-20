@@ -4,8 +4,8 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
 import com.raspisanie.mai.domain.controllers.SelectWeekController
 import com.yandex.metrica.YandexMetrica
+import online.jutter.supersld.common.base.BasePresenter
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
 
 @InjectViewState
 class SelectWeekBSPresenter : BasePresenter<MvpView>() {

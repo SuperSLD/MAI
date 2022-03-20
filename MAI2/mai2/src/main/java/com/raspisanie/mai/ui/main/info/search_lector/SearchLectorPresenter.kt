@@ -3,21 +3,20 @@ package com.raspisanie.mai.ui.main.info.search_lector
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
-import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.domain.models.TeacherLocal
-import com.raspisanie.mai.data.net.retrofit.ApiService
+import com.raspisanie.mai.domain.usecases.information.lector.SearchLectorsUseCase
 import com.yandex.metrica.YandexMetrica
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineExceptionHandler
+import online.jutter.supersld.common.base.BasePresenter
+import online.jutter.supersld.extensions.launchUI
+import online.jutter.supersld.extensions.withIO
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
-import timber.log.Timber
 
 @InjectViewState
 class SearchLectorPresenter : BasePresenter<SearchLectorView>() {
 
-    private val service: ApiService by inject()
     private val bottomVisibilityController: BottomVisibilityController by inject()
+    private val searchLectorsUseCase: SearchLectorsUseCase by inject()
     private var lastSearch = ""
 
     override fun attachView(view: SearchLectorView?) {
@@ -37,29 +36,14 @@ class SearchLectorPresenter : BasePresenter<SearchLectorView>() {
 
     fun search(name: String = lastSearch) {
         lastSearch = name.ifEmpty { "#" }
-        service.getSearchLector(lastSearch)
-                .map { if (it.success) it.data else error(it.message.toString()) }
-                .map { it!!.map { t -> t.toLocal() }.toMutableList() }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe { viewState.toggleLoading(true) }
-                .doOnError {
-                    it.printStackTrace()
-                    viewState.showErrorLoading()
-                }
-                .subscribe(
-                        {
-                            viewState.toggleLoading(false)
-                            viewState.showList(it)
-                        },
-                        {
-                            Timber.e(it)
-                        }
-                ).connect()
-    }
-
-    fun next() {
-        router?.newRootScreen(Screens.FlowMain)
+        launchUI(CoroutineExceptionHandler { _, _ ->
+            viewState.showErrorLoading()
+        }) {
+            viewState.toggleLoading(true)
+            val list = withIO { searchLectorsUseCase(lastSearch) }
+            viewState.toggleLoading(false)
+            viewState.showList(list)
+        }
     }
 
     fun back() = router?.exit()

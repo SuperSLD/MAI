@@ -23,8 +23,8 @@ import kotlinx.android.synthetic.main.fragment_timetable.vgEmpty
 import kotlinx.android.synthetic.main.fragment_timetable.vgMain
 import kotlinx.android.synthetic.main.fragment_timetable.vgSelectGroup
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemTopPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemTopPadding
 
 /**
  * Страшный фрагмент, со сложной логикой.

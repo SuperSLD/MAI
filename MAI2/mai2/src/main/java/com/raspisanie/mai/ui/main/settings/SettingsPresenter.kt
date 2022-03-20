@@ -6,29 +6,38 @@ import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.common.base.BottomSheetDialogController
 import com.raspisanie.mai.common.enums.BottomSheetDialogType
+import com.raspisanie.mai.data.db.models.GroupRealm
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.controllers.ConfirmController
+import com.raspisanie.mai.domain.usecases.devs.GetAllDevsUseCase
+import com.raspisanie.mai.domain.usecases.devs.LoadDevsUseCase
+import com.raspisanie.mai.domain.usecases.devs.SaveInRealmDevsUseCase
+import com.raspisanie.mai.domain.usecases.groups.GetAllGroupsUseCase
+import com.raspisanie.mai.domain.usecases.groups.GetCurrentGroupUseCase
+import com.raspisanie.mai.domain.usecases.schedule.GetAllStorageSchedulesUseCase
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.mappers.toRealm
-import com.raspisanie.mai.extesions.realm.*
 import com.raspisanie.mai.extesions.showToast
-import com.raspisanie.mai.data.db.models.GroupRealm
-import com.raspisanie.mai.data.net.retrofit.ApiService
 import com.yandex.metrica.YandexMetrica
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
-import io.realm.Realm
+import kotlinx.coroutines.CoroutineExceptionHandler
+import online.jutter.supersld.common.base.BasePresenter
+import online.jutter.supersld.extensions.launchUI
+import online.jutter.supersld.extensions.withIO
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
 import timber.log.Timber
 
 @InjectViewState
 class SettingsPresenter : BasePresenter<SettingsView>() {
 
     private val bottomVisibilityController: BottomVisibilityController by inject()
-    private val realm: Realm by inject()
+    private val getCurrentGroupUseCase: GetCurrentGroupUseCase by inject()
+    private val getAllStorageSchedulesUseCase: GetAllStorageSchedulesUseCase by inject()
+    private val getAllGroupUseCase: GetAllGroupsUseCase by inject()
+    private val getAllDevsUseCase: GetAllDevsUseCase by inject()
+    private val loadDevsUseCase: LoadDevsUseCase by inject()
+    private val saveInRealmDevsUseCase: SaveInRealmDevsUseCase by inject()
+
     private val context: Context by inject()
-    private val service: ApiService by inject()
 
     private var lastDeletedGroup: GroupRealm? = null
     private val confirmController: ConfirmController by inject()
@@ -68,38 +77,31 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     }
 
     private fun showCurrentGroup() {
-        viewState.showCurrentGroup(realm.getCurrentGroup())
+        viewState.showCurrentGroup(getCurrentGroupUseCase())
     }
 
     private fun showScheduleInfo() {
-        viewState.showScheduleInfo(realm.getAllSchedules().toLocal(), realm.getAllGroup())
+        viewState.showScheduleInfo(getAllStorageSchedulesUseCase(), getAllGroupUseCase())
     }
 
     private fun listenConfirm() {
         confirmController.state
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(
-                        { confirm ->
-                            if (confirm) {
-                                context.showToast(R.drawable.ic_close_toast, context.getString(R.string.settings_remove_group))
-                                lastDeletedGroup?.let { it -> viewState.removeGroup(it) }
-                                lastDeletedGroup = null
-                                showScheduleInfo()
-                            }
-                        },
-                        {
-                            Timber.e(it)
-                        }
-                ).connect()
+            .listen { confirm ->
+                if (confirm) {
+                    context.showToast(R.drawable.ic_close_toast, context.getString(R.string.settings_remove_group))
+                    lastDeletedGroup?.let { it -> viewState.removeGroup(it) }
+                    lastDeletedGroup = null
+                    showScheduleInfo()
+                }
+            }.connect()
     }
 
     private fun showGroupsList() {
-        viewState.showGroups(realm.getAllGroup())
+        viewState.showGroups(getAllGroupUseCase())
     }
 
     private fun showDevs() {
-        val devs = realm.getAllDevs()
+        val devs = getAllDevsUseCase()
         if (devs.size == 0) {
             viewState.toggleLoading(true)
         }
@@ -108,26 +110,14 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     }
 
     private fun getDevList() {
-        service.getDevList()
-            .map { if (it.success) it.data else error(it.message.toString()) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe {  }
-            .doOnError {
-                it.printStackTrace()
-                viewState.toggleLoading(false)
-            }
-            .subscribe(
-                {
-                    val realmList = it!!.toRealm()
-                    realm.addAllDevs(realmList)
-                    viewState.toggleLoading(false)
-                    viewState.showDevList(realmList.toLocal())
-                },
-                {
-                    Timber.e(it)
-                }
-            ).connect()
+        launchUI(CoroutineExceptionHandler { _, _ ->
+            viewState.toggleLoading(false)
+        }) {
+            val realmList = withIO { loadDevsUseCase() }!!.toRealm()
+            saveInRealmDevsUseCase(realmList)
+            viewState.toggleLoading(false)
+            viewState.showDevList(realmList.toLocal())
+        }
     }
 
     fun sendFeedback() = router?.navigateTo(Screens.Feedback)

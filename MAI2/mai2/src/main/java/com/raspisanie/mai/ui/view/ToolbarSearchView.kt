@@ -5,12 +5,11 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import com.raspisanie.mai.R
-import kotlinx.android.synthetic.main.view_toolbar.view.*
 import kotlinx.android.synthetic.main.view_toolbar.view.TVicClose
 import kotlinx.android.synthetic.main.view_toolbar.view.TVtoolbar
 import kotlinx.android.synthetic.main.view_toolbar.view.TVtvTitle
 import kotlinx.android.synthetic.main.view_toolbar_search.view.*
-import pro.midev.supersld.extensions.addSystemTopPadding
+import online.jutter.supersld.extensions.addSystemTopPadding
 
 class ToolbarSearchView  : RelativeLayout {
 

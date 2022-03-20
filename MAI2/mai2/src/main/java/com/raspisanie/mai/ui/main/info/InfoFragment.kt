@@ -7,7 +7,7 @@ import com.raspisanie.mai.R
 import com.raspisanie.mai.domain.models.NotificationsLocal
 import kotlinx.android.synthetic.main.fragment_info.*
 import kotlinx.android.synthetic.main.item_info.view.*
-import pro.midev.supersld.common.base.BaseFragment
+import online.jutter.supersld.common.base.BaseFragment
 import timber.log.Timber
 
 class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
@@ -15,8 +15,8 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
     @InjectPresenter
     lateinit var presenter: InfoPresenter
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         lAdv.setOnClickListener {
             presenter.openAdvList()

@@ -8,8 +8,8 @@ import com.raspisanie.mai.R
 import com.raspisanie.mai.data.db.models.GroupRealm
 import kotlinx.android.synthetic.main.fragment_select_group.*
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class SelectGroupFragment : BaseFragment(R.layout.fragment_select_group), SelectGroupView {
 
@@ -18,8 +18,8 @@ class SelectGroupFragment : BaseFragment(R.layout.fragment_select_group), Select
 
     private val adapter by lazy { GroupsAdapter(presenter::select) }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         with(vToolbar) {
             init(

@@ -11,8 +11,8 @@ import com.raspisanie.mai.domain.models.StudentOrganizationLocal
 import kotlinx.android.synthetic.main.fragment_library.vToolbar
 import kotlinx.android.synthetic.main.fragment_students.*
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class StudentsFragment : BaseFragment(R.layout.fragment_students), StudentsView {
 
@@ -21,9 +21,8 @@ class StudentsFragment : BaseFragment(R.layout.fragment_students), StudentsView 
 
     private val adapter by lazy {StudentsAdapter(this::callPhone)}
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         vToolbar.init(
             title = R.string.info_button_students,
             back = {onBackPressed()}

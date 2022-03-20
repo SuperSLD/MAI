@@ -2,7 +2,7 @@ package com.raspisanie.mai.ui.main
 
 import android.os.Bundle
 import com.raspisanie.mai.Screens
-import pro.midev.supersld.common.base.FlowFragment
+import online.jutter.supersld.common.base.FlowFragment
 import ru.terrakok.cicerone.commands.BackTo
 import ru.terrakok.cicerone.commands.Replace
 

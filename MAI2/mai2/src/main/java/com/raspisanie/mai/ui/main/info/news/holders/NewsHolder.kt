@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import com.bumptech.glide.Glide
 import com.raspisanie.mai.R
-import com.raspisanie.mai.extesions.getIsDayTheme
+import com.raspisanie.mai.common.extesions.getIsDayTheme
 import com.raspisanie.mai.domain.models.NewsLocal
 import kotlinx.android.synthetic.main.item_adv_holder.view.tvText
 import kotlinx.android.synthetic.main.item_news.view.*

@@ -1,9 +1,10 @@
-package com.raspisanie.mai.extesions
+package com.raspisanie.mai.common.extesions
 
 import android.content.Context
 import com.google.gson.Gson
 import com.raspisanie.mai.domain.models.NotificationsLocal
-import pro.midev.supersld.common.PreferenceHelper
+import com.raspisanie.mai.extesions.toFormat
+import online.jutter.supersld.common.PreferenceHelper
 import java.util.*
 
 const val MAI_PREFS = "mai_prefs"

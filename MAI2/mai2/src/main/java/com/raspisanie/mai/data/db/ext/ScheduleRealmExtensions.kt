@@ -1,4 +1,4 @@
-package com.raspisanie.mai.extesions.realm
+package com.raspisanie.mai.data.db.ext
 
 import com.raspisanie.mai.data.db.models.*
 import io.realm.Realm

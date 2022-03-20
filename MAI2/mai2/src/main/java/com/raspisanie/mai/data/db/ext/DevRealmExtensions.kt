@@ -1,8 +1,8 @@
-package com.raspisanie.mai.extesions.realm
+package com.raspisanie.mai.data.db.ext
 
-import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.domain.models.DevLocal
 import com.raspisanie.mai.data.db.models.DevRealm
+import com.raspisanie.mai.extesions.mappers.toLocal
 import io.realm.Realm
 import io.realm.RealmList
 

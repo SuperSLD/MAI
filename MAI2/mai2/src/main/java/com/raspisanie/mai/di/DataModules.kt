@@ -1,5 +1,8 @@
 package com.raspisanie.mai.di
 
+import com.raspisanie.mai.data.db.repositories.DevStorageRepository
+import com.raspisanie.mai.data.db.repositories.GroupStorageRepository
+import com.raspisanie.mai.data.db.repositories.ScheduleStorageRepository
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import org.koin.android.ext.koin.androidContext
@@ -14,4 +17,8 @@ fun Module.provideDataFlow() {
             .build()
         Realm.getInstance(config)
     }
+
+    single { ScheduleStorageRepository(get()) }
+    single { GroupStorageRepository(get()) }
+    single { DevStorageRepository(get()) }
 }

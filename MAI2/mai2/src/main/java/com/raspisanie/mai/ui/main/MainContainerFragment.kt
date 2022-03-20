@@ -8,8 +8,8 @@ import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.domain.models.NotificationsLocal
 import kotlinx.android.synthetic.main.fragment_main_container.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import timber.log.Timber
 
@@ -20,8 +20,8 @@ class MainContainerFragment : BaseFragment(R.layout.fragment_main_container), Ma
     private val currentTabFragment: BaseFragment?
         get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         bottomNavigation.addSystemBottomPadding()
     }
 

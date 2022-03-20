@@ -1,6 +1,5 @@
 package com.raspisanie.mai.ui.main.settings.confirm_dialog
 
-import android.Manifest
 import android.os.Bundle
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter

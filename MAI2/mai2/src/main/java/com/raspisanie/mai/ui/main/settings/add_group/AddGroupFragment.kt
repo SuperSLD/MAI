@@ -10,8 +10,8 @@ import com.raspisanie.mai.ui.select_group.select_group.GroupsAdapter
 import com.raspisanie.mai.ui.select_group.select_group.SelectGroupView
 import kotlinx.android.synthetic.main.fragment_select_group.*
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class AddGroupFragment : BaseFragment(R.layout.fragment_select_group), SelectGroupView {
 

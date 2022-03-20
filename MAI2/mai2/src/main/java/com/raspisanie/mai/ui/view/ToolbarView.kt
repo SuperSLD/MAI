@@ -8,7 +8,7 @@ import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.getDrawable
 import com.raspisanie.mai.extesions.getString
 import kotlinx.android.synthetic.main.view_toolbar.view.*
-import pro.midev.supersld.extensions.addSystemTopPadding
+import online.jutter.supersld.extensions.addSystemTopPadding
 
 class ToolbarView  : RelativeLayout {
 

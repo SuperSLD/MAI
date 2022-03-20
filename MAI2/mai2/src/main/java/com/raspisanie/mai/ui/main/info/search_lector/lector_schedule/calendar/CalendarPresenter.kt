@@ -4,8 +4,8 @@ import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.controllers.SelectDateController
 import com.yandex.metrica.YandexMetrica
+import online.jutter.supersld.common.base.BasePresenter
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
 
 @InjectViewState
 class CalendarPresenter : BasePresenter<CalendarView>() {

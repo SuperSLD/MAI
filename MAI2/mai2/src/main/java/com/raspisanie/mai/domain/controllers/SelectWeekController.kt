@@ -1,13 +1,10 @@
 package com.raspisanie.mai.domain.controllers
 
-import com.jakewharton.rxrelay3.PublishRelay
-import io.reactivex.rxjava3.core.Observable
+import online.jutter.supersld.common.datacontrol.PublishDataController
 
 class SelectWeekController {
-    private val stateRelay = PublishRelay.create<Int>()
-
-    val state: Observable<Int> = stateRelay
-    fun select(week: Int) = stateRelay.accept(week)
+    val state = PublishDataController<Int>()
+    fun select(week: Int) = state.emit(week)
 
     /**
      * Особые номера недель, чтобы

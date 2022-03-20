@@ -1,4 +1,4 @@
-package com.raspisanie.mai.extesions.mappers
+package com.raspisanie.mai.domain.mappers
 
 import com.raspisanie.mai.data.net.models.FeedbackBody
 import online.juter.supersld.view.input.form.JTForm

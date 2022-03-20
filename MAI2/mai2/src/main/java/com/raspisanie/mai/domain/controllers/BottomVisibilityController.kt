@@ -1,13 +1,10 @@
 package com.raspisanie.mai.domain.controllers
 
-
-import com.jakewharton.rxrelay3.BehaviorRelay
-import io.reactivex.rxjava3.core.Observable
+import online.jutter.supersld.common.datacontrol.PublishDataController
 
 class BottomVisibilityController {
-    private val stateRelay = BehaviorRelay.create<Boolean>()
+    val state = PublishDataController<Boolean>()
 
-    val state: Observable<Boolean> = stateRelay
-    fun show() = stateRelay.accept(true)
-    fun hide() = stateRelay.accept(false)
+    fun show() = state.emit(true)
+    fun hide() = state.emit(false)
 }

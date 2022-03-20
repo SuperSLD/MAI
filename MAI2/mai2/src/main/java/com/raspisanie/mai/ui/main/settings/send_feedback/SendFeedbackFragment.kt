@@ -1,21 +1,16 @@
 package com.raspisanie.mai.ui.main.settings.send_feedback
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.createFormParams
 import com.raspisanie.mai.extesions.showToast
 import com.yandex.metrica.YandexMetrica
-import kotlinx.android.synthetic.main.fragment_adv_add.*
 import kotlinx.android.synthetic.main.fragment_feedback.*
-import kotlinx.android.synthetic.main.fragment_feedback.vForm
-import kotlinx.android.synthetic.main.fragment_feedback.vToolbar
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class SendFeedbackFragment : BaseFragment(R.layout.fragment_feedback), SendFeedbackView {
 

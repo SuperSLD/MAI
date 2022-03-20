@@ -8,59 +8,59 @@ import retrofit2.http.*
 
 interface Api {
     @GET("groups/search/{name}")
-    fun getGroupList(@Path("name") name: String) : Single<DataWrapper<MutableList<GroupResponse>>>
+    suspend fun getGroupList(@Path("name") name: String) : DataWrapper<MutableList<GroupResponse>>
 
     @GET("schedule/all/{id}")
-    fun getSchedule(@Path("id") id: String) : Single<DataWrapper<MutableList<WeekResponse>>>
+    suspend fun getSchedule(@Path("id") id: String) : DataWrapper<MutableList<WeekResponse>>
 
     @POST("feedback/send")
-    fun sendFeedback(@Body body: FeedbackBody) : Single<DataWrapper<Any?>>
+    suspend fun sendFeedback(@Body body: FeedbackBody) : DataWrapper<Any?>
 
     @GET("advertisements/get")
-    fun getAdvPage(
+    suspend fun getAdvPage(
         @Query("limit") limit: Int,
         @Query("skip") skip: Int
-    ) : Single<DataWrapper<MutableList<AdvResponse>>>
+    ) : DataWrapper<MutableList<AdvResponse>>
 
     @GET("canteens/all")
-    fun getCanteens() : Single<DataWrapper<MutableList<CanteenResponse>>>
+    suspend fun getCanteens() : DataWrapper<MutableList<CanteenResponse>>
 
     @GET("studorg/all")
-    fun getStudents() : Single<DataWrapper<MutableList<StudentOrganizationResponse>>>
+    suspend fun getStudents() : DataWrapper<MutableList<StudentOrganizationResponse>>
 
     @GET("developers/all")
-    fun getDevList() : Single<DataWrapper<MutableList<DevResponse>>>
+    suspend fun getDevList() : DataWrapper<MutableList<DevResponse>>
 
     @GET("sport/all")
-    fun getSport() : Single<DataWrapper<MutableList<SportResponse>>>
+    suspend fun getSport() : DataWrapper<MutableList<SportResponse>>
 
     @GET("library/all")
-    fun getLibrary() : Single<DataWrapper<MutableList<LibraryResponse>>>
+    suspend fun getLibrary() : DataWrapper<MutableList<LibraryResponse>>
 
     @GET("creative/all")
-    fun getCreative() : Single<DataWrapper<MutableList<CreativeResponse>>>
+    suspend fun getCreative() : DataWrapper<MutableList<CreativeResponse>>
 
     @GET("notification/all/{date}")
-    fun getNotifications(@Path("date") date: String) : Single<DataWrapper<NotificationsResponse>>
+    suspend fun getNotifications(@Path("date") date: String) : DataWrapper<NotificationsResponse>
 
     @GET("news/get")
-    fun getNews(
+    suspend fun getNews(
         @Query("limit") limit: Int,
         @Query("skip") skip: Int
-    ) : Single<DataWrapper<MutableList<NewsResponse>>>
+    ) : DataWrapper<MutableList<NewsResponse>>
 
     @GET("news/like/{id}")
-    fun likeNews(@Path("id") id: String) : Single<DataWrapper<Boolean?>>
+    suspend fun likeNews(@Path("id") id: String) : DataWrapper<Boolean?>
 
     @GET("advertisements/like/{id}")
-    fun likeAdv(@Path("id") id: String) : Single<DataWrapper<Boolean?>>
+    suspend fun likeAdv(@Path("id") id: String) : DataWrapper<Boolean?>
 
     @GET("schedule/searchLector/{name}")
-    fun getSearchLector(@Path("name") name: String) : Single<DataWrapper<MutableList<TeacherResponse>>>
+    suspend fun getSearchLector(@Path("name") name: String) : DataWrapper<MutableList<TeacherResponse>>
 
     @GET("schedule/lector/{id}")
-    fun getLectorSchedule(@Path("id") id: String) : Single<DataWrapper<MutableList<WeekResponse>>>
+    suspend fun getLectorSchedule(@Path("id") id: String) : DataWrapper<MutableList<WeekResponse>>
 
     @POST("advertisements/add")
-    fun createAdv(@Body body: AdvCreateBody) : Single<DataWrapper<Any?>>
+    suspend fun createAdv(@Body body: AdvCreateBody) : DataWrapper<Any?>
 }

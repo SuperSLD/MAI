@@ -5,26 +5,25 @@ import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.R
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
-import com.raspisanie.mai.extesions.mappers.toAdsCreateBody
+import com.raspisanie.mai.domain.usecases.information.adv.CreateAdvUseCase
 import com.raspisanie.mai.extesions.showToast
-import com.raspisanie.mai.data.net.retrofit.ApiService
 import com.yandex.metrica.YandexMetrica
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineExceptionHandler
 import online.juter.supersld.view.input.form.JTForm
 import online.juter.supersld.view.input.form.JTFormPage
 import online.juter.supersld.view.input.form.lines.SolidTextLine
 import online.juter.supersld.view.input.form.lines.TextInputLine
 import online.juter.supersld.view.input.form.lines.TextLine
+import online.jutter.supersld.common.base.BasePresenter
+import online.jutter.supersld.extensions.launchUI
+import online.jutter.supersld.extensions.withIO
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
-import timber.log.Timber
 
 @InjectViewState
 class AddAdvPresenter : BasePresenter<AddAdvView>() {
 
     private val bottomVisibilityController: BottomVisibilityController by inject()
-    private val service: ApiService by inject()
+    private val createAdvUseCase: CreateAdvUseCase by inject()
     private val context: Context by inject()
 
     override fun attachView(view: AddAdvView?) {
@@ -74,27 +73,18 @@ class AddAdvPresenter : BasePresenter<AddAdvView>() {
 
 
     fun sendForm(form: JTForm) {
-        service.createAdv(form.toAdsCreateBody())
-            .map { if (it.success) 0 else error(it.message.toString()) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe { viewState.toggleLoading(true) }
-            .doOnError {
-                it.printStackTrace()
-                context.showToast(
-                    R.drawable.ic_report_gmailerrorred,
-                    it.message.toString(),
-                    true
-                )
-            }
-            .subscribe(
-                {
-                    router?.replaceScreen(Screens.CreateAdvSuccess)
-                },
-                {
-                    Timber.e(it)
-                }
-            ).connect()
+        launchUI(CoroutineExceptionHandler { _, thr ->
+            context.showToast(
+                R.drawable.ic_report_gmailerrorred,
+                thr.message.toString(),
+                true
+            )
+            viewState.toggleLoading(false)
+        }) {
+            viewState.toggleLoading(true)
+            withIO { createAdvUseCase(form) }
+            router?.replaceScreen(Screens.CreateAdvSuccess)
+        }
     }
 
     fun back() = router?.exit()

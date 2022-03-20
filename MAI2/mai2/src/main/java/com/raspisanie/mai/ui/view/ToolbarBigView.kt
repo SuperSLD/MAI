@@ -8,7 +8,7 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import com.raspisanie.mai.R
 import kotlinx.android.synthetic.main.view_toolbar_big.view.*
-import pro.midev.supersld.extensions.addSystemTopPadding
+import online.jutter.supersld.extensions.addSystemTopPadding
 
 class ToolbarBigView  : RelativeLayout {
 

@@ -3,6 +3,7 @@ package com.raspisanie.mai.extesions
 import android.content.Context
 import android.graphics.Color
 import com.raspisanie.mai.R
+import com.raspisanie.mai.common.extesions.getIsDayTheme
 import online.juter.supersld.view.input.form.JTFormParams
 
 fun Context.createFormParams() =

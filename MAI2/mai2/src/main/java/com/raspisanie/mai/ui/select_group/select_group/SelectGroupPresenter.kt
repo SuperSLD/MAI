@@ -4,27 +4,29 @@ import android.content.Context
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.Screens
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
-import com.raspisanie.mai.extesions.mappers.toRealm
-import com.raspisanie.mai.extesions.realm.updateGroup
-import com.raspisanie.mai.extesions.saveAuthState
+import com.raspisanie.mai.data.db.ext.updateGroup
+import com.raspisanie.mai.common.extesions.saveAuthState
 import com.raspisanie.mai.data.db.models.GroupRealm
-import com.raspisanie.mai.data.net.retrofit.ApiService
+import com.raspisanie.mai.domain.mappers.toRealm
+import com.raspisanie.mai.domain.usecases.groups.SearchGroupsUseCase
+import com.raspisanie.mai.domain.usecases.groups.UpdateGroupUseCase
+import com.raspisanie.mai.domain.usecases.state.SaveAuthStateUseCase
 import com.yandex.metrica.YandexMetrica
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
 import io.realm.Realm
+import kotlinx.coroutines.CoroutineExceptionHandler
+import online.jutter.supersld.common.base.BasePresenter
+import online.jutter.supersld.extensions.launchUI
+import online.jutter.supersld.extensions.withIO
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
-import timber.log.Timber
 
 @InjectViewState
 class SelectGroupPresenter : BasePresenter<SelectGroupView>() {
 
-    private val service: ApiService by inject()
     private val bottomVisibilityController: BottomVisibilityController by inject()
+    private val searchGroupsUseCase: SearchGroupsUseCase by inject()
+    private val saveAuthStateUseCase: SaveAuthStateUseCase by inject()
+    private val updateGroupUseCase: UpdateGroupUseCase by inject()
     private var lastSearch = ""
-    private val context: Context by inject()
-    private val realm: Realm by inject()
 
     override fun attachView(view: SelectGroupView?) {
         super.attachView(view)
@@ -38,33 +40,22 @@ class SelectGroupPresenter : BasePresenter<SelectGroupView>() {
 
     fun select(group: GroupRealm) {
         YandexMetrica.reportEvent("FirstGroupSelected")
-        context.saveAuthState(true)
+        saveAuthStateUseCase(true)
         group.selected = true
-        realm.updateGroup(group)
+        updateGroupUseCase(group)
         router?.newRootScreen(Screens.FlowMain)
     }
 
     fun search(name: String = lastSearch) {
-        lastSearch = if (name.isEmpty()) "#" else name
-        service.getGroupList(lastSearch)
-                .map { if (it.success) it.data else error(it.message.toString()) }
-                .map { it!!.toRealm() }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe { viewState.toggleLoading(true) }
-                .doOnError {
-                    it.printStackTrace()
-                    viewState.showErrorLoading()
-                }
-                .subscribe(
-                        {
-                            viewState.toggleLoading(false)
-                            viewState.showList(it)
-                        },
-                        {
-                            Timber.e(it)
-                        }
-                ).connect()
+        lastSearch = name.ifEmpty { "#" }
+        launchUI(CoroutineExceptionHandler { _, _ ->
+            viewState.showErrorLoading()
+        }) {
+            viewState.toggleLoading(true)
+            val list = withIO{ searchGroupsUseCase(lastSearch) } ?: mutableListOf()
+            viewState.toggleLoading(false)
+            viewState.showList(list.map { it.toRealm() }.toMutableList())
+        }
     }
 
     fun next() {
