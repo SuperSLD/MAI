@@ -15,6 +15,8 @@ import com.raspisanie.mai.domain.usecases.devs.SaveInRealmDevsUseCase
 import com.raspisanie.mai.domain.usecases.groups.GetAllGroupsUseCase
 import com.raspisanie.mai.domain.usecases.groups.GetCurrentGroupUseCase
 import com.raspisanie.mai.domain.usecases.schedule.GetAllStorageSchedulesUseCase
+import com.raspisanie.mai.domain.usecases.state.GetThemeIsDayUseCase
+import com.raspisanie.mai.domain.usecases.state.SaveThemeIsDayUseCase
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.mappers.toRealm
 import com.raspisanie.mai.extesions.showToast
@@ -34,6 +36,7 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     private val getAllStorageSchedulesUseCase: GetAllStorageSchedulesUseCase by inject()
     private val getAllGroupUseCase: GetAllGroupsUseCase by inject()
     private val getAllDevsUseCase: GetAllDevsUseCase by inject()
+    private val saveThemeIsDayUseCase: SaveThemeIsDayUseCase by inject()
     private val loadDevsUseCase: LoadDevsUseCase by inject()
     private val saveInRealmDevsUseCase: SaveInRealmDevsUseCase by inject()
 
@@ -56,6 +59,10 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
         showGroupsList()
         showScheduleInfo()
         listenConfirm()
+    }
+
+    fun onSaveTheme(isDay: Boolean) {
+        saveThemeIsDayUseCase(isDay)
     }
 
     fun select(group: GroupRealm) {
