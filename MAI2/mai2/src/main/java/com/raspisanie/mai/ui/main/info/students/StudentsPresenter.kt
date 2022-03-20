@@ -3,6 +3,7 @@ package com.raspisanie.mai.ui.main.info.students
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.usecases.information.LoadStudOrgUseCase
+import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
 import kotlinx.coroutines.CoroutineExceptionHandler
 import online.jutter.supersld.common.base.BasePresenter
@@ -30,9 +31,8 @@ class StudentsPresenter : BasePresenter<StudentsView>() {
     fun back() = router?.exit()
 
     fun loadList() {
-        launchUI(CoroutineExceptionHandler { _, _ ->
-            viewState.showErrorLoading()
-        }) {
+        val handler = createHandler { viewState.showErrorLoading() }
+        launchUI(handler) {
             viewState.toggleLoading(true)
             val list = withIO { loadStudOrgUseCase() }
             viewState.toggleLoading(false)

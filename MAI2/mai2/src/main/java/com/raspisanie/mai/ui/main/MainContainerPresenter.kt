@@ -1,13 +1,12 @@
 package com.raspisanie.mai.ui.main
 
-import android.content.Context
 import com.arellomobile.mvp.InjectViewState
-import com.raspisanie.mai.data.net.retrofit.ApiService
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.controllers.ChangeBottomTabController
 import com.raspisanie.mai.domain.controllers.NotificationController
 import com.raspisanie.mai.domain.usecases.main.LoadNotificationsUseCase
 import com.raspisanie.mai.domain.usecases.state.GetNotificationsUseCase
+import com.raspisanie.mai.ui.ext.createEmptyHandler
 import online.jutter.supersld.common.base.BasePresenter
 import online.jutter.supersld.extensions.launchIO
 import online.jutter.supersld.extensions.withUI
@@ -57,7 +56,7 @@ class MainContainerPresenter : BasePresenter<MainContainerView>() {
      * Получаем количесво уведомлений.
      */
     private fun loadNotifications() {
-        launchIO {
+        launchIO(createEmptyHandler()) {
             val updatedNotifications = loadNotificationsUseCase()
             withUI {
                 notificationController.show(updatedNotifications)

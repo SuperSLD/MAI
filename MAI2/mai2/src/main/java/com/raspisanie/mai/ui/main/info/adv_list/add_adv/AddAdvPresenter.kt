@@ -7,6 +7,7 @@ import com.raspisanie.mai.Screens
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.usecases.information.adv.CreateAdvUseCase
 import com.raspisanie.mai.extesions.showToast
+import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
 import kotlinx.coroutines.CoroutineExceptionHandler
 import online.juter.supersld.view.input.form.JTForm
@@ -73,14 +74,15 @@ class AddAdvPresenter : BasePresenter<AddAdvView>() {
 
 
     fun sendForm(form: JTForm) {
-        launchUI(CoroutineExceptionHandler { _, thr ->
+        val handler = createHandler {
             context.showToast(
                 R.drawable.ic_report_gmailerrorred,
-                thr.message.toString(),
+                it.message.toString(),
                 true
             )
             viewState.toggleLoading(false)
-        }) {
+        }
+        launchUI(handler) {
             viewState.toggleLoading(true)
             withIO { createAdvUseCase(form) }
             router?.replaceScreen(Screens.CreateAdvSuccess)

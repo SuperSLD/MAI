@@ -20,6 +20,7 @@ import com.raspisanie.mai.domain.usecases.state.SaveThemeIsDayUseCase
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.mappers.toRealm
 import com.raspisanie.mai.extesions.showToast
+import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
 import kotlinx.coroutines.CoroutineExceptionHandler
 import online.jutter.supersld.common.base.BasePresenter
@@ -117,9 +118,8 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     }
 
     private fun getDevList() {
-        launchUI(CoroutineExceptionHandler { _, _ ->
-            viewState.toggleLoading(false)
-        }) {
+        val handler = createHandler { viewState.toggleLoading(false) }
+        launchUI(handler) {
             val realmList = withIO { loadDevsUseCase() }!!.toRealm()
             saveInRealmDevsUseCase(realmList)
             viewState.toggleLoading(false)

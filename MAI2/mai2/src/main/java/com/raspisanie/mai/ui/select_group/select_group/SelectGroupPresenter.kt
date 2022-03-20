@@ -11,6 +11,7 @@ import com.raspisanie.mai.domain.mappers.toRealm
 import com.raspisanie.mai.domain.usecases.groups.SearchGroupsUseCase
 import com.raspisanie.mai.domain.usecases.groups.UpdateGroupUseCase
 import com.raspisanie.mai.domain.usecases.state.SaveAuthStateUseCase
+import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
 import io.realm.Realm
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -48,9 +49,8 @@ class SelectGroupPresenter : BasePresenter<SelectGroupView>() {
 
     fun search(name: String = lastSearch) {
         lastSearch = name.ifEmpty { "#" }
-        launchUI(CoroutineExceptionHandler { _, _ ->
-            viewState.showErrorLoading()
-        }) {
+        val handler = createHandler { viewState.showErrorLoading() }
+        launchUI(handler) {
             viewState.toggleLoading(true)
             val list = withIO{ searchGroupsUseCase(lastSearch) } ?: mutableListOf()
             viewState.toggleLoading(false)

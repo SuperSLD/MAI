@@ -10,6 +10,7 @@ import com.raspisanie.mai.domain.usecases.information.news.SetLikeNewsUseCase
 import com.raspisanie.mai.domain.usecases.state.GetNotificationsUseCase
 import com.raspisanie.mai.domain.usecases.state.SaveNotificationsUseCase
 import com.raspisanie.mai.extesions.showToast
+import com.raspisanie.mai.ui.ext.createHandler
 import com.raspisanie.mai.ui.main.info.news.NewsPagingParams.PAGE_SIZE
 import com.yandex.metrica.YandexMetrica
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -40,10 +41,11 @@ class NewsPresenter : BasePresenter<NewsView>() {
     }
 
     fun loadList(skip: Int) {
-        launchUI(CoroutineExceptionHandler { _, thr ->
+        val handler = createHandler {
             viewState.showErrorLoading()
-            context.showToast(R.drawable.ic_close_toast, thr.message.toString())
-        }) {
+            context.showToast(R.drawable.ic_close_toast, it.message.toString())
+        }
+        launchUI(handler) {
             viewState.toggleLoading(true)
             val list = withIO { loadNewsUseCase(PAGE_SIZE, skip) }
             viewState.toggleLoading(false)
@@ -53,9 +55,10 @@ class NewsPresenter : BasePresenter<NewsView>() {
     }
 
     fun like(id: String) {
-        launchUI(CoroutineExceptionHandler { _, thr ->
-            context.showToast(R.drawable.ic_close_toast, thr.message.toString())
-        }) {
+        val handler = createHandler {
+            context.showToast(R.drawable.ic_close_toast, it.message.toString())
+        }
+        launchUI(handler) {
             val isLiked = withIO { setLikeNewsUseCase(id) }
             context.showToast(
                 R.drawable.ic_like_toast,

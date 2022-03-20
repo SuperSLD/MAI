@@ -1,11 +1,11 @@
 package com.raspisanie.mai.ui.splash
 
-import android.content.Context
 import com.arellomobile.mvp.MvpView
 import com.raspisanie.mai.Screens
-import com.raspisanie.mai.common.extesions.getAuthState
+import com.raspisanie.mai.domain.usecases.main.RemoveRealmDataUseCase
+import com.raspisanie.mai.domain.usecases.state.GetAuthStateUseCase
+import com.raspisanie.mai.ui.ext.createEmptyHandler
 import com.yandex.metrica.YandexMetrica
-import io.realm.Realm
 import kotlinx.coroutines.delay
 import online.jutter.supersld.common.base.BasePresenter
 import online.jutter.supersld.extensions.launchIO
@@ -14,8 +14,8 @@ import org.koin.core.inject
 
 class SplashPresenter : BasePresenter<MvpView>() {
 
-    private val context : Context by inject()
-    private val realm: Realm by inject()
+    private val removeRealmDataUseCase: RemoveRealmDataUseCase by inject()
+    private val getAuthStateUseCase: GetAuthStateUseCase by inject()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -24,15 +24,13 @@ class SplashPresenter : BasePresenter<MvpView>() {
     }
 
     private fun start() {
-        launchIO {
+        launchIO(createEmptyHandler()) {
             delay(2000)
             withUI {
-                if (context.getAuthState()) {
+                if (getAuthStateUseCase()) {
                     router?.newRootScreen(Screens.FlowMain)
                 } else {
-                    realm.executeTransaction {
-                        realm.deleteAll()
-                    }
+                    removeRealmDataUseCase()
                     router?.newRootScreen(Screens.FlowSelectGroup)
                 }
             }

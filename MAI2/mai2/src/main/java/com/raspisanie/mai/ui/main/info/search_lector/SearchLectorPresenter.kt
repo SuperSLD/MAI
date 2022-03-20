@@ -5,6 +5,7 @@ import com.raspisanie.mai.Screens
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.models.TeacherLocal
 import com.raspisanie.mai.domain.usecases.information.lector.SearchLectorsUseCase
+import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
 import kotlinx.coroutines.CoroutineExceptionHandler
 import online.jutter.supersld.common.base.BasePresenter
@@ -36,9 +37,10 @@ class SearchLectorPresenter : BasePresenter<SearchLectorView>() {
 
     fun search(name: String = lastSearch) {
         lastSearch = name.ifEmpty { "#" }
-        launchUI(CoroutineExceptionHandler { _, _ ->
+        val handler = createHandler {
             viewState.showErrorLoading()
-        }) {
+        }
+        launchUI(handler) {
             viewState.toggleLoading(true)
             val list = withIO { searchLectorsUseCase(lastSearch) }
             viewState.toggleLoading(false)

@@ -3,6 +3,7 @@ package com.raspisanie.mai.ui.main.info.creative
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.usecases.information.LoadCreativeGroupsUseCase
+import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
 import kotlinx.coroutines.CoroutineExceptionHandler
 import online.jutter.supersld.common.base.BasePresenter
@@ -28,9 +29,8 @@ class CreativePresenter : BasePresenter<CreativeView>() {
     }
 
     fun loadList() {
-        launchUI(CoroutineExceptionHandler { _, _ ->
-            viewState.showErrorLoading()
-        }) {
+        val handler = createHandler {  viewState.showErrorLoading() }
+        launchUI(handler) {
             viewState.toggleLoading(true)
             val list = withIO { loadCreativeGroupsUseCase() }
             viewState.toggleLoading(false)

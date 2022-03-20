@@ -3,6 +3,7 @@ package com.raspisanie.mai.ui.main.info.sport
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.usecases.information.LoadSportSectionsUseCase
+import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
 import kotlinx.coroutines.CoroutineExceptionHandler
 import online.jutter.supersld.common.base.BasePresenter
@@ -28,9 +29,10 @@ class SportPresenter : BasePresenter<SportView>() {
     }
 
     fun loadList() {
-        launchUI(CoroutineExceptionHandler { _, _ ->
+        val handler = createHandler {
             viewState.showErrorLoading()
-        }) {
+        }
+        launchUI(handler) {
             viewState.toggleLoading(true)
             val list = withIO { loadSportSectionsUseCase() }
             viewState.toggleLoading(false)

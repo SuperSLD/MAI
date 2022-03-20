@@ -8,9 +8,9 @@ import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.usecases.information.adv.LoadAdvUseCase
 import com.raspisanie.mai.domain.usecases.information.adv.SetLikeAdvUseCase
 import com.raspisanie.mai.extesions.showToast
+import com.raspisanie.mai.ui.ext.createHandler
 import com.raspisanie.mai.ui.main.info.adv_list.AdvPagingParams.PAGE_SIZE
 import com.yandex.metrica.YandexMetrica
-import kotlinx.coroutines.CoroutineExceptionHandler
 import online.jutter.supersld.common.base.BasePresenter
 import online.jutter.supersld.extensions.launchUI
 import online.jutter.supersld.extensions.withIO
@@ -36,10 +36,11 @@ class AdvPresenter : BasePresenter<AdvView>() {
     }
 
     fun loadList(skip: Int) {
-        launchUI(CoroutineExceptionHandler { _, thr ->
+        val handler = createHandler {
             viewState.showErrorLoading()
-            context.showToast(R.drawable.ic_close_toast, thr.message.toString())
-        }) {
+            context.showToast(R.drawable.ic_close_toast, it.message.toString())
+        }
+        launchUI(handler) {
             viewState.toggleLoading(true)
             val list = withIO { loadAdvUseCase(PAGE_SIZE, skip) }
             viewState.toggleLoading(false)
@@ -48,9 +49,10 @@ class AdvPresenter : BasePresenter<AdvView>() {
     }
 
     fun like(id: String) {
-        launchUI(CoroutineExceptionHandler { _, thr ->
-            context.showToast(R.drawable.ic_close_toast, thr.message.toString())
-        }) {
+        val handler = createHandler {
+            context.showToast(R.drawable.ic_close_toast, it.message.toString())
+        }
+        launchUI(handler) {
             val isLiked = withIO { setLikeAdvUseCase(id) }
             context.showToast(
                 R.drawable.ic_like_toast,

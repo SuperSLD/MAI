@@ -8,6 +8,7 @@ import com.raspisanie.mai.common.enums.ToastType
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.controllers.ShowToastController
 import com.raspisanie.mai.domain.usecases.main.SendFeedbackUseCase
+import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
 import kotlinx.coroutines.CoroutineExceptionHandler
 import online.juter.supersld.view.input.form.JTForm
@@ -39,10 +40,11 @@ class SendFeedbackPresenter : BasePresenter<SendFeedbackView>() {
     }
 
     fun sendFeedback(form: JTForm) {
-        launchUI(CoroutineExceptionHandler { _, _ ->
+        val handler = createHandler {
             viewState.toggleLoading(false)
             showToastController.show(ToastType.ERROR, context.getString(R.string.errorLoading))
-        }) {
+        }
+        launchUI(handler) {
             withIO { sendFeedbackUseCase(form) }
             router?.replaceScreen(Screens.Success)
         }

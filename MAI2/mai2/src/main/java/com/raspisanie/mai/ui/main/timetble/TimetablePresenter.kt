@@ -30,6 +30,7 @@ import com.raspisanie.mai.domain.usecases.schedule.UpdateCurrentGroupScheduleUse
 import com.raspisanie.mai.domain.usecases.state.GetSemesterUseCase
 import com.raspisanie.mai.domain.usecases.state.SaveAuthStateUseCase
 import com.raspisanie.mai.domain.usecases.state.SaveSemesterUseCase
+import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -112,23 +113,24 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
      * Загрузка с сервера.
      */
     fun loadSchedule() {
-        getCurrentGroupUseCase()?.let { group ->
-            launchUI(CoroutineExceptionHandler { _, thr ->
-                if (thr.message.toString() == "schedule not found") {
-                    removeAndOpenNewGroup()
+        val handler = createHandler {
+            if (it.message.toString() == "schedule not found") {
+                removeAndOpenNewGroup()
+            } else {
+                context.showToast(
+                    R.drawable.ic_report_gmailerrorred,
+                    context.getString(R.string.timetable_error),
+                    true
+                )
+                if (getStorageScheduleUseCase() == null) {
+                    viewState.showErrorLoading()
                 } else {
-                    context.showToast(
-                        R.drawable.ic_report_gmailerrorred,
-                        context.getString(R.string.timetable_error),
-                        true
-                    )
-                    if (getStorageScheduleUseCase() == null) {
-                        viewState.showErrorLoading()
-                    } else {
-                        showWeekByCurrent()
-                    }
+                    showWeekByCurrent()
                 }
-            }) {
+            }
+        }
+        getCurrentGroupUseCase()?.let { group ->
+            launchUI(handler) {
                 val id = group.id!!
                 viewState.toggleLoading(true)
                 val scheduleRealm = withIO { loadScheduleUseCase(id) }.toRealm(group.id!!)
