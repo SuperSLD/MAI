@@ -3,18 +3,14 @@ package com.raspisanie.mai.ui.splash
 import android.content.Context
 import com.arellomobile.mvp.MvpView
 import com.raspisanie.mai.Screens
-import com.raspisanie.mai.extesions.getAuthState
-import com.raspisanie.mai.extesions.realm.getCurrentGroup
-import com.raspisanie.mai.extesions.saveAuthState
+import com.raspisanie.mai.common.extesions.getAuthState
 import com.yandex.metrica.YandexMetrica
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
 import io.realm.Realm
+import kotlinx.coroutines.delay
+import online.jutter.supersld.common.base.BasePresenter
+import online.jutter.supersld.extensions.launchIO
+import online.jutter.supersld.extensions.withUI
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
-import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 class SplashPresenter : BasePresenter<MvpView>() {
 
@@ -28,26 +24,19 @@ class SplashPresenter : BasePresenter<MvpView>() {
     }
 
     private fun start() {
-        Single
-            .timer(1, TimeUnit.SECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe(
-                {
-                    //if (false) {
-                    if (context.getAuthState()) {
-                       router?.newRootScreen(Screens.FlowMain)
-                    } else {
-                        realm.executeTransaction {
-                            realm.deleteAll()
-                        }
-                        router?.newRootScreen(Screens.FlowSelectGroup)
+        launchIO {
+            delay(2000)
+            withUI {
+                if (context.getAuthState()) {
+                    router?.newRootScreen(Screens.FlowMain)
+                } else {
+                    realm.executeTransaction {
+                        realm.deleteAll()
                     }
-                },
-                {
-                    Timber.e(it)
+                    router?.newRootScreen(Screens.FlowSelectGroup)
                 }
-            ).connect()
+            }
+        }
     }
 
     fun back() {

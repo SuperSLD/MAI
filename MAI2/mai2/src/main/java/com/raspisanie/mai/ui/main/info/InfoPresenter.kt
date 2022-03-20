@@ -1,30 +1,25 @@
 package com.raspisanie.mai.ui.main.info
 
-import android.content.Context
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpView
 import com.raspisanie.mai.Screens
-import com.raspisanie.mai.controllers.BottomVisibilityController
-import com.raspisanie.mai.controllers.NotificationController
-import com.raspisanie.mai.extesions.getNotifications
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.NotificationController
+import com.raspisanie.mai.domain.usecases.state.GetNotificationsUseCase
 import com.yandex.metrica.YandexMetrica
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import online.jutter.supersld.common.base.BasePresenter
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
-import timber.log.Timber
 
 @InjectViewState
 class InfoPresenter : BasePresenter<InfoView>() {
 
     private val bottomVisibilityController: BottomVisibilityController by inject()
     private val notificationController: NotificationController by inject()
-    private val context: Context by inject()
+    private val getNotificationUseCase: GetNotificationsUseCase by inject()
 
     override fun attachView(view: InfoView?) {
         super.attachView(view)
         bottomVisibilityController.show()
-        viewState.showNotifications(context.getNotifications())
+        viewState.showNotifications(getNotificationUseCase())
     }
 
     override fun onFirstViewAttach() {
@@ -45,16 +40,9 @@ class InfoPresenter : BasePresenter<InfoView>() {
 
     private fun listenNotifications() {
         notificationController.state
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe(
-                {
-                    viewState.showNotifications(it)
-                },
-                {
-                    Timber.e(it)
-                }
-            ).connect()
+            .listen {
+                viewState.showNotifications(it)
+            }.connect()
     }
 
     fun back() {

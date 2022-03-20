@@ -1,8 +1,9 @@
 package com.raspisanie.mai.ui.main.info
 
 import android.os.Bundle
+import android.view.View
 import com.raspisanie.mai.Screens
-import pro.midev.supersld.common.base.FlowFragment
+import online.jutter.supersld.common.base.FlowFragment
 import ru.terrakok.cicerone.commands.BackTo
 import ru.terrakok.cicerone.commands.Replace
 
@@ -12,8 +13,8 @@ class FlowInfoFragment : FlowFragment(ROUTER) {
         const val ROUTER = "INFO_ROUTER"
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (childFragmentManager.fragments.isEmpty()) {
             navigator.applyCommands(
                 arrayOf(

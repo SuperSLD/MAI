@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.CreativeLocal
+import com.raspisanie.mai.domain.models.CreativeLocal
 import kotlinx.android.synthetic.main.item_creative_group.view.*
 
 

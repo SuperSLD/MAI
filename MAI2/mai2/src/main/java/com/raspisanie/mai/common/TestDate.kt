@@ -1,7 +1,7 @@
 package com.raspisanie.mai.common
 
 import com.raspisanie.mai.extesions.parseCalendarByFormat
-import com.raspisanie.mai.models.local.ScheduleLocal
+import com.raspisanie.mai.domain.models.ScheduleLocal
 import java.util.*
 
 /**

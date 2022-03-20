@@ -2,10 +2,10 @@ package com.raspisanie.mai.ui.main.info.campus_map
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
-import com.raspisanie.mai.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.yandex.metrica.YandexMetrica
+import online.jutter.supersld.common.base.BasePresenter
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
 
 @InjectViewState
 class CampusMapPresenter : BasePresenter<MvpView>() {

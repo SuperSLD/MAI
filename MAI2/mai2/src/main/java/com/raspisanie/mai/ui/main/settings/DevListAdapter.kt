@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.getColor
-import com.raspisanie.mai.models.local.DevLocal
+import com.raspisanie.mai.domain.models.DevLocal
 import kotlinx.android.synthetic.main.item_dev.view.*
 
 

@@ -9,14 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.google.android.material.appbar.AppBarLayout
 import com.raspisanie.mai.R
-import com.raspisanie.mai.controllers.SelectWeekController
+import com.raspisanie.mai.domain.controllers.SelectWeekController
 import com.raspisanie.mai.extesions.openWebLink
-import com.raspisanie.mai.models.local.DayLocal
-import com.raspisanie.mai.models.local.WeekLocal
-import com.raspisanie.mai.models.realm.GroupRealm
+import com.raspisanie.mai.domain.models.DayLocal
+import com.raspisanie.mai.domain.models.WeekLocal
+import com.raspisanie.mai.data.db.models.GroupRealm
 import com.raspisanie.mai.ui.view.ToolbarBigView
-import com.yandex.metrica.impl.ob.V
-import com.yandex.metrica.impl.ob.Vi
 import kotlinx.android.synthetic.main.fragment_timetable.*
 import kotlinx.android.synthetic.main.fragment_timetable.rvWeek
 import kotlinx.android.synthetic.main.fragment_timetable.vToolbar
@@ -25,8 +23,8 @@ import kotlinx.android.synthetic.main.fragment_timetable.vgEmpty
 import kotlinx.android.synthetic.main.fragment_timetable.vgMain
 import kotlinx.android.synthetic.main.fragment_timetable.vgSelectGroup
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemTopPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemTopPadding
 
 /**
  * Страшный фрагмент, со сложной логикой.

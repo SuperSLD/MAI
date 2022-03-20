@@ -6,21 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
-import com.raspisanie.mai.extesions.realm.remove
+import com.raspisanie.mai.data.db.ext.remove
 import com.raspisanie.mai.extesions.shortVibration
-import com.raspisanie.mai.models.realm.CanteenLocal
-import com.raspisanie.mai.models.realm.GroupRealm
-import kotlinx.android.synthetic.main.item_canteens.view.*
-import kotlinx.android.synthetic.main.item_group.view.*
+import com.raspisanie.mai.data.db.models.GroupRealm
 import kotlinx.android.synthetic.main.item_group_settings.view.*
-import kotlinx.android.synthetic.main.item_timetable_subject.view.*
 import kotlinx.android.synthetic.main.item_timetable_subject.view.tvName
 
 
 class GroupsListAdapter(
-        private val select: (GroupRealm) -> Unit,
-        private val remove: (GroupRealm) -> Unit,
-        private var vibrator: Vibrator
+    private val select: (GroupRealm) -> Unit,
+    private val remove: (GroupRealm) -> Unit,
+    private var vibrator: Vibrator
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val list = mutableListOf<GroupRealm>()

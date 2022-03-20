@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.DayLocal
-import com.raspisanie.mai.models.local.TeacherLocal
+import com.raspisanie.mai.domain.models.DayLocal
+import com.raspisanie.mai.domain.models.TeacherLocal
 import kotlinx.android.synthetic.main.fragment_lector_schedule.*
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class LectorScheduleFragment : BaseFragment(R.layout.fragment_lector_schedule), LectorScheduleView {
 
@@ -24,9 +24,8 @@ class LectorScheduleFragment : BaseFragment(R.layout.fragment_lector_schedule), 
         LectorScheduleAdapter(presenter::openCalendar)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         with(vToolbar) {
             init(
                     title = "",

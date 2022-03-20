@@ -3,29 +3,31 @@ package com.raspisanie.mai.ui.main.info.news
 import android.content.Context
 import com.arellomobile.mvp.InjectViewState
 import com.raspisanie.mai.R
-import com.raspisanie.mai.controllers.BottomVisibilityController
-import com.raspisanie.mai.controllers.NotificationController
-import com.raspisanie.mai.extesions.getNotifications
-import com.raspisanie.mai.extesions.mappers.toLocal
-import com.raspisanie.mai.extesions.saveNotifications
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.controllers.NotificationController
+import com.raspisanie.mai.domain.usecases.information.news.LoadNewsUseCase
+import com.raspisanie.mai.domain.usecases.information.news.SetLikeNewsUseCase
+import com.raspisanie.mai.domain.usecases.state.GetNotificationsUseCase
+import com.raspisanie.mai.domain.usecases.state.SaveNotificationsUseCase
 import com.raspisanie.mai.extesions.showToast
-import com.raspisanie.mai.server.ApiService
 import com.raspisanie.mai.ui.main.info.news.NewsPagingParams.PAGE_SIZE
 import com.yandex.metrica.YandexMetrica
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
-import io.realm.Realm
+import kotlinx.coroutines.CoroutineExceptionHandler
+import online.jutter.supersld.common.base.BasePresenter
+import online.jutter.supersld.extensions.launchUI
+import online.jutter.supersld.extensions.withIO
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
-import timber.log.Timber
 
 @InjectViewState
 class NewsPresenter : BasePresenter<NewsView>() {
 
     private val bottomVisibilityController: BottomVisibilityController by inject()
-    private val service: ApiService by inject()
     private val context: Context by inject()
     private val notificationController: NotificationController by inject()
+    private val loadNewsUseCase: LoadNewsUseCase by inject()
+    private val setLikeNewsUseCase: SetLikeNewsUseCase by inject()
+    private val getNotificationsUseCase: GetNotificationsUseCase by inject()
+    private val saveNotificationsUseCase: SaveNotificationsUseCase by inject()
 
     override fun attachView(view: NewsView?) {
         super.attachView(view)
@@ -35,53 +37,32 @@ class NewsPresenter : BasePresenter<NewsView>() {
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         YandexMetrica.reportEvent("OpenNews")
-        //loadList(0)
     }
 
     fun loadList(skip: Int) {
-        service.getNews(PAGE_SIZE, skip)
-            .map { if (it.success) it.data else error(it.message.toString()) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .doOnError {
-                it.printStackTrace()
-                viewState.showErrorLoading()
-                context.showToast(R.drawable.ic_close_toast, it.message.toString())
-            }
-            .subscribe(
-                {
-                    hideNotifications()
-
-                    viewState.showList(it!!.map { n->n.toLocal() }.toMutableList())
-                },
-                {
-                    Timber.e(it)
-                }
-            ).connect()
+        launchUI(CoroutineExceptionHandler { _, thr ->
+            viewState.showErrorLoading()
+            context.showToast(R.drawable.ic_close_toast, thr.message.toString())
+        }) {
+            viewState.toggleLoading(true)
+            val list = withIO { loadNewsUseCase(PAGE_SIZE, skip) }
+            viewState.toggleLoading(false)
+            hideNotifications()
+            viewState.showList(list)
+        }
     }
 
     fun like(id: String) {
-        service.likeNews(id)
-            .map { if (it.success) it.data else error(it.message.toString()) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .doOnError {
-                it.printStackTrace()
-                viewState.showErrorLoading()
-                context.showToast(R.drawable.ic_close_toast, it.message.toString())
-            }
-            .subscribe(
-                {
-                    context.showToast(
-                        R.drawable.ic_like_toast,
-                        context.getString(if (it!!) R.string.like_success else R.string.like_error)
-                    )
-                    if (it) viewState.updateLike(id)
-                },
-                {
-                    Timber.e(it)
-                }
-            ).connect()
+        launchUI(CoroutineExceptionHandler { _, thr ->
+            context.showToast(R.drawable.ic_close_toast, thr.message.toString())
+        }) {
+            val isLiked = withIO { setLikeNewsUseCase(id) }
+            context.showToast(
+                R.drawable.ic_like_toast,
+                context.getString(if (isLiked) R.string.like_success else R.string.like_error)
+            )
+            if (isLiked) viewState.updateLike(id)
+        }
     }
 
     /**
@@ -90,9 +71,9 @@ class NewsPresenter : BasePresenter<NewsView>() {
      * счетчик уведомлений.
      */
     private fun hideNotifications() {
-        val notifications = context.getNotifications()
+        val notifications = getNotificationsUseCase()
         notifications.setNewsCount(0)
-        context.saveNotifications(notifications)
+        saveNotificationsUseCase(notifications)
         notificationController.show(notifications)
     }
 

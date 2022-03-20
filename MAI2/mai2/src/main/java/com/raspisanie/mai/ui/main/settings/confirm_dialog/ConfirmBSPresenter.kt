@@ -1,12 +1,10 @@
 package com.raspisanie.mai.ui.main.settings.confirm_dialog
 
-import android.content.Context
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
-import com.raspisanie.mai.controllers.ConfirmController
+import com.raspisanie.mai.domain.controllers.ConfirmController
+import online.jutter.supersld.common.base.BasePresenter
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
-import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class ConfirmBSPresenter : BasePresenter<MvpView>() {

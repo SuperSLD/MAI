@@ -5,14 +5,14 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.TeacherLocal
+import com.raspisanie.mai.domain.models.TeacherLocal
 import kotlinx.android.synthetic.main.fragment_search_lector.*
 import kotlinx.android.synthetic.main.fragment_select_group.vToolbar
 import kotlinx.android.synthetic.main.fragment_select_group.vgEmpty
 import kotlinx.android.synthetic.main.fragment_select_group.vgMain
 import kotlinx.android.synthetic.main.layout_loading.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class SearchLectorFragment : BaseFragment(R.layout.fragment_search_lector), SearchLectorView {
 
@@ -21,8 +21,8 @@ class SearchLectorFragment : BaseFragment(R.layout.fragment_search_lector), Sear
 
     private val adapter by lazy { LectorsAdapter(presenter::select) }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         with(vToolbar) {
             init(

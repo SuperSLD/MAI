@@ -1,22 +1,20 @@
 package com.raspisanie.mai.ui.main.info.library
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpView
-import com.raspisanie.mai.controllers.BottomVisibilityController
-import com.raspisanie.mai.extesions.mappers.toLocall
-import com.raspisanie.mai.server.ApiService
+import com.raspisanie.mai.domain.controllers.BottomVisibilityController
+import com.raspisanie.mai.domain.usecases.information.LoadLibraryUseCase
 import com.yandex.metrica.YandexMetrica
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineExceptionHandler
+import online.jutter.supersld.common.base.BasePresenter
+import online.jutter.supersld.extensions.launchUI
+import online.jutter.supersld.extensions.withIO
 import org.koin.core.inject
-import pro.midev.supersld.common.base.BasePresenter
-import timber.log.Timber
 
 @InjectViewState
 class LibraryPresenter : BasePresenter<LibraryView>() {
 
     private val bottomVisibilityController: BottomVisibilityController by inject()
-    private val service: ApiService by inject()
+    private val loadLibraryUseCase: LoadLibraryUseCase by inject()
 
     override fun attachView(view: LibraryView?) {
         super.attachView(view)
@@ -30,25 +28,14 @@ class LibraryPresenter : BasePresenter<LibraryView>() {
     }
 
     fun loadList() {
-        service.getLibrary()
-            .map { if (it.success) it.data else error(it.message.toString()) }
-            .map { it!!.toLocall() }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe { viewState.toggleLoading(true) }
-            .doOnError {
-                it.printStackTrace()
-                viewState.showErrorLoading()
-            }
-            .subscribe(
-                {
-                    viewState.toggleLoading(false)
-                    viewState.showList(it)
-                },
-                {
-                    Timber.e(it)
-                }
-            ).connect()
+        launchUI(CoroutineExceptionHandler { _, _ ->
+            viewState.showErrorLoading()
+        }) {
+            viewState.toggleLoading(true)
+            val list = withIO { loadLibraryUseCase() }
+            viewState.toggleLoading(false)
+            viewState.showList(list)
+        }
     }
 
 

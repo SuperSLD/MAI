@@ -1,15 +1,16 @@
 package com.raspisanie.mai.ui.main.info.news
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.NewsLocal
+import com.raspisanie.mai.domain.models.NewsLocal
 import kotlinx.android.synthetic.main.fragment_library.vToolbar
 import kotlinx.android.synthetic.main.fragment_news.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class NewsFragment : BaseFragment(R.layout.fragment_news), NewsView {
 
@@ -17,9 +18,8 @@ class NewsFragment : BaseFragment(R.layout.fragment_news), NewsView {
     lateinit var presenter: NewsPresenter
     private val adapter by lazy { NewsListAdapter(this::tryLoadList, presenter::like) }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         with(vToolbar) {
             hideDivider()
             init(

@@ -1,9 +1,8 @@
 package com.raspisanie.mai.ui.main.info.adv_list
 
-import com.raspisanie.mai.models.local.*
+import com.raspisanie.mai.domain.models.AdvLocal
 import com.raspisanie.mai.ui.main.info.adv_list.holders.AdvAddHolder
 import com.raspisanie.mai.ui.main.info.adv_list.holders.AdvHolder
-import com.raspisanie.mai.ui.main.info.news.NewsListAdapter
 import com.raspisanie.mai.ui.main.info.reused.holders.PostInfoHolder
 import com.raspisanie.mai.ui.main.info.reused.holders.PostInfoHolder.Companion.LIKE_CLICK_EVENT
 import com.raspisanie.mai.ui.main.info.reused.holders.PostLoadingErrorHolder

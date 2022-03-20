@@ -12,20 +12,26 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.R
+import com.raspisanie.mai.common.extesions.getIsDayTheme
+import com.raspisanie.mai.common.extesions.saveIsDayTheme
+import com.raspisanie.mai.data.db.models.GroupRealm
+import com.raspisanie.mai.domain.models.DevLocal
+import com.raspisanie.mai.domain.models.ScheduleLocal
+import com.raspisanie.mai.domain.usecases.state.GetThemeIsDayUseCase
 import com.raspisanie.mai.extesions.*
-import com.raspisanie.mai.models.local.DevLocal
-import com.raspisanie.mai.models.local.ScheduleLocal
-import com.raspisanie.mai.models.realm.GroupRealm
 import com.yandex.metrica.YandexMetrica
-import com.yandex.metrica.impl.ob.V
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_info.view.*
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemTopPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemTopPadding
+import org.koin.android.ext.android.inject
+import org.koin.core.inject
 import timber.log.Timber
 
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView {
+
+    private val getThemeIsDayUseCase: GetThemeIsDayUseCase by inject()
 
     companion object {
         const val RESTORE_POSITION = "arg_restore_position"
@@ -78,9 +84,9 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
 
         setView()
 
-        swEnabled.isChecked = !context?.getIsDayTheme()!!
+        swEnabled.isChecked = !getThemeIsDayUseCase()
         swEnabled.setOnCheckedChangeListener { _, checked ->
-            context?.saveIsDayTheme(!checked)
+            presenter.onSaveTheme(!checked)
             if (!checked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             } else {
@@ -149,7 +155,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
         presenter.back()
     }
 
-    fun openLink(link: String) {
+    private fun openLink(link: String) {
         requireContext().openWebLink(link)
     }
 

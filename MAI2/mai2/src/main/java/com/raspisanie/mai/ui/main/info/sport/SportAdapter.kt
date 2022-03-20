@@ -1,6 +1,6 @@
 package com.raspisanie.mai.ui.main.info.sport
 
-import com.raspisanie.mai.models.local.SportLocal
+import com.raspisanie.mai.domain.models.SportLocal
 import com.raspisanie.mai.ui.main.info.sport.holders.SportCorpusHolder
 import com.raspisanie.mai.ui.main.info.sport.holders.SportSectionHolder
 import online.jutter.diffadapter2.DiffAdapter

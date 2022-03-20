@@ -5,7 +5,7 @@ import android.view.View
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.fromFormatToFormat
 import com.raspisanie.mai.extesions.parseCalendarByFormat
-import com.raspisanie.mai.models.local.DayLocal
+import com.raspisanie.mai.domain.models.DayLocal
 import kotlinx.android.synthetic.main.item_timetable_day_title.view.*
 import online.jutter.diffadapter2.base.DFBaseHolder
 import online.jutter.diffadapter2.base.HolderLayout

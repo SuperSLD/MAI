@@ -3,7 +3,7 @@ package com.raspisanie.mai.ui.main.info.sport.holders
 import android.annotation.SuppressLint
 import android.view.View
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.SportSectionLocal
+import com.raspisanie.mai.domain.models.SportSectionLocal
 import com.raspisanie.mai.ui.main.info.sport.SportAdapter
 import kotlinx.android.synthetic.main.item_sport_section.view.*
 import online.jutter.diffadapter2.base.DFBaseHolder

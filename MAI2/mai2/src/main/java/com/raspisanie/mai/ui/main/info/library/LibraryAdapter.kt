@@ -1,6 +1,6 @@
 package com.raspisanie.mai.ui.main.info.library
 
-import com.raspisanie.mai.models.local.LibraryLocal
+import com.raspisanie.mai.domain.models.LibraryLocal
 import com.raspisanie.mai.ui.main.info.library.holders.LibraryCorpusHolder
 import com.raspisanie.mai.ui.main.info.library.holders.LibrarySectionHolder
 import online.jutter.diffadapter2.DiffAdapter

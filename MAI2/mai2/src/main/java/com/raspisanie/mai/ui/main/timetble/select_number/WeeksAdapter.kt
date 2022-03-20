@@ -7,12 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.raspisanie.mai.R
-import com.raspisanie.mai.models.local.WeekLocal
-import com.raspisanie.mai.models.realm.CanteenLocal
-import com.raspisanie.mai.models.realm.GroupRealm
-import kotlinx.android.synthetic.main.item_canteens.view.*
-import kotlinx.android.synthetic.main.item_group.view.*
-import kotlinx.android.synthetic.main.item_timetable_subject.view.*
+import com.raspisanie.mai.domain.models.WeekLocal
 import kotlinx.android.synthetic.main.item_timetable_subject.view.tvName
 import kotlinx.android.synthetic.main.item_week.view.*
 

@@ -3,14 +3,14 @@ package com.raspisanie.mai.ui.global
 import android.os.Bundle
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.Screens
-import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.common.base.MvpBottomSheetDialogFragment
+import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.common.enums.ToastType
+import com.raspisanie.mai.domain.models.SelectWeekData
 import com.raspisanie.mai.extesions.showToast
-import com.raspisanie.mai.models.local.SelectWeekData
 import com.raspisanie.mai.ui.main.settings.confirm_dialog.ConfirmBSFragment
 import com.raspisanie.mai.ui.main.timetble.select_week_bs.SelectWeekBSFragment
-import pro.midev.supersld.common.base.FlowFragment
+import online.jutter.supersld.common.base.FlowFragment
 import ru.terrakok.cicerone.commands.BackTo
 import ru.terrakok.cicerone.commands.Replace
 

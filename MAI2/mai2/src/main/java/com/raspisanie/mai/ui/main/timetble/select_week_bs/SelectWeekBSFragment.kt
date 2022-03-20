@@ -1,14 +1,12 @@
 package com.raspisanie.mai.ui.main.timetble.select_week_bs
 
-import android.Manifest
 import android.os.Bundle
 import android.view.View
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.common.base.MvpBottomSheetDialogFragment
-import com.raspisanie.mai.controllers.SelectWeekController
-import com.raspisanie.mai.ui.main.settings.confirm_dialog.ConfirmBSFragment
+import com.raspisanie.mai.domain.controllers.SelectWeekController
 import kotlinx.android.synthetic.main.bs_select_week.*
 
 class SelectWeekBSFragment : MvpBottomSheetDialogFragment(R.layout.bs_select_week), MvpView {

@@ -1,14 +1,14 @@
 package com.raspisanie.mai
 
 import androidx.appcompat.app.AppCompatDelegate
+import com.raspisanie.mai.common.extesions.getIsDayTheme
 import com.raspisanie.mai.di.appModule
-import com.raspisanie.mai.extesions.getIsDayTheme
 import com.yandex.metrica.YandexMetrica
 import com.yandex.metrica.YandexMetricaConfig
-import pro.midev.supersld.AppBase
+import online.jutter.supersld.AppBase
 
 
-class App : AppBase(appModule = appModule) {
+class App : AppBase(appModule = appModule()) {
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(

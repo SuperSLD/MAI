@@ -2,6 +2,7 @@ package com.raspisanie.mai.ui.main.info.search_lector.lector_schedule.calendar
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
@@ -10,17 +11,16 @@ import com.raspisanie.mai.ui.view.ToolbarView
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import online.juter.supersld.view.input.calendar.JTCalendarProperty
 import online.juter.supersld.view.input.calendar.JTCalendarView
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarView {
 
     @InjectPresenter
     lateinit var presenter: CalendarPresenter
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         with(vToolbar) {
             hideDivider()
             init(

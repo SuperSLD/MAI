@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.view.View
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.getDrawable
-import com.raspisanie.mai.models.local.PostLocal
+import com.raspisanie.mai.domain.models.PostLocal
 import kotlinx.android.synthetic.main.item_post_information.view.*
 import online.jutter.diffadapter2.base.DFBaseHolder
 import online.jutter.diffadapter2.base.HolderLayout

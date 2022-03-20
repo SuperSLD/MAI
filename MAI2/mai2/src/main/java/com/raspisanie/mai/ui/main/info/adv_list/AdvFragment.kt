@@ -1,17 +1,18 @@
 package com.raspisanie.mai.ui.main.info.adv_list
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.extesions.openWebLink
-import com.raspisanie.mai.models.local.AdvLocal
+import com.raspisanie.mai.domain.models.AdvLocal
 import com.raspisanie.mai.ui.main.info.adv_list.AdvPagingParams.PAGE_SIZE
 import kotlinx.android.synthetic.main.fragment_adv_list.*
 import kotlinx.android.synthetic.main.fragment_canteens.vToolbar
-import pro.midev.supersld.common.base.BaseFragment
-import pro.midev.supersld.extensions.addSystemBottomPadding
+import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 
 class AdvFragment : BaseFragment(R.layout.fragment_adv_list), AdvView {
 
@@ -25,9 +26,8 @@ class AdvFragment : BaseFragment(R.layout.fragment_adv_list), AdvView {
         presenter::like
     ) }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         with(vToolbar) {
             hideDivider()
             init(
