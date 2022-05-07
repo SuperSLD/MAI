@@ -12,7 +12,7 @@ android {
         applicationId "com.raspisanie.mai"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 11039
+        versionCode 11040
         versionName "2.4.8"
 
         multiDexEnabled true

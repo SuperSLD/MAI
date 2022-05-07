@@ -116,6 +116,8 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
         val handler = createHandler {
             if (it.message.toString() == "schedule not found") {
                 removeAndOpenNewGroup()
+            } else if (it.message.toString() == "black list") {
+                router?.replaceScreen(Screens.BlackList)
             } else {
                 context.showToast(
                     R.drawable.ic_report_gmailerrorred,

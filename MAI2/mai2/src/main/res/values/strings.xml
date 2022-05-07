@@ -91,6 +91,7 @@
     <string name="timetable_empty">На эту неделю расписания нет, мы ничего не нашли</string>
     <string name="timetable_select_week_number_title">Другая неделя</string>
     <string name="timetable_error">При загрузке произошла ошибка, показана офлайн версия</string>
+    <string name="black_list_error">Извините, но вы в черном списке и вам нельзя смотреть расписание через это приложение</string>
     <string name="timetable_success">Расписание обновилось и будет доступно офлайн!</string>
     <string name="timetable_new_sem">Пришло новое расписание на начало учебного года! Название вашей группы могло измениться, по этому пожалуйста выберите её еще раз.</string>
     <string name="timetable_select_group">Чтобы увидеть расписание, нужно выбрать свою учебную группу</string>

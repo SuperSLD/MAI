@@ -29,6 +29,7 @@ import com.raspisanie.mai.ui.main.settings.send_feedback.SendFeedbackFragment
 import com.raspisanie.mai.ui.main.settings.send_feedback.success.SuccessFragment
 import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
 import com.raspisanie.mai.ui.main.timetble.TimetableFragment
+import com.raspisanie.mai.ui.main.timetble.blacklist.BlackListFragment
 import com.raspisanie.mai.ui.main.timetble.new_group.NewGroupFragment
 import com.raspisanie.mai.ui.main.timetble.select_number.SelectNumberFragment
 import com.raspisanie.mai.ui.select_group.FlowSelectGroupFragment
@@ -161,6 +162,10 @@ object Screens {
 
     object NewGroup: SupportAppScreen() {
         override fun getFragment(): Fragment = NewGroupFragment()
+    }
+
+    object BlackList: SupportAppScreen() {
+        override fun getFragment(): Fragment = BlackListFragment()
     }
 
     /** Настройки - роутер */
