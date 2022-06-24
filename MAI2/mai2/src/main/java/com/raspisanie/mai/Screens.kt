@@ -24,6 +24,7 @@ import com.raspisanie.mai.ui.main.info.sport.SportFragment
 import com.raspisanie.mai.ui.main.info.students.StudentsFragment
 import com.raspisanie.mai.ui.main.settings.FlowSettingsFragment
 import com.raspisanie.mai.ui.main.settings.SettingsFragment
+import com.raspisanie.mai.ui.main.settings.about.AboutFragment
 import com.raspisanie.mai.ui.main.settings.add_group.AddGroupFragment
 import com.raspisanie.mai.ui.main.settings.send_feedback.SendFeedbackFragment
 import com.raspisanie.mai.ui.main.settings.send_feedback.success.SuccessFragment
@@ -188,5 +189,9 @@ object Screens {
 
     object Success: SupportAppScreen() {
         override fun getFragment(): Fragment = SuccessFragment()
+    }
+
+    object About: SupportAppScreen() {
+        override fun getFragment(): Fragment = AboutFragment()
     }
 }

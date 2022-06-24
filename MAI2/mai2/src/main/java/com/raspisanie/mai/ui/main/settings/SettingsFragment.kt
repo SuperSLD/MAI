@@ -123,15 +123,17 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
 
     private fun setView() {
         val views = mutableListOf(
-                lSupport, lMai
+                lSupport, lMai, lAbout
         )
         val titles = mutableListOf(
                 resources.getString(R.string.settings_support),
-                resources.getString(R.string.settings_mai_link)
+                resources.getString(R.string.settings_mai_link),
+                resources.getString(R.string.settings_about),
         )
         val icons = mutableListOf(
                 R.drawable.ic_support,
-                R.drawable.ic_site_link
+                R.drawable.ic_site_link,
+                R.drawable.ic_code,
         )
 
         for (i in views.indices) {
@@ -144,6 +146,10 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
 
         lSupport.setOnClickListener {
             presenter.sendFeedback()
+        }
+
+        lAbout.setOnClickListener {
+            presenter.onOpenAbout()
         }
 
         lMai.setOnClickListener {

@@ -73,10 +73,12 @@ class MainContainerFragment : BaseFragment(R.layout.fragment_main_container), Ma
     }
 
     override fun showNotifications(notifications: NotificationsLocal) {
-        bottomNavigation.setNotification(
-            if (notifications.getNewsCount() > 0) "+${notifications.getNewsCount()}" else "",
-            0
-        )
+        try {
+            bottomNavigation.setNotification(
+                if (notifications.getNewsCount() > 0) "+${notifications.getNewsCount()}" else "",
+                0
+            )
+        } catch (ex: Exception) {}
     }
 
     private fun selectTab(tab: SupportAppScreen) {

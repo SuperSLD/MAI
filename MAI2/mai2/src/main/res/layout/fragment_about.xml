@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/scrollingContent"
+            android:padding="@dimen/paddingMax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clipToPadding="false">
+
+            <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="?attr/actionBarItemBackground"
+                    app:srcCompat="@drawable/ic_arrow_back"
+                    android:tint="@color/colorPrimary"
+                    android:layout_marginStart="-16dp"
+            />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/settings_about_code"
+            />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/settings_about_code_text"
+                    android:layout_marginTop="24dp"
+            />
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:padding="16dp"
+                    android:layout_marginVertical="16dp"
+            >
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/settings_about_team"
+            />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/settings_about_team_text"
+                    android:layout_marginTop="24dp"
+            />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

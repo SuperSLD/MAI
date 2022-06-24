@@ -110,7 +110,8 @@
     <string name="settings_events_restore">Вернуть скрытые события</string>
     <string name="settings_support">Поддержка</string>
     <string name="settings_news">Новости приложения</string>
-    <string name="settings_mai_link">Перейти на сайт МАИ</string>
+    <string name="settings_mai_link">Сайт МАИ</string>
+    <string name="settings_about">О нас</string>
 
     <string name="settings_diagram_text">Устройство</string>
     <string name="settings_diagram_kb">%1$d KB</string>
@@ -140,6 +141,11 @@
     <string name="settings_info_students_text">Адрес:</string>
     <string name="settings_change_group">Выбранна новая группа</string>
     <string name="settings_remove_group">Группа удалена из быстрого доступа</string>
+
+    <string name="settings_about_code">Открытый\nисходный код</string>
+    <string name="settings_about_code_text">У нашего приложения открытый исходный код, который вы можете использовать в своих целях.</string>
+    <string name="settings_about_team">Наша\nкоманда</string>
+    <string name="settings_about_team_text">У нас небольшая, растущая команда, к которой может присоедениться любой желающий.</string>
 
     <string name="form_file_mandatory">Обязательный файл</string>
 

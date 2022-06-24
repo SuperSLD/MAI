@@ -303,8 +303,12 @@
                 android:background="@color/colorBorder"/>
 
             <include
-                android:id="@+id/lMai"
+                android:id="@+id/lAbout"
                 layout="@layout/item_settings"/>
+
+            <include
+                    android:id="@+id/lMai"
+                    layout="@layout/item_settings"/>
 
             <LinearLayout
                     android:layout_width="match_parent"

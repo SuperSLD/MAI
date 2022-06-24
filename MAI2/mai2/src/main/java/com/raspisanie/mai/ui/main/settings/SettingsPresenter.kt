@@ -131,6 +131,8 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
 
     fun addGroup() = router?.navigateTo(Screens.AddGroup)
 
+    fun onOpenAbout() = router?.navigateTo(Screens.About)
+
     fun back() {
         router?.exit()
     }

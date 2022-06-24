@@ -31,6 +31,7 @@ import com.raspisanie.mai.domain.usecases.state.GetSemesterUseCase
 import com.raspisanie.mai.domain.usecases.state.SaveAuthStateUseCase
 import com.raspisanie.mai.domain.usecases.state.SaveSemesterUseCase
 import com.raspisanie.mai.ui.ext.createHandler
+import com.raspisanie.mai.ui.global.FlowGlobalFragment
 import com.yandex.metrica.YandexMetrica
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -63,6 +64,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
 
     private var currentSchedule: ScheduleLocal? = null
     private var currentWeek = SelectWeekController.THIS_WEEK
+    private val mainCicerone = navigationHolder.getCicerone(FlowGlobalFragment.ROUTER)
 
     override fun attachView(view: TimetableView?) {
         super.attachView(view)
@@ -117,7 +119,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
             if (it.message.toString() == "schedule not found") {
                 removeAndOpenNewGroup()
             } else if (it.message.toString() == "black list") {
-                router?.replaceScreen(Screens.BlackList)
+                mainCicerone?.router?.newRootScreen(Screens.BlackList)
             } else {
                 context.showToast(
                     R.drawable.ic_report_gmailerrorred,
