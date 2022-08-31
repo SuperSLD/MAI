@@ -198,6 +198,7 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 android:layout_marginBottom="8dp"/>
+
         <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -274,28 +275,9 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="v s"
                     android:layout_marginBottom="@dimen/paddingMid"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextSecondary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/settings_author_title"
-                    android:layout_marginBottom="8dp"
-                />
-                <com.raspisanie.mai.ui.view.JTProgressBarColored
-                        android:id="@+id/vLoader"
-                        android:layout_marginTop="16dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginBottom="16dp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvDevs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"/>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

@@ -36,10 +36,7 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     private val getCurrentGroupUseCase: GetCurrentGroupUseCase by inject()
     private val getAllStorageSchedulesUseCase: GetAllStorageSchedulesUseCase by inject()
     private val getAllGroupUseCase: GetAllGroupsUseCase by inject()
-    private val getAllDevsUseCase: GetAllDevsUseCase by inject()
     private val saveThemeIsDayUseCase: SaveThemeIsDayUseCase by inject()
-    private val loadDevsUseCase: LoadDevsUseCase by inject()
-    private val saveInRealmDevsUseCase: SaveInRealmDevsUseCase by inject()
 
     private val context: Context by inject()
 
@@ -50,7 +47,6 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         YandexMetrica.reportEvent("OpenSettings")
-        showDevs()
     }
 
     override fun attachView(view: SettingsView?) {
@@ -106,25 +102,6 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
 
     private fun showGroupsList() {
         viewState.showGroups(getAllGroupUseCase())
-    }
-
-    private fun showDevs() {
-        val devs = getAllDevsUseCase()
-        if (devs.size == 0) {
-            viewState.toggleLoading(true)
-        }
-        viewState.showDevList(devs)
-        getDevList()
-    }
-
-    private fun getDevList() {
-        val handler = createHandler { viewState.toggleLoading(false) }
-        launchUI(handler) {
-            val realmList = withIO { loadDevsUseCase() }!!.toRealm()
-            saveInRealmDevsUseCase(realmList)
-            viewState.toggleLoading(false)
-            viewState.showDevList(realmList.toLocal())
-        }
     }
 
     fun sendFeedback() = router?.navigateTo(Screens.Feedback)

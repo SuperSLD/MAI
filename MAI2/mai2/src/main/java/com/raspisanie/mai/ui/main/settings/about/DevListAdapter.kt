@@ -1,4 +1,4 @@
-package com.raspisanie.mai.ui.main.settings
+package com.raspisanie.mai.ui.main.settings.about
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
-import com.raspisanie.mai.extesions.getColor
 import com.raspisanie.mai.domain.models.DevLocal
 import kotlinx.android.synthetic.main.item_dev.view.*
-
 
 class DevListAdapter(
         private val openLink: (link: String) -> Unit
@@ -41,14 +39,12 @@ class DevListAdapter(
         fun bind(data: Any?) {
             val dev = data as DevLocal
             with(itemView) {
-                tvInfo.text = "${dev.name} / ${dev.from}"
-                tvInfo.setTextColor(getColor(if (dev.link.isEmpty()) R.color.colorTextSecondary else R.color.colorPrimary))
-                if (dev.link.isEmpty()) {
-                    tvInfo.setOnClickListener {}
-                } else {
-                    tvInfo.setOnClickListener {
-                        openLink(dev.link)
-                    }
+                tvName.text = dev.name
+                val info = dev.from.split("$")
+                tvOrganisation.text = info[0]
+                if (info.size > 1) tvWork.text = info[1]
+                cvDev.setOnClickListener {
+                    openLink(dev.link)
                 }
             }
         }

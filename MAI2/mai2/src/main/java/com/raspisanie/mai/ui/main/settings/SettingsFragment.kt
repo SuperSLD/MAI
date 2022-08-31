@@ -12,22 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.R
-import com.raspisanie.mai.common.extesions.getIsDayTheme
-import com.raspisanie.mai.common.extesions.saveIsDayTheme
 import com.raspisanie.mai.data.db.models.GroupRealm
-import com.raspisanie.mai.domain.models.DevLocal
 import com.raspisanie.mai.domain.models.ScheduleLocal
 import com.raspisanie.mai.domain.usecases.state.GetThemeIsDayUseCase
-import com.raspisanie.mai.extesions.*
+import com.raspisanie.mai.extesions.firstItems
+import com.raspisanie.mai.extesions.openWebLink
 import com.yandex.metrica.YandexMetrica
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_info.view.*
 import online.jutter.supersld.common.base.BaseFragment
 import online.jutter.supersld.extensions.addSystemTopPadding
 import org.koin.android.ext.android.inject
-import org.koin.core.inject
 import timber.log.Timber
-
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView {
 
@@ -58,10 +54,6 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             presenter::select,
             presenter::remove,
             context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-    ) }
-
-    private val adapterDev by lazy { DevListAdapter(
-        this::openLink
     ) }
 
     private val adapterSchedule by lazy { ScheduleListAdapter(colors) }
@@ -114,11 +106,6 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             adapter = this@SettingsFragment.adapterSchedule
             layoutManager = LinearLayoutManager(context)
         }
-
-        with(rvDevs) {
-            adapter = this@SettingsFragment.adapterDev
-            layoutManager = LinearLayoutManager(context)
-        }
     }
 
     private fun setView() {
@@ -161,9 +148,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
         presenter.back()
     }
 
-    private fun openLink(link: String) {
-        requireContext().openWebLink(link)
-    }
+
 
     /**
      * Составляем инфу для диаграммы.
@@ -194,15 +179,6 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             }
         }
         adapterSchedule.addAll(firstItems, groups)
-    }
-
-    override fun showDevList(list: MutableList<DevLocal>) {
-        adapterDev.addAll(list)
-    }
-
-    override fun toggleLoading(show: Boolean) {
-        vLoader.show(show)
-        rvDevs.show(!show)
     }
 
     /**

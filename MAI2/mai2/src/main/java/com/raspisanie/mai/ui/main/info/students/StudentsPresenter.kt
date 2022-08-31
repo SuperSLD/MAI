@@ -5,7 +5,6 @@ import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.usecases.information.LoadStudOrgUseCase
 import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
-import kotlinx.coroutines.CoroutineExceptionHandler
 import online.jutter.supersld.common.base.BasePresenter
 import online.jutter.supersld.extensions.launchUI
 import online.jutter.supersld.extensions.withIO

@@ -17,6 +17,7 @@
     <color name="colorTextSecondary">#909DA9</color>
     <color name="colorTextWhite">#121212</color>
     <color name="colorTextToastWhite">#FFFFFF</color>
+    <color name="colorTextLight">#383838</color>
 
     <!-- Navigation -->
     <color name="colorBottomNavigation">#444A51</color>

@@ -1,10 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-        android:id="@+id/tvInfo"
+<com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvDev"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:fontFamily="@font/roboto_regular"
-        android:text="@string/settings_author1"
-        android:layout_marginBottom="8dp"
-        xmlns:android="http://schemas.android.com/apk/res/android"/>
+        android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/colorBackgroundSecondary"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginBottom="16dp"
+>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="horizontal"
+    >
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+        >
+
+            <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_github"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/roboto_regular"
+                    tools:text="Юра Воронцов"
+            />
+
+            <TextView
+                    android:id="@+id/tvWork"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_github_text"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    tools:text="Сделал целый один экран"
+            />
+
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/tvOrganisation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_github_text"
+                android:textColor="@color/colorTextLight"
+                android:textSize="24sp"
+                android:fontFamily="@font/roboto_bold"
+                tools:text="ИАТЭ"
+                android:layout_gravity="center_vertical"
+        />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -20,9 +20,4 @@ interface SettingsView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showScheduleInfo(list: MutableList<ScheduleLocal>, groups: MutableList<GroupRealm>)
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showDevList(list: MutableList<DevLocal>)
-
-    fun toggleLoading(show: Boolean)
 }

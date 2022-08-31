@@ -56,7 +56,7 @@ class SendFeedbackPresenter : BasePresenter<SendFeedbackView>() {
                 lines = mutableListOf(
                     TextLine("Укажите ваши контактные данные для того, чтобы мы смогли с вами связаться в случае, если понадобится дополнительная информация для решения проблеммы"),
                     TextInputLine("name", "Как к вам обращаться?", mandatory = true),
-                    TextInputLine("email", "Ваш E-mail", mandatory = true)
+                    TextInputLine("email", "Ссылка на vk или tg", mandatory = true)
                 ),
                 buttonText = "Далее"
             ),

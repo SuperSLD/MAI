@@ -141,6 +141,9 @@
     <string name="settings_info_students_text">Адрес:</string>
     <string name="settings_change_group">Выбранна новая группа</string>
     <string name="settings_remove_group">Группа удалена из быстрого доступа</string>
+    <string name="settings_github">GitHub</string>
+    <string name="settings_github_text">Нажмите на эту карточку, чтобы\nперейти к нашему репозиторию</string>
+
 
     <string name="settings_about_code">Открытый\nисходный код</string>
     <string name="settings_about_code_text">У нашего приложения открытый исходный код, который вы можете использовать в своих целях.</string>
@@ -151,7 +154,6 @@
 
     <string name="like_success">Вы поставили лайк, спасибо за активность!</string>
     <string name="like_error">Вы уже поставили лайк</string>
-
 
     <string name="jutter">Jutter</string>
 </resources>
