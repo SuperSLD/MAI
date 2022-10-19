@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        android:id="@+id/mainCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/colorBackgroundSecondary"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+    >
+
+        <online.jutter.roadmapview.RMMapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:visibility="gone"
+        />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical"
+        >
+            <TextView
+                    android:id="@+id/tvSymbol"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="Д"
+                    android:textColor="@color/white"
+                    android:background="@drawable/shape_orange_eclipse_48"
+                    android:gravity="center"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_marginEnd="16dp"
+            />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+            >
+
+                <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="7-491"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="4dp"
+                />
+
+                <TextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Начальная точка"
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_marginEnd="12dp"
+                />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/tvSelected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorTextSecondary"
+                android:background="@color/colorBorder"
+                android:text="@string/marker_info_done"
+                android:visibility="gone"
+        />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

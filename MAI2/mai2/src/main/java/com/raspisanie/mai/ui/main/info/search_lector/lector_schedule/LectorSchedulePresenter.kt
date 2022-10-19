@@ -10,10 +10,9 @@ import com.raspisanie.mai.domain.models.DayLocal
 import com.raspisanie.mai.domain.models.ScheduleLocal
 import com.raspisanie.mai.domain.models.TeacherLocal
 import com.raspisanie.mai.domain.usecases.information.lector.LoadLectorScheduleUseCase
-import com.raspisanie.mai.extesions.getUUID
+import com.raspisanie.mai.common.extesions.getUUID
 import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
-import kotlinx.coroutines.CoroutineExceptionHandler
 import online.jutter.supersld.common.base.BasePresenter
 import online.jutter.supersld.extensions.launchUI
 import online.jutter.supersld.extensions.withIO

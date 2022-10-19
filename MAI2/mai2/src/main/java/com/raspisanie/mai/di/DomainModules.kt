@@ -14,6 +14,7 @@ import com.raspisanie.mai.domain.usecases.information.lector.LoadLectorScheduleU
 import com.raspisanie.mai.domain.usecases.information.lector.SearchLectorsUseCase
 import com.raspisanie.mai.domain.usecases.information.news.LoadNewsUseCase
 import com.raspisanie.mai.domain.usecases.information.news.SetLikeNewsUseCase
+import com.raspisanie.mai.domain.usecases.main.LoadFeedbackResponseUseCase
 import com.raspisanie.mai.domain.usecases.main.LoadNotificationsUseCase
 import com.raspisanie.mai.domain.usecases.main.RemoveRealmDataUseCase
 import com.raspisanie.mai.domain.usecases.main.SendFeedbackUseCase
@@ -58,6 +59,9 @@ fun Module.provideUeeCases() {
     single { LoadCanteensUseCase(get()) }
     single { LoadCreativeGroupsUseCase(get()) }
     single { LoadLibraryUseCase(get()) }
+    single { LoadFeedbackResponseUseCase(get()) }
+    single { TestMapIsEnabledUseCase(get()) }
+    single { SaveEnabledTestMapUseCase(get()) }
 }
 
 fun Module.provideControllers() {
@@ -69,4 +73,8 @@ fun Module.provideControllers() {
     single { ShowToastController() }
     single { NotificationController() }
     single { SelectDateController() }
+    single { NavigationController() }
+    single { SelectRoomController() }
+    single { SelectMarkerController() }
+    single { PointTypeController() }
 }

@@ -63,4 +63,7 @@ interface Api {
 
     @POST("advertisements/add")
     suspend fun createAdv(@Body body: AdvCreateBody) : DataWrapper<Any?>
+
+    @GET("feedback/getresponse")
+    suspend fun getFeedbackResponse() : DataWrapper<List<FeedbackResponse>>
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tvFloor"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:textColor="@color/colorTextPrimary"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="18sp"
+        android:gravity="center"
+/>

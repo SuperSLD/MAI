@@ -8,6 +8,7 @@ import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.common.enums.ToastType
 import com.raspisanie.mai.domain.models.SelectWeekData
 import com.raspisanie.mai.extesions.showToast
+import com.raspisanie.mai.ui.main.info.roadmap.navigation.pointtype.PointTypeBSFragment
 import com.raspisanie.mai.ui.main.settings.confirm_dialog.ConfirmBSFragment
 import com.raspisanie.mai.ui.main.timetble.select_week_bs.SelectWeekBSFragment
 import online.jutter.supersld.common.base.FlowFragment
@@ -47,6 +48,7 @@ class FlowGlobalFragment : FlowFragment(ROUTER), GlobalView {
                 SelectWeekBSFragment.create(selectWeekData.num, selectWeekData.empty)
             }
             BottomSheetDialogType.CONFIRM -> ConfirmBSFragment.create((data as Pair<*, *>).first as String, data.second as String)
+            BottomSheetDialogType.POINT_TYPE -> PointTypeBSFragment()
         }
 
         bottomSheet.show(childFragmentManager, bottomSheet.tag)

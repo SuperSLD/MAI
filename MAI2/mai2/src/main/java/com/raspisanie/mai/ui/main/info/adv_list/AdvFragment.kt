@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.extesions.openWebLink
+import com.raspisanie.mai.common.extesions.openWebLink
 import com.raspisanie.mai.domain.models.AdvLocal
 import com.raspisanie.mai.ui.main.info.adv_list.AdvPagingParams.PAGE_SIZE
 import kotlinx.android.synthetic.main.fragment_adv_list.*

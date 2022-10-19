@@ -10,7 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.google.android.material.appbar.AppBarLayout
 import com.raspisanie.mai.R
 import com.raspisanie.mai.domain.controllers.SelectWeekController
-import com.raspisanie.mai.extesions.openWebLink
+import com.raspisanie.mai.common.extesions.openWebLink
 import com.raspisanie.mai.domain.models.DayLocal
 import com.raspisanie.mai.domain.models.WeekLocal
 import com.raspisanie.mai.data.db.models.GroupRealm

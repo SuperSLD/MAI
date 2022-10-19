@@ -5,8 +5,9 @@ import com.raspisanie.mai.common.extesions.getIsDayTheme
 import com.raspisanie.mai.di.appModule
 import com.yandex.metrica.YandexMetrica
 import com.yandex.metrica.YandexMetricaConfig
+import online.jutter.roadmapview.RMMapID
+import online.jutter.roadmapview.RMMapView
 import online.jutter.supersld.AppBase
-
 
 class App : AppBase(appModule = appModule()) {
     override fun onCreate() {
@@ -19,6 +20,7 @@ class App : AppBase(appModule = appModule()) {
                 }
         )
         initYandex()
+        RMMapView.setApiKey("9b8d2e6b-bdd9-4379-9e01-5c2b74cf728f")
     }
 
     private fun initYandex() {

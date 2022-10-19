@@ -18,6 +18,7 @@ class LoadNotificationsUseCase(
         val data = withIO { service.getNotifications(oldData.lastUpdate) }
         return if (data.success) with(data.data!!) {
             oldData.setNewsCount(this.newsCount + oldData.getNewsCount())
+            oldData.setSupportCount(this.supportResponseCount + oldData.getSupportCount())
             oldData.updateDate()
             saveNotificationsUseCase(oldData)
             oldData

@@ -13,6 +13,7 @@ const val IS_AUTH = "is_auth"
 const val IS_DAY_THEME = "is_day_theme"
 const val SEMESTER = "semester"
 const val NOTIFICATIONS = "notifications"
+const val USE_TEST_MAP = "use_test_map"
 
 fun Context.saveAuthState(isAuth: Boolean) {
     PreferenceHelper.customPrefs(this, MAI_PREFS).edit().putBoolean(IS_AUTH, isAuth).apply()
@@ -28,6 +29,14 @@ fun Context.saveIsDayTheme(day: Boolean) {
 
 fun Context.getIsDayTheme(): Boolean {
     return PreferenceHelper.customPrefs(this, MAI_PREFS).getBoolean(IS_DAY_THEME, true)
+}
+
+fun Context.saveEnabledTestMap(enabled: Boolean) {
+    PreferenceHelper.customPrefs(this, MAI_PREFS).edit().putBoolean(USE_TEST_MAP, enabled).apply()
+}
+
+fun Context.getEnabledTestMap(): Boolean {
+    return PreferenceHelper.customPrefs(this, MAI_PREFS).getBoolean(USE_TEST_MAP, false)
 }
 
 fun Context.saveSemester(sem: Int) {

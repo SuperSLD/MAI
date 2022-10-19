@@ -1,6 +1,6 @@
 package com.raspisanie.mai.extesions.mappers
 
-import com.raspisanie.mai.extesions.toRealmList
+import com.raspisanie.mai.common.extesions.toRealmList
 import com.raspisanie.mai.domain.models.DevLocal
 import com.raspisanie.mai.data.db.models.DevRealm
 import com.raspisanie.mai.data.net.models.DevResponse

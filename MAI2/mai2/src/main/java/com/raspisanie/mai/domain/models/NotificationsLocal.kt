@@ -10,6 +10,7 @@ data class NotificationsLocal(
 ) {
     companion object {
         const val NEWS_COUNT = "news_counts"
+        const val SUPPORT_COUNT = "support_counts"
     }
 
     /**
@@ -23,6 +24,12 @@ data class NotificationsLocal(
     fun setNewsCount(count: Int) {
         counts[NEWS_COUNT] = count
     }
+
+    fun setSupportCount(count: Int) {
+        counts[SUPPORT_COUNT] = count
+    }
+
+    fun getSupportCount() = counts[SUPPORT_COUNT] ?: 0
 
     /**
      * Замена старой даты на текущую

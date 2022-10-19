@@ -6,6 +6,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.domain.models.NotificationsLocal
 import kotlinx.android.synthetic.main.fragment_info.*
+import kotlinx.android.synthetic.main.item_info.*
 import kotlinx.android.synthetic.main.item_info.view.*
 import online.jutter.supersld.common.base.BaseFragment
 import timber.log.Timber
@@ -95,6 +96,12 @@ class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
         with(lNews) {
             cvNotification.visibility = if (notifications.getNewsCount() > 0) View.VISIBLE else View.GONE
             tvNotification.text = notifications.getNewsCount().toString()
+        }
+    }
+
+    override fun enableTestMap() {
+        with(lMap) {
+            tvTest.visibility = View.VISIBLE
         }
     }
 }

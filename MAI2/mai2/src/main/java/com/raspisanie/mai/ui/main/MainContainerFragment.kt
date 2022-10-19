@@ -75,8 +75,12 @@ class MainContainerFragment : BaseFragment(R.layout.fragment_main_container), Ma
     override fun showNotifications(notifications: NotificationsLocal) {
         try {
             bottomNavigation.setNotification(
-                if (notifications.getNewsCount() > 0) "+${notifications.getNewsCount()}" else "",
+                if (notifications.getNewsCount() > 0) "${notifications.getNewsCount()}" else "",
                 0
+            )
+            bottomNavigation.setNotification(
+                if (notifications.getSupportCount() > 0) "${notifications.getSupportCount()}" else "",
+                3
             )
         } catch (ex: Exception) {}
     }

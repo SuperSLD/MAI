@@ -17,6 +17,10 @@ import com.raspisanie.mai.ui.main.info.canteens.CanteensFragment
 import com.raspisanie.mai.ui.main.info.creative.CreativeFragment
 import com.raspisanie.mai.ui.main.info.library.LibraryFragment
 import com.raspisanie.mai.ui.main.info.news.NewsFragment
+import com.raspisanie.mai.ui.main.info.roadmap.RoadMapFragment
+import com.raspisanie.mai.ui.main.info.roadmap.navigation.NavigationFragment
+import com.raspisanie.mai.ui.main.info.roadmap.selectpoint.SelectPointFragment
+import com.raspisanie.mai.ui.main.info.roadmap.selectroom.SelectRoomFragment
 import com.raspisanie.mai.ui.main.info.search_lector.SearchLectorFragment
 import com.raspisanie.mai.ui.main.info.search_lector.lector_schedule.LectorScheduleFragment
 import com.raspisanie.mai.ui.main.info.search_lector.lector_schedule.calendar.CalendarFragment
@@ -26,6 +30,7 @@ import com.raspisanie.mai.ui.main.settings.FlowSettingsFragment
 import com.raspisanie.mai.ui.main.settings.SettingsFragment
 import com.raspisanie.mai.ui.main.settings.about.AboutFragment
 import com.raspisanie.mai.ui.main.settings.add_group.AddGroupFragment
+import com.raspisanie.mai.ui.main.settings.feedback_response.FeedbackResponseFragment
 import com.raspisanie.mai.ui.main.settings.send_feedback.SendFeedbackFragment
 import com.raspisanie.mai.ui.main.settings.send_feedback.success.SuccessFragment
 import com.raspisanie.mai.ui.main.timetble.FlowTimetableFragment
@@ -87,6 +92,30 @@ object Screens {
 
     object CampusMap: SupportAppScreen() {
         override fun getFragment(): Fragment = CampusMapFragment()
+    }
+
+    object RoadMap: SupportAppScreen() {
+        override fun getFragment(): Fragment = RoadMapFragment()
+    }
+
+    data class SelectPoint(
+        val id: String,
+        val titleRes: Int,
+        val descriptionRes: Int,
+        val symbol: String,
+        val color: String,
+    ) : SupportAppScreen() {
+        override fun getFragment() = SelectPointFragment.createInstance(
+            id, titleRes, descriptionRes, symbol, color
+        )
+    }
+
+    object SelectRoom: SupportAppScreen() {
+        override fun getFragment() = SelectRoomFragment()
+    }
+
+    object NavPoints: SupportAppScreen() {
+        override fun getFragment(): Fragment = NavigationFragment()
     }
 
     object Canteens: SupportAppScreen() {
@@ -185,6 +214,10 @@ object Screens {
 
     object Feedback: SupportAppScreen() {
         override fun getFragment(): Fragment = SendFeedbackFragment()
+    }
+
+    object FeedbackResponse: SupportAppScreen() {
+        override fun getFragment(): Fragment = FeedbackResponseFragment()
     }
 
     object Success: SupportAppScreen() {

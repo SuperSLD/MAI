@@ -68,3 +68,6 @@ fun View.collapse() {
 fun View.show(show: Boolean, vType: Int = View.GONE) {
     this.visibility = if (show) View.VISIBLE else vType
 }
+
+fun View.hide() = show(false)
+fun View.show() = show(true)

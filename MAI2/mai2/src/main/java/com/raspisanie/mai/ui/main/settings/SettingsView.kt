@@ -7,8 +7,10 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.raspisanie.mai.domain.models.DevLocal
 import com.raspisanie.mai.domain.models.ScheduleLocal
 import com.raspisanie.mai.data.db.models.GroupRealm
+import com.raspisanie.mai.domain.models.NotificationsLocal
 
 interface SettingsView : MvpView {
+
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showCurrentGroup(group: GroupRealm?)
 
@@ -20,4 +22,7 @@ interface SettingsView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showScheduleInfo(list: MutableList<ScheduleLocal>, groups: MutableList<GroupRealm>)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showNotifications(notifications: NotificationsLocal)
 }

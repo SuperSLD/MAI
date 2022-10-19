@@ -30,13 +30,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
+                android:layout_weight="1"
                 android:layout_marginLeft="@dimen/paddingMin"
                 android:textSize="@dimen/textButton"
                 android:textColor="@color/colorTextPrimary"
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/settings_select_group"/>
+
+            <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvNotification"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    android:visibility="gone"
+                    android:layout_marginHorizontal="16dp"
+                    app:cardBackgroundColor="@color/colorNotification"
+            >
+                <TextView
+                        android:id="@+id/tvNotification"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="10sp"
+                        android:textColor="#FFFFFF"
+                        android:fontFamily="@font/roboto_bold"
+                        tools:ignore="SmallSp"/>
+            </com.google.android.material.card.MaterialCardView>
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="end|center_vertical">
                 <ImageView

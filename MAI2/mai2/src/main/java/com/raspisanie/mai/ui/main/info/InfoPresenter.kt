@@ -5,8 +5,10 @@ import com.raspisanie.mai.Screens
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.controllers.NotificationController
 import com.raspisanie.mai.domain.usecases.state.GetNotificationsUseCase
+import com.raspisanie.mai.domain.usecases.state.TestMapIsEnabledUseCase
 import com.yandex.metrica.YandexMetrica
 import online.jutter.supersld.common.base.BasePresenter
+import org.koin.android.ext.android.inject
 import org.koin.core.inject
 
 @InjectViewState
@@ -15,6 +17,7 @@ class InfoPresenter : BasePresenter<InfoView>() {
     private val bottomVisibilityController: BottomVisibilityController by inject()
     private val notificationController: NotificationController by inject()
     private val getNotificationUseCase: GetNotificationsUseCase by inject()
+    private val testMapIsEnabledUseCase: TestMapIsEnabledUseCase by inject()
 
     override fun attachView(view: InfoView?) {
         super.attachView(view)
@@ -26,12 +29,17 @@ class InfoPresenter : BasePresenter<InfoView>() {
         super.onFirstViewAttach()
         YandexMetrica.reportEvent("OpenInfo")
         listenNotifications()
+        if (testMapIsEnabledUseCase()) viewState.enableTestMap()
     }
 
     fun openAdvList() = router?.navigateTo(Screens.AdvList)
     fun openNews() = router?.navigateTo(Screens.News)
     fun openLectors() = router?.navigateTo(Screens.SearchLector)
-    fun openCampusMap() = router?.navigateTo(Screens.CampusMap)
+    fun openCampusMap() = if (testMapIsEnabledUseCase()) {
+        router?.navigateTo(Screens.RoadMap)
+    } else {
+        router?.navigateTo(Screens.CampusMap)
+    }
     fun openCanteens() = router?.navigateTo(Screens.Canteens)
     fun openLibrary() = router?.navigateTo(Screens.Library)
     fun openSport() = router?.navigateTo(Screens.Sport)

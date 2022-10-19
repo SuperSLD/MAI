@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/colorBackgroundSecondary"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical"
+    >
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_feedback_new_title"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="20sp"
+                android:fontFamily="@font/roboto_regular"
+        />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_feedback_new_subtitle"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/roboto_regular"
+        />
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ButtonSolid"
+                android:textColor="@color/colorTextWhite"
+                android:layout_marginTop="16dp"
+                android:text="@string/settings_feedback_new_button"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

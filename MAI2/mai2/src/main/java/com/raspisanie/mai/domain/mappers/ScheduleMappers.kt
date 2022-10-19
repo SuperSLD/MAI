@@ -4,8 +4,8 @@ import com.google.gson.Gson
 import com.raspisanie.mai.data.db.models.*
 import com.raspisanie.mai.data.net.models.*
 import com.raspisanie.mai.domain.models.*
-import com.raspisanie.mai.extesions.getUUID
-import com.raspisanie.mai.extesions.toRealmList
+import com.raspisanie.mai.common.extesions.getUUID
+import com.raspisanie.mai.common.extesions.toRealmList
 import io.realm.RealmList
 import java.util.*
 

@@ -37,4 +37,6 @@ class ApiService(private var api: Api) {
     suspend fun getLectorSchedule(id: String) = api.getLectorSchedule(id)
 
     suspend fun createAdv(body: AdvCreateBody) = api.createAdv(body)
+
+    suspend fun getFeedbackResponse() = api.getFeedbackResponse()
 }

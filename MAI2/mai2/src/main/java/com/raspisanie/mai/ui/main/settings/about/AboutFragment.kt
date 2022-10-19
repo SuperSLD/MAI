@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.domain.models.DevLocal
-import com.raspisanie.mai.extesions.openWebLink
+import com.raspisanie.mai.common.extesions.openWebLink
 import kotlinx.android.synthetic.main.fragment_about.*
 import kotlinx.android.synthetic.main.layout_loading.*
 import online.jutter.supersld.common.base.BaseFragment

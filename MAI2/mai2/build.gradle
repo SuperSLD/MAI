@@ -12,8 +12,8 @@ android {
         applicationId "com.raspisanie.mai"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 11043
-        versionName "2.4.11"
+        versionCode 11044
+        versionName "2.5.0"
 
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -96,9 +96,10 @@ dependencies {
 
     // тестирование
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.2"
+    testImplementation "io.mockk:mockk:1.9.3"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
     // корутины
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
@@ -106,7 +107,8 @@ dependencies {
     // мои модули
     implementation 'online.jutter.supersld:diffadapter:2.0.0'
     implementation 'online.jutter.supersld:jutter_core:2.1.3'
-    implementation 'online.jutter.supersld:jutter_ui_kit:1.4.10'
+    implementation 'online.jutter.supersld:jutter_ui_kit:1.4.14'
+    implementation 'online.jutter.supersld:roadmapview:0.2.6'
 
     // фото со скролом
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'

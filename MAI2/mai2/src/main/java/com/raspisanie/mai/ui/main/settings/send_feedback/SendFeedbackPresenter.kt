@@ -10,7 +10,6 @@ import com.raspisanie.mai.domain.controllers.ShowToastController
 import com.raspisanie.mai.domain.usecases.main.SendFeedbackUseCase
 import com.raspisanie.mai.ui.ext.createHandler
 import com.yandex.metrica.YandexMetrica
-import kotlinx.coroutines.CoroutineExceptionHandler
 import online.juter.supersld.view.input.form.JTForm
 import online.juter.supersld.view.input.form.JTFormPage
 import online.juter.supersld.view.input.form.lines.TextInputLine
@@ -54,7 +53,7 @@ class SendFeedbackPresenter : BasePresenter<SendFeedbackView>() {
         pages = mutableListOf(
             JTFormPage(
                 lines = mutableListOf(
-                    TextLine("Укажите ваши контактные данные для того, чтобы мы смогли с вами связаться в случае, если понадобится дополнительная информация для решения проблеммы"),
+                    TextLine("Укажите ваши контактные данные для того, чтобы мы смогли с вами связаться в случае, если понадобится дополнительная информация для решения проблемы"),
                     TextInputLine("name", "Как к вам обращаться?", mandatory = true),
                     TextInputLine("email", "Ссылка на vk или tg", mandatory = true)
                 ),
@@ -65,7 +64,7 @@ class SendFeedbackPresenter : BasePresenter<SendFeedbackView>() {
                     TextLine("Опишите вашу проблему как можно подробнее, тогда мы сможем ее решить"),
                     TextInputLine("message", "Информация о проблемме",
                         mandatory = true, inputType = TextInputLine.TEXT_MULTILINE, minLines = 6
-                    )
+                    ),
                 ),
                 buttonText = "Далее"
             )

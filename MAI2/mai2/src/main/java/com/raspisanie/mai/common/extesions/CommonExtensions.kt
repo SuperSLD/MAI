@@ -1,4 +1,4 @@
-package com.raspisanie.mai.extesions
+package com.raspisanie.mai.common.extesions
 
 import android.content.Context
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import io.realm.RealmList
 import io.realm.RealmObject
+import java.math.RoundingMode
 import java.util.*
 
 fun Vibrator.shortVibration() {
@@ -17,6 +18,8 @@ fun Vibrator.shortVibration() {
         vibrate(100)
     }
 }
+
+fun Double.round(n: Int) = this.toBigDecimal().setScale(n, RoundingMode.CEILING).toDouble()
 
 fun Context.openWebLink(link: String) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
@@ -36,7 +39,7 @@ fun <T : RealmObject> List<T>.toRealmList(): RealmList<T> {
  * Получение первых нескольких элементов списка.
  * @param count количество элементов.
  */
-fun <T> MutableList<T>.firstItems(count: Int): MutableList<T> {
+fun <T> List<T>.firstItems(count: Int): MutableList<T> {
     val result = mutableListOf<T>()
     for (i in 0 until (if (count > this.size) this.size else count)) {
         result.add(this[i])

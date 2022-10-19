@@ -58,6 +58,34 @@
     <string name="adv_create_success_message">Ваше объявление успешно отправлено! В ближайшее время мы его рассмотрим и опубликуем.</string>
     <string name="adv_create_success_subtext">Если оно будет нарушать какие-то правила, то мы об этом сообщим по оставленным контактам.</string>
 
+    <!-- Campus Map -->
+    <string name="roadmap_navigation_error">Не удалось построить маршрут</string>
+    <string name="roadmap_navigation">Построить маршрут</string>
+    <string name="roadmap_steps">Пройти по шагам</string>
+    <string name="roadmap_time">%1$s минут в пути</string>
+    <string name="roadmap_distance">%1$s км.</string>
+
+    <string name="roadmap_steps_previous">Назад</string>
+    <string name="roadmap_steps_next">Далее</string>
+    <string name="roadmap_steps_finish">Завершить</string>
+
+
+    <string name="marker_info_done">Выбрано</string>
+    <string name="select_point_done">Готово</string>
+    <string name="select_room_back">Назад</string>
+
+    <string name="nav_title">Поиск маршрута</string>
+    <string name="nav_desk">Вы можете построить маршрут по карте, прямо до аудитории</string>
+    <string name="nav_a_title">Начало пути</string>
+    <string name="nav_a_desk">Выберите начало маршрута</string>
+    <string name="nav_b_title">Пункт назначения</string>
+    <string name="nav_b_desk">Выберите пункт назначения</string>
+
+    <string name="point_type_title">Добавление точки</string>
+    <string name="point_type_map">Точка на карте</string>
+    <string name="point_type_room">Аудитория из списка</string>
+
+
     <!-- Canteens Fragment -->
     <string name="canteens_title">Столовые и буфеты</string>
 
@@ -101,6 +129,7 @@
 
     <!-- Settings Fragment -->
     <string name="settings_dark_theme">Темная тема</string>
+    <string name="settings_test_map">Тестовая карта</string>
     <string name="settings_info_card">ваши данные</string>
     <string name="settings_info_card_empty">Группа не выбрана</string>
 
@@ -149,6 +178,14 @@
     <string name="settings_about_code_text">У нашего приложения открытый исходный код, который вы можете использовать в своих целях.</string>
     <string name="settings_about_team">Наша\nкоманда</string>
     <string name="settings_about_team_text">У нас небольшая, растущая команда, к которой может присоедениться любой желающий.</string>
+    <string name="settings_feedback_response_title">Ваши обращения</string>
+    <string name="settings_feedback_new_title">Новое обращение</string>
+    <string name="settings_feedback_new_subtitle">Напишите, если у вас есть какие-то проблемы или предложения</string>
+    <string name="settings_feedback_new_button">Поддержка</string>
+    <string name="settings_feedback_empty">Тут будут вопросы, которые вы\nнапишите нам</string>Сообщение
+    <string name="settings_feedback_answer_title">Сообщение</string>
+    <string name="settings_feedback_response">Ответ поддержки</string>
+    <string name="settings_feedback_waiting_response">Ответа еще нет</string>
 
     <string name="form_file_mandatory">Обязательный файл</string>
 

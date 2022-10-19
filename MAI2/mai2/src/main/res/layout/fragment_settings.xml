@@ -7,30 +7,30 @@
     android:layout_height="match_parent"
     android:gravity="center">
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nested"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/scrollingContent"
-            android:padding="@dimen/paddingMax"
+            android:id="@+id/nested"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:clipToPadding="false"
-            android:gravity="center">
-
-            <com.google.android.material.card.MaterialCardView
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:id="@+id/scrollingContent"
+                android:padding="@dimen/paddingMax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="0dp"
-                app:cardCornerRadius="@dimen/radiusBig"
-                android:layout_marginBottom="@dimen/paddingMid">
-                <LinearLayout
+                android:orientation="vertical"
+                android:clipToPadding="false"
+                android:gravity="center">
+
+            <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/paddingMax"
-                    android:background="@drawable/background_gradient"
-                    android:orientation="vertical">
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="@dimen/radiusBig"
+                    android:layout_marginBottom="@dimen/paddingMid">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/paddingMax"
+                        android:background="@drawable/background_gradient"
+                        android:orientation="vertical">
                     <LinearLayout
                             android:id="@+id/vgGroupInfo"
                             android:layout_width="match_parent"
@@ -102,20 +102,20 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_group_list"
-                android:textColor="@color/colorTextSecondary"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_regular"
-                android:layout_marginBottom="16dp"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_group_list"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_marginBottom="16dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvGroups"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginBottom="8dp"/>
+                    android:id="@+id/rvGroups"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginBottom="8dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnAdd"
@@ -126,60 +126,101 @@
                     android:layout_marginBottom="16sp"/>
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorBorder"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorBorder"/>
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/radiusNormal"
-                app:cardElevation="0dp"
-                android:layout_marginTop="@dimen/paddingMid"
-                android:layout_marginBottom="@dimen/paddingMid">
-                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:background="@drawable/background_gradient">
-                    <com.google.android.material.card.MaterialCardView
+                    app:cardBackgroundColor="@color/colorBackgroundSecondary"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp"
+                    android:layout_marginTop="16dp"
+            >
+
+                <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:cardCornerRadius="@dimen/radiusNormal"
-                        app:cardBackgroundColor="@color/colorBackground"
-                        app:cardElevation="0dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                >
+
+                    <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:foreground="?android:selectableItemBackground"
+                            android:text="@string/settings_test_map"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp"
+                            android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="@dimen/paddingMid">
+                            android:fontFamily="@font/roboto_regular"
+                            android:drawableStart="@drawable/ic_map"
+                            android:drawablePadding="16dp"
+                            android:drawableTint="@color/colorTextPrimary"
+                    />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/swTestMap"
+                            android:layout_height="1dp"
+                            android:layout_width="wrap_content"
+                            app:useMaterialThemeColors="false"
+                    />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/radiusNormal"
+                    app:cardElevation="0dp"
+                    android:layout_marginTop="@dimen/paddingMid"
+                    android:layout_marginBottom="@dimen/paddingMid">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:background="@drawable/background_gradient">
+                    <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:cardCornerRadius="@dimen/radiusNormal"
+                            app:cardBackgroundColor="@color/colorBackground"
+                            app:cardElevation="0dp">
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:foreground="?android:selectableItemBackground"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/paddingMid">
 
                             <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_weight="1">
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1">
 
                                 <TextView
-                                    android:id="@+id/tvTitle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:textColor="@color/colorTextPrimary"
-                                    android:text="@string/settings_dark_theme"
-                                    android:layout_weight="1"
-                                    android:textSize="@dimen/textNormalHint"
-                                    android:textStyle="bold"/>
+                                        android:id="@+id/tvTitle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:textColor="@color/colorTextPrimary"
+                                        android:text="@string/settings_dark_theme"
+                                        android:layout_weight="1"
+                                        android:textSize="@dimen/textNormalHint"
+                                        android:textStyle="bold"/>
 
                             </LinearLayout>
 
 
                             <com.google.android.material.switchmaterial.SwitchMaterial
-                                android:id="@+id/swEnabled"
-                                android:layout_height="1dp"
-                                android:layout_width="wrap_content"
-                                app:useMaterialThemeColors="false" />
+                                    android:id="@+id/swEnabled"
+                                    android:layout_height="1dp"
+                                    android:layout_width="wrap_content"
+                                    app:useMaterialThemeColors="false"/>
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -187,106 +228,106 @@
             </com.google.android.material.card.MaterialCardView>
 
             <online.juter.supersld.view.data.JTDiagram
-                android:id="@+id/diagramView"
-                android:layout_marginTop="@dimen/paddingMax"
-                android:layout_width="match_parent"
-                android:layout_height="196dp"/>
+                    android:id="@+id/diagramView"
+                    android:layout_marginTop="@dimen/paddingMax"
+                    android:layout_width="match_parent"
+                    android:layout_height="196dp"/>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvSchedules"
-                android:layout_marginTop="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginBottom="8dp"/>
-
-        <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="8dp"
-                android:layout_marginTop="8dp"
-                app:cardCornerRadius="8dp"
-                app:cardBackgroundColor="@color/colorBackgroundSecondary">
-            <LinearLayout
-                    android:id="@+id/vgVkNotAuth"
+                    android:id="@+id/rvSchedules"
+                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:orientation="vertical"
-                    android:gravity="center"
-            >
-                <TextView
-                        android:id="@+id/tvDeviceId"
-                        android:layout_width="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginBottom="8dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="8dp"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardBackgroundColor="@color/colorBackgroundSecondary">
+                <LinearLayout
+                        android:id="@+id/vgVkNotAuth"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="00000000000"
-                        android:textSize="24sp"
-                        android:textColor="@color/colorPrimary"
-                />
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings_device_id_description"
-                        android:textSize="16sp"
-                        android:textColor="@color/colorTextPrimary"
+                        android:padding="16dp"
+                        android:orientation="vertical"
                         android:gravity="center"
-                />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                >
+                    <TextView
+                            android:id="@+id/tvDeviceId"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="00000000000"
+                            android:textSize="24sp"
+                            android:textColor="@color/colorPrimary"
+                    />
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_device_id_description"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorTextPrimary"
+                            android:gravity="center"
+                    />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
             <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/paddingMax"
-                android:background="@color/colorBorder"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/paddingMax"
+                    android:background="@color/colorBorder"/>
 
             <include
-                android:id="@+id/lSupport"
-                layout="@layout/item_settings"/>
+                    android:id="@+id/lSupport"
+                    layout="@layout/item_settings"/>
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/paddingMax"
-                android:paddingRight="@dimen/paddingMax"
-                android:layout_marginTop="16dp">
-                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextSecondary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/settings_description_title"/>
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/paddingMax"
+                    android:paddingRight="@dimen/paddingMax"
+                    android:layout_marginTop="16dp">
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextPrimary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/settings_description"
-                    android:layout_marginBottom="@dimen/paddingMid"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorTextSecondary"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/settings_description_title"/>
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextSecondary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/settings_version_title"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorTextPrimary"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/settings_description"
+                        android:layout_marginBottom="@dimen/paddingMid"/>
                 <TextView
-                    android:id="@+id/tvVersion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextPrimary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="v s"
-                    android:layout_marginBottom="@dimen/paddingMid"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorTextSecondary"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/settings_version_title"/>
+                <TextView
+                        android:id="@+id/tvVersion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorTextPrimary"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="v s"
+                        android:layout_marginBottom="@dimen/paddingMid"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/paddingMid"
-                android:background="@color/colorBorder"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/paddingMid"
+                    android:background="@color/colorBorder"/>
 
             <include
-                android:id="@+id/lAbout"
-                layout="@layout/item_settings"/>
+                    android:id="@+id/lAbout"
+                    layout="@layout/item_settings"/>
 
             <include
                     android:id="@+id/lMai"

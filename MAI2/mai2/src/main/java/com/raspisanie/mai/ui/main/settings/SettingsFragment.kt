@@ -13,12 +13,15 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.BuildConfig
 import com.raspisanie.mai.R
 import com.raspisanie.mai.data.db.models.GroupRealm
+import com.raspisanie.mai.domain.models.NotificationsLocal
 import com.raspisanie.mai.domain.models.ScheduleLocal
 import com.raspisanie.mai.domain.usecases.state.GetThemeIsDayUseCase
-import com.raspisanie.mai.extesions.firstItems
-import com.raspisanie.mai.extesions.openWebLink
+import com.raspisanie.mai.domain.usecases.state.TestMapIsEnabledUseCase
+import com.raspisanie.mai.common.extesions.firstItems
+import com.raspisanie.mai.common.extesions.openWebLink
 import com.yandex.metrica.YandexMetrica
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.fragment_settings.scrollingContent
 import kotlinx.android.synthetic.main.item_info.view.*
 import online.jutter.supersld.common.base.BaseFragment
 import online.jutter.supersld.extensions.addSystemTopPadding
@@ -28,6 +31,7 @@ import timber.log.Timber
 class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView {
 
     private val getThemeIsDayUseCase: GetThemeIsDayUseCase by inject()
+    private val testMapIsEnabledUseCase: TestMapIsEnabledUseCase by inject()
 
     companion object {
         const val RESTORE_POSITION = "arg_restore_position"
@@ -90,6 +94,11 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
             activity?.recreate()
             savedInstanceState?.putBoolean(RESTORE_POSITION, true)
             savedInstanceState?.putInt(SAVED_POSITION, nested.scrollY)
+        }
+
+        swTestMap.isChecked = testMapIsEnabledUseCase()
+        swTestMap.setOnCheckedChangeListener { _, checked ->
+            presenter.onTestMapStateChange(checked)
         }
 
         btnAdd.setOnClickListener {
@@ -205,5 +214,12 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), SettingsView 
 
     override fun removeGroup(group: GroupRealm) {
         adapter.removeGroup(group)
+    }
+
+    override fun showNotifications(notifications: NotificationsLocal) {
+        with(lSupport) {
+            cvNotification.visibility = if (notifications.getSupportCount() > 0) View.VISIBLE else View.GONE
+            tvNotification.text = notifications.getSupportCount().toString()
+        }
     }
 }

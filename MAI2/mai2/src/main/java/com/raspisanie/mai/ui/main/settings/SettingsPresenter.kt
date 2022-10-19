@@ -9,13 +9,16 @@ import com.raspisanie.mai.common.enums.BottomSheetDialogType
 import com.raspisanie.mai.data.db.models.GroupRealm
 import com.raspisanie.mai.domain.controllers.BottomVisibilityController
 import com.raspisanie.mai.domain.controllers.ConfirmController
+import com.raspisanie.mai.domain.controllers.NotificationController
 import com.raspisanie.mai.domain.usecases.devs.GetAllDevsUseCase
 import com.raspisanie.mai.domain.usecases.devs.LoadDevsUseCase
 import com.raspisanie.mai.domain.usecases.devs.SaveInRealmDevsUseCase
 import com.raspisanie.mai.domain.usecases.groups.GetAllGroupsUseCase
 import com.raspisanie.mai.domain.usecases.groups.GetCurrentGroupUseCase
 import com.raspisanie.mai.domain.usecases.schedule.GetAllStorageSchedulesUseCase
+import com.raspisanie.mai.domain.usecases.state.GetNotificationsUseCase
 import com.raspisanie.mai.domain.usecases.state.GetThemeIsDayUseCase
+import com.raspisanie.mai.domain.usecases.state.SaveEnabledTestMapUseCase
 import com.raspisanie.mai.domain.usecases.state.SaveThemeIsDayUseCase
 import com.raspisanie.mai.extesions.mappers.toLocal
 import com.raspisanie.mai.extesions.mappers.toRealm
@@ -36,8 +39,10 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
     private val getCurrentGroupUseCase: GetCurrentGroupUseCase by inject()
     private val getAllStorageSchedulesUseCase: GetAllStorageSchedulesUseCase by inject()
     private val getAllGroupUseCase: GetAllGroupsUseCase by inject()
+    private val saveEnabledTestMapUseCase: SaveEnabledTestMapUseCase by inject()
     private val saveThemeIsDayUseCase: SaveThemeIsDayUseCase by inject()
-
+    private val notificationController: NotificationController by inject()
+    private val getNotificationUseCase: GetNotificationsUseCase by inject()
     private val context: Context by inject()
 
     private var lastDeletedGroup: GroupRealm? = null
@@ -46,7 +51,10 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        viewState.showNotifications(getNotificationUseCase())
         YandexMetrica.reportEvent("OpenSettings")
+        listenNotifications()
+        listenConfirm()
     }
 
     override fun attachView(view: SettingsView?) {
@@ -55,11 +63,14 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
         showCurrentGroup()
         showGroupsList()
         showScheduleInfo()
-        listenConfirm()
     }
 
     fun onSaveTheme(isDay: Boolean) {
         saveThemeIsDayUseCase(isDay)
+    }
+
+    fun onTestMapStateChange(enabled: Boolean) {
+        saveEnabledTestMapUseCase(enabled)
     }
 
     fun select(group: GroupRealm) {
@@ -100,11 +111,18 @@ class SettingsPresenter : BasePresenter<SettingsView>() {
             }.connect()
     }
 
+    private fun listenNotifications() {
+        notificationController.state
+            .listen {
+                viewState.showNotifications(it)
+            }.connect()
+    }
+
     private fun showGroupsList() {
         viewState.showGroups(getAllGroupUseCase())
     }
 
-    fun sendFeedback() = router?.navigateTo(Screens.Feedback)
+    fun sendFeedback() = router?.navigateTo(Screens.FeedbackResponse)
 
     fun addGroup() = router?.navigateTo(Screens.AddGroup)
 
