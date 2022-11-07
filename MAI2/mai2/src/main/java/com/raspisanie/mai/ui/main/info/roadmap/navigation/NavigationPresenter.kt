@@ -19,8 +19,14 @@ class NavigationPresenter : BasePresenter<NavigationView>() {
     private val selectRoomController: SelectRoomController by inject()
     private val pointTypeController: PointTypeController by inject()
     private val bottomSheetDialogController: BottomSheetDialogController by inject()
+    private val bottomVisibilityController: BottomVisibilityController by inject()
     private var isStartMarker = false
     private var selectRoom = false
+
+    override fun attachView(view: NavigationView?) {
+        super.attachView(view)
+        bottomVisibilityController.hide()
+    }
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

@@ -64,6 +64,7 @@
     <string name="roadmap_steps">Пройти по шагам</string>
     <string name="roadmap_time">%1$s минут в пути</string>
     <string name="roadmap_distance">%1$s км.</string>
+    <string name="roadmap_search_room">Название места</string>
 
     <string name="roadmap_steps_previous">Назад</string>
     <string name="roadmap_steps_next">Далее</string>

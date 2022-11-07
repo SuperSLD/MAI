@@ -280,21 +280,15 @@
 
         </LinearLayout>
 
-        <com.raspisanie.mai.ui.view.floorsview.FloorsView
-                android:id="@+id/floorsView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start"
-                android:layout_marginLeft="16dp"
-        />
-
-
     </FrameLayout>
 
-    <FrameLayout
+    <LinearLayout
             android:id="@+id/vgButtonContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+    >
+
         <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cvBack"
                 android:layout_width="50dp"
@@ -302,13 +296,24 @@
                 app:cardElevation="16dp"
                 app:cardCornerRadius="25dp"
                 android:layout_margin="16dp">
+
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:srcCompat="@drawable/ic_arrow_back"
                     android:layout_gravity="center"
                     app:tint="@color/colorPrimarySecondary"/>
+
         </com.google.android.material.card.MaterialCardView>
-    </FrameLayout>
+
+        <com.raspisanie.mai.ui.view.floorsview.FloorsView
+                android:id="@+id/floorsView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginStart="16dp"
+        />
+
+    </LinearLayout>
 
 </FrameLayout>

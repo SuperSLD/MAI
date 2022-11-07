@@ -46,6 +46,7 @@ class SearchLineView : androidx.appcompat.widget.AppCompatEditText {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (searchLine.text?.isNotEmpty()!!) {
                     searchLine.showClearIcon(true)
+                    searchLambda(searchLine.text.toString())
                 } else {
                     searchLine.showClearIcon(false)
                     defaultLambda()

@@ -7,8 +7,10 @@ import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import kotlinx.android.synthetic.main.fragment_selectroom.*
+import kotlinx.android.synthetic.main.view_toolbar_search.view.*
 import online.jutter.roadmapview.RMDataController
 import online.jutter.supersld.common.base.BaseFragment
+import online.jutter.supersld.extensions.addSystemBottomPadding
 import online.jutter.supersld.extensions.addSystemTopAndBottomPadding
 
 class SelectRoomFragment : BaseFragment(R.layout.fragment_selectroom), MvpView {
@@ -22,10 +24,20 @@ class SelectRoomFragment : BaseFragment(R.layout.fragment_selectroom), MvpView {
         super.onViewCreated(view, savedInstanceState)
 
         listContainer.addSystemTopAndBottomPadding()
-        rvRooms.addSystemTopAndBottomPadding()
+        rvRooms.addSystemBottomPadding()
         btnBack.setOnClickListener { onBackPressed() }
 
         initRoomsRecycler()
+        initSearch()
+    }
+
+    private fun initSearch() {
+        with(vSearch) {
+            setHintString(context.getString(R.string.roadmap_search_room))
+            setClearIcon(R.drawable.ic_clear_line)
+            onSearch { adapter.setSearchFilter(it) }
+            init()
+        }
     }
 
     private fun initRoomsRecycler() {

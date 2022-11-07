@@ -60,10 +60,10 @@ ext {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'com.aurelhubert:ahbottomnavigation:2.3.4'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.github.smarteist:autoimageslider:1.3.9'
@@ -108,11 +108,11 @@ dependencies {
     implementation 'online.jutter.supersld:diffadapter:2.0.0'
     implementation 'online.jutter.supersld:jutter_core:2.1.3'
     implementation 'online.jutter.supersld:jutter_ui_kit:1.4.14'
-    implementation 'online.jutter.supersld:roadmapview:0.2.6'
+    implementation 'online.jutter.supersld:roadmapview:0.2.9'
 
     // фото со скролом
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     // Yandex метрика
-    implementation 'com.yandex.android:mobmetricalib:4.1.1'
+    implementation 'com.yandex.android:mobmetricalib:5.0.1'
 }

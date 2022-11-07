@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raspisanie.mai.R
+import com.raspisanie.mai.common.extesions.levenshtein
 import kotlinx.android.synthetic.main.item_room.view.*
 import online.jutter.roadmapview.data.models.map.RMRoom
 
@@ -25,6 +26,11 @@ class RoomsAdapter(
     }
 
     override fun getItemCount(): Int = list.size
+
+    fun setSearchFilter(search: String) {
+        this.list = list.sortedBy { levenshtein(it.name, search) }
+        notifyDataSetChanged()
+    }
 
     fun addData(rooms: List<RMRoom>) {
         this.list = rooms

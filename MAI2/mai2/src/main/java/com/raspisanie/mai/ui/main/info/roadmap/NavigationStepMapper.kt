@@ -8,9 +8,9 @@ import online.jutter.roadmapview.data.models.nav.RMNavigationStep.Companion.MOVE
 import online.jutter.roadmapview.data.models.nav.RMNavigationStep.Companion.MOVE_OUT_FROM_STRUCTURE
 import online.jutter.roadmapview.data.models.nav.RMNavigationStep.Companion.UP
 
-fun RMNavigationStep.toText() = when(type) {
-    UP -> "Дойдите до лестницы или лифта и поднимитесь на этаж $floor"
-    DOWN -> "Дойдите до лестницы или лифта и спуститесь на этаж $floor"
+fun RMNavigationStep.toText(nextFloor: Int? = null) = when(type) {
+    UP -> "Дойдите до лестницы или лифта и поднимитесь на этаж $nextFloor"
+    DOWN -> "Дойдите до лестницы или лифта и спуститесь на этаж $nextFloor"
 
     MOVE_IN_STRUCTURE -> "Пройдите по коридору"
     MOVE_ON_STREET -> "Пройдите по улице"

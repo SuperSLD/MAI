@@ -7,8 +7,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
 import com.raspisanie.mai.common.extesions.round
 import com.raspisanie.mai.extesions.*
-import kotlinx.android.synthetic.main.fragment_campus_map.cvBack
-import kotlinx.android.synthetic.main.fragment_campus_map.vgButtonContainer
 import kotlinx.android.synthetic.main.fragment_road_map.*
 import kotlinx.android.synthetic.main.layout_loading.*
 import online.jutter.roadmapview.data.models.map.RMMarker
@@ -120,7 +118,8 @@ class RoadMapFragment : BaseFragment(R.layout.fragment_road_map), RoadMapView {
             floorsView.setSelectedFloor(it)
         }
         vStepProgress.updateProgress(step)
-        tvStepsDescription.text = navData!!.steps[step - 1].toText()
+        val nextStepFloor = if (step <= navData!!.steps.lastIndex) navData!!.steps[step].floor else null
+        tvStepsDescription.text = navData!!.steps[step - 1].toText(nextStepFloor)
     }
 
     private fun hideNavData() {

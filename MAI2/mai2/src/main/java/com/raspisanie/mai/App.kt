@@ -1,5 +1,6 @@
 package com.raspisanie.mai
 
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import com.raspisanie.mai.common.extesions.getIsDayTheme
 import com.raspisanie.mai.di.appModule
