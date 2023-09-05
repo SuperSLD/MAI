@@ -126,6 +126,7 @@ class TimetablePresenter : BasePresenter<TimetableView>() {
                     context.getString(R.string.timetable_error),
                     true
                 )
+                it.printStackTrace()
                 if (getStorageScheduleUseCase() == null) {
                     viewState.showErrorLoading()
                 } else {

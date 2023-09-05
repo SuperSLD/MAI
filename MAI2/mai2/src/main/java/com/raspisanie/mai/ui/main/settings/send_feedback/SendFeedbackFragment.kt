@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.raspisanie.mai.R
-import com.raspisanie.mai.extesions.createFormParams
+import com.raspisanie.mai.common.extesions.createFormParams
 import com.raspisanie.mai.extesions.showToast
 import com.yandex.metrica.YandexMetrica
 import kotlinx.android.synthetic.main.fragment_feedback.*
