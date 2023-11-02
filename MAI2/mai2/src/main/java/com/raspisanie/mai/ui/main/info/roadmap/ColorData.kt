@@ -6,37 +6,39 @@ import androidx.fragment.app.Fragment
 import com.raspisanie.mai.common.extesions.getIsDayTheme
 import online.jutter.roadmapview.RMColorData
 import online.jutter.roadmapview.extensions.createColor
+import online.jutter.roadmapview.extensions.createColorInt
 
 fun Context.getMapColorData(
-    back: Int = createColor(255, 255, 255),
-    backD: Int = Color.parseColor("#121212"),
+    back: FloatArray = createColor(255, 255, 255),
+    backD: FloatArray = colorToFloatArray("#121212"),
 ): RMColorData {
     val isDay = getIsDayTheme()
     return if (isDay) {
         RMColorData(
-            buildingColor = Color.parseColor("#F1F1F1"),
-            buildingWithFloorsColor = Color.parseColor("#8ECAFC"),
+            buildingColor = colorToFloatArray("#F1F1F1"),
+            buildingWithFloorsColor = colorToFloatArray("#8ECAFC"),
             backColor = back,
-            navBorder = createColor(0, 0, 0),
+            navBorder = createColorInt(0, 0, 0),
             roadColors = listOf(
-                Color.parseColor("#DCDCDC"), // серый
-                Color.parseColor("#DCDCDC"), // серый
-                Color.parseColor("#DCDCDC"), // серый
-                Color.parseColor("#DCDCDC"), // серый
+                colorToFloatArray("#DCDCDC"), // серый
+                colorToFloatArray("#DCDCDC"), // серый
+                colorToFloatArray("#DCDCDC"), // серый
+                colorToFloatArray("#DCDCDC"), // серый
             ),
             floorBackColor = createColor(103, 103, 103),
         )
     } else {
         RMColorData(
-            buildingColor = Color.parseColor("#303030"),
-            buildingWithFloorsColor = Color.parseColor("#0D83E4"),
+            grassColor = colorToFloatArray("#1C3A2F"),
+            buildingColor = colorToFloatArray("#303030"),
+            buildingWithFloorsColor = colorToFloatArray("#0D83E4"),
             backColor = backD,
-            navBorder = createColor(255, 255, 255),
+            navBorder = createColorInt(255, 255, 255),
             roadColors = listOf(
-                Color.parseColor("#505050"), // серый
-                Color.parseColor("#505050"), // серый
-                Color.parseColor("#505050"), // серый
-                Color.parseColor("#505050"), // серый
+                colorToFloatArray("#505050"), // серый
+                colorToFloatArray("#505050"), // серый
+                colorToFloatArray("#505050"), // серый
+                colorToFloatArray("#505050"), // серый
             ),
             floorBackColor = createColor(10, 10, 10),
         )
@@ -44,6 +46,17 @@ fun Context.getMapColorData(
 }
 
 fun Fragment.getMapColorData(
-    back: Int = createColor(255, 255, 255),
-    backD: Int = createColor(12, 12, 12),
+    back: FloatArray = createColor(255, 255, 255),
+    backD: FloatArray = createColor(12, 12, 12),
 ) = requireContext().getMapColorData(back, backD)
+
+fun colorToFloatArray(string: String): FloatArray {
+    val c = Color.parseColor(string)
+    Color.alpha(c)
+    return floatArrayOf(
+        Color.red(c)/255F,
+        Color.green(c)/255F,
+        Color.blue(c)/255F,
+        Color.alpha(c)/255F,
+    )
+}

@@ -39,7 +39,10 @@ class FeedbackResponsePresenter : BasePresenter<FeedbackResponseView>() {
     }
 
     fun loadList() {
-        val handler = createHandler {  viewState.showErrorLoading() }
+        val handler = createHandler {
+            it.printStackTrace()
+            viewState.showErrorLoading()
+        }
         launchUI(handler) {
             viewState.toggleLoading(true)
             val list = withIO { loadFeedbackResponsePresenter() }
